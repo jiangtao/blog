@@ -33,11 +33,13 @@ cdn支持webp。图片上传到cdn之后，直接通过url规则访问图片即�
 
 ### 滚动加载图片
 
-当我们有了原图和webp地址后，可以做进一步优化。滚动条**滚动到可视区域内显示图片** 。考虑到要做 **webp的兼容方案**，需要“动态"处理， 在vue自定义一个 `Image` 重写现有的img功能，支持以下功能：
+当我们有了原图和webp地址后，可以做进一步优化。滚动条**滚动到可视区域内显示图片** 。考虑到要做 **webp的兼容方案**，需要“动态"处理，在vue自定义一个 `Image` 重写现有的img功能，支持以下功能：
 
 1. 根据webp支持程度，引用对应的图片
 
 2. 支持lazyload
+
+于是封装了[vt-image](https://github.com/vue-tools/vt-image)， 感兴趣可以查阅源码.
 
 通过js判定支持webp：
 
@@ -56,9 +58,6 @@ function detectWebp() {
     }
 }
 ```
-
-于是封装了[vt-image](https://github.com/vue-tools/vt-image)， 感兴趣可以查阅源码.
-
 
 ### 资源离线存储
 
