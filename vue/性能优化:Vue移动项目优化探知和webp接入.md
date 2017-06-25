@@ -39,7 +39,7 @@ cdn支持webp。图片上传到cdn之后，直接通过url规则访问图片即�
 
 2. 支持lazyload
 
-于是封装了[vt-image](https://github.com/vue-tools/vt-image)， 感兴趣可以查阅源码. 点击可查看[Demo](https://vue-tools.github.io/vt-image/#/demo)
+于是封装了vue image组件[vt-image](https://github.com/vue-tools/vt-image)， 旨在提升图片的性能。感兴趣可以查阅源码. 点击可查看[Demo](https://vue-tools.github.io/vt-image/#/demo)
 
 通过js判定支持webp：
 
