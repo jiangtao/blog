@@ -67,6 +67,8 @@ function detectWebp() {
 
 **使用 service worker 做离线方案**
 
+webpack插件[offline-plugin](https://github.com/NekR/offline-plugin)， 对webpack打包的资源做了service worker cache以及兼容方案。
+
 ### 总结
 
 问题和过程往往比结论更重要，站在巨人的肩膀上，吸收优点引用到自己的项目。如果没有符合需求的，根据 `场景`，考虑`成本`，`收益`，要么换条路走，要么就造个吧。
