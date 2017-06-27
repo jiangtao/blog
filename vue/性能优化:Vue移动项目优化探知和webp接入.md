@@ -29,7 +29,7 @@ cdn支持webp。图片上传到cdn之后，直接通过url规则访问图片即�
 
 #### 通过service worker支持
 
-使用service worker拦截请求，改变图片的`content-type`为webp，使用浏览器对webp天然压缩做支持。 [声享](http://shengxiang.com/) 是通过这种方式实现的。
+使用service worker拦截请求，改变图片的`content-type`为webp，使用浏览器对webp天然压缩做支持。 [声享](http://shengxiang.com/) 是通过这种方式实现的。
 
 ### 滚动加载图片
 
