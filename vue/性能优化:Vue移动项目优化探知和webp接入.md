@@ -67,7 +67,9 @@ function detectWebp() {
 
 **使用 service worker 做离线方案**
 
-webpack插件[offline-plugin](https://github.com/NekR/offline-plugin)， 对webpack打包的资源做了service worker cache以及兼容方案。
+webpack插件[offline-plugin](https://github.com/NekR/offline-plugin)， 对webpack打包的资源做了service worker和AppCache以及兼容方案。
+
+另外一个[serviceworker-webpack-plugin](https://github.com/oliviertassinari/serviceworker-webpack-plugin)只处理`service worker`，`sw.js`也是自己处理，自定义和扩展比较方便。可以从`chrome network`查看效果：[Demo](https://vue-tools.github.io/vt-image/#/demo)
 
 ### 总结
 
