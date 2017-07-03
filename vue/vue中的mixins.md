@@ -11,7 +11,7 @@
 
 在`SPA`实现埋点需求中比较通用的需求，`进入页面` 和 `离开页面` 需要记录用户在 当前页面的 停留时间。使用`mixin`， 简化代码如下
 
-** mixin.js **
+**mixin.js**
 ```javascript
 
 let cache = null // 确保进入和离开是一个page
@@ -36,7 +36,7 @@ export default {
 
 ```
 
-** demo.vue **  部分代码
+**demo.vue**  部分代码
 
 ```javascript
 <script>
@@ -57,7 +57,7 @@ export default {
 }
 ```
 
-** 运行结果图 ** 
+**运行结果图** 
 
 ![mixin运行结果](./img/mixin.jpg)
 
