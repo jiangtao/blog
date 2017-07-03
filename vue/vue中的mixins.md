@@ -59,7 +59,7 @@ export default {
 
 **运行结果图** 
 
-![mixin运行结果](./img/mixin.jpg)
+![mixin运行结果](./img/mixin.png)
 
 从图中发现，使用`局部mixin` 使用 `mounted`, `destroyed` 等组件中的生成周期方法与 mixin 是 合并； 当然实验得出 methods中的方法是被覆盖的。具体是通过 [mergeOtions function实现](https://github.com/vuejs/vue/blob/master/src/core/util/options.js)
 
