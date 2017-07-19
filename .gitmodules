@@ -1,0 +1,3 @@
+[submodule "vue-resource-notes"]
+	path = vue-resource-notes
+	url = https://github.com/jiangtao/vue-resource-notes.git
