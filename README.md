@@ -2,9 +2,9 @@
 
 ## 目录
  
-- [docker笔记](https://github.com/jiangtao/blog/tree/master/docker)
-- [node笔记](https://github.com/jiangtao/blog/tree/master/node)
-- [项目开发中的问题记录](https://github.com/jiangtao/project-summary/issues)
+- [docker笔记](https://github.com/jiangtao/blog/issues?utf8=%E2%9C%93&q=docker)
+- [node笔记](https://github.com/jiangtao/blog/issues?utf8=%E2%9C%93&q=node)
+- [项目开发中的问题解决方法](https://github.com/jiangtao/blog/issues?q=is%3Aissue+is%3Aclosed+label%3Asolution)
 
 ## 备注
 
