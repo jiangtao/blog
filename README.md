@@ -1,6 +1,17 @@
+本repo记录项目总结，原创文件，翻译等，文件已迁移到[issue](https://github.com/jiangtao/blog/issues)，便于讨论。
+
+## 目录
  
-文件主要放一些文章（笔记和心得）， issues 主要记录项目中的细节和解决方案，以及讨论话题。
- 
- - [docker笔记](https://github.com/jiangtao/blog/tree/master/docker)
- - [node笔记](https://github.com/jiangtao/blog/tree/master/node)
- - [项目开发中的问题记录](https://github.com/jiangtao/project-summary/issues)
+- [docker笔记](https://github.com/jiangtao/blog/tree/master/docker)
+- [node笔记](https://github.com/jiangtao/blog/tree/master/node)
+- [项目开发中的问题记录](https://github.com/jiangtao/project-summary/issues)
+
+## 备注
+
+- [issue](https://github.com/jiangtao/blog/issues) 为原创文件
+- 项目中的目录代码片段和参考资源
+- closed issue一般为项目中遇到的问题解决方法
+
+## License
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/"><img alt="知识共享许可协议" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/cn/88x31.png" /></a><br />本<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">作品</span>由<a xmlns:cc="http://creativecommons.org/ns#" href="http://github.com/jiangtao" property="cc:attributionName" rel="cc:attributionURL">jiangtao</a>创作，采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/">知识共享署名-非商业性使用-相同方式共享 3.0 中国大陆许可协议</a>进行许可。凡是转载的文章，翻译的文章，或者由其他作者投稿的文章，版权归原作者所有。
