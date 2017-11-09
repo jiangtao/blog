@@ -7,6 +7,16 @@
 - [vue文章](https://github.com/jiangtao/blog/issues?utf8=%E2%9C%93&q=vue)
 - [项目开发中的问题解决方法](https://github.com/jiangtao/blog/issues?q=is%3Aissue+is%3Aclosed+label%3Asolution)
 
+## 文章
+
+### 2017年9月
+
+- [使用decorator处理model层验证](https://github.com/jiangtao/blog/issues/8)
+- [vue中的mixins实践](https://github.com/jiangtao/blog/issues/11)
+- [Vue移动项目优化探知和webp接入](https://github.com/jiangtao/blog/issues/10)
+- [异步编程小结](https://github.com/jiangtao/blog/issues/10)
+- [xss live总结](https://github.com/jiangtao/blog/issues/7)
+
 ## 备注
 
 - [issue](https://github.com/jiangtao/blog/issues) 为原创文件
