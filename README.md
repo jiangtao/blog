@@ -9,6 +9,10 @@
 
 ## 文章
 
+### 2017年11月
+
+- [从一个爬虫初识puppeteer](https://github.com/jiangtao/blog/issues/15)
+
 ### 2017年9月
 
 - [使用decorator处理model层验证](https://github.com/jiangtao/blog/issues/8)
@@ -16,6 +20,7 @@
 - [Vue移动项目优化探知和webp接入](https://github.com/jiangtao/blog/issues/10)
 - [异步编程小结](https://github.com/jiangtao/blog/issues/10)
 - [xss live总结](https://github.com/jiangtao/blog/issues/7)
+- [初识docker:使用docker管理博客](https://github.com/jiangtao/blog/issues/12)
 
 ## 备注
 
