@@ -21,7 +21,9 @@
       '//gma.alicdn.com/bao/uploaded/i1/42419104/TB2eUg1cxTI8KJjSspiXXbM4FXa_!!0-saturn_solar.jpg_230x230.jpg'
     ]
     
-    images.forEach(load)
+    setTimeout(function(){
+      images.forEach(load)
+    }, 1000)
 
     function load(src) {
       var img = new Image()
