@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="dns-prefetch" href="//img.alicdn.com">
+  <link rel="dns-prefetch" href="//gw.alicdn.com">
+  <title>dns prefetch</title>
+</head>
+
+<body>
+  <h3>prefetch: view the network</h3>
+  <script>
+    var images = [
+      '//img.alicdn.com/tfs/TB1oo33em_I8KJjy0FoXXaFnVXa-146-151.png',
+      '//img.alicdn.com/tfs/TB1qvANelfH8KJjy1XbXXbLdXXa-146-40.jpg',
+      '//gw.alicdn.com/bao/uploaded/TB1_ovbc46I8KJjy0FgSutXzVXa.jpg_q90.jpg',
+      '//gw.alicdn.com/bao/uploaded/TB1IbuhaVYM8KJjSZFuSuwf7FXa.jpg_q90.jpg',
+      '//gma.alicdn.com/bao/uploaded/i2/1156606078055871470/TB2I3oMzNlmpuFjSZPfXXc9iXXa_!!0-saturn_solar.jpg_230x230.jpg',
+      '//gma.alicdn.com/bao/uploaded/i4/14970172/TB2a2gIbHsTMeJjSsziXXcdwXXa_!!0-saturn_solar.jpg_230x230.jpg',
+      '//gma.alicdn.com/bao/uploaded/i1/42419104/TB2eUg1cxTI8KJjSspiXXbM4FXa_!!0-saturn_solar.jpg_230x230.jpg'
+    ]
+    
+    images.forEach(load)
+
+    function load(src) {
+      var img = new Image()
+      img.src = src
+    }
+  </script>
+</body>
+
+</html>
