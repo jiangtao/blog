@@ -12,6 +12,7 @@
 ### 2017年11月
 
 - [从一个爬虫初识puppeteer](https://github.com/jiangtao/blog/issues/15)
+- #19
 
 ### 2017年9月
 
