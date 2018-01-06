@@ -19,7 +19,7 @@
 - [使用decorator处理model层验证](https://github.com/jiangtao/blog/issues/8)
 - [vue中的mixins实践](https://github.com/jiangtao/blog/issues/11)
 - [Vue移动项目webp接入](https://github.com/jiangtao/blog/issues/10)
-- [异步编程小结](https://github.com/jiangtao/blog/issues/10)
+- [异步编程小结](https://github.com/jiangtao/blog/issues/9)
 - [xss live总结](https://github.com/jiangtao/blog/issues/7)
 - [初识docker:使用docker管理博客](https://github.com/jiangtao/blog/issues/12)
 
