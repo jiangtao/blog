@@ -11,6 +11,10 @@
 
 ## 文章
 
+### 2018年1月
+
+- [搭建一个通用脚手架](https://github.com/jiangtao/blog/issues/23) 
+
 ### 2017年11月
 
 - [从一个爬虫初识puppeteer](https://github.com/jiangtao/blog/issues/15)
