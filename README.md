@@ -17,7 +17,7 @@
 
 ### 2017年11月
 
-- [从一个爬虫初识puppeteer](https://github.com/jiangtao/blog/issues/15)
+- [初识puppeteer之爬虫](https://github.com/jiangtao/blog/issues/15)
 - [npm依赖版本锁定和管理](https://github.com/jiangtao/blog/issues/19)
 
 ### 2017年9月
