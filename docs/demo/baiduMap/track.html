@@ -1,40 +1,125 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-	<style type="text/css">
-		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
-	</style>
-	<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=C6272e532ab6f729b502ddc67219b8f9"></script>
-	<title>单个标注点沿直线的轨迹运动</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <style type="text/css">
+        body,
+        html,
+        #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+    <script
+        type="text/javascript"
+        src="https://api.map.baidu.com/api?v=2.0&ak=C6272e532ab6f729b502ddc67219b8f9"
+    ></script>
+    <title>单个标注点沿直线的轨迹运动</title>
 </head>
 <body>
-	<div id="allmap"></div>
+<div id="allmap"></div>
 </body>
 </html>
 <script type="text/javascript">
 	// 百度地图API功能
-	var map = new BMap.Map("allmap");
-	map.centerAndZoom(new BMap.Point(116.404, 39.915), 15);
-    var point = [116.424374,39.914668]
-	var myP1 = new BMap.Point(116.380967,39.913285);    //起点
-	var myP2 = new BMap.Point(point[0], point[1]);    //终点
-	var myIcon = new BMap.Icon("http://lbsyun.baidu.com/jsdemo/img/Mario.png", new BMap.Size(32, 70), {    //小车图片
-		//offset: new BMap.Size(0, -5),    //相当于CSS精灵
-		imageOffset: new BMap.Size(0, 0)    //图片的偏移量。为了是图片底部中心对准坐标点。
-	  });
-	var driving2 = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});    //驾车实例
-	driving2.search(myP2, myP1);    //显示一条公交线路
-    var count = 0, timer
-    timer = setInterval(function() {
-       point[0] += 0.01
-       point[1] -= 0.01 
-       myP2 = new BMap.Point(point[0], point[1]);
-       driving2.search(myP2, myP1);
-       if(count++ > 10) {
-           clearInterval(timer)
-       }
-    }, 1000)
-	
+	function HexMap(opts) {
+		this.map = opts.map;
+		this.start = this.point(opts.start);
+		this.end = this.point(opts.end);
+		this.map.centerAndZoom(this.start, 15);
+		this.driver = new BMap.DrivingRoute(this.map, {
+			renderOptions: {map: this.map, autoViewport: true}
+		});
+		this._startIcon = null;
+		this._endIcon = null;
+		this._label = null;
+		this.labelStyle = opts.labelStyle || {
+			color: "#111",
+			fontSize: "12px",
+			height: "20px",
+			lineHeight: "20px",
+			fontFamily: "微软雅黑",
+			border: "none"
+		}
+
+		var icon = opts.icon || {}
+
+		if(icon.start && icon.start.url) {
+			this._startIcon = new BMap.Icon(icon.start.url, new BMap.Size(icon.start.size[0], icon.start.size[1]))
+        }
+        if(icon.end && icon.end.url) {
+	        this._endIcon = new BMap.Icon(icon.end.url, new BMap.Size(icon.end.size[0], icon.end.size[1]))
+        }
+	}
+
+	HexMap.prototype.point = function(coord){
+		return new BMap.Point(coord[0], coord[1])
+    }
+
+	/**
+     *
+	 * @param start {Array} 起始经纬度
+	 * @param end {Array} 终点经纬度
+	 */
+	HexMap.prototype.drive = function(start, end) {
+		var self = this
+        start = start ? this.point(start) : this.start
+		end = end ? this.point(end) : this.end
+
+		this.driver.search(start, end); //显示一条公交线路
+		this.driver.setSearchCompleteCallback(function() {
+			self.labelDistance(start, end);
+		});
+		if(this._startIcon && this._endIcon)
+			this.driver.setMarkersSetCallback(function(result) {
+				result[0].marker.setIcon(self._startIcon);
+				result[1].marker.setIcon(self._endIcon);
+			});
+	};
+	HexMap.prototype.labelDistance = function(start, end) {
+		var d = (this.map.getDistance(start, end) / 1000).toFixed(2);
+		var content = "距离目标" + d + "km";
+
+		if(!this.label) {
+			var opts = {
+				position: start, // 指定文本标注所在的地理位置
+				offset: new BMap.Size(-40, -40) //设置文本偏移量
+			};
+			this.label = new BMap.Label(content, opts);
+			this.label.setStyle(this.labelStyle);
+			this.map.addOverlay(this.label)
+		} else {
+			this.label.setContent(content);
+			this.label.setPosition(start);
+		}
+	}
+	var end = [116.380967, 39.913285]
+    var start = [116.424374, 39.914668];
+	var hexMap = new HexMap({
+        map: new BMap.Map("allmap"),
+        start: start,
+        end: end,
+        icon: {
+        	start: {url: 'img/avatar.png',size: [20,20]},
+            end: {url: 'img/logo.png',size: [20,20]}
+        }
+    })
+
+
+    hexMap.drive()
+
+	var count = 0,
+		timer;
+	timer = setInterval(function() {
+		start[0] += 0.01;
+		start[1] -= 0.01;
+		hexMap.drive(start, null)
+		if(count++ > 10) {
+			clearInterval(timer);
+		}
+	}, 1000);
 </script>
