@@ -25,7 +25,22 @@
 </body>
 </html>
 <script type="text/javascript">
-	// 百度地图API功能
+	// hexyun内置百度地图通用api
+	/**
+	 * @param opts {Object}
+     *
+     * ```js
+     * new HexMap({
+         map: new BMap.Map("allmap"),
+         start: start,
+         end: end,
+         icon: {
+            start: {url: 'img/avatar.png', size: [20, 20]},
+            end: {url: 'img/logo.png', size: [20, 20]}
+        }
+     })```
+     *
+	 */
 	function HexMap(opts) {
 		this.map = opts.map;
 		this.start = this.point(opts.start);
@@ -100,11 +115,32 @@
 			this.label.setPosition(start);
 		}
 	}
+	/**
+     * @description 修复GPS坐标到百度坐标
+	 * @param coords {Array}
+	 */
+	HexMap.fixCoords = function(coords) {
+		var convertor = new BMap.Convertor();
+		var pointArr = [];
+		pointArr.push(new BMap.Point(coords[0],coords[1]));
+		return new Promise(function(resolve, reject){
+			convertor.translate(pointArr, 1, 5, function(data){
+				if(data.status === 0) {
+					resolve([data.points[0].lng, data.points[1].lat])
+				} else {
+					reject({
+                        code: -101,
+                        message: '百度地图坐标转换失败'
+                    })
+                }
+            })
+        })
+    }
 	HexMap.locate = function() {
 		return new Promise(function(resolve, reject) {
 			if(window.navigator.geolocation) {
 				window.navigator.geolocation.getCurrentPosition(function(data) {
-					resolve([data.coords.longitude, data.coords.latitude])
+					return resolve(HexMap.fixCoords([data.coords.longitude, data.coords.latitude]))
 				}, reject);
 			} else {
 				reject(new Error({
