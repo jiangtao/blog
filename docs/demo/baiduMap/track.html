@@ -104,7 +104,7 @@
 		return new Promise(function(resolve, reject) {
 			if(window.navigator.geolocation) {
 				window.navigator.geolocation.getCurrentPosition(function(data) {
-					resolve([data.coords.longitude, data.coords.laltitude])
+					resolve([data.coords.longitude, data.coords.latitude])
 				}, reject);
 			} else {
 				reject(new Error({
