@@ -126,7 +126,7 @@
 		return new Promise(function(resolve, reject){
 			convertor.translate(pointArr, 1, 5, function(data){
 				if(data.status === 0) {
-					resolve([data.points[0].lng, data.points[1].lat])
+					resolve([data.points[0].lng, data.points[0].lat])
 				} else {
 					reject({
                         code: -101,
