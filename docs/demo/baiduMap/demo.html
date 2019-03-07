@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>地理定位</title>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=C6272e532ab6f729b502ddc67219b8f9"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js"></script>
+  <script src="https://cdn.staticfile.org/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://cdn.staticfile.org/jquery/1.7.2/jquery.min.js"></script>
+</head>
+<body>
+    <div id="canvas"></div>
+    <script>
+        var map = new BMap.Map('map_canvas');
+        
+        var getLocation = function() {
+            return new Promise(function(resolve, reject) {
+                if (window.navigator.geolocation){
+                    window.navigator.geolocation.getCurrentPosition(resolve, reject);
+                } else {
+                    reject(new Error({
+                        code: -10000,
+                        message: '您的浏览器不支持地理定位'
+                    }))
+                }
+            })
+        }
+
+        getLocation().then(function(data) {
+            map.enableScrollWheelZoom();
+            var x = data.coords.longitude
+            var y = data.coords.latitude
+            map.centerAndZoom(new BMap.Point(x, y), 13);
+        }).catch(function(e){
+            if(e.message) {
+                console.log(e)
+                alert(e.message)
+            }
+        })
+
+    
+    </script>
+</body>
+</html>
