@@ -26,9 +26,14 @@
 	  });
 	var driving2 = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});    //驾车实例
 	driving2.search(myP2, myP1);    //显示一条公交线路
-    setInterval(function() {
+    var count = 0, timer
+    timer = setInterval(function() {
        point[0] += 0.01
        point[1] -= 0.01 
+       driving2.search(myP2, myP1);
+       if(count++ > 10) {
+           clearInterval(timer)
+       }
     }, 1000)
 	
 </script>
