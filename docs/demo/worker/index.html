@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>worker测试</title>
+</head>
+
+<body>
+    <script>
+        var worker = new Worker('worker.js')
+        var tree = function makeTree(number, prefix, depth) {
+            var result = []
+            var length = number
+            while (length >= 0) {
+                result[length] = {
+                    name: prefix + length,
+                    children: depth > 3 ? [] : makeTree(2, prefix + length, depth + 1)
+                }
+                length--
+            }
+            return result
+        }(100, 'c', 0)
+
+        worker.postMessage(tree)
+        worker.onmessage = function (result) {
+            var frameDoc = document.createDocumentFragment()
+            result.data.forEach(o => {
+                var div = document.createElement('div')
+                div.innerHTML = o.name
+                frameDoc.appendChild(div)
+            })
+            document.body.appendChild(frameDoc)
+        }
+        worker.onerror = function (error) {
+            console.log('worker', error)
+        }
+    </script>
+</body>
+
+</html>

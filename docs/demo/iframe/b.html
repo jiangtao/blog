@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .h {
+        margin-top: 100px;
+        height: 200px;
+    }
+</style>
+
+<body>
+    <p class="h">1内容</p>
+    <p class="h">2内容</p>
+    <p class="h">3内容</p>
+    <p class="h">4内容</p>
+    <p class="h">5内容</p>
+    <p class="h">6内容</p>
+    <p class="h">7内容</p>
+    <p class="h">8内容</p>
+    <p class="h">9内容</p>
+    <p class="h">10内容</p>
+    <script>
+        window.onload = function () {
+            if (window.top.postMessage) {
+                var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight)
+                console.log(h)
+                window.top.postMessage(JSON.stringify({
+                    h: h,
+                    type: 'height'
+                }), window.location.origin)
+            }
+        }
+
+    </script>
+</body>
+
+</html>
