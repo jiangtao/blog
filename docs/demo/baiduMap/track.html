@@ -50,24 +50,27 @@
 
 		if(icon.start && icon.start.url) {
 			this._startIcon = new BMap.Icon(icon.start.url, new BMap.Size(icon.start.size[0], icon.start.size[1]))
-        }
-        if(icon.end && icon.end.url) {
-	        this._endIcon = new BMap.Icon(icon.end.url, new BMap.Size(icon.end.size[0], icon.end.size[1]))
-        }
+		}
+		if(icon.end && icon.end.url) {
+			this._endIcon = new BMap.Icon(icon.end.url, new BMap.Size(icon.end.size[0], icon.end.size[1]))
+		}
 	}
 
-	HexMap.prototype.point = function(coord){
+	HexMap.point = function(coord) {
 		return new BMap.Point(coord[0], coord[1])
-    }
+	}
+	HexMap.prototype.point = function(coord) {
+		HexMap.point(coord)
+	}
 
 	/**
-     *
+	 *
 	 * @param start {Array} 起始经纬度
 	 * @param end {Array} 终点经纬度
 	 */
 	HexMap.prototype.drive = function(start, end) {
 		var self = this
-        start = start ? this.point(start) : this.start
+		start = start ? this.point(start) : this.start
 		end = end ? this.point(end) : this.end
 
 		this.driver.search(start, end); //显示一条公交线路
@@ -97,27 +100,53 @@
 			this.label.setPosition(start);
 		}
 	}
-	var end = [116.380967, 39.913285]
-    var start = [116.424374, 39.914668];
-	var hexMap = new HexMap({
-        map: new BMap.Map("allmap"),
-        start: start,
-        end: end,
-        icon: {
-        	start: {url: 'img/avatar.png',size: [20,20]},
-            end: {url: 'img/logo.png',size: [20,20]}
-        }
-    })
+	HexMap.locate = function() {
+		return new Promise(function(resolve, reject) {
+			if(window.navigator.geolocation) {
+				window.navigator.geolocation.getCurrentPosition(function(data) {
+					resolve([data.coords.longitude, data.coords.altitude])
+				}, reject);
+			} else {
+				reject(new Error({
+					code: -10000,
+					message: '您的浏览器不支持地理定位'
+				}))
+			}
+		})
+	}
+	var hexMap, end = [116.380967, 39.913285]
 
+	function run() {
+		HexMap.locate().then(function(data) {
+			var start = data
+			if(!hexMap) {
+				hexMap = new HexMap({
+					map: new BMap.Map("allmap"),
+					start: start,
+					end: end,
+					icon: {
+						start: {url: 'img/avatar.png', size: [20, 20]},
+						end: {url: 'img/logo.png', size: [20, 20]}
+					}
+				})
+				hexMap.drive()
+			} else {
+				hexMap.drive(start, null)
+			}
+			console.log(data)
+		}).catch(function(e) {
+			if(e.message) alert(e.message)
+		})
 
-    hexMap.drive()
+	}
+
+	var start = [116.424374, 39.914668];
+
 
 	var count = 0,
 		timer;
 	timer = setInterval(function() {
-		start[0] += 0.01;
-		start[1] -= 0.01;
-		hexMap.drive(start, null)
+		run()
 		if(count++ > 10) {
 			clearInterval(timer);
 		}
