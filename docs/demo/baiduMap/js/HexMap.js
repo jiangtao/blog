@@ -142,7 +142,8 @@
       
       // this.map.addOverlay(marker);
       // this.map.panTo(point);
-      // this.map.openInfoWindow(infoWindow, point);
+      
+      this.map.openInfoWindow(infoWindow, point);
       return {
         marker: marker,
         infoWindow: infoWindow,
