@@ -21,10 +21,9 @@
      */
     function HexMap(opts) {
       this.map = opts.map;
-      if(opts.start) this.start = this.point(opts.start)
+      if(opts.start) this.setStartPoint(opts.start)
       if(opts.end) this.end = this.point(opts.end)
       
-      this.map.centerAndZoom(this.start, 15);
       this.driver = new BMap.DrivingRoute(this.map, {
         renderOptions: {map: this.map, autoViewport: true}
       });
@@ -50,12 +49,38 @@
         this._endIcon = new BMap.Icon(icon.end.url, new BMap.Size(icon.end.size[0], icon.end.size[1]))
       }
     }
-
+    HexMap.prototype.setStartPoint = function(point) {
+      this.start = this.point(point)
+      if(this.start) {
+        this.map.centerAndZoom(this.start, 15);
+      }
+    }
     HexMap.point = function (coord) {
       return new BMap.Point(coord[0], coord[1])
     }
     HexMap.prototype.point = function (coord) {
       return HexMap.point(coord)
+    }
+    HexMap.prototype.locate = function() {
+      var self = this
+      return new Promise(function(resolve, reject) {
+        var geolocation = new BMap.Geolocation();
+        geolocation.getCurrentPosition(function(r){
+          if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            self.map.centerAndZoom(r.point,15);
+            var mk = new BMap.Marker(r.point);
+            self.map.addOverlay(mk);
+            self.map.panTo(r.point);
+            console.log('您的位置：'+r.point.lng+','+r.point.lat);
+            resolve([r.point.lng, r.point.lat], bdPoint)
+
+          }
+          else {
+            reject(this.getStatus())
+            // alert('failed'+this.getStatus());
+          }
+        },{enableHighAccuracy: true})
+      })
     }
     /**
      * @description 两个点的位置连线，自带距离属性，用实时位置展示效果
@@ -100,8 +125,8 @@
       var streetNumber = addComp.streetNumber
       var opts = {
         width: 40,     // 信息窗口宽度  
-        height: 90,     // 信息窗口高度  
-        title: "现在的位置:<hr />"  // 信息窗口标题  
+        height: 50,     // 信息窗口高度
+        title: ""  // 信息窗口标题
       }
       var point
       
@@ -114,14 +139,29 @@
       
       var marker = new BMap.Marker(point);  //事件类
       var infoWindow = new BMap.InfoWindow(province + city  + district  + street + streetNumber + "<br />", opts);
-
-      this.map.openInfoWindow(infoWindow, point);
+      
+      // this.map.addOverlay(marker);
+      // this.map.panTo(point);
+      // this.map.openInfoWindow(infoWindow, point);
       return {
         marker: marker,
         infoWindow: infoWindow,
         point: point,
-        coord: coord
+        coord: coord,
+        addressInfo: addComp
       }
+    }
+    HexMap.prototype.setCenter = function(point, size) {
+      size = size || 15
+      this.map.centerAndZoom(this.point(point),size);
+    }
+    HexMap.prototype.getCity = function() {
+      var city = new BMap.LocalCity()
+      return new Promise(function(resolve, reject) {
+        city.get(function(result) {
+          resolve(result)
+        })
+      })
     }
     /**
      * 

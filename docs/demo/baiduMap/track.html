@@ -26,41 +26,41 @@
 </html>
 <script src="js/HexMap.js"></script>
 <script type="text/javascript">
-	var hexMap, end = [116.380967, 39.913285]
+    var hexMap, end = [116.380967, 39.913285]
 
-	function run() {
-		HexMap.locate().then(function(data) {
-			var start = data
-			if(!hexMap) {
-				hexMap = new HexMap({
-					map: new BMap.Map("allmap"),
-					start: start,
-					end: end,
-					icon: {
-						start: {url: 'img/avatar.png', size: [20, 20]},
-						end: {url: 'img/logo.png', size: [20, 20]}
-					}
-				})
-				hexMap.drive()
-			} else {
-				hexMap.drive(start, null)
-			}
-			console.log(data)
-		}).catch(function(e) {
-			if(e.message) alert(e.message)
-		})
+    function run() {
+        HexMap.locate().then(function(data) {
+            var start = data
+            if(!hexMap) {
+                hexMap = new HexMap({
+                    map: new BMap.Map("allmap"),
+                    start: start,
+                    end: end,
+                    icon: {
+                        start: {url: 'img/avatar.png', size: [20, 20]},
+                        end: {url: 'img/logo.png', size: [20, 20]}
+                    }
+                })
+                hexMap.drive()
+            } else {
+                hexMap.drive(start, null)
+            }
+            console.log(data)
+        }).catch(function(e) {
+            if(e.message) alert(e.message)
+        })
 
-	}
+    }
 
-	var start = [116.424374, 39.914668];
+    var start = [116.424374, 39.914668];
 
 
-	var count = 0,
-		timer;
-	timer = setInterval(function() {
-		run()
-		if(count++ > 10) {
-			clearInterval(timer);
-		}
-	}, 1000);
+    var count = 0,
+        timer;
+    timer = setInterval(function() {
+        run()
+        if(count++ > 10) {
+            clearInterval(timer);
+        }
+    }, 1000);
 </script>

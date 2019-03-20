@@ -17,25 +17,12 @@
 <body>
 <div id="canvas"></div>
 <script>
-    var hexMap = new HexMap({
-        map: new BMap.Map("canvas"),
-        start: [116.380967, 39.913285],
-        icon: {
-            start: {url: 'img/avatar.png', size: [20, 20]}
-        }
+    var map = new HexMap({
+        map: new BMap.Map("allmap")
     })
-    // hexMap.locate().then(function(point) {
-    //     console.log(point)
-    //     hexMap.setStartPoint(point)
-    // })
-    hexMap.map.addEventListener('click', function(event) {
-        hexMap.getLocation(event.point).then(function(rs){
-            var markInfo = hexMap.markPointInfo(rs, event.point)
-        })
-    })
-    var initPoint = hexMap.point([116.380967, 39.913285])
-    hexMap.getLocation(initPoint).then(function(rs){
-        var markInfo = hexMap.markPointInfo(rs, initPoint)
+    map.getCity().then(function(data){
+        alert(data.name)
+        map.map.centerAndZoom(data.center,15)
     })
 </script>
 </body>

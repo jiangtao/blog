@@ -15,9 +15,18 @@
         </style>
 </head>
 <body>
+    <label for="">
+        业主经度: <input type="text" name="" value="116.404" id="x">
+        业主纬度: <input type="text" name="" value="39.915" id="y">
+    </label>
     <div id="canvas"></div>
     <script>
         var map = new BMap.Map('canvas');
+        var x = document.getElementById('x').value
+        var y = document.getElementById('y').value
+
+        map.enableScrollWheelZoom();
+        map.centerAndZoom(new BMap.Point(x, y), 13);
         
         var getLocation = function() {
             return new Promise(function(resolve, reject) {
@@ -36,6 +45,7 @@
             map.enableScrollWheelZoom();
             var x = data.coords.longitude
             var y = data.coords.latitude
+            window.localStorage.setItem('address.location', JSON.stringify([x, y])) 
             map.centerAndZoom(new BMap.Point(x, y), 13);
         }).catch(function(e){
             if(e.message) {
