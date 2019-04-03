@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>kity minder</title>
+    <link rel="stylesheet" href="kityminder.core.css">
+    <script src="kity.min.js"></script>
+    <script src="kityminder.core.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        #minder-view {
+            position: absolute;
+            border: 1px solid #ccc;
+            left: 10px;
+            top: 10px;
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="minder-view"></div>
+<script>
+    var km = window.km = new kityminder.Minder();
+    var data = `{
+        "root": {
+            "data": {
+                "text": "百度产品",
+                "image": "https://www.baidu.com/img/bd_logo1.png?where=super",
+                "imageSize": {"width": 270, "height": 129}
+            },
+            "children": [
+                {"data": {"text": "新闻"}},
+                {"data": {"text": "网页", "priority": 1}},
+                {"data": {"text": "贴吧", "priority": 2}},
+                {"data": {"text": "知道", "priority": 2}},
+                {"data": {"text": "音乐", "priority": 3}},
+                {"data": {"text": "图片", "priority": 3}},
+                {"data": {"text": "视频", "priority": 3}},
+                {"data": {"text": "地图", "priority": 3}},
+                {"data": {"text": "百科", "priority": 3}},
+                {"data": {"text": "更多", "hyperlink": "http://www.baidu.com/more"}}
+            ]
+        }
+    }`
+    // km.setup('#minder-view');
+    km.renderTo('#minder-view');
+    km.importData('json', data);
+    km.enable()
+</script>
+</body>
+</html>
