@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    'use strict';
+
+
+    function T(a, b = 10) {
+        console.log(a === arguments[0])
+        console.log(b === arguments[1])
+        a = 20
+        b = 20
+        console.log(a === arguments[0])
+        console.log(b === arguments[1])
+    }
+    T(1, 2)
+    T(1) //和编译后的代码一样  b = 10 arguments[1] undefined
+
+    function F(a, ...b) {
+        console.log(a, ...b)
+    }
+    F('hi', '小张', '小李')
+
+    console.log(Math.max(...[1,2,3], 0))
+
+    const G = {
+        get name() {
+            return 1
+        }
+    }
+    // ES6 对 name 扩展, 方便 debug
+    console.log(Object.getOwnPropertyDescriptor(G, 'name').get.name)
+
+
+    // 块级函数
+
+    if(true) {
+        console.log(typeof FF)
+        function FF() {console.log('ff')}
+    }
+    console.log(typeof FF)
+
+    </script>
+</body>
+</html>

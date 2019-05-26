@@ -30,7 +30,9 @@
 
 <div id="minder-view"></div>
 <script>
-    var km = window.km = new kityminder.Minder();
+    var km = window.km = new kityminder.Minder({
+        layoutBox: 'Poly'
+    });
     var data = `{
         "root": {
             "data": {
@@ -52,10 +54,11 @@
             ]
         }
     }`
+    console.log(kityminder.Minder.getTemplateList())
     // km.setup('#minder-view');
     km.renderTo('#minder-view');
     km.importData('json', data);
-    km.enable()
+    // km.disable()
 </script>
 </body>
 </html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      "use strict";
+      // console.log(a) // Uncaught ReferenceError: Cannot access 'a' before initialization
+      // console.log(typeof a) // 'undefined'
+      // console.log(typeof Date) // 'function'
+      // console.log(window.Date) // function Date() {}
+      let a = 10;
+      let Date = 1000;
+      console.log(a, Date, window.Date, window.a); // 1000
+
+      for (let i = 0; i < 10; i++) {
+        var div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = i;
+        div.onclick = function() {
+            alert(i)
+        }
+        document.body.appendChild(div);
+      }
+    </script>
+  </body>
+</html>

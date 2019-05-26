@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>脑图编辑器</title>
+    <script src="https://a.alipayobjects.com/jquery/jquery/1.11.1/jquery.js"></script>
+    <script src="https://gw.alipayobjects.com/os/antv/assets/g6/1.2.8/g6.min.js"></script>
+</head>
+<body>
+<div id="c1"></div>
+<script type="text/javascript">
+    var Global = G6.Global;
+    var Util = G6.Util;
+    Global.nodeControlPointStyle = null;
+    Global.nodeAcitveBoxStyle = {
+        stroke: '#108EE9',
+        fill: '#00B5F4',
+        fillOpacity: 0.2,
+        lineWidth: 2,
+        radius: 4
+    };
+    var data = {
+        "id": "root",
+        "name": "flare",
+        "link": 'https://www.baidu.com',
+        "children": [{
+            "name": "analytics",
+            "children": [{
+                "name": "cluster",
+                "children": [{
+                    "name": "AgglomerativeCluster",
+                }, {
+                    "name": "CommunityStructure",
+                }, {
+                    "name": "HierarchicalCluster",
+                }, {
+                    "name": "MergeEdge",
+                }]
+            }, {
+                "name": "tree",
+                "children": [{
+                    "name": "BetweennessCentrality",
+                }, {
+                    "name": "LinkDistance",
+                }, {
+                    "name": "MaxFlowMinCut",
+                }, {
+                    "name": "ShortestPaths",
+                }, {
+                    "name": "SpanningTree",
+                }]
+            }, {
+                "name": "optimization",
+                "children": [{
+                    "name": "AspectRatioBanker"
+                }]
+            }]
+        }, {
+            "name": "animate",
+            "children": [{
+                "name": "Easing",
+            }, {
+                "name": "FunctionSequence",
+            }, {
+                "name": "interpolate",
+                "children": [{
+                    "name": "ArrayInterpolator",
+                }, {
+                    "name": "ColorInterpolator",
+                }, {
+                    "name": "DateInterpolator",
+                }, {
+                    "name": "Interpolator",
+                }, {
+                    "name": "MatrixInterpolator",
+                }, {
+                    "name": "NumberInterpolator",
+                }, {
+                    "name": "ObjectInterpolator",
+                }, {
+                    "name": "PointInterpolator",
+                }, {
+                    "name": "RectangleInterpolator",
+                }]
+            }, {
+                "name": "ISchedulable",
+            }, {
+                "name": "Parallel",
+            }, {
+                "name": "Pause",
+            }, {
+                "name": "Scheduler",
+            }, {
+                "name": "Sequence",
+            }, {
+                "name": "Transition",
+            }, {
+                "name": "Transitioner",
+            }, {
+                "name": "TransitionEvent",
+            }, {
+                "name": "Tween",
+            }]
+        }]
+    };
+    var tree = new G6.Tree({
+        id: 'c1',
+        height: 450,                    // 此处替换高度
+        fitView: {                      // 自动对齐到中心点
+            x: 0,
+            y: 0
+        },
+        behaviourFilter: ['wheelZoom'], // 过滤鼠标滚轮缩放行为
+        layoutCfg: {
+            direction: 'H',
+            getHGap: function() {
+                return 40;
+            },
+            getVGap: function() {
+                return 10;
+            }
+        }
+    });
+    var graphContainer = tree.get('graphContainer');
+    var input = Util.createDOM('<input class="g6-label-input" />', {
+        position: 'absolute',
+        zIndex: 10,
+        display: 'none'
+    });
+    var a = Util.createDOM('<a class="g6-anchor"></a>', {
+        position: 'absolute',
+        zIndex: 10,
+        display: 'none'
+    })
+    var mouseEnterNodeStyle = {
+        lineWidth: 2
+    };
+    var nodeStyle = {
+        lineWidth: 1
+    };
+    function hasClass(shape, className) {
+        if (shape) {
+            var clasees = shape.get('class');
+            if (clasees && clasees.indexOf(className) !== -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+    function showInputLabel(node) {
+        if(!node){
+            return;
+        }
+        var group = node.get('group');
+        var label = group.findBy(function(child){
+            if(hasClass(child, 'label')){
+                return true;
+            }
+            return false;
+        });
+        var rootGroup = tree.get('rootGroup');
+        var bbox = Util.getBBox(label, rootGroup);
+        var borderWidth = 1;
+        var text = label.attr('text');
+        clearAllActived();
+        input.value = text;
+        input.show();
+        input.css({
+            top: bbox.minY - borderWidth + 'px',
+            left: bbox.minX - borderWidth + 'px',
+            width: bbox.width + 'px',
+            height: bbox.height + 'px',
+            padding: '0px',
+            margin: '0px',
+            border: borderWidth + 'px solid #999'
+        });
+        input.focus();
+        input.node = node;
+    }
+    function updateLabel() {
+        if(input.visibility){
+            var node = input.node;
+            clearAllActived();
+            if(input.value !== node.get('model').name){
+                if(input.value){
+                    tree.update(node, {
+                        label: input.value
+                    });
+                }
+            }
+            input.hide();
+        }
+    }
+    function clearAllActived(){
+        tree.clearAllActived();
+        tree.refresh(false);
+    }
+    input.hide = function(){
+        input.css({
+            display: 'none'
+        });
+        input.visibility = false;
+    }
+    input.show = function(){
+        input.css({
+            display: 'block'
+        });
+        input.visibility = true;
+    }
+    a.hide = function(){
+        a.css({
+            display: 'none'
+        });
+        a.visibility = false;
+    }
+    a.show = function(){
+        a.css({
+            display: 'block'
+        });
+        a.visibility = true;
+    }
+    graphContainer.appendChild(input);
+    graphContainer.appendChild(a);
+    tree.addBehaviour('default', ['clickActive']);
+    tree.addBehaviour('default', ['clickBlankClearActive']);
+    tree.node().label('name').style(nodeStyle);
+    tree.edge().shape('smooth');
+    tree.source(data);
+    // 默认中心为树图根节点 (0, 0) 点
+    tree.render();
+    tree.on('itemmouseenter', function(ev){
+        if(ev.itemType !== 'node'){
+            return;
+        }
+        var keyShape = ev.item.getKeyShape();
+        keyShape.attr(mouseEnterNodeStyle);
+        tree.refresh();
+    });
+    tree.on('itemmouseleave', function(ev){
+        if(ev.itemType !== 'node'){
+            return;
+        }
+        var keyShape = ev.item.getKeyShape();
+        keyShape.attr(nodeStyle);
+        tree.refresh();
+    });
+    tree.on('dragmove', function(){
+        input.hide();
+    });
+    tree.on('keydown', function(ev){
+        var active = tree.getActived();
+        var newNode;
+        var id;
+        if(ev.keyCode === 9 && active && active.get('type') === 'node'){
+            id = active.get('id');
+            if(!active){
+                return;
+            }
+            newNode = tree.add(id, {
+                name: '新增节点'
+            });
+            setTimeout(function(){
+                showInputLabel(newNode);
+            }, 460);
+        }
+    });
+    tree.on('dblclick', function(ev){
+        var item = ev.item;
+        var shape = ev.shape;
+        if ( hasClass(shape, 'label') && item && item.get('type') === 'node') {
+            showInputLabel(item);
+        }
+    });
+    input.on('keydown', function(ev){
+        if(ev.keyCode === 13){
+            updateLabel();
+        }
+    });
+    input.on('blur', function(){
+        updateLabel();
+    });
+</script>
+</body>
+</html>

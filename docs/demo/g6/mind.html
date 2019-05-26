@@ -7,15 +7,71 @@
     <style>
         #editor{
             position: relative;
+            top: 50px;
+            left: 0;
         }
         #minimap{
             position: absolute;
             right: 0;
             bottom: 0;
         }
+
+
+        #toolbar{
+            padding: 8px 0px;
+            width: 100%;
+            border: 1px solid #E9E9E9;
+            height: 42px;
+            z-index: 3;
+            box-shadow: 0px 8px 12px 0px rgba(0, 52, 107, 0.04);
+            position: absolute;
+            text-align: left;
+            top: 0;
+            left: 0;
+        }
+        #toolbar *::before{
+            font-size: 16px !important;
+        }
+        #toolbar .disable{
+            color: rgba(0,0,0,0.25);
+        }
+        #toolbar .icon-select.disable{
+            background: #EEEEEE;
+        }
+        #toolbar .separator{
+            margin: 4px;
+            border-left: 1px solid #E9E9E9;
+        }
+        #toolbar .command{
+            width: 27px;
+            height: 27px;
+            margin: 0px 6px;
+            border-radius: 2px;
+            padding-left: 4px;
+            display: inline-block;
+            border: 1px solid rgba(2,2,2,0);
+        }
+        #toolbar .command:nth-of-type(1){
+            margin-left: 24px;
+        }
+        #toolbar .command:hover{
+            cursor: pointer;
+            border: 1px solid #E9E9E9;
+        }
+        #toolbar .disable:hover{
+            cursor: default;
+            border: 1px solid rgba(2,2,2,0);
+        }
+        #toolbar {
+        }
     </style>
 </head>
 <body>
+<div id="toolbar" class="toolbar">
+    <i data-command="delete" class="command el-icon el-icon-delete" title="删除">remove</i>
+    <i data-command="zoomIn" class="command el-icon el-icon-zoom-in" title="放大">Zoom</i>
+    <i data-command="save" id="save" class="command el-icon el-icon-upload" title="保存">Save</i>
+</div>
 <div id="editor">
     <div id="minimap"></div>
 </div>
@@ -597,11 +653,36 @@
                 }
             ]
         }
-        
         var editor = new window.G6Editor.Editor()
+
+        var Command = window.G6Editor.Command
+        Command.registerCommand('save', {
+            // 命令是否进入队列，默认是 true
+            queue: false,
+            // 命令是否可用
+            enable(eidtor) {
+                return true
+            },
+            // 正向命令
+            execute(eidtor) {
+                // 获取当前page
+                var page = editor.getCurrentPage()
+                var data = page.save()
+                console.log(data)
+                return data
+            },
+            // 快捷键：Ctrl+shirt+s
+            shortcutCodes : [['ctrlKey', 'shiftKey', 's']]
+        })
+        
+        
+        var toolbar = new G6Editor.Toolbar({
+            container: 'toolbar'
+        });
+
         var mind = new G6Editor.Mind({
             defaultData: data,
-            labelEditable: false,
+            labelEditable: true,
             shortcut: {
                 append: true,
                 appendChild: true,
@@ -613,14 +694,15 @@
                 container: 'editor',
                 height: 600,
                 modes: {
-                    // default: ["clickNodeSelected", "keydownMoveSelection", "clickCanvasSelected", "hoverMindExpandButton", "keydownEditLabel", "panBlank", "wheelChangeViewport", "panMindNode", "clickCollapsedButton", "clickExpandedButton", "hoverButton", "hoverNodeActived", "dblclickItemEditLabel"],
+                    default: ["clickNodeSelected", "keydownMoveSelection", "clickCanvasSelected", "hoverMindExpandButton", "keydownEditLabel", "panBlank", "wheelChangeViewport", "panMindNode", "clickCollapsedButton", "clickExpandedButton", "hoverButton", "hoverNodeActived", "dblclickItemEditLabel"],
                     // readOnly: ["clickNodeSelected", "wheelChangeViewport", "keydownMoveSelection", "hoverNodeActived", "panCanvas", "clickExpandedButton", "hoverButton", "clickCanvasSelected"],
                     readOnly: [],
-                    default: []
+                    // default: []
                 },
                 minZoom: .2,
                 maxZoom: 2
             },
+            orbit: {satellite: ["forkAndLink"]}, anchorLink: 1, noEndEdge: !1,
             align: {
                 item: false
             },
@@ -628,14 +710,18 @@
         var minimap = new window.G6Editor.Minimap({
             container: document.querySelector('#minimap'),
             width: 200,
-            height: 200,
+            height: 120,
             viewportWindowStyle: {
                 
             },
         })
         editor.add(mind)
         editor.add(minimap)
-
+        editor.add(toolbar)
+        editor.executeCommand(function() {
+            console.log(arguments)
+        })
+        editor.executeCommand('autoZoom')
 
         var label = mind.get('labelTextArea')
         label.on('keyup', e => {

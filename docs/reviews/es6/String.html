@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="module">
+      const letter = String.fromCodePoint(85536);
+      const s16bit = "a";
+      console.log("32bit", is32Bit(letter));
+      console.log("32bit", is32Bit(s16bit));
+
+      function is32Bit(s) {
+        return s.codePointAt(0) > 0xffff;
+      }
+
+      const search = "hello world";
+      console.log(search.startsWith("w", 6)); // 从索引位置开始匹配
+      console.log(search.includes("w", 6)); // 从索引位置开始匹配
+      console.log(search.endsWith("e", 2)); // 从结尾开始匹配, 字符串的长度 - 参数
+      const regString = "/a/bc";
+      // indexOf lastIndexOf中的隐式转换
+      console.log("indexof", regString.indexOf(/a/) === 0); // 正则先隐式转换为 /a/.toString()
+      /*
+      console.log(regString.startsWith(/a/)); // 报错, 不能隐式转换
+      console.log(regString.ends(/a/), 1); // 报错, 不能隐式转换
+      console.log(regString.includes(/a/)); // 报错, 不能隐式转换
+      */
+      const formatedText = "I am a chinese"
+        .split(/\s+/g)
+        .map((s, i) => "  ".repeat(i + 1) + s)
+        .join("\n");
+      console.log(formatedText);
+      let b = 10;
+      let msg = T`123 ${b} ccc`;
+      function T(literals, ...substitutions) {
+        let result = "";
+        for (let i = 0, len = substitutions.length; i < len; i++) {
+          result += literals.raw[i];
+          result += substitutions[i];
+        }
+        result += literals.raw[literals.length - 1];
+        return result;
+      }
+      console.log(msg);
+    </script>
+  </body>
+</html>

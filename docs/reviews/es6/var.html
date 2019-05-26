@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>var 预解释</title>
+  </head>
+  <body>
+    <script>
+        'use strict';
+      console.log(typeof A); // 'function'
+      console.log(a); // undefined
+      console.log(typeof a); // 'undefined'
+      console.log(typeof Date); // 'function'
+      console.log(window.Date); // function Date() {}
+      function A() {
+        console.log(new Date());
+      }
+      var a = 10;
+      var Date = 1000;
+      console.log(window.Date); // 1000
+    </script>
+  </body>
+</html>
