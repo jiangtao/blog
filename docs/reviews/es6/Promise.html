@@ -26,14 +26,26 @@
       })
       console.log(111) // 在同一次事件循环中, 同步远远大于异步操作
       console.log('')
+      /*
       let list = [
           fetch(() => 1, 1, '1s duration', true),
           fetch(() => 2, 2, '2s duration', true),
           fetch(() => 3, 3, '3s duration', true)
       ]
-      // 当正常的时候 运行需要花最长的时间, 此例子中为 3s
-      // 当异常的时候, 所有的请求都正常发出去, 此时 then 不能正常输出, catch 可以 catch 到第一个发生错误的请求
+    //   当正常的时候 运行需要花最长的时间, 此例子中为 3s
+    //   当异常的时候, 所有的请求都正常发出去, 此时 then 不能正常输出, catch 可以 catch 到第一个发生错误的请求
       Promise.all(list).then(messages => console.log(messages)).catch(e => console.log('error',e))
+      */
+
+      console.log('------------------华丽的分割线------------------')
+
+      let list2 = [
+          fetch(() => 1, 1, '1s duration', true),
+          fetch(() => 2, 2, '2s duration', false),
+          fetch(() => 3, 3, '3s duration', false)
+      ]
+      // 返回最快的异步调用结果, 最快的正确就正确, 最快的错误就错误
+      Promise.race(list2).then(messages => console.log('race',messages)).catch(e => console.log('race error',e))
     </script>
   </body>
 </html>
