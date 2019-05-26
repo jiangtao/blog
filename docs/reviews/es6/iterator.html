@@ -1,31 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>迭代器</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-    function createIterator(items) {
-        let i = 0
-        return {
-            next() {
-                let done, value
-                while(i < items.length) {
-                    value = items[i++]
-                    done = i === items.length
-                }
-                return {
-                    done,
-                    value
-                }
+    //   function createIterator(items) {
+    //       let i = 0
+    //       return {
+    //           next() {
+    //               let done = i >= items.length
+    //               let value = done ? void 0 : items[i++]
+    //               return {
+    //                   done,
+    //                   value
+    //               }
+    //           }
+    //       }
+    //   }
+
+    // yield 必须在生成器内部, 无法穿越函数边界, 因此无法用 forEach 构建
+    function* createIterator(items) {
+        for(let i = 0, len = items.length; i < len; i++) yield items[i]
+    }
+    const task = createIterator([1,2,3,4])
+    // console.log(task.next())
+    // console.log(task.next())
+    // console.log(task.next())
+    // console.log(task.next())
+    
+    // 因为上面已经执行到 done 为 true,所以下面不会输出了
+
+    for(let t of task) console.log(t)
+
+    // 访问默认迭代器
+
+    let values = [1,2,3,5]
+    let iterator = values[Symbol.iterator]()
+    console.log(iterator.next())
+    console.log(iterator.next())
+    console.log(iterator.next())
+    console.log(iterator.next())
+
+    // 监测对象是否可迭代
+    function isIteratable(o) {
+        return typeof o[Symbol.iterator] === 'function'
+    }
+    console.log('string',isIteratable('122'))
+    console.log('number',isIteratable(1111))
+    console.log('array',isIteratable([1,2,3]))
+    console.log('set',isIteratable(new Set()))
+    console.log('map',isIteratable(new Map()))
+    console.log('weakset',isIteratable(new WeakSet()))
+    console.log('weakmap',isIteratable(new WeakMap()))
+    console.log('document collections',isIteratable(document.querySelector('*')))
+    console.log('document tagname',isIteratable(document.getElementsByTagName('*')))
+    // 让 document.querySelectorAll 可迭代
+    let collections = {
+        get items() {
+            return document.querySelectorAll('*')
+        },
+        *[Symbol.iterator]() {
+            for(let i = 0, len = this.items.length; i < len; i++) {
+                yield this.items[i]
             }
         }
-    }    
-    const list = createIterator([1,2,3,5])
-    for(let t of list) console.log(t)
+    }
+    for(let ele of collections) console.log(ele)
     </script>
-</body>
+  </body>
 </html>
