@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>迭代器</title>
+</head>
+<body>
+    <script>
+    function createIterator(items) {
+        let i = 0
+        return {
+            next() {
+                let done, value
+                while(i < items.length) {
+                    value = items[i++]
+                    done = i === items.length
+                }
+                return {
+                    done,
+                    value
+                }
+            }
+        }
+    }    
+    const list = createIterator([1,2,3,5])
+    for(let t of list) console.log(t)
+    </script>
+</body>
+</html>
