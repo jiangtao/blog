@@ -32,5 +32,4 @@ const Path = require('path')
 run(function* () {
   let content = yield readFile(Path.resolve(__dirname, 'var.html'), {encoding: 'utf-8'})
   content = yield (content + '\nhi')
-  console.log(content)
 })
