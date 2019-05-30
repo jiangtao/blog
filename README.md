@@ -1,6 +1,6 @@
 本repo记录项目总结，原创文件，翻译等，文件已迁移到[issue](https://github.com/jiangtao/blog/issues)。
 
-喜欢请`star`，订阅请`watch`，欢迎讨论。
+喜欢请`star`，订阅请`watch`，欢迎讨论.
 
 ## 目录
  
@@ -8,6 +8,7 @@
 - [node文章](https://github.com/jiangtao/blog/issues?utf8=%E2%9C%93&q=node)
 - [vue文章](https://github.com/jiangtao/blog/issues?utf8=%E2%9C%93&q=vue)
 - [项目开发中的问题解决方法](https://github.com/jiangtao/blog/issues?q=is%3Aissue+is%3Aclosed+label%3Asolution)
+- [每日一道算法题](https://github.com/jiangtao/one-algorithm)
 
 ## 文章
 
