@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>css矩阵</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #box {
+      position: relative;
+      z-index: 0;
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: lightpink;
+    }
+
+    .action {
+      position: absolute;
+      top: 30px;
+      left: 0;
+      z-index: 1;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .stage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;;
+      height: 100%;
+      width: 100%;
+      z-index: 0;
+    }
+
+    .stage__base {
+      position: relative;
+      height: 100%;
+      width: 100%; 
+      will-change: transform;
+      transition: transform .5s ease-in-out;
+      transform-origin: 50% 50%;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+<div class="stage">
+  <div class="stage__base container">
+    <div id="box">
+      hello world
+    </div>
+  </div>
+</div>
+<div class="action">
+
+  <input type="button" id="translate" value="translate">
+  <input type="button" id="zoom__in" value="zoom in">
+  <input type="button" id="zoom__out" value="zoom out">
+
+</div>
+<script>
+  function $(el) {
+    if (typeof el === 'string') {
+      el = document.querySelector(el)
+    }
+    if (el && el.nodeType === 1) {
+      return el
+    }
+    return null
+  }
+
+  class Matrix {
+    constructor(el, x = 0, y = 0) {
+      this.el = $(el)
+      this.x = x
+      this.y = y
+      this.a = 1
+      this.b = 0
+      this.c = 0
+      this.d = 1
+      this.e = 0
+      this.f = 0
+      const styles = window.getComputedStyle(this.el, null)
+      this.w = parseInt(styles.width)
+      this.h = parseInt(styles.height)
+
+      console.log(this.w, this.h)
+    }
+
+    meta() {
+      return [
+        this.a,
+        this.b,
+        this.c,
+        this.d,
+        this.e,
+        this.f
+      ].join(',')
+    }
+    // 保证宽度和高度，不管怎样缩放都在一个固定的值, 缩放的相对位置都是相对于 el的正中间
+    fix() {
+      if(this._zoom != this.a) {
+        const w = Math.min(this.a < 1 ? this.w / this.a : this.w * this.a, this.w)
+        const h = Math.min(this.a < 1 ? this.h / this.a : this.h * this.a, this.h)
+        this.el.style.width = `${w}px`
+        this.el.style.height = `${h}px`
+        this._zoom = this.a
+      }
+    }
+
+    matrix() {
+      var ctx = this
+      window.requestAnimationFrame(function () {
+        ctx.fix()
+        ctx.el.style.transform = `matrix(${ctx.meta()})`
+      })
+      return this
+    }
+
+    translate({x, y}, offset = false) {
+      this.e = offset ? this.e + x : x
+      this.f = offset ? this.f + y : y
+      if(this.el) {
+        this.el.style = 'transition: none;'
+      }
+      return this
+    }
+
+    scale(zoom, offset) {
+      this.a = offset ? this.a * zoom : zoom
+      this.d = offset ? this.d * zoom : zoom
+      if(this.el) {
+        this.el.style = 'transition: transform .5s ease-in-out;'
+      }
+      return this
+    }
+  }
+
+  class Dragger {
+    constructor(el, cb) {
+      this.el = $(el)
+      if (this.el) {
+        this.down = (e) => {
+          this.x = e.clientX
+          this.y = e.clientY
+          this.lastX = this.x
+          this.lastY = this.y
+          this.el.addEventListener('mousemove', this.move)
+          this.el.addEventListener('mouseup', this.up)
+        }
+        this.move = e => {
+          this.x = e.clientX
+          this.y = e.clientY
+          if(typeof cb === 'function') {
+            cb({x: this.x - this.lastX , y: this.y - this.lastY})
+          }
+          this.lastX = this.x
+          this.lastY = this.y
+        }
+        this.up = e => {
+          this.el.removeEventListener('mousemove', this.move)
+          this.el.removeEventListener('mouseup', this.down)
+        }
+        this.el.addEventListener('mousedown', this.down)
+      }
+    }
+  }
+  
+  function throttle(fn, delay) {
+    var timer, ctx = this, now = Date.now()
+    return function(...args) {
+      if((Date.now() - now) < delay) return
+      fn.call(ctx,...args)
+      now = Date.now()
+    }
+  }
+  
+
+  const m = new Matrix('.stage__base')
+  const dragger = new Dragger('.stage', throttle(function({x, y}) {
+    
+    if(x != 0 || y != 0 ) m.translate({x: x * 2, y: y * 2}, true).matrix()
+  }, 16.6))
+  let zoom = 1, zoomInCount = 0, zoomOutCount = 0
+
+  $('#translate').addEventListener('click', function () {
+    m.translate({x: 100, y:100}, true).matrix()
+  })
+  $('#zoom__in').addEventListener('click', function () {
+    m.scale(Math.max(m.a - 0.2 * (++zoomInCount), 0.2)).matrix()
+  })
+  $('#zoom__out').addEventListener('click', function () {
+    m.scale(Math.max(m.a + 0.2 * (++zoomOutCount), 2)).matrix()
+  })
+</script>
+</body>
+</html>

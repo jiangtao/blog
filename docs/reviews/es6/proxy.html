@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Proxy 和 Reflect</title>
+</head>
+<body>
+<script>
+
+let target = {
+    name: 'jiangtao',
+    value: '江涛'
+}
+Object.defineProperty(target, 'age', {
+    value: 29,
+    configurable: false
+})
+let proxy = new Proxy(target, {
+    set(trapTarget, k, v, receiever){
+        // 如果是新增的属性的话
+        if(!trapTarget.hasOwnProperty(k)) {
+            if(!Number.isInteger(v)) {
+                throw new Error(`${k} value must be an integer`)
+            }
+        }
+        // 不可配置的属性在set的时候 严格模式下会报错
+        return Reflect.set(trapTarget, k, v, receiever)
+    },
+    get(trapTarget, k, receiever) {
+        if(!trapTarget[k]) throw new Error(`${k} doesnt't exists`)
+        return Reflect.get(trapTarget, k)
+    },
+    /*
+     * in 原型和自身属性都可以判定， 只要存在即可
+     * hasOwnProperty 只判定自身属性， 不记录原型上的属性和方法
+     * proxy后没有hasOwnProperty
+     *
+     * 使用has隐藏部分属性
+    */
+    has(trapTarget, k) {
+        if(k === 'value') return false
+        else return Reflect.has(trapTarget, k)
+    },
+    defineProperty(trapTarget, k) {
+        if(k === 'value') {
+            return false
+        } else {
+            return Reflect.deleteProperty(trapTarget, k)
+        }
+    },
+    // 原型不可获取
+    getPrototypeOf(trapTarget) {
+        return Reflect.getPrototypeOf(trapTarget)
+        // return null
+    },
+    // 原型不可修改
+    setPrototypeOf(trapTarget, proto) {
+        // return false
+        return Reflect.setPrototypeOf(trapTarget, proto)
+    }
+})  
+proxy.age = 36
+console.log('value' in proxy)
+console.log('name' in proxy)
+// console.log(proxy.a)
+
+// 当对象属性不可配置的时候， 不能删除, 严格模式下直接报错了
+console.log(delete target.age)
+console.log(delete proxy.age)
+console.log(delete proxy.name)
+
+let targetProto = Object.getPrototypeOf(target)
+let proxyProto = Object.getPrototypeOf(proxy)
+
+console.log(targetProto === Object.prototype)
+console.log(proxyProto === Object.prototype)
+console.log(proxyProto)
+
+Object.setPrototypeOf(target, {})
+Object.setPrototypeOf(proxy, {})
+
+// Object.getPrototypeOf vs Reflect.getPrototypeOf
+const a = 1
+console.log(Object.getPrototypeOf(a)) // Number.prototype 这里会隐式转换为 new Number(1) 而下面例子不会
+console.log(Reflect.getPrototypeOf(new Number(a))) // 传入a报错， 因为  Reflect.getPrototypeOf 接收的是对象
+
+// Object.setPrototypeOf vs Reflect.setPrototypeOf
+let target1 = {}, target2 = {}
+let result1, result2
+result1 = Object.setPrototypeOf(target1, {})
+console.log(target1 === result1) // Object.setPrototypeOf 返回设置的对象， 失败报错
+
+result2 = Reflect.setPrototypeOf(target2, {}) // 返回true false 当返回false会导致正常的  Object.setPrototypeOf报错  
+console.log(result2, result2 === target2)
+
+// 获取对象的属性名称， 过滤掉所有的私有变量和symbol
+
+let t = {
+    name: 'jiangtao',
+    _cycle() {
+        console.log(`${this.name} can cycle`)
+    },
+    [Symbol('code')]() {
+        console.log(`${this.name} can programe`)
+    }
+}
+class F{
+    constructor(name) {
+        this.name = name
+        this[Symbol('code')] = () => console.log(`${this.name} can programe`)
+    }
+    _cycle() {
+        console.log(`${this.name} can cycle`)
+    }
+}
+
+var proxyKeys = (o) => new Proxy(o, {
+    ownKeys(trapTarget) {
+        return Reflect.ownKeys(trapTarget).filter(k => {
+            if(typeof k == 'symbol') return false
+            if(typeof k === 'string' && k.startsWith('_')) return false
+            return true 
+        })
+    }
+})
+
+
+var proxyT = proxyKeys(t)
+var proxyF = proxyKeys(new F('jiangtao'))
+console.log('object Object.keys',Object.keys(proxyT))
+console.log('class Object.keys', Object.keys(proxyF))
+
+console.log('object getOwnPropertySymbols',Object.getOwnPropertySymbols(proxyT))
+console.log('class getOwnPropertySymbols', Object.getOwnPropertySymbols(proxyF))
+console.log('origin getOwnPropertySymbols', Object.getOwnPropertySymbols(t))
+
+
+var proxyFunc = (f) =>  new Proxy(f, {
+    apply(trapTarget, thisArg, args) {
+        // 直接返回一个实例
+        return Reflect.construct(trapTarget, args)
+    },
+    construct(trapTarget, args) {
+        return Reflect.construct(trapTarget, args)
+    }
+})
+function P(name) {
+    this.name = name
+}
+
+var Person = proxyFunc(P)
+var p = new Person('jiangtao')
+console.log(p.constructor.name)
+console.log(p instanceof Person)
+console.log(p instanceof P)
+console.log(Person.prototype === P.prototype,  P.prototype === p.__proto__)
+
+// 模拟可劫持的Array 
+
+function validArrayIndex(v) {
+    if(typeof v === 'string') v *= 1
+    if(!Number.isInteger(v)) throw new TypeError('v must a number or number string')
+
+    v = Math.max(v, 0)
+    return v % (2**32 - 1)
+}
+function isArrayIndex(v) {
+    return Number(v) == v && v >= 0 && v <= 2**32 -1
+}
+
+// A[length + 1] = 1
+// A[length - 1] = 10
+// A.length = 2
+class JArray extends Array{
+    constructor(length = 0){
+        super()
+        this.length = length
+        return new Proxy(this, {
+            set(trapTarget, k, v) {
+                let currentLength = Reflect.get(trapTarget, 'length')
+                if(isArrayIndex(k)) {
+                    k = validArrayIndex(k)
+                    if(k > currentLength - 1) {
+                        Reflect.set(trapTarget, 'length', k + 1)
+                    }
+                // length删除处理
+                } else if(k === 'length') {
+                    if(v < currentLength) {
+                        console.log('length',currentLength,  v)
+                        for(let i = currentLength - 1; i >=v ;i--) {
+                            if(Reflect.get(trapTarget, i)) {
+                                Reflect.deleteProperty(trapTarget, i)
+                            }
+                        }
+                    }
+                }
+                return Reflect.set(trapTarget, k, v)
+            }
+        })
+    }
+}
+
+var jA = new JArray()
+</script>
+</body>
+</html>
