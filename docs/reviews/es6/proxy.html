@@ -180,6 +180,7 @@ class JArray extends Array{
         return new Proxy(this, {
             set(trapTarget, k, v) {
                 let currentLength = Reflect.get(trapTarget, 'length')
+                // length增加
                 if(isArrayIndex(k)) {
                     k = validArrayIndex(k)
                     if(k > currentLength - 1) {
@@ -203,6 +204,8 @@ class JArray extends Array{
 }
 
 var jA = new JArray()
+
+// 原型劫持
 </script>
 </body>
 </html>
