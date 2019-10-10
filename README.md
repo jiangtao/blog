@@ -2,6 +2,8 @@
 
 喜欢请`star`，订阅请`watch`，欢迎讨论.
 
+目前发生语雀很方便， 内容会同步至 [语雀博客](https://www.yuque.com/imjt/blog) 和 大前端空间 微信公众号
+
 ## 目录
  
 - [docker文章](https://github.com/jiangtao/blog/issues?utf8=%E2%9C%93&q=docker)
