@@ -5,7 +5,7 @@
 
 ## 书籍下载
 
-- [深入理解ES6](./pdf/ES6.pdf) [笔记脑图](./ES6.xmind)
+- [深入理解ES6](./pdf/ES6.pdf) [笔记脑图](./ES6.xmind) [es6代码目录](./reviews/es6)
 
 ## 知乎高质量文章
 
