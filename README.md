@@ -4,7 +4,7 @@
 
 内容会同步至 [语雀博客](https://www.yuque.com/imjt/blog) 和 前端进制 微信公众号
 
-<img width="400" src="https://mmbiz.qpic.cn/mmbiz_png/CLicINvw6OGqLsL8t9yJd8UKjjguMABArahbGkyLVyBUDSHQnyU8VmwSt1xWiaVriaysQKO62Y8R2pMicuyplZZO7Q/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" />
+<img width="400" src="./assets/wechat/wechat.jpeg" />
 
 ## 目录
  
