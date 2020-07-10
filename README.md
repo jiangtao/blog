@@ -13,6 +13,7 @@
 - [vue文章](https://github.com/jiangtao/blog/issues?utf8=%E2%9C%93&q=vue)
 - [项目开发中的问题解决方法](https://github.com/jiangtao/blog/issues?q=is%3Aissue+is%3Aclosed+label%3Asolution)
 - [leetcode刷题记录](https://github.com/jiangtao/keep-leetcode)
+- [🚀【长期招聘】美团点评到店技术-高级前端工程师-终端](https://github.com/jiangtao/blog/issues/29)
 
 ## 文章
 
