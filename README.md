@@ -1,10 +1,4 @@
-<style>
-.main{
- display: flex;
- justify-content:space-between;
-}
-</style>
-<div class="wrapper">
+<div class="wrapper" style="justify-content:space-between; display: flex;">
   <div class="main">
     本repo记录项目总结，原创文件，翻译等，文件已迁移到[issue](https://github.com/jiangtao/blog/issues)。
 
