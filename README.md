@@ -1,10 +1,20 @@
-本repo记录项目总结，原创文件，翻译等，文件已迁移到[issue](https://github.com/jiangtao/blog/issues)。
+<style>
+.main{
+ display: flex;
+ justify-content:space-between;
+}
+</style>
+<div class="wrapper">
+  <div class="main">
+    本repo记录项目总结，原创文件，翻译等，文件已迁移到[issue](https://github.com/jiangtao/blog/issues)。
 
 喜欢请`star`，订阅请`watch`，欢迎讨论.
 
 内容会同步至 [语雀博客](https://www.yuque.com/imjt/blog) 和 前端进制 微信公众号
 
 <img width="400" src="https://github.com/jiangtao/jiangtao/raw/master/assets/wechat/wechat.jpeg" />
+  </div>
+  <div class="toc">
 
 ## 目录
  
@@ -14,6 +24,11 @@
 - [项目开发中的问题解决方法](https://github.com/jiangtao/blog/issues?q=is%3Aissue+is%3Aclosed+label%3Asolution)
 - [leetcode刷题记录](https://github.com/jiangtao/keep-leetcode)
 - [🚀【长期招聘】美团点评到店技术-高级前端工程师-终端](https://github.com/jiangtao/blog/issues/29)
+
+</div>
+</div>
+
+
 
 ## 文章
 
