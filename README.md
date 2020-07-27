@@ -1,15 +1,10 @@
-<div class="wrapper" style="justify-content:space-between; display: flex;">
-  <div class="main">
-    本repo记录项目总结，原创文件，翻译等，文件已迁移到[issue](https://github.com/jiangtao/blog/issues)。
+本repo记录项目总结，原创文件，翻译等，文件已迁移到[issue](https://github.com/jiangtao/blog/issues)。
 
 喜欢请`star`，订阅请`watch`，欢迎讨论.
 
 内容会同步至 [语雀博客](https://www.yuque.com/imjt/blog) 和 前端进制 微信公众号
 
 <img width="400" src="https://github.com/jiangtao/jiangtao/raw/master/assets/wechat/wechat.jpeg" />
-  </div>
-  <div class="toc">
-
 ## 目录
  
 - [docker文章](https://github.com/jiangtao/blog/issues?utf8=%E2%9C%93&q=docker)
@@ -18,10 +13,6 @@
 - [项目开发中的问题解决方法](https://github.com/jiangtao/blog/issues?q=is%3Aissue+is%3Aclosed+label%3Asolution)
 - [leetcode刷题记录](https://github.com/jiangtao/keep-leetcode)
 - [🚀【长期招聘】美团点评到店技术-高级前端工程师-终端](https://github.com/jiangtao/blog/issues/29)
-
-</div>
-</div>
-
 
 
 ## 文章
@@ -32,21 +23,7 @@
 
 ### 2018年1月
 
-- [搭建一个通用脚手架](https://github.com/jiangtao/blog/issues/23) 
-
-### 2017年11月
-
-- [初识puppeteer之爬虫](https://github.com/jiangtao/blog/issues/15)
-- [npm依赖版本锁定和管理](https://github.com/jiangtao/blog/issues/19)
-
-### 2017年9月
-
-- [使用decorator处理model层验证](https://github.com/jiangtao/blog/issues/8)
-- [vue中的mixins实践](https://github.com/jiangtao/blog/issues/11)
-- [Vue移动项目webp接入](https://github.com/jiangtao/blog/issues/10)
-- [异步编程小结](https://github.com/jiangtao/blog/issues/9)
-- [xss live总结](https://github.com/jiangtao/blog/issues/7)
-- [初识docker:使用docker管理博客](https://github.com/jiangtao/blog/issues/12)
+- [搭建一个通用脚手架](https://github.com/jiangtao/blog/issues/23)
 
 ## 备注
 
