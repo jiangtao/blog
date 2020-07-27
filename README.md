@@ -5,7 +5,8 @@
 内容会同步至 [语雀博客](https://www.yuque.com/imjt/blog) 和 前端进制 微信公众号
 
 <img width="400" src="https://github.com/jiangtao/jiangtao/raw/master/assets/wechat/wechat.jpeg" />
-## 目录
+
+## 文章目录
  
 - [docker文章](https://github.com/jiangtao/blog/issues?utf8=%E2%9C%93&q=docker)
 - [node文章](https://github.com/jiangtao/blog/issues?utf8=%E2%9C%93&q=node)
@@ -14,16 +15,6 @@
 - [leetcode刷题记录](https://github.com/jiangtao/keep-leetcode)
 - [🚀【长期招聘】美团点评到店技术-高级前端工程师-终端](https://github.com/jiangtao/blog/issues/29)
 
-
-## 文章
-
-### 2018年3月
-
-- [无javascript实现自适应布局](https://imjiangtao.com/blog/viewport/)
-
-### 2018年1月
-
-- [搭建一个通用脚手架](https://github.com/jiangtao/blog/issues/23)
 
 ## 备注
 
