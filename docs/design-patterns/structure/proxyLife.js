@@ -37,3 +37,5 @@ const xiaohong = {
   }
 }
 xiaoming.sendPresent(xiaohong)
+
+// 矩阵相乘

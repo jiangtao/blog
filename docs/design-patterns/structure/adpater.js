@@ -30,4 +30,3 @@ const renderMap = (map, ...args) => {
 
 renderMap(gaodeMap)
 renderMap(googleAdapter)
-
