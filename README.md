@@ -1,5 +1,3 @@
-<img align="right" width="300" src="./assets/wechat/wechat.jpeg" />
-
 本repo记录项目总结，原创文件，翻译等，文件已迁移到[issue](https://github.com/jiangtao/blog/issues)。
 
 喜欢请`star`，订阅请`watch`，欢迎讨论.
