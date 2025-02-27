@@ -1,0 +1,25 @@
+{
+  "name": "business-publish-mcp",
+  "version": "1.0.0",
+  "description": "Business publish module using MCP",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc --project tsconfig.json",
+    "start": "node dist/server.js",
+    "start:client": "node dist/client.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "typescript": "^5.0.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/jest": "^29.0.0",
+    "jest": "^29.0.0",
+    "ts-jest": "^29.0.0"
+  }
+}
