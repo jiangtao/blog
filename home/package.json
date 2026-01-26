@@ -1,0 +1,31 @@
+{
+  "name": "jiangtao-blog",
+  "version": "0.0.0",
+  "private": true,
+  "hexo": {
+    "version": "6.3.0"
+  },
+  "dependencies": {
+    "gh-pages": "^1.1.0",
+    "hexo": "^6.3.0",
+    "hexo-front-matter": "^0.2.3",
+    "hexo-generator-archive": "^0.1.4",
+    "hexo-generator-category": "^0.1.3",
+    "hexo-generator-index": "^0.2.0",
+    "hexo-generator-tag": "^0.2.0",
+    "hexo-renderer-ejs": "^0.3.0",
+    "hexo-renderer-marked": "^0.3.0",
+    "hexo-renderer-stylus": "^0.3.1",
+    "hexo-renderer-swig": "^2.0.0",
+    "hexo-server": "^0.2.0"
+  },
+  "devDependencies": {
+    "hexo-generator-feed": "^3.0.0",
+    "hexo-workbox": "^0.0.2"
+  },
+  "scripts": {
+    "build": "hexo generate",
+    "dev": "hexo server",
+    "clean": "hexo clean"
+  }
+}

@@ -1,3 +1,19 @@
 demo/test
 .DS_Store
 node_modules
+.cursor
+rules
+
+# Slidev shares 构建产物
+shares/dist/
+shares/.slidev/
+shares/node_modules/
+shares/*.pdf
+shares/*.png
+shares/*.pptx
+
+# Hexo blog
+home/node_modules/
+home/public/
+home/.deploy_git/
+home/db.json
