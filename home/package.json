@@ -38,6 +38,7 @@
     "lint:images": "node bin/image-lint-cli.js",
     "fix:images": "node bin/image-lint-cli.js --auto --include-yuque",
     "migrate:images": "node bin/migrate-manual.js",
+    "sync:profile": "node bin/sync-to-profile.js",
     "prepare": "cd .. && husky install home/.husky"
   },
   "lint-staged": {
