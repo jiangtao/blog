@@ -33,6 +33,9 @@
   "scripts": {
     "build": "hexo generate",
     "dev": "hexo server",
-    "clean": "hexo clean"
+    "clean": "hexo clean",
+    "lint:images": "node scripts/image-lint-cli.js",
+    "fix:images": "node scripts/image-lint-cli.js --auto --include-yuque",
+    "prepare": "husky install"
   }
 }
