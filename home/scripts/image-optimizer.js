@@ -71,8 +71,10 @@ async function downloadAndOptimizeFromLocal(localPath, outputDir, baseName) {
       throw new Error(`Local file does not exist: ${localPath}`);
     }
 
+    // Sanitize baseName to prevent path traversal
     const timestamp = Date.now();
-    const name = baseName || `${timestamp}`;
+    const safeBaseName = baseName ? baseName.replace(/[^a-zA-Z0-9-_]/g, '_') : `${timestamp}`;
+    const name = safeBaseName || `${timestamp}`;
 
     // Ensure output directory exists
     await fs.mkdir(outputDir, { recursive: true });

@@ -13,6 +13,19 @@ const tempDir = path.join(__dirname, '../.temp');
 
 // Read temp directory for manually downloaded images
 async function migrateFromTemp() {
+  let failures = 0;
+
+  // Validate directories exist
+  if (!fs.existsSync(postsDir)) {
+    console.error('❌ 文章目录不存在:', postsDir);
+    failures++;
+    return;
+  }
+  if (!fs.existsSync(imageDir)) {
+    console.error('❌ 图片目录不存在:', imageDir);
+    failures++;
+    return;
+  }
   if (!fs.existsSync(tempDir)) {
     console.log('❌ .temp 目录不存在，请先手动下载图片到该目录');
     return;
@@ -30,8 +43,8 @@ async function migrateFromTemp() {
 
   for (const file of files) {
     const filePath = path.join(postsDir, file);
-    let content = fs.readFileSync(filePath, 'utf-8');
-    const { links } = extractImageLinks(content, file);
+    let currentContent = fs.readFileSync(filePath, 'utf-8');
+    const { links } = extractImageLinks(currentContent, file);
     const yuqueLinks = links.filter(l => l.type === 'yuque');
 
     if (yuqueLinks.length === 0) continue;
@@ -50,8 +63,8 @@ async function migrateFromTemp() {
         return imgName === urlFilename || imgName.includes(urlFilename.substring(0, 8));
       });
 
-      // If no match found, use first available image (fallback for single image scenario)
-      if (!matchedImage && tempImages.length > 0) {
+      // Only use fallback when there's exactly one temp image (unsafe otherwise)
+      if (!matchedImage && tempImages.length === 1) {
         matchedImage = tempImages[0];
       }
 
@@ -75,11 +88,15 @@ async function migrateFromTemp() {
 
         const newPath = `/images/${subdir}/${file.replace('.md', '')}/${baseName}`;
 
-        // Replace link and update content
-        content = replaceImageLink(content, link.url, newPath, '图片');
+        // Replace link in current content
+        currentContent = replaceImageLink(currentContent, link.url, newPath, '图片');
 
         // Write updated content to file
-        fs.writeFileSync(filePath, content, 'utf-8');
+        fs.writeFileSync(filePath, currentContent, 'utf-8');
+
+        // CRITICAL: Reload content after write to prevent staleness bugs
+        currentContent = fs.readFileSync(filePath, 'utf-8');
+
         console.log(`  ✅ 已迁移: ${link.url.substring(0, 40)}... → ${matchedImage}`);
 
         // Remove processed temp image
@@ -94,13 +111,18 @@ async function migrateFromTemp() {
         // Only process one link per file to avoid confusion
         break;
       } catch (error) {
-        console.log(`  ❌ 迁移失败: ${error.message}`);
+        failures++;
+        console.error(`  ❌ 迁移失败: ${error.message}`);
         continue;
       }
     }
   }
 
   console.log('\n✅ 迁移完成！');
+  if (failures > 0) {
+    console.error(`\n⚠️  有 ${failures} 个操作失败`);
+    process.exit(1);
+  }
 }
 
 migrateFromTemp().catch(console.error);
