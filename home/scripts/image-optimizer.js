@@ -33,6 +33,7 @@ async function downloadAndOptimize(url, outputDir, baseName) {
     original: originalPath,
     png: pngPath,
     webp: webpPath,
+    originalSize: (await fs.stat(originalPath)).size,
     pngSize: (await fs.stat(pngPath)).size,
     webpSize: (await fs.stat(webpPath)).size
   };
