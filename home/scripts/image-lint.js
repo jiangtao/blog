@@ -33,7 +33,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-async function validateLinks(links, imageDir) {
+async function validateLinks(links, imageDir, timeout = 5000) {
   const results = [];
 
   for (const link of links) {
@@ -45,14 +45,23 @@ async function validateLinks(links, imageDir) {
       message = 'Yuque 防盗链（需要迁移）';
     } else if (link.type === 'external') {
       try {
-        const response = await axios.head(link.url, { timeout: 5000 });
-        if (response.status < 200 || response.status >= 300) {
+        const response = await axios.head(link.url, {
+          timeout,
+          maxRedirects: 5
+        });
+        // Only 4xx and 5xx are errors, 3xx redirects are followed automatically
+        if (response.status >= 400) {
           status = 'invalid';
           message = `HTTP ${response.status}`;
         }
       } catch (error) {
         status = 'invalid';
-        message = error.code === 'ECONNABORTED' ? '超时' : error.message;
+        // Safely check error.code
+        if (error.code) {
+          message = error.code === 'ECONNABORTED' ? '超时' : error.message;
+        } else {
+          message = error.message || '未知错误';
+        }
       }
     } else if (link.type === 'local') {
       const fullPath = path.join(imageDir, link.url.replace('/images/', ''));
