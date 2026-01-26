@@ -15,7 +15,18 @@ async function main() {
   const auto = args.includes('--auto');
   const includeYuque = args.includes('--include-yuque');
 
-  const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md'));
+  let files;
+  try {
+    files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md'));
+  } catch (err) {
+    console.error(`Error reading posts directory: ${err.message}`);
+    process.exit(1);
+  }
+
+  if (files.length === 0) {
+    console.log('No markdown files found in posts directory');
+    process.exit(0);
+  }
 
   for (const file of files) {
     const filePath = path.join(postsDir, file);
@@ -34,13 +45,16 @@ async function main() {
       continue;
     }
 
+    let currentContent = content;
+
     for (const issue of issues) {
       if (issue.type === 'yuque') {
         console.log(`  🔴 ${issue.url.substring(0, 60)}...`);
         console.log(`     状态: ${issue.message}`);
 
         if (auto && includeYuque) {
-          const subdir = `20${file.substring(0, 2)}`;
+          const yearMatch = file.match(/^(\d{2})/);
+          const subdir = yearMatch ? `20${yearMatch[1]}` : 'misc';
           const imgDir = path.join(imageDir, subdir, file.replace('.md', ''));
           const baseName = `${Date.now()}`;
 
@@ -48,8 +62,8 @@ async function main() {
             await downloadAndOptimize(issue.url, imgDir, baseName);
             const newPath = `/images/${subdir}/${file.replace('.md', '')}/${baseName}`;
 
-            const newContent = replaceImageLink(content, issue.url, newPath, '图片');
-            fs.writeFileSync(filePath, newContent, 'utf-8');
+            currentContent = replaceImageLink(currentContent, issue.url, newPath, '图片');
+            fs.writeFileSync(filePath, currentContent, 'utf-8');
             console.log(`     ✅ 已迁移到 ${newPath}`);
           } catch (err) {
             console.log(`     ❌ 迁移失败: ${err.message}`);
