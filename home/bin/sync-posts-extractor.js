@@ -5,38 +5,76 @@ const matter = require('gray-matter');
  * @param {Array} posts - Array of Hexo post objects with front-matter data
  * @param {number} limit - Maximum number of posts to extract (default: 5)
  * @returns {Array} Array of post objects with title, date, and url
+ * @throws {Error} If posts is not an array or is empty
  */
 function extractLatestPosts(posts, limit = 5) {
+  // Input validation
+  if (!Array.isArray(posts)) {
+    throw new Error('posts must be an array');
+  }
+
+  if (posts.length === 0) {
+    return [];
+  }
+
+  // Validate limit
+  if (typeof limit !== 'number' || limit < 0) {
+    throw new Error('limit must be a non-negative number');
+  }
+
   // Transform each post into the desired format
-  const parsedPosts = posts.map(post => {
-    // Handle both raw markdown strings and parsed post objects
-    let postData;
-    if (typeof post === 'string') {
-      // Parse raw markdown content
-      const file = matter(post);
-      postData = file.data;
-    } else {
-      // Use already parsed post object from Hexo
-      postData = post;
+  const parsedPosts = posts.map((post, index) => {
+    try {
+      // Handle both raw markdown strings and parsed post objects
+      let postData;
+      if (typeof post === 'string') {
+        // Parse raw markdown content
+        const file = matter(post);
+        postData = file.data;
+      } else if (post && typeof post === 'object') {
+        // Use already parsed post object from Hexo
+        postData = post;
+      } else {
+        // Skip invalid post entries
+        console.warn(`Skipping invalid post at index ${index}`);
+        return null;
+      }
+
+      // Extract date and format permalink
+      const date = postData.date || new Date();
+      let dateObj = new Date(date);
+
+      // Validate date
+      if (isNaN(dateObj.getTime())) {
+        console.warn(`Invalid date for post "${postData.title || 'unknown'}", using current date`);
+        dateObj = new Date();
+      }
+
+      const year = dateObj.getFullYear();
+      const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+      const day = String(dateObj.getDate()).padStart(2, '0');
+
+      // Build URL using Hexo permalink pattern: :year/:month/:day/:slug/
+      // Priority: front-matter slug > post object slug > skip title (title may have special chars)
+      const slug = postData.slug;
+
+      if (!slug) {
+        console.warn(`No slug found for post "${postData.title || 'unknown'}", skipping URL generation`);
+        return null;
+      }
+
+      const url = `https://imjiangtao.com/${year}/${month}/${day}/${slug}/`;
+
+      return {
+        title: postData.title || 'Untitled',
+        date: dateObj.toISOString().split('T')[0], // YYYY-MM-DD format
+        url: url
+      };
+    } catch (error) {
+      console.warn(`Error parsing post at index ${index}:`, error.message);
+      return null;
     }
-
-    // Extract date and format permalink
-    const date = postData.date || new Date();
-    const dateObj = new Date(date);
-    const year = dateObj.getFullYear();
-    const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-    const day = String(dateObj.getDate()).padStart(2, '0');
-
-    // Build URL using Hexo permalink pattern: :year/:month/:day/:title/
-    const titleSlug = postData.slug || postData.title || 'untitled';
-    const url = `https://imjiangtao.com/${year}/${month}/${day}/${titleSlug}/`;
-
-    return {
-      title: postData.title,
-      date: dateObj.toISOString().split('T')[0], // YYYY-MM-DD format
-      url: url
-    };
-  });
+  }).filter(post => post !== null); // Remove any null entries from parsing errors
 
   // Sort by date (newest first) and limit
   return parsedPosts
