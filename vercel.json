@@ -1,5 +1,6 @@
 {
-  "buildCommand": "cd home && npm install && npm run build",
-  "outputDirectory": "home/public",
-  "installCommand": "cd home && npm install"
+  "root": "home",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": "public"
 }
