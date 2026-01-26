@@ -1,0 +1,74 @@
+const fs = require('fs');
+const path = require('path');
+const { execSync } = require('child_process');
+const matter = require('gray-matter');
+const { extractLatestPosts } = require('./sync-posts-extractor.js');
+const { generateProfileReadme } = require('./sync-profile-readme.js');
+
+const POSTS_DIR = path.join(__dirname, '../source/_posts');
+const PROFILE_README_PATH = '/tmp/jiangtao-profile/README.md';
+
+async function syncToProfile(localReadmePath = PROFILE_README_PATH) {
+  console.log('📖 Reading blog posts...');
+
+  // Read all markdown files in posts directory
+  const posts = fs.readdirSync(POSTS_DIR)
+    .filter(f => f.endsWith('.md'))
+    .map(f => {
+      const content = fs.readFileSync(path.join(POSTS_DIR, f), 'utf-8');
+      // Parse front-matter to get post metadata
+      const { data, content: markdownContent } = matter(content);
+      // Add slug from filename if not in front-matter
+      if (!data.slug) {
+        data.slug = f.replace('.md', '');
+      }
+      // Return post object with front-matter data
+      return data;
+    });
+
+  // Extract latest 5 posts
+  const latestPosts = extractLatestPosts(posts, 5);
+  console.log(`✅ Found ${posts.length} posts, extracted latest ${latestPosts.length}`);
+
+  // Clone profile repo temporarily
+  console.log('📥 Cloning profile repo...');
+  const profileDir = '/tmp/jiangtao-profile';
+
+  try {
+    execSync(`rm -rf ${profileDir}`, { stdio: 'ignore' });
+    execSync(`git clone https://${process.env.GITHUB_TOKEN}@github.com/jiangtao/jiangtao.git ${profileDir}`, {
+      stdio: 'ignore',
+      env: { ...process.env, GITHUB_TOKEN: process.env.GITHUB_TOKEN }
+    });
+
+    // Generate updated README
+    const profileReadmePath = path.join(profileDir, 'README.md');
+    const updatedReadme = generateProfileReadme(latestPosts, profileReadmePath);
+
+    // Write updated README
+    fs.writeFileSync(profileReadmePath, updatedReadme);
+    console.log('✅ Profile README updated');
+
+    // Commit and push
+    console.log('📤 Committing to profile repo...');
+    execSync(`cd ${profileDir} && git config user.name "github-actions[bot]" && git config user.email "github-actions[bot]@users.noreply.github.com"`, {
+      stdio: 'ignore'
+    });
+
+    execSync(`cd ${profileDir} && git add README.md && git commit -m "chore: sync latest blog posts from jiangtao/blog" && git push`, {
+      stdio: 'ignore'
+    });
+
+    console.log('✅ Profile repo updated!');
+    return { success: true, postsCount: latestPosts.length };
+
+  } catch (error) {
+    console.error('❌ Sync failed:', error.message);
+    return { success: false, error: error.message };
+  } finally {
+    // Cleanup
+    execSync(`rm -rf ${profileDir}`, { stdio: 'ignore' });
+  }
+}
+
+module.exports = { syncToProfile };
