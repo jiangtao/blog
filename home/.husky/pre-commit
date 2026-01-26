@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "Checking image links..."
-cd home && npm run lint:images
+echo "🔍 Checking image links in staged files..."
+cd home && npx lint-staged
