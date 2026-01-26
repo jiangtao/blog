@@ -89,7 +89,18 @@ async function migrateFromTemp() {
         const newPath = `/images/${subdir}/${file.replace('.md', '')}/${baseName}`;
 
         // Replace link in current content
-        currentContent = replaceImageLink(currentContent, link.url, newPath, '图片');
+        const replaceResult = replaceImageLink(currentContent, link.url, newPath, '图片');
+
+        // Check if replacement was successful
+        if (!replaceResult.replaced) {
+          failures++;
+          console.error(`  ❌ 替换失败: URL 在 Markdown 中未找到匹配`);
+          console.error(`     原始 URL: ${link.url}`);
+          console.error(`     提示: 可能是 URL 编码差异导致，临时文件 ${matchedImage} 已保留`);
+          continue;
+        }
+
+        currentContent = replaceResult.content;
 
         // Write updated content to file
         fs.writeFileSync(filePath, currentContent, 'utf-8');
@@ -99,7 +110,7 @@ async function migrateFromTemp() {
 
         console.log(`  ✅ 已迁移: ${link.url.substring(0, 40)}... → ${matchedImage}`);
 
-        // Remove processed temp image
+        // Remove processed temp image ONLY after successful replacement
         fs.unlinkSync(tempImagePath);
 
         // Remove from tempImages array to prevent reuse

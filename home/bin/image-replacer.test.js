@@ -17,4 +17,10 @@ const result = replaceImageLink(
 );
 
 console.log('Result:', result);
-// Expected: <img src="/images/2020/test/1604027361.webp" alt="新图片" loading="lazy" onerror="window.imgFallback(this)">
+console.log('Replaced:', result.replaced);
+console.log('Count:', result.count);
+console.log('Content:', result.content);
+// Expected: 
+// replaced: true
+// count: 1
+// content: <img src="/images/2020/test/1604027361.webp" alt="新图片" loading="lazy" onerror="window.imgFallback(this)">

@@ -24,11 +24,20 @@ function replaceImageLink(markdown, oldUrl, newPath, alt) {
     'g'
   );
 
-  // Use replacement function to access capture group
-  return markdown.replace(regex, (match, capturedAlt) => {
-    const finalAlt = capturedAlt || (alt ? escapeHtml(alt) : 'image');
+  let replacementCount = 0;
+  
+  // Use replacement function to access capture group and count replacements
+  const result = markdown.replace(regex, (match, capturedAlt) => {
+    replacementCount++;
+    const finalAlt = capturedAlt || alt || 'image';
     return `<img src="${newPath}.webp" alt="${escapeHtml(finalAlt)}" loading="lazy" onerror="window.imgFallback(this)">`;
   });
+
+  return {
+    content: result,
+    replaced: replacementCount > 0,
+    count: replacementCount
+  };
 }
 
 module.exports = { replaceImageLink };

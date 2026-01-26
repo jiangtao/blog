@@ -64,7 +64,14 @@ async function main() {
             await downloadAndOptimize(issue.url, imgDir, baseName);
             const newPath = `/images/${subdir}/${file.replace('.md', '')}/${baseName}`;
 
-            currentContent = replaceImageLink(currentContent, issue.url, newPath, '图片');
+            const replaceResult = replaceImageLink(currentContent, issue.url, newPath, '图片');
+            
+            if (!replaceResult.replaced) {
+              console.log(`     ❌ 替换失败: URL 在 Markdown 中未找到匹配`);
+              continue;
+            }
+            
+            currentContent = replaceResult.content;
             fs.writeFileSync(filePath, currentContent, 'utf-8');
             console.log(`     ✅ 已迁移到 ${newPath}`);
           } catch (err) {
