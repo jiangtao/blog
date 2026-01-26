@@ -5,3 +5,6 @@ if ('serviceWorker' in navigator) {
   }).catch(console.error);
 }
 </script>
+
+<!-- Image fallback for WebP support -->
+<script src="/js/image-fallback.js"></script>

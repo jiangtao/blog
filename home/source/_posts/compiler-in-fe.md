@@ -15,7 +15,7 @@ tags:
 
 ## 一、前言
 从互联网时代初至今， 从[Web1.0](https://zh.wikipedia.org/wiki/Web_2.0#Web_1.0)静态展示型到 [Web2.0](https://zh.wikipedia.org/wiki/Web_2.0) 重交互型发展，软件应用的复杂度越来越高。前端领域需进一步提高研发效率，在此过程中针对细分领域诞生了各种语言及配套工具。而在这些工具中编译原理及其思想被反复在前端中使用。有必要了解、学习基本原理和应用场景，来更好的解决业务问题。
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/114956/1604027361305-86f0f0c5-f8aa-4dc5-b77d-1cd559be0fc5.png#align=left&display=inline&height=1181&margin=%5Bobject%20Object%5D&name=image.png&originHeight=2362&originWidth=5078&size=2094241&status=done&style=none&width=2539)
+<img src="/images/misc/compiler-in-fe/1769450767287.webp" alt="image.png" loading="lazy" onerror="window.imgFallback(this)">
 ## 二、编译原理概述
 ### 2.1 什么是编译原理
 
@@ -25,9 +25,9 @@ tags:
    - **编程语言： **编程语言分为两种：一种是静态类型，如（C++，Go等），都需要提前编译 **（AOT）** 成机器码然后执行，这个过程主要使用**编译器**来完成；一种是动态类型，如JavaScript、Python等，只在运行时进行编译执行 **（JIT）** ，这个过程通过解释器完成。静态类型语言运行时不需要在进行编译，执行效率较快；动态语言因边解释边执行，调试较方便。
 
    - **编译器主要工作阶段：**
-      - ![image.png](https://cdn.nlark.com/yuque/0/2020/png/114956/1604027476165-85f189af-9f70-4708-85c6-0ff428ea60f4.png#align=left&display=inline&height=56&margin=%5Bobject%20Object%5D&name=image.png&originHeight=112&originWidth=1968&size=31258&status=done&style=none&width=984)
+      - <img src="/images/misc/compiler-in-fe/1769450768758.webp" alt="image.png" loading="lazy" onerror="window.imgFallback(this)">
    - **解释器主要工作阶段：**
-      - ![image.png](https://cdn.nlark.com/yuque/0/2020/png/114956/1604027485576-3e708a7e-58f5-4828-8826-fe56b51047d6.png#align=left&display=inline&height=56&margin=%5Bobject%20Object%5D&name=image.png&originHeight=112&originWidth=1968&size=31258&status=done&style=none&width=984)
+      - <img src="/images/misc/compiler-in-fe/1769450768986.webp" alt="image.png" loading="lazy" onerror="window.imgFallback(this)">
 ### 2.2 为什么前端要了解编译原理
 
 - **本职工作：**JavaScript本身也属于程序设计语言，通过了解 JS 执行时解释器工作原理，可以帮助更好的理解代码运行，优化代码，基于JavaScript 本身做些扩展（如Flow 静态类型检查器，JSDoc 文档生成等等）。
@@ -40,14 +40,14 @@ tags:
 编译原理在前端中有很多应用，这里列举几个常见的应用例子，便于理解。
 ### 3.1 JS 执行机制
 JS执行机制整理流程
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/114956/1604027557747-29c66c24-4459-43af-ae44-cf66d9088353.png#align=left&display=inline&height=322&margin=%5Bobject%20Object%5D&name=image.png&originHeight=644&originWidth=1768&size=149233&status=done&style=none&width=884)
+<img src="/images/misc/compiler-in-fe/1769450769163.webp" alt="image.png" loading="lazy" onerror="window.imgFallback(this)">
 #### 3.1.1 **生成抽象语法树（AST）和执行上下文**
 ##### **3.1.1.1 生成抽象语法树**
 对于我们开发者而言，JavaScript 源代码是对我们较为友好的理解，但对于编译器来说生成抽象语法树 AST 更好理解，好比 HTML 生成 DOM 树浏览器更好理解。
 生成抽象语法树经过两个阶段
 **词法分析**
 词法解析，将一行行源代码解析成 token 单元，所谓 token 单元是语法上不能再分的最小单元。可以通过下图理解：
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/114956/1604027584346-30268b29-16fb-4ce7-81ff-f58053c96fd6.png#align=left&display=inline&height=198&margin=%5Bobject%20Object%5D&name=image.png&originHeight=396&originWidth=744&size=40280&status=done&style=none&width=372)
+<img src="/images/misc/compiler-in-fe/1769450769508.webp" alt="image.png" loading="lazy" onerror="window.imgFallback(this)">
 
 上面的代码，由关键字var, 标识符 name，值literal 组成。更多的 token 组成，可以通过[ast工具](https://astexplorer.net/)查看生成的 token 单元描述。
 **语法分析**
@@ -225,7 +225,7 @@ foo(name)
 - **this指向:  this 和执行上下文有关，1 个执行上下文有一个this**
 
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/114956/1604027835423-8ad81b26-803d-451c-b35f-a8c69db9cc95.png#align=left&display=inline&height=154&margin=%5Bobject%20Object%5D&name=image.png&originHeight=308&originWidth=504&size=17123&status=done&style=none&width=252)
+<img src="/images/misc/compiler-in-fe/1769450769732.webp" alt="image.png" loading="lazy" onerror="window.imgFallback(this)">
 ##### 3.1.1.3 js 执行
 有了**ast 和执行上下文**之后， 遇到 ignition 解析器 解析成字节码。如果一段代码多次触发，会标记为 hot，触发turboFan 编译器，将字节码编译成更高效的机器码存储，当下次再次执行，使用优化后的机器码执行，以此来提高 js 执行效率。
 turboFan 编译器去优化，举个例子，当执行函数100 次 时，假设前 90次 参数为 init，第 91 次是其他类型，此时turboFan 编译器进行去优化操作，重新回到 ignition 解析器 解析成字节码并执行阶段，去优化代价比较昂贵，在实际编码中注意去优化操作。
@@ -249,13 +249,13 @@ export default class ListController {
     }
 }
 ```
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/114956/1604027866628-1ac9ef8c-7d2f-4167-bd0c-186c9bfb5663.png#align=left&display=inline&height=235&margin=%5Bobject%20Object%5D&name=image.png&originHeight=470&originWidth=1700&size=418100&status=done&style=none&width=850)
+<img src="/images/misc/compiler-in-fe/1769450769908.webp" alt="image.png" loading="lazy" onerror="window.imgFallback(this)">
 ##### 3.2.1.3 实现流程
 上面源代码的范式基于 JS class Decorator 实现，集中式管理Node API地址，请求参数，请求规则，Mock 数据等。感兴趣这里可以查看[代码](https://github.com/ijs/halojs-doc-examples) 主要介绍 doc 生成的工作流程：
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/114956/1604027895381-c59900c1-c09d-4bba-a102-fa5ef2b0fc0c.png#align=left&display=inline&height=66&margin=%5Bobject%20Object%5D&name=image.png&originHeight=132&originWidth=1592&size=37180&status=done&style=none&width=796)
+<img src="/images/misc/compiler-in-fe/1769450770283.webp" alt="image.png" loading="lazy" onerror="window.imgFallback(this)">
 
 - **源码解析：**可以用任意JS解析器，选择对 ESModule 较为友好的[babylon](https://www.npmjs.com/package/babylon)解析，实例中的代码通过 decorators定义信息，生成后的 AST decorator 中存储着关键信息
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/114956/1604027904134-a6aed299-7b0a-470d-a3a9-5b8908f59552.png#align=left&display=inline&height=375&margin=%5Bobject%20Object%5D&name=image.png&originHeight=750&originWidth=882&size=87991&status=done&style=none&width=441)
+<img src="/images/misc/compiler-in-fe/1769450770661.webp" alt="image.png" loading="lazy" onerror="window.imgFallback(this)">
 - **语义分析： **通过提取 ast的 每个decorator信息， 这里只对 RequestUrl, RequestParam信息提取，[代码实现逻辑可点击查看](https://github.com/jiangtao/halo-utils/blob/master/src/libs/doc/utils.js#L9)
 ```
 [
@@ -289,7 +289,7 @@ export default class ListController {
 低代码平台因面向用户和面向领域，实现方式等不同，有不同的称谓，如搭建平台，无代码平台等。具体可[查看开源的 awsome-lowcode](https://github.com/taowen/awesome-lowcode)一些介绍。
 ### 4.2 页面编辑器工作流程
 不同的低代码平台对于 实体的抽象不同，但最核心页面编辑器（视图、交互、数据），页面编辑器输出 （页面视图、交互、数据）的表示DSL（领域特定语言），DSL 回显到页面编辑器，展示再编辑等。为了让存储的 DSL，创建应用，需要将 DSL 转换为浏览器可识别的语言，将 DSL 转换到小程序、手机端等不同平台展示。具体的流程
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/114956/1604027941313-7f21d065-39c1-408a-966f-5fe10474a3ab.png#align=left&display=inline&height=298&margin=%5Bobject%20Object%5D&name=image.png&originHeight=596&originWidth=1610&size=116485&status=done&style=none&width=805)
+<img src="/images/misc/compiler-in-fe/1769450771186.webp" alt="image.png" loading="lazy" onerror="window.imgFallback(this)">
 
 从核心的DSL来看，DSL 是组件的表示，若想在浏览器中运行， 需要通过对 DSL 进行解析和转换在浏览器动态运行（和业务强相关的 DSL 会通过编译来处理，进行数据脱敏，数据组装、加工、鉴权等），若存在不同平台需要对 DSL 进行编译处理成不同平台可运行的代码，发布后运行。整个过程和编译思想相似，每个阶段面向对象有所区别。
 在整个低代码平台中 页面编辑器 是低代码平台的核心承载，应用生产者的输入和调整都是通过编辑器来制作，就好比开发者通过 IDE 进行代码研发一样。
@@ -306,11 +306,11 @@ export default class ListController {
 
 **视图与数据**之间 通过 **交互**连接, 体现在前端 通过组件 method， event来做处理。而交互有很高的复杂性，每个交互可以看成一步步的流程。整个页面编辑器分为两部分：**设计和流程**
 组件通过事件来调用流程好的流程，流程通过逻辑操作可对组件属性进行设置，暴露方法调用。
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/114956/1604040810803-cf135ce4-ab40-4191-9dc7-1fa1cadbafff.png#align=left&display=inline&height=255&margin=%5Bobject%20Object%5D&name=image.png&originHeight=510&originWidth=1688&size=71173&status=done&style=none&width=844)
+<img src="/images/misc/compiler-in-fe/1769450771654.webp" alt="image.png" loading="lazy" onerror="window.imgFallback(this)">
 整体的**设计编辑区域** 和 **流程节点编排区域，**社区里面有不少优秀的案例，如**设计编辑区域 [vvweb editor](http://www.vvveb.com/vvvebjs/editor.html)， 流程节点编排**[G6 Editor](https://github.com/antvis/g6-editor)，[GGeditor](https://github.com/alibaba/GGEditor)。本篇文章重心还是放在编译思维的应用上，涉及到具体的领域技术细节这里不作展开。
 #### 4.3.2 存储设计
 由于系统的复杂性和早期的实验和快速迭代。之前工作的无代码平台采用了 MongoDB 数据库。编辑器界面的核心是组件、流程。这里面介绍下
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/114956/1604041614915-af0ff378-f240-4da2-8ed5-0cf6941e5d00.png#align=left&display=inline&height=258&margin=%5Bobject%20Object%5D&name=image.png&originHeight=516&originWidth=1158&size=59524&status=done&style=none&width=579)
+<img src="/images/misc/compiler-in-fe/1769450771919.webp" alt="image.png" loading="lazy" onerror="window.imgFallback(this)">
 
 - 组件通过事件调用流程设计好的流程，组件表中记录对应事件调用的流程 flow_id
 
@@ -415,7 +415,7 @@ export default class ListController {
 
 #### **4.4.2 实现流程**
 上面介绍到低代码平台整体的核心是 DSL，可以通过把编写的 Vue 2.0 组件 以 DSL 的存入数据库中，以 Vue2.0 的模板编译器和 JS 编译器转换成 Vue1.0可识别的语法，以达成使用 Vue2.0 组件开发，在 Vue1.0 的编译环境下运行。
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/114956/1604041665914-1f3332d2-f0d1-4f5f-80c9-ebd95d953a6b.png#align=left&display=inline&height=378&margin=%5Bobject%20Object%5D&name=image.png&originHeight=756&originWidth=1424&size=126452&status=done&style=none&width=712)
+<img src="/images/misc/compiler-in-fe/1769450772174.webp" alt="image.png" loading="lazy" onerror="window.imgFallback(this)">
 编译实现通过Vue 模板核心基于不同版本的 [vue-template-compiler](https://www.npmjs.com/package/vue-template-compiler)， 通过Vue2.0的 template-compiler 编译成 模板 ast，在对 ast 进行 转换成 Vue1.0 的代码。[Vue1.0模板转ast转模板](https://github.com/jiangtao/vue-template-ast-to-template)， [Vue2.0模板转 ast 转模板](https://github.com/jiangtao/vue-template-ast-to-template/tree/master)。JS 通过手动转换生命周期即可。Css 无需要转换。
 ## 五、总结
 本文讲述了编译原理概述，前端学习编译思想的一些好处，以及从 JS 执行机制解析编译在前端中的流程，JSDoc 在前端中的基本流程，低代码平台中编译思维的运用，低代码平台通过 DSL 不同编译环境下实现前端开发技术栈升级。理解编译原理思维，对不同的实体（可以是 源代码、DSL 信息）进行抽象，解析或编译处理成目标对象，来实现场景。再次感谢您的阅读，您在工作中把编译思想用到哪些有意思的场景，欢迎留言或联系我交流。

@@ -1,0 +1,96 @@
+#!/usr/bin/env node
+// home/scripts/image-lint-cli.js
+
+const fs = require('fs');
+const path = require('path');
+const { extractImageLinks, validateLinks } = require('./image-lint.js');
+const { downloadAndOptimize } = require('./image-optimizer.js');
+const { replaceImageLink } = require('./image-replacer.js');
+
+const args = process.argv.slice(2);
+const postsDir = path.join(__dirname, '../source/_posts');
+const imageDir = path.join(__dirname, '../source/images');
+let hasErrors = false;
+
+async function main() {
+  const auto = args.includes('--auto');
+  const includeYuque = args.includes('--include-yuque');
+
+  let files;
+  try {
+    files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md'));
+  } catch (err) {
+    console.error(`Error reading posts directory: ${err.message}`);
+    process.exit(1);
+  }
+
+  if (files.length === 0) {
+    console.log('No markdown files found in posts directory');
+    process.exit(0);
+  }
+
+  for (const file of files) {
+    const filePath = path.join(postsDir, file);
+    const content = fs.readFileSync(filePath, 'utf-8');
+    const { links } = extractImageLinks(content, file);
+
+    if (links.length === 0) continue;
+
+    console.log(`\n📄 ${file}`);
+
+    const results = await validateLinks(links, imageDir);
+    const issues = results.filter(r => r.status !== 'valid');
+
+    if (issues.length === 0) {
+      console.log('  ✅ All links valid');
+      continue;
+    }
+
+    hasErrors = true;
+    let currentContent = content;
+
+    for (const issue of issues) {
+      if (issue.type === 'yuque') {
+        console.log(`  🔴 ${issue.url.substring(0, 60)}...`);
+        console.log(`     状态: ${issue.message}`);
+
+        if (auto && includeYuque) {
+          const yearMatch = file.match(/^(\d{2})/);
+          const subdir = yearMatch ? `20${yearMatch[1]}` : 'misc';
+          const imgDir = path.join(imageDir, subdir, file.replace('.md', ''));
+          const baseName = `${Date.now()}`;
+
+          try {
+            await downloadAndOptimize(issue.url, imgDir, baseName);
+            const newPath = `/images/${subdir}/${file.replace('.md', '')}/${baseName}`;
+
+            const replaceResult = replaceImageLink(currentContent, issue.url, newPath, '图片');
+            
+            if (!replaceResult.replaced) {
+              console.log(`     ❌ 替换失败: URL 在 Markdown 中未找到匹配`);
+              continue;
+            }
+            
+            currentContent = replaceResult.content;
+            fs.writeFileSync(filePath, currentContent, 'utf-8');
+            console.log(`     ✅ 已迁移到 ${newPath}`);
+          } catch (err) {
+            console.log(`     ❌ 迁移失败: ${err.message}`);
+          }
+        }
+      } else {
+        console.log(`  ⚠️  ${issue.url}`);
+        console.log(`     状态: ${issue.message}`);
+      }
+    }
+  }
+
+  if (hasErrors && !auto) {
+    process.exit(1);
+  }
+}
+
+main().catch(err => {
+  console.error(err);
+  process.exit(1);
+});

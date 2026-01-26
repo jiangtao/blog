@@ -1,0 +1,19 @@
+name: Image Link Check
+
+on:
+  pull_request:
+    paths:
+      - 'home/source/_posts/**/*.md'
+
+jobs:
+  check-images:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: cd home && npm install
+      - name: Check image links
+        run: cd home && npm run lint:images

@@ -20,12 +20,26 @@
     "hexo-server": "^0.2.0"
   },
   "devDependencies": {
+    "axios": "^1.6.0",
+    "chalk": "^4.1.2",
     "hexo-generator-feed": "^3.0.0",
-    "hexo-workbox": "^0.0.2"
+    "hexo-workbox": "^0.0.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "markdown-it": "^14.0.0",
+    "ora": "^5.4.1",
+    "sharp": "^0.33.0"
   },
   "scripts": {
     "build": "hexo generate",
     "dev": "hexo server",
-    "clean": "hexo clean"
+    "clean": "hexo clean",
+    "lint:images": "node bin/image-lint-cli.js",
+    "fix:images": "node bin/image-lint-cli.js --auto --include-yuque",
+    "migrate:images": "node bin/migrate-manual.js",
+    "prepare": "cd .. && husky install home/.husky"
+  },
+  "lint-staged": {
+    "*.md": ["node bin/image-lint-cli.js"]
   }
 }
