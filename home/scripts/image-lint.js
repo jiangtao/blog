@@ -28,4 +28,44 @@ function extractImageLinks(markdown, filename = '<unknown>') {
   return { filename, links };
 }
 
-module.exports = { extractImageLinks };
+// Add to home/scripts/image-lint.js
+const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
+
+async function validateLinks(links, imageDir) {
+  const results = [];
+
+  for (const link of links) {
+    let status = 'valid';
+    let message = '';
+
+    if (link.type === 'yuque') {
+      status = 'yuque-auth';
+      message = 'Yuque 防盗链（需要迁移）';
+    } else if (link.type === 'external') {
+      try {
+        const response = await axios.head(link.url, { timeout: 5000 });
+        if (response.status < 200 || response.status >= 300) {
+          status = 'invalid';
+          message = `HTTP ${response.status}`;
+        }
+      } catch (error) {
+        status = 'invalid';
+        message = error.code === 'ECONNABORTED' ? '超时' : error.message;
+      }
+    } else if (link.type === 'local') {
+      const fullPath = path.join(imageDir, link.url.replace('/images/', ''));
+      if (!fs.existsSync(fullPath)) {
+        status = 'invalid';
+        message = '文件不存在';
+      }
+    }
+
+    results.push({ ...link, status, message });
+  }
+
+  return results;
+}
+
+module.exports = { extractImageLinks, validateLinks };
