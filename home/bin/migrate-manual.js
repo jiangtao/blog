@@ -56,12 +56,16 @@ async function migrateFromTemp() {
     for (const link of yuqueLinks) {
       // Find matching temp image by extracting filename from URL
       // Yuque URLs typically contain the image filename
-      const urlParts = link.url.split('/');
+      const urlParts = link.url.split('/').filter(part => part.length > 0);
       const urlFilename = urlParts[urlParts.length - 1].split('.')[0];
 
       // Try to find a matching temp image
       let matchedImage = tempImages.find(img => {
         const imgName = img.split('.')[0];
+        // Only match if urlFilename is non-empty and has at least 8 characters
+        if (!urlFilename || urlFilename.length < 8) {
+          return imgName === urlFilename;
+        }
         return imgName === urlFilename || imgName.includes(urlFilename.substring(0, 8));
       });
 
