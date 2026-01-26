@@ -63,4 +63,44 @@ async function downloadAndOptimize(url, outputDir, baseName) {
   }
 }
 
-module.exports = { downloadAndOptimize };
+async function downloadAndOptimizeFromLocal(localPath, outputDir, baseName) {
+  try {
+    // Validate input path exists
+    const fsSync = require('fs');
+    if (!fsSync.existsSync(localPath)) {
+      throw new Error(`Local file does not exist: ${localPath}`);
+    }
+
+    const timestamp = Date.now();
+    const name = baseName || `${timestamp}`;
+
+    // Ensure output directory exists
+    await fs.mkdir(outputDir, { recursive: true });
+
+    // Parallelize PNG and WebP generation from local file
+    const pngPath = path.join(outputDir, `${name}.png`);
+    const webpPath = path.join(outputDir, `${name}.webp`);
+
+    const [pngResult, webpResult] = await Promise.all([
+      sharp(localPath).png({ quality: 85, effort: 6 }).toFile(pngPath),
+      sharp(localPath).webp({ quality: 85 }).toFile(webpPath)
+    ]);
+
+    // Parallelize stat operations
+    const [pngStat, webpStat] = await Promise.all([
+      fs.stat(pngPath),
+      fs.stat(webpPath)
+    ]);
+
+    return {
+      png: pngPath,
+      webp: webpPath,
+      pngSize: pngStat.size,
+      webpSize: webpStat.size
+    };
+  } catch (err) {
+    throw new Error(`Failed to optimize local image: ${err.message}`);
+  }
+}
+
+module.exports = { downloadAndOptimize, downloadAndOptimizeFromLocal };
