@@ -1,6 +1,6 @@
 // home/scripts/image-replacer.js
 function escapeHtml(unsafe) {
-  return unsafe
+  return String(unsafe)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -9,7 +9,7 @@ function escapeHtml(unsafe) {
 }
 
 function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return String(string).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
 function replaceImageLink(markdown, oldUrl, newPath, alt) {
@@ -18,17 +18,17 @@ function replaceImageLink(markdown, oldUrl, newPath, alt) {
     throw new Error(`Invalid path: ${newPath}`);
   }
 
-  // WebP优先 + 懒加载 + 调用全局 fallback 方法
-  // Use $1 to preserve original alt text from markdown, fallback to provided alt (escaped)
-  const imgTag = `<img src="${newPath}.webp" alt="${alt ? escapeHtml(alt) : '$1'}" loading="lazy" onerror="window.imgFallback(this)">`;
-
   // Match markdown image, preserving alt text in group 1
   const regex = new RegExp(
     `!\\[([^\\]]*)\\]\\(${escapeRegExp(oldUrl)}(?:[^)]*)?\\)`,
     'g'
   );
 
-  return markdown.replace(regex, imgTag);
+  // Use replacement function to access capture group
+  return markdown.replace(regex, (match, capturedAlt) => {
+    const finalAlt = capturedAlt || (alt ? escapeHtml(alt) : 'image');
+    return `<img src="${newPath}.webp" alt="${escapeHtml(finalAlt)}" loading="lazy" onerror="window.imgFallback(this)">`;
+  });
 }
 
 module.exports = { replaceImageLink };
