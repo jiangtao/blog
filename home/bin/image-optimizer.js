@@ -37,7 +37,7 @@ async function downloadAndOptimize(url, outputDir, baseName) {
     const webpPath = path.join(outputDir, `${name}.webp`);
 
     const [pngResult, webpResult] = await Promise.all([
-      sharp(originalPath).png({ quality: 85, effort: 6 }).toFile(pngPath),
+      sharp(originalPath).png({ compressionLevel: 9 }).toFile(pngPath),
       sharp(originalPath).webp({ quality: 85 }).toFile(webpPath)
     ]);
 
@@ -84,7 +84,7 @@ async function downloadAndOptimizeFromLocal(localPath, outputDir, baseName) {
     const webpPath = path.join(outputDir, `${name}.webp`);
 
     const [pngResult, webpResult] = await Promise.all([
-      sharp(localPath).png({ quality: 85, effort: 6 }).toFile(pngPath),
+      sharp(localPath).png({ compressionLevel: 9 }).toFile(pngPath),
       sharp(localPath).webp({ quality: 85 }).toFile(webpPath)
     ]);
 

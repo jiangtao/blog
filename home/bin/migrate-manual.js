@@ -19,16 +19,17 @@ async function migrateFromTemp() {
   if (!fs.existsSync(postsDir)) {
     console.error('❌ 文章目录不存在:', postsDir);
     failures++;
-    return;
+    process.exit(1);
   }
   if (!fs.existsSync(imageDir)) {
     console.error('❌ 图片目录不存在:', imageDir);
     failures++;
-    return;
+    process.exit(1);
   }
   if (!fs.existsSync(tempDir)) {
     console.log('❌ .temp 目录不存在，请先手动下载图片到该目录');
-    return;
+    failures++;
+    process.exit(1);
   }
 
   const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md'));
@@ -36,7 +37,8 @@ async function migrateFromTemp() {
 
   if (tempImages.length === 0) {
     console.log('❌ .temp 目录中没有图片文件');
-    return;
+    failures++;
+    process.exit(1);
   }
 
   console.log(`📁 找到 ${tempImages.length} 个图片文件`);
@@ -136,4 +138,7 @@ async function migrateFromTemp() {
   }
 }
 
-migrateFromTemp().catch(console.error);
+migrateFromTemp().catch(err => {
+  console.error('❌ 迁移过程中发生错误:', err);
+  process.exit(1);
+});

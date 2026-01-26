@@ -69,6 +69,9 @@ async function validateLinks(links, imageDir, timeout = 5000) {
         status = 'invalid';
         message = '文件不存在';
       }
+    } else if (link.type === 'unknown') {
+      status = 'invalid';
+      message = '不支持的链接格式(相对路径、协议相对URL或其他非标准格式)';
     }
 
     results.push({ ...link, status, message });

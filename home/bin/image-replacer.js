@@ -13,8 +13,9 @@ function escapeRegExp(string) {
 }
 
 function replaceImageLink(markdown, oldUrl, newPath, alt) {
-  // Validate newPath contains only safe characters
-  if (!/^\/[a-zA-Z0-9\/_-]+$/.test(newPath)) {
+  // Validate newPath contains only safe characters (允许字母、数字、斜杠、下划线、连字符和点号)
+  // 并防止路径遍历攻击 (..)
+  if (!/^\/[a-zA-Z0-9\/_.-]+$/.test(newPath) || newPath.includes('..')) {
     throw new Error(`Invalid path: ${newPath}`);
   }
 
