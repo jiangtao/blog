@@ -34,12 +34,12 @@
     "build": "hexo generate",
     "dev": "hexo server",
     "clean": "hexo clean",
-    "lint:images": "node scripts/image-lint-cli.js",
-    "fix:images": "node scripts/image-lint-cli.js --auto --include-yuque",
-    "migrate:images": "node scripts/migrate-manual.js",
+    "lint:images": "node bin/image-lint-cli.js",
+    "fix:images": "node bin/image-lint-cli.js --auto --include-yuque",
+    "migrate:images": "node bin/migrate-manual.js",
     "prepare": "cd .. && husky install home/.husky"
   },
   "lint-staged": {
-    "*.md": ["node scripts/image-lint-cli.js"]
+    "*.md": ["node bin/image-lint-cli.js"]
   }
 }
