@@ -10,6 +10,7 @@ const { replaceImageLink } = require('./image-replacer.js');
 const args = process.argv.slice(2);
 const postsDir = path.join(__dirname, '../source/_posts');
 const imageDir = path.join(__dirname, '../source/images');
+let hasErrors = false;
 
 async function main() {
   const auto = args.includes('--auto');
@@ -45,6 +46,7 @@ async function main() {
       continue;
     }
 
+    hasErrors = true;
     let currentContent = content;
 
     for (const issue of issues) {
@@ -75,6 +77,13 @@ async function main() {
       }
     }
   }
+
+  if (hasErrors && !auto) {
+    process.exit(1);
+  }
 }
 
-main().catch(console.error);
+main().catch(err => {
+  console.error(err);
+  process.exit(1);
+});

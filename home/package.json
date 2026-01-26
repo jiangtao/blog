@@ -36,6 +36,9 @@
     "clean": "hexo clean",
     "lint:images": "node scripts/image-lint-cli.js",
     "fix:images": "node scripts/image-lint-cli.js --auto --include-yuque",
-    "prepare": "husky install"
+    "prepare": "cd .. && husky install home/.husky"
+  },
+  "lint-staged": {
+    "*.md": ["node scripts/image-lint-cli.js"]
   }
 }
