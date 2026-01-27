@@ -15,7 +15,12 @@ async function syncToProfile(localReadmePath = PROFILE_README_PATH) {
   const posts = fs.readdirSync(POSTS_DIR)
     .filter(f => f.endsWith('.md'))
     .map(f => {
-      const content = fs.readFileSync(path.join(POSTS_DIR, f), 'utf-8');
+      let content = fs.readFileSync(path.join(POSTS_DIR, f), 'utf-8');
+      // Fix: Add missing opening --- for posts that don't have it
+      // gray-matter requires --- at the start and end of front-matter
+      if (!content.startsWith('---')) {
+        content = '---\n' + content;
+      }
       // Parse front-matter to get post metadata
       const { data, content: markdownContent } = matter(content);
       // Add slug from filename if not in front-matter
