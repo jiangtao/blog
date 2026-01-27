@@ -26,8 +26,8 @@ async function syncToProfile(localReadmePath = PROFILE_README_PATH) {
       return data;
     });
 
-  // Extract latest 5 posts
-  const latestPosts = extractLatestPosts(posts, 5);
+  // Extract latest 8 posts
+  const latestPosts = extractLatestPosts(posts, 8);
   console.log(`✅ Found ${posts.length} posts, extracted latest ${latestPosts.length}`);
 
   // Clone profile repo temporarily
@@ -72,3 +72,21 @@ async function syncToProfile(localReadmePath = PROFILE_README_PATH) {
 }
 
 module.exports = { syncToProfile };
+
+// Run sync when executed directly
+if (require.main === module) {
+  syncToProfile()
+    .then(result => {
+      if (result.success) {
+        console.log(`🎉 Sync completed successfully! Updated ${result.postsCount} posts.`);
+        process.exit(0);
+      } else {
+        console.error(`❌ Sync failed: ${result.error}`);
+        process.exit(1);
+      }
+    })
+    .catch(error => {
+      console.error('❌ Unexpected error:', error);
+      process.exit(1);
+    });
+}

@@ -1,4 +1,7 @@
 const matter = require('gray-matter');
+const dayjs = require('dayjs');
+const utc = require('dayjs/plugin/utc.js');
+dayjs.extend(utc);
 
 /**
  * Extract latest posts from Hexo posts array
@@ -7,7 +10,7 @@ const matter = require('gray-matter');
  * @returns {Array} Array of post objects with title, date, and url
  * @throws {Error} If posts is not an array or is empty
  */
-function extractLatestPosts(posts, limit = 5) {
+function extractLatestPosts(posts, limit = 8) {
   // Input validation
   if (!Array.isArray(posts)) {
     throw new Error('posts must be an array');
@@ -40,19 +43,19 @@ function extractLatestPosts(posts, limit = 5) {
         return null;
       }
 
-      // Extract date and format permalink
+      // Extract date and format permalink using dayjs
       const date = postData.date || new Date();
-      let dateObj = new Date(date);
+      let dateObj = dayjs.utc(date);
 
       // Validate date
-      if (isNaN(dateObj.getTime())) {
+      if (!dateObj.isValid()) {
         console.warn(`Invalid date for post "${postData.title || 'unknown'}", using current date`);
-        dateObj = new Date();
+        dateObj = dayjs.utc();
       }
 
-      const year = dateObj.getFullYear();
-      const month = String(dateObj.getMonth() + 1).padStart(2, '0');
-      const day = String(dateObj.getDate()).padStart(2, '0');
+      const year = dateObj.format('YYYY');
+      const month = dateObj.format('MM');
+      const day = dateObj.format('DD');
 
       // Build URL using Hexo permalink pattern: :year/:month/:day/:slug/
       // Priority: front-matter slug > post object slug > skip title (title may have special chars)
@@ -63,11 +66,11 @@ function extractLatestPosts(posts, limit = 5) {
         return null;
       }
 
-      const url = `https://imjiangtao.com/${year}/${month}/${day}/${slug}/`;
+      const url = `https://jiangtao.vercel.app/${year}/${month}/${day}/${slug}/`;
 
       return {
         title: postData.title || 'Untitled',
-        date: dateObj.toISOString().split('T')[0], // YYYY-MM-DD format
+        date: dateObj.utc().format('YYYY-MM-DD'),
         url: url
       };
     } catch (error) {

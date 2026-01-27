@@ -71,7 +71,7 @@ const chineseTitlePost = {
 };
 const chineseResult = extractLatestPosts([chineseTitlePost], 1);
 console.log('Chinese title post URL:', chineseResult[0]?.url);
-const expectedUrl = 'https://imjiangtao.com/2022/08/18/compiler-in-fe/';
+const expectedUrl = 'https://jiangtao.vercel.app/2022/08/18/compiler-in-fe/';
 console.log('Expected URL:', expectedUrl);
 console.log('URL uses slug (not title)?', chineseResult[0]?.url === expectedUrl ? 'PASS' : 'FAIL');
 

@@ -6,6 +6,7 @@
     "version": "6.3.0"
   },
   "dependencies": {
+    "dayjs": "^1.11.19",
     "gh-pages": "^1.1.0",
     "gray-matter": "^4.0.3",
     "hexo": "^6.3.0",

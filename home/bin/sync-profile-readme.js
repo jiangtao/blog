@@ -42,12 +42,12 @@ function generateProfileReadme(posts, outputPath) {
 
   const newContent = `${markerStart}\n${postsList}\n${markerEnd}`;
 
-  const updatedReadme = readme.replace(regex, newContent);
-
-  // Verify that markers were found and replaced
-  if (updatedReadme === readme && posts.length > 0) {
+  // Check if markers exist before attempting replacement
+  if (!readme.includes(markerStart) || !readme.includes(markerEnd)) {
     throw new Error('Markers not found in README. Ensure <!-- BLOG-POST-LIST:START --> and <!-- BLOG-POST-LIST:END --> markers exist.');
   }
+
+  const updatedReadme = readme.replace(regex, newContent);
 
   return updatedReadme;
 }
