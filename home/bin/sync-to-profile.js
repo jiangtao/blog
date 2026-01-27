@@ -60,11 +60,20 @@ async function syncToProfile(localReadmePath = PROFILE_README_PATH) {
       stdio: 'ignore'
     });
 
-    execSync(`cd ${profileDir} && git add README.md && git commit -m "chore: sync latest blog posts from jiangtao/blog" && git push`, {
-      stdio: 'ignore'
-    });
-
-    console.log('✅ Profile repo updated!');
+    // Check if there are changes to commit
+    try {
+      execSync(`cd ${profileDir} && git add README.md && git diff --cached --quiet`, {
+        stdio: 'ignore'
+      });
+      // No changes detected
+      console.log('ℹ️ No changes to commit (README already up to date)');
+    } catch (diffError) {
+      // Changes exist, commit and push
+      execSync(`cd ${profileDir} && git commit -m "chore: sync latest blog posts from jiangtao/blog" && git push`, {
+        stdio: 'ignore'
+      });
+      console.log('✅ Profile repo updated!');
+    }
     return { success: true, postsCount: latestPosts.length };
 
   } catch (error) {
