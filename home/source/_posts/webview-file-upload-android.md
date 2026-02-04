@@ -6,9 +6,11 @@ categories: [Android开发]
 cover: /images/misc/webview-file-upload/webview-file-upload-cover.svg
 ---
 
-# Android WebView 文件上传功能完整实现指南
+![](/images/misc/webview-file-upload/webview-file-upload-cover.svg)    
 
-> 本文档详细记录了在 Android WebView 中实现完整的文件选择和上传功能的过程，包括多文件选择、相机拍照、权限处理等。
+> 本文档详细记录了在 Android WebView 中实现完整的文件选择和上传功能的过程，包括多文件选择、相机拍照、权限处理等,以解决 H5拍照功能Android中无法使用 
+
+<!--more-->
 
 ## 背景问题
 
