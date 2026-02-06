@@ -1,9 +1,9 @@
 export const SITE = {
   website: "https://jiangtao.vercel.app/", // replace this with your deployed domain
-  author: "江涛",
+  author: "Jerret",
   profile: "https://github.com/jiangtao",
   desc: "江涛的博客，记录成长，共同进步",
-  title: "江涛",
+  title: "Jerret",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 10,
