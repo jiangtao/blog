@@ -1,3 +1,7 @@
 node_modules
 *.log
 .idea
+.astro
+dist
+.env
+.DS_Store
