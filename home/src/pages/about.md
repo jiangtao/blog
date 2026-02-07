@@ -7,8 +7,10 @@ title: "About"
 - 👯 Worked in [meituan](https://github.com/meituan) 2020-2025，worked in [YiChuang wudaima](https://www.wudaima.com)/2018-2020。Loved at Lowcode/NoCode. Currently exploring AI efficiency practices.
 - 📝 [Blog](https://github.com/jiangtao/blog) [YuQue Notes](https://www.yuque.com/imjt)
 - 💬 Skill: **Javascript/Node.js/Mongo/MySQL/Electron**
-- 📫 Contact Me: **w3cfuns@qq.com**
-- 💬 vx: jtss77 [X](https://x.com/Jerret321) 
+- 📫 Email: **w3cfuns@qq.com**
+- 💬 [X](https://x.com/Jerret321), A comfort zone for information exchange
+- 💬 WeChat: jtss77，添加请备注来意
+
 
 ## History Jobs
 
@@ -21,7 +23,7 @@ title: "About"
 ## Want To Do
 
 - 定期会分享一些实践、心得等，转载的话备注出处
-- 找工作中，方向务公司的前端/全栈（Leader）或 AI公司可IC，如果你需要详细简历，请添加 vx，备注来意、招聘职级说明白
+- 找工作中，方向前端/全栈（Leader），期望有机会实践 AI，不限制 AI Coding，如果您需要详细简历，请添加 vx，备注来意、招聘大概的职级等
 - 可短期承接 App项目、后端服务
 - 可承接面试辅导、技术咨询服务等
 
