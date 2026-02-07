@@ -1,50 +1,50 @@
 {
-  "name": "jiangtao-blog",
-  "version": "0.0.0",
-  "private": true,
-  "hexo": {
-    "version": "6.3.0"
+  "name": "astro-paper-blog",
+  "type": "module",
+  "version": "5.5.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build && pagefind --site dist",
+    "preview": "astro preview",
+    "sync": "astro sync",
+    "astro": "astro",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "lint:images": "node bin/image-lint-cli.cjs",
+    "fix:images": "node bin/image-lint-cli.cjs --auto --include-yuque"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.14",
+    "@astrojs/sitemap": "^3.6.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.16.6",
     "dayjs": "^1.11.19",
-    "gh-pages": "^1.1.0",
-    "gray-matter": "^4.0.3",
-    "hexo": "^6.3.0",
-    "hexo-front-matter": "^0.2.3",
-    "hexo-generator-archive": "^0.1.4",
-    "hexo-generator-category": "^0.1.3",
-    "hexo-generator-index": "^0.2.0",
-    "hexo-generator-tag": "^0.2.0",
-    "hexo-renderer-ejs": "^0.3.0",
-    "hexo-renderer-marked": "^0.3.0",
-    "hexo-renderer-stylus": "^0.3.1",
-    "hexo-renderer-swig": "^2.0.0",
-    "hexo-server": "^0.2.0"
+    "lodash.kebabcase": "^4.1.1",
+    "remark-collapse": "^0.1.2",
+    "remark-toc": "^9.0.0",
+    "satori": "^0.18.3",
+    "sharp": "^0.34.5",
+    "slugify": "^1.6.6",
+    "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
-    "axios": "^1.6.0",
-    "chalk": "^4.1.2",
-    "hexo-generator-feed": "^3.0.0",
-    "hexo-workbox": "^0.0.2",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.2.0",
-    "markdown-it": "^14.0.0",
-    "ora": "^5.4.1",
-    "sharp": "^0.33.0"
-  },
-  "scripts": {
-    "build": "hexo generate",
-    "dev": "hexo server",
-    "clean": "hexo clean",
-    "lint:images": "node bin/image-lint-cli.js",
-    "fix:images": "node bin/image-lint-cli.js --auto --include-yuque",
-    "migrate:images": "node bin/migrate-manual.js",
-    "sync:profile": "node bin/sync-to-profile.js",
-    "prepare": "cd .. && husky install home/.husky"
-  },
-  "lint-staged": {
-    "*.md": [
-      "node bin/image-lint-cli.js"
-    ]
+    "@astrojs/check": "^0.9.6",
+    "@pagefind/default-ui": "^1.4.0",
+    "@shikijs/transformers": "^3.20.0",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/lodash.kebabcase": "^4.1.9",
+    "@typescript-eslint/parser": "^8.51.0",
+    "axios": "^1.13.4",
+    "eslint": "^9.39.2",
+    "eslint-plugin-astro": "^1.5.0",
+    "globals": "^16.5.0",
+    "pagefind": "^1.4.0",
+    "prettier": "^3.7.4",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.51.0"
   }
 }
