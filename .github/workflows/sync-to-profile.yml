@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -26,4 +27,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.PROFILE_SYNC_TOKEN }}
         working-directory: ./home
-        run: node bin/sync-to-profile.js
+        run: node bin/sync-to-profile.cjs
