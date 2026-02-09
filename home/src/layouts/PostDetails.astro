@@ -35,6 +35,7 @@ const {
   timezone,
   tags,
   hideEditPost,
+  cover,
 } = post.data;
 
 const { Content } = await render(post);
@@ -53,10 +54,8 @@ if (!ogImageUrl && SITE.dynamicOgImage) {
   ogImageUrl = `${getPath(post.id, post.filePath, true, post)}/index.png`;
 }
 
-// Resolve OG image URL (or fallback to SITE.ogImage / default `og.png`)
-const ogImage = ogImageUrl
-  ? new URL(ogImageUrl, Astro.url.origin).href
-  : undefined;
+// Use cover for ogImage if cover exists and ogImage not set
+const finalOgImage = ogImageUrl || cover;
 
 const layoutProps = {
   title: `${title} | ${SITE.title}`,
@@ -65,7 +64,7 @@ const layoutProps = {
   pubDatetime,
   modDatetime,
   canonicalURL,
-  ogImage,
+  ogImage: finalOgImage,
   scrollSmooth: true,
 };
 
@@ -120,6 +119,16 @@ const nextPost =
       id="article"
       class="app-prose mt-8 w-full max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
     >
+      {cover && (
+        <div class="cover-image mb-8 rounded-lg overflow-hidden shadow-lg">
+          <img
+            src={cover}
+            alt={`${title} 封面图`}
+            loading="lazy"
+            class:list={["w-full h-auto", { "max-w-4xl mx-auto": cover.endsWith('.svg') }]}
+          />
+        </div>
+      )}
       <Content />
     </article>
 
@@ -237,9 +246,49 @@ const nextPost =
   // Initialize external links
   setupExternalLinks();
 
+  // Move cover image to correct position (before <!--more--> or at beginning)
+  function positionCoverImage() {
+    const article = document.getElementById('article');
+    if (!article) return;
+
+    // Find cover image
+    const coverDiv = article.querySelector('.cover-image');
+    if (!coverDiv) return;
+
+    // Find <!--more--> comment
+    const walker = document.createTreeWalker(
+      article,
+      NodeFilter.SHOW_COMMENT,
+      null,
+      false
+    );
+
+    let moreComment = null;
+    while (walker.nextNode()) {
+      if (walker.currentNode.nodeValue?.trim() === 'more') {
+        moreComment = walker.currentNode;
+        break;
+      }
+    }
+
+    if (moreComment) {
+      // Insert cover before <!--more-->
+      moreComment.parentNode?.insertBefore(coverDiv, moreComment);
+      console.log('[Cover] Positioned before <!--more-->');
+    } else {
+      // No <!--more-->, keep at beginning (insert as first child of article)
+      article.insertBefore(coverDiv, article.firstChild);
+      console.log('[Cover] Positioned at beginning (no <!--more-->)');
+    }
+  }
+
+  // Run on page load
+  positionCoverImage();
+
   // Reinitialize after page navigation
   document.addEventListener('astro:after-swap', () => {
     setTimeout(setupExternalLinks, 50);
+    setTimeout(positionCoverImage, 50);
   });
 
   /** Create a progress indicator
