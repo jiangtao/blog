@@ -6,6 +6,7 @@ tags:
 draft: false
 issue: 'https://github.com/jiangtao/blog/issues/7'
 description: "前端安全：XSS 攻击与防护，介绍常见的 XSS 攻击方式和防御措施。"
+cover: /images/blog-covers/xss-live-cover.svg
 ---
 
 朋友组织了一场`xss` live，`安全`一直是开发中不可忽视的一部分。而`xss`作为web开发中最常见的攻击手段，防范是必然的。基于**web浏览器tricks**，**JavaScript的发展**，**npm等开源项目漏洞**，**web注入**等会让开发者越来越防不胜防。

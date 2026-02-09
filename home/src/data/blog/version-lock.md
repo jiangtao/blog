@@ -7,6 +7,7 @@ tags:
 draft: false
 issue: 'https://github.com/jiangtao/blog/issues/19'
 description: "介绍 npm 版本锁定机制，包括 package-lock.json 的作用和最佳实践。"
+cover: /images/blog-covers/version-lock-cover.svg
 ---
 
 

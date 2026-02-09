@@ -8,6 +8,7 @@ tags:
 draft: false
 issue: 'https://github.com/jiangtao/blog/issues/23'
 description: "记录开发 Next.js CLI 工具的过程，包括命令解析、文件生成、模板系统等。"
+cover: /images/blog-covers/project-next-cli-cover.svg
 ---
 
 在16年年底的时候，同事聊起脚手架。由于公司业务的`多样性`,前端的`灵活性`,让我们不得不思考更通用的脚手架。而不是伴随着前端技术的发展，不断的把时间花在`配置`上。于是[chef-cli](https://github.com/2046/chef-cli)诞生了。 18年年初，把过往一年的东西整理和总结下，重新增强了原有的脚手架[project-next-cli](https://github.com/ijs/project-next-cli), 不单单满足我们团队的需求，也可以满足其他人的需求。

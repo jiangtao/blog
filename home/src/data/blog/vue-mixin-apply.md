@@ -7,6 +7,7 @@ tags:
 draft: false
 issue: 'https://github.com/jiangtao/blog/issues/11'
 description: "Vue Mixin 实战应用，介绍如何在项目中合理使用 Mixin 进行代码复用。"
+cover: /images/blog-covers/vue-mixin-apply-cover.svg
 ---
 
 奇舞周刊推荐了一篇文章[Vue.js 中使用Mixin](http://zcfy.cc/article/using-mixins-in-vue-js-css-tricks-3257.html)， 用了vue大半年时间，`mixin`不知道挺惭愧。

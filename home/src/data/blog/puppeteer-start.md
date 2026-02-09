@@ -7,6 +7,7 @@ tags:
 draft: false
 issue: 'https://github.com/jiangtao/blog/issues/15'
 description: "Puppeteer 入门指南，介绍如何使用 Puppeteer 进行网页自动化操作、爬虫开发等。"
+cover: /images/blog-covers/puppeteer-start-cover.svg
 ---
 
 
