@@ -7,11 +7,15 @@ tags:
 draft: false
 issue: 'https://github.com/jiangtao/blog/issues/10'
 description: "Vue 项目中 WebP 图片格式支持，包括格式检测、降级方案等。"
+cover: /images/blog-covers/vue-webp-cover.svg
 ---
+
 
 前段时间和朋友聊天，无意间问了一个`vue`移动端项目优化。针对老的项目怎么提升更好的性能。本人这方面经验不足，忙里偷闲研究了下淘宝，聚划算等网站。
 
-通过`network`抓包，对比分析得出几个显著的区别 <!--more-->
+通过`network`抓包，对比分析得出几个显著的区别
+
+<!--more-->
 
 ## 调研结果
 

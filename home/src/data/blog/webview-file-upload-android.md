@@ -7,11 +7,12 @@ tags:
   - 文件上传
   - FileProvider
   - Android开发
+  - 安全最佳实践
 draft: false
-description: "本文档详细记录了在 Android WebView 中实现完整的文件选择和上传功能的过程，包括多文件选择、相机拍照、权限处理等。"
+description: "本文档详细记录了在 Android WebView 中实现完整的文件选择和上传功能的过程，包括多文件选择、相机拍照、权限处理，以及系统安全配置最佳实践。"
+cover: /images/misc/webview-file-upload/webview-file-upload-cover.svg
 ---
-
-![](/images/misc/webview-file-upload/webview-file-upload-cover.svg)    
+  
 
 > 本文档详细记录了在 Android WebView 中实现完整的文件选择和上传功能的过程，包括多文件选择、相机拍照、权限处理等,以解决 H5拍照功能Android中无法使用 
 
@@ -587,6 +588,157 @@ if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
 
 ---
 
+## 安全最佳实践
+
+在实现 WebView 文件上传功能时，除了功能实现，安全配置同样重要。以下是系统层面的安全配置建议。
+
+### 系统安全的重要性
+
+WebView 安全配置和 Android 系统安全配置必须**协同防护**。即使 WebView 配置正确，如果系统层面存在漏洞，攻击者仍可能：
+
+1. **绕过应用沙箱** - 通过导出组件访问应用内部数据
+2. **中间人攻击** - 利用系统网络配置缺陷拦截通信
+3. **权限提升** - 通过过度权限申请获取敏感数据访问
+4. **数据泄露** - 通过不安全的存储配置读取应用数据
+
+### 网络安全配置
+
+Android 7.0+ 引入了网络安全配置 (Network Security Config)，建议在 `res/xml/network_security_config.xml` 中配置：
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- 默认配置：禁止明文流量 -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- 特定域名配置：仅允许必要的 HTTP -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">localhost</domain>
+        <domain includeSubdomains="false">127.0.0.1</domain>
+    </domain-config>
+
+    <!-- 调试配置：仅在 DEBUG 构建中使用 -->
+    <debug-overrides>
+        <trust-anchors>
+            <certificates src="user" />
+        </trust-anchors>
+    </debug-overrides>
+</network-security-config>
+```
+
+在 `AndroidManifest.xml` 中引用：
+
+```xml
+<application
+    android:networkSecurityConfig="@xml/network_security_config"
+    android:allowBackup="false">  <!-- 禁止备份 -->
+    ...
+</application>
+```
+
+### 组件导出安全
+
+确保包含 WebView 的 Activity 不被意外导出：
+
+```xml
+<!-- ✅ 正确配置：默认不导出 -->
+<activity
+    android:name=".WebActivity"
+    android:exported="false" />
+```
+
+### 权限最小化原则
+
+按需申请最小必要权限：
+
+```xml
+<!-- 基础权限 -->
+<uses-permission android:name="android.permission.INTERNET" />
+
+<!-- 仅当需要拍照时 -->
+<uses-permission android:name="android.permission.CAMERA" />
+
+<!-- Android 13+ 细粒度媒体权限 -->
+<uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+<uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+```
+
+### FileProvider 路径安全
+
+在配置 FileProvider 时，仅暴露必要的子目录：
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 相机图片存储目录 -->
+    <external-files-path name="pictures" path="Pictures/" />
+
+    <!-- 缓存目录（可清理） -->
+    <cache-path name="cache" path="." />
+    <external-cache-path name="ext_cache" path="." />
+
+    <!-- ⚠️ 避免使用 path="." 暴露整个目录 -->
+</paths>
+```
+
+### 敏感数据存储
+
+对于需要存储的敏感信息（如 token），使用 EncryptedSharedPreferences：
+
+```kotlin
+// 添加依赖：implementation "androidx.security:security-crypto:1.1.0-alpha06"
+val masterKey = MasterKey.Builder(applicationContext)
+    .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+    .build()
+
+val sharedPreferences = EncryptedSharedPreferences.create(
+    applicationContext,
+    "secret_shared_prefs",
+    masterKey,
+    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+)
+```
+
+### 生产环境日志安全
+
+使用 ProGuard/R8 移除生产环境的日志：
+
+```proguard
+# 在 proguard-rules.pro 中配置
+-assumenosideeffects class android.util.Log {
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int d(...);
+    public static int i(...);
+}
+```
+
+或使用条件编译：
+
+```kotlin
+if (BuildConfig.DEBUG) {
+    Log.d("WebView", "Debug info: ${sanitizedInfo}")
+}
+```
+
+### 安全检查清单
+
+| 检查项 | 安全配置 |
+|--------|----------|
+| 网络安全 | `cleartextTrafficPermitted="false"` |
+| 组件导出 | `android:exported="false"` |
+| 备份保护 | `android:allowBackup="false"` |
+| 权限申请 | 最小化，使用 `maxSdkVersion` |
+| 文件访问 | `allowFileAccess=false` (WebView) |
+| 日志安全 | ProGuard 移除或条件编译 |
+
+---
+
 ## 完整代码清单
 
 ### 需要修改的文件
@@ -627,8 +779,9 @@ private static final String FILE_PROVIDER_AUTHORITY =
 4. **持久化 URI 权限** - 使用 takePersistableUriPermission()
 5. **添加详细日志** - 方便排查问题
 6. **充分测试** - 覆盖各种场景（单选、多选、相机、动态创建）
+7. **系统安全配置** - 网络安全配置、组件导出保护、权限最小化
 
-通过以上步骤，我们实现了一个完整、健壮的 WebView 文件选择解决方案。
+通过以上步骤，我们实现了一个完整、健壮的 WebView 文件选择解决方案，同时确保了系统层面的安全防护。
 
 ---
 
@@ -637,3 +790,6 @@ private static final String FILE_PROVIDER_AUTHORITY =
 - [Android WebChromeClient 文档](https://developer.android.com/reference/android/webkit/WebChromeClient)
 - [FileProvider 文档](https://developer.android.com/reference/androidx/core/content/FileProvider)
 - [Android 存储权限变更](https://developer.android.com/about/versions/12/behavior-changes-12)
+- [网络安全配置](https://developer.android.com/training/articles/security-config)
+- [OWASP Mobile Security](https://owasp.org/www-project-mobile-security/)
+- [WebView 安全最佳实践 (完整版)](/docs/android/webview-security-best-practices.md)
