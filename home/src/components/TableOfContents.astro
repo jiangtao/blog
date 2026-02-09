@@ -165,7 +165,7 @@
       right: 20px;
       bottom: auto;
       transform: translateY(-50%);
-      width: 240px;
+      width: 300px;
       max-height: 70vh;
       border: 1px solid oklch(var(--color-muted) / 0.3);
       border-radius: 8px;
@@ -276,27 +276,21 @@
     }
 
     /* Better hierarchy on mobile with visual indicators */
-    .toc-list .toc-h3 {
-      padding-left: 24px;
+    .toc-list .toc-sublist {
+      padding-left: 20px;
+      margin-top: 4px;
+      border-left: 1px solid oklch(var(--color-muted) / 0.25);
+    }
+
+    .toc-list .toc-sublist .toc-link {
       font-size: 13px;
+      padding: 10px 16px;
       opacity: 0.9;
     }
 
-    .toc-list .toc-h3::before {
+    .toc-list .toc-sublist .toc-link::before {
       width: 2px;
-    }
-
-    .toc-list .toc-h4 {
-      padding-left: 36px;
-      font-size: 13px;
-      opacity: 0.85;
-    }
-
-    .toc-list .toc-h5,
-    .toc-list .toc-h6 {
-      padding-left: 48px;
-      font-size: 12px;
-      opacity: 0.8;
+      height: 14px;
     }
   }
 
@@ -399,10 +393,23 @@
   }
 
   /* Hierarchy indentation with better visual cues */
-  .toc-list .toc-h3 {
-    padding-left: 20px;
+  .toc-list .toc-sublist {
+    list-style: none;
+    padding-left: 16px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border-left: 1px solid oklch(var(--color-muted) / 0.3);
+  }
+
+  .toc-list .toc-sublist .toc-link {
     font-size: 12px;
+    padding: 6px 12px;
     opacity: 0.9;
+  }
+
+  .toc-list .toc-sublist .toc-link::before {
+    width: 2px;
+    height: 12px;
   }
 
   .toc-list .toc-h4 {
@@ -506,7 +513,8 @@
       if (!article) return;
 
       // Get all headings and filter out non-content ones
-      const allHeadings = article.querySelectorAll('h2, h3, h4, h5, h6');
+      // Only include h2, h3 (exclude h4, h5, h6)
+      const allHeadings = article.querySelectorAll('h2, h3');
       const headings = Array.from(allHeadings).filter(heading => {
         // Skip headings inside certain containers
         const parent = heading.closest('nav, .share-links, .tags, .related-posts, .pagination, [data-pagefind-ignore]');
@@ -523,7 +531,11 @@
       // Clear existing list
       tocList.innerHTML = '';
 
-      // Generate TOC items
+      // Build nested TOC structure
+      let currentList = tocList;
+      let level2List = null;
+      let lastLevel = 2; // Start with h2 as base level
+
       headings.forEach((heading, index) => {
         // Ensure heading has an ID
         if (!heading.id) {
@@ -535,6 +547,8 @@
             .substring(0, 50);
           heading.id = `heading-${index}-${slug}`;
         }
+
+        const headingLevel = parseInt(heading.tagName.charAt(1));
 
         // Create TOC item
         const li = document.createElement('li');
@@ -555,7 +569,23 @@
         });
 
         li.appendChild(a);
-        tocList.appendChild(li);
+
+        // Handle nesting for h3 under h2
+        if (headingLevel === 3) {
+          // Create nested list for h3 if not exists
+          if (!level2List) {
+            level2List = document.createElement('ul');
+            level2List.className = 'toc-list toc-sublist';
+            tocList.appendChild(level2List);
+          }
+          level2List.appendChild(li);
+          lastLevel = 3;
+        } else {
+          // h2 - add to main list
+          tocList.appendChild(li);
+          level2List = null;
+          lastLevel = 2;
+        }
       });
 
       // Show TOC after initialization
