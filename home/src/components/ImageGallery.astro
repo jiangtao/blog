@@ -76,6 +76,17 @@
     pointer-events: none;
   }
 
+  /* SVG images in lightbox need special handling - use 80% of viewport */
+  .lightbox-img[src$=".svg"] {
+    width: 80vw;
+    height: 80vh;
+    max-width: 80vw;
+    max-height: 80vh;
+    min-width: auto;
+    min-height: auto;
+    object-fit: contain;
+  }
+
   /* Close Button */
   .lightbox-close {
     position: absolute !important;
@@ -354,8 +365,19 @@
 
       currentIndex = index;
       const img = galleryImages[currentIndex];
+      const src = img.src || '';
 
-      lightboxImg.src = img.src;
+      // Check if this is an SVG image
+      const isSvg = src.toLowerCase().endsWith('.svg');
+
+      // For SVG images, we need to handle them differently
+      if (isSvg) {
+        // For SVG, set width/height attributes to help with sizing
+        lightboxImg.removeAttribute('width');
+        lightboxImg.removeAttribute('height');
+      }
+
+      lightboxImg.src = src;
       lightboxImg.alt = img.alt || '图片预览';
 
       if (currentEl) currentEl.textContent = String(currentIndex + 1);
@@ -371,7 +393,7 @@
       // Show lightbox
       lightbox.classList.add('active');
 
-      console.log('[ImageGallery] Lightbox opened for image', index);
+      console.log('[ImageGallery] Lightbox opened for image', index, 'isSvg:', isSvg);
     }
 
     function closeLightbox() {
@@ -391,7 +413,18 @@
       if (!lightboxImg) return;
 
       const img = galleryImages[currentIndex];
-      lightboxImg.src = img.src;
+      const src = img.src || '';
+
+      // Check if this is an SVG image
+      const isSvg = src.toLowerCase().endsWith('.svg');
+
+      // For SVG images, we need to handle them differently
+      if (isSvg) {
+        lightboxImg.removeAttribute('width');
+        lightboxImg.removeAttribute('height');
+      }
+
+      lightboxImg.src = src;
       lightboxImg.alt = img.alt || '图片预览';
 
       if (currentEl) currentEl.textContent = String(currentIndex + 1);
