@@ -1,0 +1,19 @@
+# 博客封面图生成配置
+
+# 输出目录
+output_dir: public/images/blog-covers
+
+# 图片路径前缀（用于文章中的引用）
+image_path_prefix: /images/blog-covers
+
+# 默认风格
+default_style: notion
+
+# 从 frontmatter 读取的字段
+title_field: title
+description_field: description
+tags_field: tags
+
+# 图片尺寸
+width: 1920
+height: 1080
