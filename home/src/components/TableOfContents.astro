@@ -278,14 +278,26 @@
     /* Better hierarchy on mobile with visual indicators */
     .toc-list .toc-sublist {
       padding-left: 0;
-      margin-top: 4px;
-      border-left: 1px solid oklch(var(--color-muted) / 0.25);
+      margin-left: 28px;
+      margin-top: 2px;
+      margin-bottom: 2px;
+      position: relative;
+    }
+
+    .toc-list .toc-sublist::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: oklch(var(--color-muted) / 0.2);
     }
 
     .toc-list .toc-sublist .toc-link {
       font-size: 13px;
       padding: 10px 16px 10px 12px;
-      text-indent: 20px;
+      margin-left: 8px;
       opacity: 0.9;
     }
 
@@ -397,15 +409,26 @@
   .toc-list .toc-sublist {
     list-style: none;
     padding-left: 0;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border-left: 1px solid oklch(var(--color-muted) / 0.3);
+    margin-left: 24px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    position: relative;
+  }
+
+  .toc-list .toc-sublist::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: oklch(var(--color-muted) / 0.2);
   }
 
   .toc-list .toc-sublist .toc-link {
     font-size: 12px;
     padding: 6px 12px;
-    text-indent: 16px;
+    margin-left: 8px;
     opacity: 0.9;
   }
 
