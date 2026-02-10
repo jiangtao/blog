@@ -129,9 +129,10 @@ When creating or modifying diagrams:
 - This is primarily a documentation/knowledge repo, not an active development project
 - Most build/test commands are only relevant to specific subdirectories (MCP examples, TypeScript demos)
 - Closed GitHub Issues typically contain problem-solving approaches
-- Content syncs to 语雀博客 and 前端进制 WeChat official account
+- Content syncs to 语雀博客 and Jerret Life WeChat official account
 - Licensed under CC BY-NC-SA 3.0 CN (original content by jiangtao)
 
 ## Rules
 
 1. 务必遵守： 禁止删除文件，若要删除的话 请询问
+2. 务必遵守：新增的变更，务必走测试，测试验证完成之后，拉分支创建提交
