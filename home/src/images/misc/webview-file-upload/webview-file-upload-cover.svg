@@ -7,10 +7,16 @@
       <stop offset="100%" style="stop-color:#3949ab;stop-opacity:1" />
     </linearGradient>
 
-    <!-- 图标渐变 -->
-    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#4fc3f7;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#0288d1;stop-opacity:1" />
+    <!-- 错误/警告渐变 -->
+    <linearGradient id="warningGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ee5a5a;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- 成功渐变 -->
+    <linearGradient id="successGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#51cf66;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#37b24d;stop-opacity:1" />
     </linearGradient>
 
     <!-- 阴影 -->
@@ -28,90 +34,109 @@
   <circle cx="1050" cy="100" r="80" fill="#ffffff" opacity="0.03"/>
   <circle cx="150" cy="530" r="100" fill="#ffffff" opacity="0.03"/>
 
-  <!-- Android 机器人图标 -->
-  <g transform="translate(180, 150)" filter="url(#shadow)">
-    <!-- 头部 -->
-    <rect x="60" y="50" width="100" height="80" rx="10" fill="#3ddc84"/>
-    <!-- 眼睛 -->
-    <circle cx="85" cy="85" r="8" fill="#ffffff"/>
-    <circle cx="135" cy="85" r="8" fill="#ffffff"/>
-    <!-- 天线 -->
-    <line x1="90" y1="50" x2="85" y2="30" stroke="#3ddc84" stroke-width="4"/>
-    <line x1="130" y1="50" x2="135" y2="30" stroke="#3ddc84" stroke-width="4"/>
-    <circle cx="85" cy="25" r="6" fill="#3ddc84"/>
-    <circle cx="135" cy="25" r="6" fill="#3ddc84"/>
-    <!-- 身体 -->
-    <rect x="70" y="135" width="80" height="90" rx="8" fill="#3ddc84"/>
-    <!-- 手臂 -->
-    <rect x="40" y="145" width="25" height="70" rx="12" fill="#3ddc84"/>
-    <rect x="155" y="145" width="25" height="70" rx="12" fill="#3ddc84"/>
-    <!-- 腿 -->
-    <rect x="80" y="220" width="25" height="60" rx="12" fill="#3ddc84"/>
-    <rect x="115" y="220" width="25" height="60" rx="12" fill="#3ddc84"/>
+  <!-- 手机框架 -->
+  <g transform="translate(200, 100)" filter="url(#shadow)">
+    <!-- 手机外框 -->
+    <rect x="0" y="0" width="200" height="380" rx="24" fill="#1f2937"/>
+    <!-- 屏幕区域 -->
+    <rect x="12" y="40" width="176" height="320" rx="4" fill="#ffffff"/>
+    <!-- 顶部刘海 -->
+    <rect x="70" y="8" width="60" height="20" rx="10" fill="#1f2937"/>
+    <!-- 底部横条 -->
+    <rect x="85" y="365" width="30" height="4" rx="2" fill="#4b5563"/>
+
+    <!-- H5 页面内容 -->
+    <g transform="translate(20, 60)">
+      <!-- 页面标题 -->
+      <rect x="0" y="0" width="100" height="12" rx="3" fill="#374151"/>
+      <!-- 页面内容行 -->
+      <rect x="0" y="20" width="140" height="6" rx="2" fill="#e5e7eb"/>
+      <rect x="0" y="32" width="120" height="6" rx="2" fill="#e5e7eb"/>
+      <rect x="0" y="44" width="130" height="6" rx="2" fill="#e5e7eb"/>
+      <!-- 上传按钮区域 -->
+      <rect x="0" y="70" width="140" height="40" rx="6" fill="#3b82f6" opacity="0.2"/>
+      <rect x="35" y="82" width="70" height="16" rx="3" fill="#3b82f6"/>
+      <!-- 红色禁止符号 - 表示不能使用 -->
+      <circle cx="70" cy="200" r="35" fill="#ff6b6b" opacity="0.9"/>
+      <line x1="50" y1="180" x2="90" y2="220" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+    </g>
   </g>
 
-  <!-- WebView/浏览器图标 -->
-  <g transform="translate(950, 180)" filter="url(#shadow)">
-    <!-- 浏览器窗口 -->
-    <rect x="0" y="0" width="140" height="100" rx="8" fill="#ffffff"/>
-    <!-- 标题栏 -->
-    <rect x="0" y="0" width="140" height="20" rx="8" fill="#e0e0e0"/>
-    <rect x="0" y="15" width="140" height="10" fill="#e0e0e0"/>
-    <!-- 窗口按钮 -->
-    <circle cx="15" cy="10" r="4" fill="#ff5f57"/>
-    <circle cx="30" cy="10" r="4" fill="#ffbd2e"/>
-    <circle cx="45" cy="10" r="4" fill="#28c940"/>
-    <!-- 网页内容 -->
-    <rect x="15" y="35" width="50" height="6" rx="3" fill="#b0bec5"/>
-    <rect x="15" y="50" width="80" height="4" rx="2" fill="#cfd8dc"/>
-    <rect x="15" y="60" width="70" height="4" rx="2" fill="#cfd8dc"/>
-    <rect x="15" y="70" width="60" height="4" rx="2" fill="#cfd8dc"/>
-    <!-- 上传图标 -->
-    <g transform="translate(90, 45)">
-      <rect x="0" y="10" width="30" height="25" rx="3" fill="url(#iconGradient)"/>
-      <polygon points="15,0 8,10 22,10" fill="#4fc3f7"/>
-      <line x1="15" y1="0" x2="15" y2="18" stroke="#4fc3f7" stroke-width="3"/>
+  <!-- Android 机器人图标 -->
+  <g transform="translate(850, 120)" filter="url(#shadow)">
+    <!-- 头部 -->
+    <rect x="50" y="40" width="80" height="65" rx="8" fill="#3ddc84"/>
+    <!-- 眼睛 -->
+    <circle cx="70" cy="68" r="6" fill="#ffffff"/>
+    <circle cx="110" cy="68" r="6" fill="#ffffff"/>
+    <!-- 天线 -->
+    <line x1="75" y1="40" x2="70" y2="22" stroke="#3ddc84" stroke-width="3"/>
+    <line x1="105" y1="40" x2="110" y2="22" stroke="#3ddc84" stroke-width="3"/>
+    <circle cx="70" cy="18" r="5" fill="#3ddc84"/>
+    <circle cx="110" cy="18" r="5" fill="#3ddc84"/>
+    <!-- 身体 -->
+    <rect x="58" y="108" width="65" height="75" rx="6" fill="#3ddc84"/>
+    <!-- 手臂 -->
+    <rect x="35" y="115" width="20" height="55" rx="10" fill="#3ddc84"/>
+    <rect x="125" y="115" width="20" height="55" rx="10" fill="#3ddc84"/>
+    <!-- 腿 -->
+    <rect x="68" y="185" width="20" height="50" rx="10" fill="#3ddc84"/>
+    <rect x="92" y="185" width="20" height="50" rx="10" fill="#3ddc84"/>
+  </g>
+
+  <!-- 解决方案图标 - FileProvider -->
+  <g transform="translate(920, 350)" filter="url(#shadow)">
+    <rect x="0" y="0" width="100" height="120" rx="8" fill="#ffffff"/>
+    <rect x="0" y="0" width="100" height="25" rx="8" fill="#4fc3f7"/>
+    <rect x="0" y="20" width="100" height="8" fill="#4fc3f7"/>
+    <!-- 文档图标 -->
+    <g transform="translate(30, 40)">
+      <rect x="0" y="0" width="40" height="50" rx="3" fill="#e3f2fd"/>
+      <rect x="8" y="10" width="24" height="3" rx="1.5" fill="#4fc3f7"/>
+      <rect x="8" y="18" width="24" height="3" rx="1.5" fill="#4fc3f7"/>
+      <rect x="8" y="26" width="18" height="3" rx="1.5" fill="#4fc3f7"/>
+      <polygon points="30,-8 20,0 40,0" fill="url(#successGradient)"/>
     </g>
   </g>
 
   <!-- 连接线 -->
-  <path d="M 330 280 Q 500 350 800 280" stroke="#4fc3f7" stroke-width="3" fill="none" opacity="0.6" stroke-dasharray="10,5"/>
-  <polygon points="800,280 785,273 785,287" fill="#4fc3f7" opacity="0.6"/>
+  <path d="M 400 280 Q 500 400 850 400" stroke="#4fc3f7" stroke-width="3" fill="none" opacity="0.6" stroke-dasharray="10,5"/>
+  <polygon points="850,400 830,393 835,405" fill="#4fc3f7" opacity="0.6"/>
 
   <!-- 标题文字 -->
-  <text x="600" y="380" font-family="'Segoe UI', Arial, sans-serif" font-size="48" font-weight="bold" fill="#ffffff" text-anchor="middle">
-    Android WebView
+  <text x="600" y="250" font-family="'Segoe UI', Arial, sans-serif" font-size="52" font-weight="bold" fill="#ffffff" text-anchor="middle">
+    H5拍照功能
   </text>
-  <text x="600" y="440" font-family="'Segoe UI', Arial, sans-serif" font-size="42" font-weight="bold" fill="#ffffff" text-anchor="middle">
-    文件上传功能完整实现指南
+  <text x="600" y="315" font-family="'Segoe UI', Arial, sans-serif" font-size="48" font-weight="bold" fill="#ff6b6b" text-anchor="middle">
+    Android中无法使用？
+  </text>
+
+  <!-- 解决方案标题 -->
+  <text x="600" y="520" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="600" fill="#4fc3f7" text-anchor="middle">
+    WebView 文件上传完整解决方案
   </text>
 
   <!-- 副标题/标签 -->
-  <g transform="translate(420, 500)">
-    <rect x="0" y="0" width="100" height="30" rx="15" fill="#4fc3f7" opacity="0.9"/>
-    <text x="50" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#1a237e" text-anchor="middle">WebChromeClient</text>
+  <g transform="translate(350, 560)">
+    <rect x="0" y="0" width="90" height="28" rx="14" fill="#3ddc84" opacity="0.9"/>
+    <text x="45" y="19" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1a237e" text-anchor="middle">WebChromeClient</text>
   </g>
 
-  <g transform="translate(540, 500)">
-    <rect x="0" y="0" width="90" height="30" rx="15" fill="#4fc3f7" opacity="0.9"/>
-    <text x="45" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#1a237e" text-anchor="middle">FileProvider</text>
+  <g transform="translate(460, 560)">
+    <rect x="0" y="0" width="80" height="28" rx="14" fill="#3ddc84" opacity="0.9"/>
+    <text x="40" y="19" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1a237e" text-anchor="middle">FileProvider</text>
   </g>
 
-  <g transform="translate(650, 500)">
-    <rect x="0" y="0" width="80" height="30" rx="15" fill="#4fc3f7" opacity="0.9"/>
-    <text x="40" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#1a237e" text-anchor="middle">文件选择</text>
+  <g transform="translate(560, 560)">
+    <rect x="0" y="0" width="70" height="28" rx="14" fill="#3ddc84" opacity="0.9"/>
+    <text x="35" y="19" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1a237e" text-anchor="middle">相机拍照</text>
   </g>
 
-  <g transform="translate(750, 500)">
-    <rect x="0" y="0" width="70" height="30" rx="15" fill="#4fc3f7" opacity="0.9"/>
-    <text x="35" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="600" fill="#1a237e" text-anchor="middle">相机</text>
+  <g transform="translate(650, 560)">
+    <rect x="0" y="0" width="60" height="28" rx="14" fill="#3ddc84" opacity="0.9"/>
+    <text x="30" y="19" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="600" fill="#1a237e" text-anchor="middle">多文件</text>
   </g>
 
   <!-- 底部装饰线 -->
-  <rect x="400" y="570" width="400" height="3" rx="1.5" fill="#4fc3f7" opacity="0.8"/>
-
-  <!-- 版本/日期信息 -->
-  <text x="600" y="600" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#ffffff" opacity="0.7" text-anchor="middle">
-    Android 13+ 适配 | 完整源码 | 实战教程
-  </text>
+  <rect x="400" y="605" width="400" height="3" rx="1.5" fill="#4fc3f7" opacity="0.8"/>
 </svg>
