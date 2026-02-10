@@ -43,6 +43,12 @@
       @apply border-border;
     }
 
+    /* Remove hr between headings */
+    :where(h2, h3, h4) + hr,
+    hr + :where(h2, h3, h4) {
+      @apply hidden;
+    }
+
     img {
       @apply mx-auto border border-border;
     }
