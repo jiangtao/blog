@@ -277,12 +277,12 @@
 
     /* Better hierarchy on mobile with visual indicators */
     .toc-list .toc-sublist {
-      padding-left: 0;
       margin-top: 2px;
       margin-bottom: 2px;
       position: relative;
-      text-indent: 16px;
+      padding-left: 0px;
     }
+
 
     .toc-list .toc-sublist::before {
       content: '';
@@ -296,8 +296,7 @@
 
     .toc-list .toc-sublist .toc-link {
       font-size: 13px;
-      padding: 10px 16px 10px 12px;
-      text-indent: 22px;
+      padding: 10px 16px 10px 28px;
       opacity: 0.9;
     }
 
@@ -408,13 +407,11 @@
   /* Hierarchy indentation with better visual cues */
   .toc-list .toc-sublist {
     list-style: none;
-    padding-left: 0;
     margin-top: 2px;
     margin-bottom: 2px;
     position: relative;
-    text-indent: 16px;
+    padding-left: 0px;
   }
-
   .toc-list .toc-sublist::before {
     content: '';
     position: absolute;
@@ -427,8 +424,7 @@
 
   .toc-list .toc-sublist .toc-link {
     font-size: 12px;
-    padding: 6px 12px;
-    text-indent: 22px;
+    padding: 6px 12px 6px 28px;
     opacity: 0.9;
   }
 
@@ -509,6 +505,12 @@
 
   .toc-toggle:hover {
     animation: none;
+  }
+</style>
+
+<style is:global>
+  .toc-list.toc-sublist {
+    text-indent: 16px !important;
   }
 </style>
 

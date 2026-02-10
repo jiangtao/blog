@@ -39,16 +39,6 @@
       @apply marker:text-accent;
     }
 
-    hr {
-      @apply border-border;
-    }
-
-    /* Remove hr between headings */
-    :where(h2, h3, h4) + hr,
-    hr + :where(h2, h3, h4) {
-      @apply hidden;
-    }
-
     img {
       @apply mx-auto border border-border;
     }
@@ -94,6 +84,17 @@
 
     pre {
       @apply focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed;
+    }
+
+    /* Override hr margin (default is 3em from typography plugin) */
+    hr {
+      @apply my-4;
+    }
+
+    /* Hide hr between headings in article content */
+    :where(h2, h3, h4) + hr,
+    hr + :where(h2, h3, h4) {
+      @apply hidden;
     }
   }
 
