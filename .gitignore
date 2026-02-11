@@ -19,3 +19,4 @@ home/node_modules/
 home/.deploy_git/
 home/db.json
 .agents
+docs/plans/
