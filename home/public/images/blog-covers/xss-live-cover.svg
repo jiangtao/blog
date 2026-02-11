@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.1"/>
+    </filter>
+    <linearGradient id="alert-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e53935"/>
+      <stop offset="100%" style="stop-color:#c62828"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#f8f9fa"/>
+
+  <!-- 标题区域 -->
+  <rect x="0" y="0" width="1920" height="200" fill="#ffffff"/>
+
+  <!-- 警告装饰条 -->
+  <rect x="0" y="195" width="1920" height="5" fill="url(#alert-gradient)"/>
+
+  <!-- 标题 -->
+  <g transform="translate(960, 100)">
+    <text x="0" y="0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="64" font-weight="700" fill="#37352f">XSS Live 学习总结</text>
+    <text x="0" y="50" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="28" fill="#787774">Cross-Site Scripting Security Guide</text>
+  </g>
+
+  <!-- 警告图标 -->
+  <g transform="translate(200, 400)">
+    <polygon points="100,0 200,160 0,160" fill="#e53935" opacity="0.9"/>
+    <text x="100" y="130" text-anchor="middle" font-size="72" fill="#ffffff">!</text>
+  </g>
+
+  <!-- XSS 攻击方式卡片 -->
+  <g transform="translate(350, 350)" filter="url(#shadow)">
+    <rect x="0" y="0" width="380" height="280" rx="12" fill="#ffffff" stroke="#e8e8e8" stroke-width="1"/>
+    <rect x="0" y="0" width="380" height="50" rx="12" fill="#ffebee"/>
+    <rect x="0" y="40" width="380" height="10" fill="#ffebee"/>
+    <text x="190" y="35" text-anchor="middle" font-size="18" fill="#c62828" font-weight="bold">插入执行标签</text>
+
+    <text x="30" y="90" font-family="monospace" font-size="14" fill="#37352f">• &lt;script&gt; 标签注入</text>
+    <text x="30" y="120" font-family="monospace" font-size="14" fill="#37352f">• &lt;img onerror&gt; 触发</text>
+    <text x="30" y="150" font-family="monospace" font-size="14" fill="#37352f">• &lt;iframe srcdoc&gt; 触发</text>
+    <text x="30" y="180" font-family="monospace" font-size="14" fill="#37352f">• &lt;svg onload&gt; 触发</text>
+
+    <rect x="20" y="210" width="340" height="50" rx="4" fill="#ffebee"/>
+    <text x="190" y="240" text-anchor="middle" font-size="13" fill="#c62828">最直接的攻击方式</text>
+  </g>
+
+  <!-- 标签闭合卡片 -->
+  <g transform="translate(770, 350)" filter="url(#shadow)">
+    <rect x="0" y="0" width="380" height="280" rx="12" fill="#ffffff" stroke="#e8e8e8" stroke-width="1"/>
+    <rect x="0" y="0" width="380" height="50" rx="12" fill="#fff3e0"/>
+    <rect x="0" y="40" width="380" height="10" fill="#fff3e0"/>
+    <text x="190" y="35" text-anchor="middle" font-size="18" fill="#e65100" font-weight="bold">标签提前闭合</text>
+
+    <text x="30" y="90" font-size="14" fill="#37352f">• 富文本注入</text>
+    <text x="30" y="120" font-size="14" fill="#37352f">• input/textarea 截断</text>
+    <text x="30" y="150" font-size="14" fill="#37352f">• 可编辑 div 注入</text>
+    <text x="30" y="180" font-size="14" fill="#37352f">• 属性注入绕过</text>
+
+    <rect x="20" y="210" width="340" height="50" rx="4" fill="#fff3e0"/>
+    <text x="190" y="240" text-anchor="middle" font-size="13" fill="#e65100">利用上下文构造攻击</text>
+  </g>
+
+  <!-- 防御措施卡片 -->
+  <g transform="translate(1190, 350)" filter="url(#shadow)">
+    <rect x="0" y="0" width="380" height="280" rx="12" fill="#ffffff" stroke="#e8e8e8" stroke-width="1"/>
+    <rect x="0" y="0" width="380" height="50" rx="12" fill="#e8f5e9"/>
+    <rect x="0" y="40" width="380" height="10" fill="#e8f5e9"/>
+    <text x="190" y="35" text-anchor="middle" font-size="18" fill="#2e7d32" font-weight="bold">防御措施</text>
+
+    <text x="30" y="90" font-size="14" fill="#37352f">• 输入转义（Escape）</text>
+    <text x="30" y="120" font-size="14" fill="#37352f">• Content Security Policy</text>
+    <text x="30" y="150" font-size="14" fill="#37352f">• HttpOnly Cookie</text>
+    <text x="30" y="180" font-size="14" fill="#37352f">• 输入验证与过滤</text>
+
+    <rect x="20" y="210" width="340" height="50" rx="4" fill="#e8f5e9"/>
+    <text x="190" y="240" text-anchor="middle" font-size="13" fill="#2e7d32">多层防御最佳实践</text>
+  </g>
+
+  <!-- 安全提示区域 -->
+  <g transform="translate(350, 700)">
+    <rect x="0" y="0" width="1220" height="150" rx="12" fill="#ffebee" stroke="#ef9a9a" stroke-width="1"/>
+    <text x="610" y="45" text-anchor="middle" font-size="22" fill="#c62828" font-weight="bold">⚠️ 安全第一</text>
+    <text x="610" y="85" text-anchor="middle" font-size="16" fill="#37352f">永远不要信任用户输入 · 前端验证仅作用户体验 · 后端必须二次验证</text>
+    <text x="610" y="120" text-anchor="middle" font-size="14" fill="#787774">基于 xss-demo.haozi.me 的实战练习</text>
+  </g>
+
+  <!-- 底部标签 -->
+  <g transform="translate(960, 920)">
+    <rect x="-100" y="-25" width="200" height="50" rx="25" fill="#ffebee"/>
+    <text x="0" y="8" text-anchor="middle" font-size="18" fill="#c62828">XSS · Web安全 · 防御</text>
+  </g>
+
+  <!-- 右下角日期 -->
+  <text x="1850" y="1030" text-anchor="end" font-size="16" fill="#9b9a97">2017-09-13</text>
+</svg>

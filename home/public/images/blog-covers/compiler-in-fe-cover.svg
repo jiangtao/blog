@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <!-- 深色黑板背景 -->
+  <rect width="1920" height="1080" fill="#1a1a2e"/>
+  <rect width="1920" height="1080" fill="#0f0f1a" opacity="0.9"/>
+
+  <!-- 木框边框 -->
+  <rect x="15" y="15" width="1890" height="1050" rx="4" fill="none" stroke="#5d4037" stroke-width="12"/>
+  <rect x="20" y="20" width="1880" height="1040" rx="2" fill="none" stroke="#3e2723" stroke-width="4"/>
+
+  <!-- 粉笔灰尘纹理 -->
+  <filter id="chalk">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/>
+  </filter>
+
+  <!-- 主标题区 -->
+  <g transform="translate(960, 85)">
+    <text x="0" y="0" text-anchor="middle" font-family="'Comic Sans MS', 'Chalkboard SE', cursive" font-size="56" font-weight="bold" fill="#fff9c4">编译原理在前端应用</text>
+    <path d="M-280 15 Q0 25 280 15" stroke="#fff9c4" stroke-width="3" fill="none" opacity="0.6"/>
+    <text x="0" y="45" text-anchor="middle" font-family="cursive" font-size="20" fill="#b0bec5">Compiler Principles in Frontend Development</text>
+  </g>
+
+  <!-- 左侧：编译原理概述 -->
+  <g transform="translate(280, 280)">
+    <!-- 蓝色框：什么是编译原理 -->
+    <rect x="-120" y="-80" width="240" height="160" rx="12" fill="none" stroke="#4fc3f7" stroke-width="3" filter="url(#chalk)"/>
+    <text x="0" y="-50" text-anchor="middle" font-family="cursive" font-size="22" font-weight="bold" fill="#4fc3f7">什么是编译原理</text>
+    <text x="0" y="-20" text-anchor="middle" font-family="cursive" font-size="14" fill="#e0f7fa">• 编译器工作流程</text>
+    <text x="0" y="5" text-anchor="middle" font-family="cursive" font-size="14" fill="#e0f7fa">• 解释器 vs 编译器</text>
+    <text x="0" y="30" text-anchor="middle" font-family="cursive" font-size="14" fill="#e0f7fa">• AOT vs JIT</text>
+    <text x="0" y="55" text-anchor="middle" font-family="cursive" font-size="14" fill="#e0f7fa">• 前端为什么要学</text>
+
+    <!-- 装饰：代码符号 -->
+    <text x="-100" y="-95" font-family="monospace" font-size="24" fill="#4fc3f7" opacity="0.5">&lt;/&gt;</text>
+  </g>
+
+  <!-- 中间上：JS执行机制 -->
+  <g transform="translate(960, 260)">
+    <!-- 黄色框：核心流程 -->
+    <rect x="-140" y="-60" width="280" height="120" rx="12" fill="none" stroke="#fff176" stroke-width="3"/>
+    <text x="0" y="-30" text-anchor="middle" font-family="cursive" font-size="24" font-weight="bold" fill="#fff176">JS执行机制</text>
+    <text x="0" y="-5" text-anchor="middle" font-family="cursive" font-size="15" fill="#fff9c4">源代码 → AST → 字节码</text>
+    <text x="0" y="20" text-anchor="middle" font-family="cursive" font-size="15" fill="#fff9c4">词法分析 → 语法分析</text>
+    <text x="0" y="45" text-anchor="middle" font-family="cursive" font-size="15" fill="#fff9c4">Ignition解析器 → TurboFan</text>
+
+    <!-- 箭头装饰 -->
+    <path d="M-100 60 L-80 75 L-100 90" stroke="#fff176" stroke-width="2" fill="none" opacity="0.5"/>
+    <path d="M100 60 L80 75 L100 90" stroke="#fff176" stroke-width="2" fill="none" opacity="0.5"/>
+  </g>
+
+  <!-- 右侧：前端工程应用 -->
+  <g transform="translate(1640, 280)">
+    <!-- 绿色框：工程应用 -->
+    <rect x="-120" y="-80" width="240" height="160" rx="12" fill="none" stroke="#81c784" stroke-width="3"/>
+    <text x="0" y="-50" text-anchor="middle" font-family="cursive" font-size="22" font-weight="bold" fill="#81c784">前端工程应用</text>
+    <text x="0" y="-20" text-anchor="middle" font-family="cursive" font-size="14" fill="#c8e6c9">• Babel编译器</text>
+    <text x="0" y="5" text-anchor="middle" font-family="cursive" font-size="14" fill="#c8e6c9">• TypeScript转换</text>
+    <text x="0" y="30" text-anchor="middle" font-family="cursive" font-size="14" fill="#c8e6c9">• JS Doc生成</text>
+    <text x="0" y="55" text-anchor="middle" font-family="cursive" font-size="14" fill="#c8e6c9">• CSS预处理器</text>
+
+    <!-- 装饰：齿轮 -->
+    <circle cx="100" cy="-95" r="15" fill="none" stroke="#81c784" stroke-width="2" opacity="0.5"/>
+    <circle cx="100" cy="-95" r="8" fill="none" stroke="#81c784" stroke-width="2" opacity="0.5"/>
+  </g>
+
+  <!-- 左下：低代码平台 -->
+  <g transform="translate(320, 580)">
+    <!-- 粉色框：低代码 -->
+    <rect x="-130" y="-100" width="260" height="200" rx="12" fill="none" stroke="#f48fb1" stroke-width="3"/>
+    <text x="0" y="-70" text-anchor="middle" font-family="cursive" font-size="22" font-weight="bold" fill="#f48fb1">低代码平台应用</text>
+    <text x="0" y="-40" text-anchor="middle" font-family="cursive" font-size="14" fill="#fce4ec">• 什么是低代码平台</text>
+    <text x="0" y="-15" text-anchor="middle" font-family="cursive" font-size="14" fill="#fce4ec">• 页面编辑器设计</text>
+    <text x="0" y="10" text-anchor="middle" font-family="cursive" font-size="14" fill="#fce4ec">• DSL编译转换</text>
+    <text x="0" y="35" text-anchor="middle" font-family="cursive" font-size="14" fill="#fce4ec">• 组件渐进升级</text>
+    <text x="0" y="60" text-anchor="middle" font-family="cursive" font-size="14" fill="#fce4ec">• Vue1.0→Vue2.0</text>
+
+    <!-- 装饰：拼图 -->
+    <path d="M-115 -115 L-100 -115 L-100 -100 L-115 -100 Z" fill="#f48fb1" opacity="0.3"/>
+  </g>
+
+  <!-- 中下：核心概念详解 -->
+  <g transform="translate(960, 600)">
+    <!-- 紫色框：核心概念 -->
+    <rect x="-160" y="-120" width="320" height="240" rx="12" fill="none" stroke="#ce93d8" stroke-width="3"/>
+    <text x="0" y="-90" text-anchor="middle" font-family="cursive" font-size="24" font-weight="bold" fill="#ce93d8">核心概念详解</text>
+
+    <!-- 左列 -->
+    <text x="-140" y="-55" font-family="cursive" font-size="15" fill="#f3e5f5">• AST抽象语法树</text>
+    <text x="-140" y="-30" font-family="cursive" font-size="15" fill="#f3e5f5">• Token词法单元</text>
+    <text x="-140" y="-5" font-family="cursive" font-size="15" fill="#f3e5f5">• 执行上下文</text>
+    <text x="-140" y="20" font-family="cursive" font-size="15" fill="#f3e5f5">• 变量环境</text>
+
+    <!-- 右列 -->
+    <text x="10" y="-55" font-family="cursive" font-size="15" fill="#f3e5f5">• 词法环境</text>
+    <text x="10" y="-30" font-family="cursive" font-size="15" fill="#f3e5f5">• 作用域链</text>
+    <text x="10" y="-5" font-family="cursive" font-size="15" fill="#f3e5f5">• 编译阶段</text>
+    <text x="10" y="20" font-family="cursive" font-size="15" fill="#f3e5f5">• 执行阶段</text>
+
+    <!-- 底部流程 -->
+    <text x="0" y="60" text-anchor="middle" font-family="cursive" font-size="16" fill="#e1bee7">源码 → 词法分析 → 语法分析 → AST</text>
+  </g>
+
+  <!-- 右下：实际案例 -->
+  <g transform="translate(1600, 580)">
+    <!-- 橙色框：实际案例 -->
+    <rect x="-120" y="-100" width="240" height="200" rx="12" fill="none" stroke="#ffb74d" stroke-width="3"/>
+    <text x="0" y="-70" text-anchor="middle" font-family="cursive" font-size="22" font-weight="bold" fill="#ffb74d">实际案例</text>
+    <text x="0" y="-40" text-anchor="middle" font-family="cursive" font-size="14" fill="#ffe0b2">• API文档自动生成</text>
+    <text x="0" y="-15" text-anchor="middle" font-family="cursive" font-size="14" fill="#ffe0b2">• Decorator解析</text>
+    <text x="0" y="10" text-anchor="middle" font-family="cursive" font-size="14" fill="#ffe0b2">• 语义分析实现</text>
+    <text x="0" y="35" text-anchor="middle" font-family="cursive" font-size="14" fill="#ffe0b2">• Markdown生成</text>
+    <text x="0" y="60" text-anchor="middle" font-family="cursive" font-size="14" fill="#ffe0b2">• 模板编译转换</text>
+  </g>
+
+  <!-- 连接线：蓝色框到中间 -->
+  <path d="M400 280 Q600 270 820 260" stroke="#4fc3f7" stroke-width="2" fill="none" stroke-dasharray="5,3" opacity="0.6"/>
+  <polygon points="815,258 825,260 815,262" fill="#4fc3f7" opacity="0.6"/>
+
+  <!-- 连接线：中间到绿色框 -->
+  <path d="M1100 260 Q1320 270 1520 280" stroke="#81c784" stroke-width="2" fill="none" stroke-dasharray="5,3" opacity="0.6"/>
+  <polygon points="1515,278 1525,280 1515,282" fill="#81c784" opacity="0.6"/>
+
+  <!-- 连接线：蓝色框到粉色框 -->
+  <path d="M280 360 Q300 470 320 480" stroke="#f48fb1" stroke-width="2" fill="none" stroke-dasharray="5,3" opacity="0.5"/>
+
+  <!-- 连接线：绿色框到橙色框 -->
+  <path d="M1640 360 Q1620 470 1600 480" stroke="#ffb74d" stroke-width="2" fill="none" stroke-dasharray="5,3" opacity="0.5"/>
+
+  <!-- 底部：章节导航 -->
+  <g transform="translate(960, 890)">
+    <text x="0" y="0" text-anchor="middle" font-family="cursive" font-size="18" fill="#b0bec5">文章章节：前言 → 编译原理概述 → 前端应用 → 低代码平台 → 总结</text>
+    <line x1="-300" y1="15" x2="300" y2="15" stroke="#607d8b" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- 左下角标签 -->
+  <g transform="translate(120, 980)">
+    <rect x="0" y="-25" width="140" height="35" rx="17" fill="none" stroke="#fff176" stroke-width="2"/>
+    <text x="70" y="0" text-anchor="middle" font-family="cursive" font-size="14" fill="#fff176">#编译原理 #AST</text>
+  </g>
+
+  <!-- 右下角日期 -->
+  <g transform="translate(1800, 980)">
+    <text x="0" y="0" text-anchor="end" font-family="cursive" font-size="14" fill="#78909c">2022-08-18 · 学习笔记</text>
+  </g>
+
+  <!-- 装饰元素：散落的数学符号 -->
+  <text x="150" y="180" font-family="cursive" font-size="30" fill="#4fc3f7" opacity="0.2">{ }</text>
+  <text x="1770" y="200" font-family="cursive" font-size="24" fill="#81c784" opacity="0.2">λ</text>
+  <text x="100" y="750" font-family="cursive" font-size="28" fill="#f48fb1" opacity="0.2">&lt;/&gt;</text>
+  <text x="1820" y="780" font-family="cursive" font-size="26" fill="#ce93d8" opacity="0.2">π</text>
+
+  <!-- 装饰：连接线和节点 -->
+  <circle cx="200" cy="480" r="4" fill="#4fc3f7" opacity="0.4"/>
+  <circle cx="1720" cy="480" r="4" fill="#81c784" opacity="0.4"/>
+  <circle cx="480" cy="750" r="4" fill="#f48fb1" opacity="0.4"/>
+  <circle cx="1440" cy="750" r="4" fill="#ffb74d" opacity="0.4"/>
+</svg>

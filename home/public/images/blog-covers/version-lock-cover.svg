@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#f8f9fa"/>
+
+  <!-- Notion 风格标题区域 -->
+  <rect x="0" y="0" width="1920" height="200" fill="#ffffff"/>
+
+  <!-- 标题 -->
+  <g transform="translate(960, 120)">
+    <text x="0" y="0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="64" font-weight="700" fill="#37352f">npm 依赖版本锁定和管理</text>
+  </g>
+
+  <!-- 装饰线条 -->
+  <rect x="0" y="200" width="1920" height="2" fill="#e8e8e8"/>
+
+  <!-- 主内容区域 -->
+  <g transform="translate(200, 320)">
+    <!-- package.json 卡片 -->
+    <g filter="url(#shadow)">
+      <rect x="0" y="0" width="400" height="400" rx="12" fill="#ffffff" stroke="#e8e8e8" stroke-width="1"/>
+      <rect x="0" y="0" width="400" height="60" rx="12" fill="#f1f3f5"/>
+      <rect x="0" y="40" width="400" height="20" fill="#f1f3f5"/>
+      <circle cx="40" cy="30" r="16" fill="#cb3837"/>
+      <text x="70" y="38" font-family="monospace" font-size="20" font-weight="bold" fill="#37352f">package.json</text>
+
+      <!-- 内容 -->
+      <text x="30" y="110" font-family="monospace" font-size="16" fill="#6b6b6b">{</text>
+      <text x="50" y="150" font-family="monospace" font-size="16" fill="#37352f">"dependencies": {</text>
+      <text x="70" y="190" font-family="monospace" font-size="16" fill="#37352f">"vue": "^2.1.8",</text>
+      <text x="70" y="230" font-family="monospace" font-size="16" fill="#37352f">"axios": "~0.18.0"</text>
+      <text x="50" y="270" font-family="monospace" font-size="16" fill="#37352f">}</text>
+      <text x="30" y="310" font-family="monospace" font-size="16" fill="#6b6b6b">}</text>
+    </g>
+  </g>
+
+  <!-- 箭头 -->
+  <g transform="translate(620, 500)">
+    <path d="M0 40 L60 40 L50 30 M60 40 L50 50" stroke="#37352f" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- package-lock.json 卡片 -->
+  <g transform="translate(700, 320)" filter="url(#shadow)">
+    <rect x="0" y="0" width="400" height="400" rx="12" fill="#ffffff" stroke="#e8e8e8" stroke-width="1"/>
+    <rect x="0" y="0" width="400" height="60" rx="12" fill="#e3f2fd"/>
+    <rect x="0" y="40" width="400" height="20" fill="#e3f2fd"/>
+    <circle cx="40" cy="30" r="16" fill="#1976d2"/>
+    <text x="70" y="38" font-family="monospace" font-size="18" font-weight="bold" fill="#37352f">package-lock.json</text>
+
+    <!-- 锁图标 -->
+    <g transform="translate(160, 150)">
+      <rect x="10" y="30" width="60" height="50" rx="8" fill="#1976d2"/>
+      <path d="M20 30 L20 15 A20 20 0 0 1 60 15 L60 30" stroke="#1976d2" stroke-width="6" fill="none"/>
+      <circle cx="40" cy="55" r="8" fill="#ffffff"/>
+      <rect x="36" y="55" width="8" height="20" fill="#ffffff"/>
+    </g>
+
+    <!-- 内容说明 -->
+    <text x="200" y="280" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#37352f" font-weight="bold">精确版本锁定</text>
+    <text x="200" y="320" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#6b6b6b">确保团队依赖一致</text>
+  </g>
+
+  <!-- 箭头 -->
+  <g transform="translate(1120, 500)">
+    <path d="M0 40 L60 40 L50 30 M60 40 L50 50" stroke="#37352f" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- yarn.lock 卡片 -->
+  <g transform="translate(1200, 320)" filter="url(#shadow)">
+    <rect x="0" y="0" width="400" height="400" rx="12" fill="#ffffff" stroke="#e8e8e8" stroke-width="1"/>
+    <rect x="0" y="0" width="400" height="60" rx="12" fill="#fff3e0"/>
+    <rect x="0" y="40" width="400" height="20" fill="#fff3e0"/>
+    <circle cx="40" cy="30" r="16" fill="#ff6f00"/>
+    <text x="70" y="38" font-family="monospace" font-size="20" font-weight="bold" fill="#37352f">yarn.lock</text>
+
+    <!-- Yarn 图标 -->
+    <g transform="translate(150, 150)">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#ff6f00" stroke-width="4"/>
+      <path d="M30 50 L50 30 L70 50 L50 70 Z" fill="#ff6f00"/>
+    </g>
+
+    <!-- 内容说明 -->
+    <text x="200" y="280" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#37352f" font-weight="bold">Yarn 版本管理</text>
+    <text x="200" y="320" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#6b6b6b">更快的安装速度</text>
+  </g>
+
+  <!-- 底部标签 -->
+  <g transform="translate(960, 850)">
+    <rect x="-100" y="-25" width="200" height="50" rx="25" fill="#e3f2fd"/>
+    <text x="0" y="8" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#1976d2">npm · yarn · 版本锁定</text>
+  </g>
+
+  <!-- 右下角日期 -->
+  <text x="1850" y="1030" text-anchor="end" font-family="sans-serif" font-size="16" fill="#9b9a97">2017-12-01</text>
+</svg>

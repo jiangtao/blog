@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.1"/>
+    </filter>
+    <linearGradient id="vue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#42b883"/>
+      <stop offset="100%" style="stop-color:#35495e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="#f8f9fa"/>
+
+  <!-- 标题区域 -->
+  <rect x="0" y="0" width="1920" height="200" fill="#ffffff"/>
+
+  <!-- Vue 渐变装饰 -->
+  <rect x="0" y="195" width="1920" height="5" fill="url(#vue-gradient)"/>
+
+  <!-- 标题 -->
+  <g transform="translate(960, 120)">
+    <text x="0" y="0" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="64" font-weight="700" fill="#37352f">vue 中的 mixins 实践</text>
+    <text x="0" y="50" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="28" fill="#787774">Vue Mixins Best Practices</text>
+  </g>
+
+  <!-- Vue Logo -->
+  <g transform="translate(200, 400)">
+    <polygon points="100,0 200,50 200,150 100,200" fill="#42b883"/>
+    <polygon points="100,0 0,50 0,150 100,200" fill="#35495e"/>
+    <polygon points="100,200 100,100 0,50 100,0" fill="#42b883" opacity="0.8"/>
+  </g>
+
+  <!-- Mixin 示例卡片 -->
+  <g transform="translate(450, 350)" filter="url(#shadow)">
+    <rect x="0" y="0" width="500" height="300" rx="12" fill="#ffffff" stroke="#e8e8e8" stroke-width="1"/>
+    <rect x="0" y="0" width="500" height="50" rx="12" fill="#42b883" opacity="0.1"/>
+    <rect x="0" y="40" width="500" height="10" fill="#42b883" opacity="0.1"/>
+    <text x="250" y="35" text-anchor="middle" font-family="monospace" font-size="18" fill="#42b883" font-weight="bold">mixin.js</text>
+
+    <!-- 代码 -->
+    <text x="30" y="90" font-family="monospace" font-size="14" fill="#37352f">const trackingMixin = {</text>
+    <text x="50" y="120" font-family="monospace" font-size="14" fill="#37352f">data() {</text>
+    <text x="70" y="150" font-family="monospace" font-size="14" fill="#37352f">return {</text>
+    <text x="90" y="180" font-family="monospace" font-size="14" fill="#37352f">startTime: null,</text>
+    <text x="90" y="210" font-family="monospace" font-size="14" fill="#37352f">endTime: null</text>
+    <text x="70" y="240" font-family="monospace" font-size="14" fill="#37352f">}</text>
+    <text x="50" y="270" font-family="monospace" font-size="14" fill="#37352f">}</text>
+    <text x="30" y="300" font-family="monospace" font-size="14" fill="#37352f">}</text>
+  </g>
+
+  <!-- 组件使用示例 -->
+  <g transform="translate(1000, 350)" filter="url(#shadow)">
+    <rect x="0" y="0" width="500" height="300" rx="12" fill="#ffffff" stroke="#e8e8e8" stroke-width="1"/>
+    <rect x="0" y="0" width="500" height="50" rx="12" fill="#35495e" opacity="0.1"/>
+    <rect x="0" y="40" width="500" height="10" fill="#35495e" opacity="0.1"/>
+    <text x="250" y="35" text-anchor="middle" font-family="monospace" font-size="18" fill="#35495e" font-weight="bold">MyComponent.vue</text>
+
+    <!-- 代码 -->
+    <text x="30" y="90" font-family="monospace" font-size="14" fill="#37352f">&lt;template&gt;</text>
+    <text x="50" y="120" font-family="monospace" font-size="14" fill="#37352f">&lt;div&gt;页面内容&lt;/div&gt;</text>
+    <text x="30" y="150" font-family="monospace" font-size="14" fill="#37352f">&lt;/template&gt;</text>
+    <text x="30" y="190" font-family="monospace" font-size="14" fill="#37352f">&lt;script&gt;</text>
+    <text x="50" y="220" font-family="monospace" font-size="14" fill="#37352f">import tracking from './mixin'</text>
+    <text x="50" y="250" font-family="monospace" font-size="14" fill="#37352f">export default {</text>
+    <text x="70" y="280" font-family="monospace" font-size="14" fill="#37352f">mixins: [tracking]</text>
+    <text x="50" y="310" font-family="monospace" font-size="14" fill="#37352f">}</text>
+  </g>
+
+  <!-- 优势说明 -->
+  <g transform="translate(450, 700)">
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="300" height="120" rx="8" fill="#42b883" opacity="0.1"/>
+      <text x="150" y="40" text-anchor="middle" font-size="18" fill="#42b883" font-weight="bold">代码复用</text>
+      <text x="150" y="75" text-anchor="middle" font-size="14" fill="#787774">避免重复逻辑</text>
+      <text x="150" y="95" text-anchor="middle" font-size="14" fill="#787774">提高可维护性</text>
+    </g>
+
+    <g transform="translate(350, 0)">
+      <rect x="0" y="0" width="300" height="120" rx="8" fill="#35495e" opacity="0.1"/>
+      <text x="150" y="40" text-anchor="middle" font-size="18" fill="#35495e" font-weight="bold">关注分离</text>
+      <text x="150" y="75" text-anchor="middle" font-size="14" fill="#787774">业务逻辑独立</text>
+      <text x="150" y="95" text-anchor="middle" font-size="14" fill="#787774">便于测试调试</text>
+    </g>
+
+    <g transform="translate(700, 0)">
+      <rect x="0" y="0" width="300" height="120" rx="8" fill="#42b883" opacity="0.1"/>
+      <text x="150" y="40" text-anchor="middle" font-size="18" fill="#42b883" font-weight="bold">灵活组合</text>
+      <text x="150" y="75" text-anchor="middle" font-size="14" fill="#787774">多 mixin 混入</text>
+      <text x="150" y="95" text-anchor="middle" font-size="14" fill="#787774">按需引入使用</text>
+    </g>
+  </g>
+
+  <!-- 底部标签 -->
+  <g transform="translate(960, 920)">
+    <rect x="-120" y="-25" width="240" height="50" rx="25" fill="#42b883" opacity="0.15"/>
+    <text x="0" y="8" text-anchor="middle" font-size="18" fill="#42b883">Vue · Mixin · 代码复用</text>
+  </g>
+
+  <!-- 右下角日期 -->
+  <text x="1850" y="1030" text-anchor="end" font-size="16" fill="#9b9a97">2017-09-13</text>
+</svg>

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="blueprint-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1929"/>
+      <stop offset="100%" style="stop-color:#1a237e"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#4fc3f7" stroke-width="0.5" opacity="0.3"/>
+    </pattern>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1920" height="1080" fill="url(#blueprint-bg)"/>
+  <rect width="1920" height="1080" fill="url(#grid)"/>
+
+  <!-- 标题 -->
+  <g transform="translate(960, 180)">
+    <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#4fc3f7">搭建一个通用的脚手架</text>
+    <text x="0" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" fill="#81d4fa">Building a Universal CLI Scaffold</text>
+  </g>
+
+  <!-- 脚手架结构图 -->
+  <g transform="translate(280, 380)">
+    <!-- 主框架 -->
+    <rect x="0" y="0" width="340" height="240" rx="8" fill="none" stroke="#4fc3f7" stroke-width="3"/>
+    <text x="170" y="-20" text-anchor="middle" font-family="monospace" font-size="20" fill="#4fc3f7">project-next-cli</text>
+
+    <!-- 配置层 -->
+    <rect x="20" y="30" width="300" height="50" rx="4" fill="#4fc3f7" opacity="0.2"/>
+    <text x="170" y="60" text-anchor="middle" font-family="monospace" font-size="16" fill="#81d4fa">配置层 (Config)</text>
+
+    <!-- 模板层 -->
+    <rect x="20" y="100" width="300" height="50" rx="4" fill="#4fc3f7" opacity="0.2"/>
+    <text x="170" y="130" text-anchor="middle" font-family="monospace" font-size="16" fill="#81d4fa">模板层 (Templates)</text>
+
+    <!-- 生成层 -->
+    <rect x="20" y="170" width="300" height="50" rx="4" fill="#4fc3f7" opacity="0.2"/>
+    <text x="170" y="200" text-anchor="middle" font-family="monospace" font-size="16" fill="#81d4fa">生成层 (Generator)</text>
+  </g>
+
+  <!-- 功能模块 -->
+  <g transform="translate(720, 380)">
+    <rect x="0" y="0" width="220" height="110" rx="8" fill="none" stroke="#29b6f6" stroke-width="2"/>
+    <text x="110" y="40" text-anchor="middle" font-family="monospace" font-size="18" fill="#29b6f6">命令解析</text>
+    <text x="110" y="70" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">Commander.js</text>
+  </g>
+
+  <g transform="translate(980, 380)">
+    <rect x="0" y="0" width="220" height="110" rx="8" fill="none" stroke="#29b6f6" stroke-width="2"/>
+    <text x="110" y="40" text-anchor="middle" font-family="monospace" font-size="18" fill="#29b6f6">文件生成</text>
+    <text x="110" y="70" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">FS Operations</text>
+  </g>
+
+  <g transform="translate(1240, 380)">
+    <rect x="0" y="0" width="220" height="110" rx="8" fill="none" stroke="#29b6f6" stroke-width="2"/>
+    <text x="110" y="40" text-anchor="middle" font-family="monospace" font-size="18" fill="#29b6f6">模板引擎</text>
+    <text x="110" y="70" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">EJS / Handlebars</text>
+  </g>
+
+  <g transform="translate(1500, 380)">
+    <rect x="0" y="0" width="220" height="110" rx="8" fill="none" stroke="#29b6f6" stroke-width="2"/>
+    <text x="110" y="40" text-anchor="middle" font-family="monospace" font-size="18" fill="#29b6f6">交互问答</text>
+    <text x="110" y="70" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">Inquirer.js</text>
+  </g>
+
+  <!-- 连接线 -->
+  <g stroke="#4fc3f7" stroke-width="2" opacity="0.5">
+    <line x1="620" y1="500" x2="720" y2="435"/>
+    <line x1="620" y1="500" x2="980" y2="435"/>
+    <line x1="620" y1="500" x2="1240" y2="435"/>
+    <line x1="620" y1="500" x2="1500" y2="435"/>
+  </g>
+
+  <!-- 底部标签 -->
+  <g transform="translate(960, 720)">
+    <rect x="-100" y="0" width="200" height="50" rx="25" fill="#4fc3f7" opacity="0.2"/>
+    <text x="0" y="32" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#4fc3f7">CLI · Node · 脚手架</text>
+  </g>
+
+  <!-- 装饰元素 -->
+  <g transform="translate(150, 900)">
+    <text font-family="monospace" font-size="48" fill="#4fc3f7" opacity="0.3">$ project-cli init</text>
+  </g>
+
+  <g transform="translate(1400, 900)">
+    <text font-family="monospace" font-size="48" fill="#4fc3f7" opacity="0.3">npm install -g</text>
+  </g>
+
+  <!-- 右下角日期 -->
+  <text x="1850" y="1050" text-anchor="end" font-family="Arial, sans-serif" font-size="18" fill="#81d4fa" opacity="0.7">2018-01-29</text>
+</svg>
