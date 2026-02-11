@@ -18,5 +18,4 @@ home/node_modules/
 # home/public/ - ignored, but covers are in src/images/
 home/.deploy_git/
 home/db.json
-docs/plans/*.md
 .agents
