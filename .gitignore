@@ -14,7 +14,8 @@ shares/*.pptx
 
 # Hexo blog
 home/node_modules/
-home/public/
+# Allow blog cover images to be tracked
+# home/public/ - ignored, but covers are in src/images/
 home/.deploy_git/
 home/db.json
 docs/plans/*.md
