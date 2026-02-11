@@ -75,6 +75,19 @@ ogImage:
 
 生成的封面图保存到：`home/public/images/blog-covers/`
 
+## 水印规范
+
+所有封面必须包含 **"Jerret's Blog"** 水印：
+
+- **位置**: 右下角
+- **样式**: 半透明、小字号
+- **实现**: SVG text 元素
+
+```svg
+<!-- 水印 -->
+<text x="1150" y="610" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#ffffff" opacity="0.5" text-anchor="end">Jerret's Blog</text>
+```
+
 ## 支持的风格
 
 | 风格 | 描述 | 主色调 | 渲染 |
