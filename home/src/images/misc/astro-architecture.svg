@@ -1,108 +1,86 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
   <defs>
-    <linearGradient id="chalkboard-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a1a2e"/>
-      <stop offset="50%" style="stop-color:#16213e"/>
-      <stop offset="100%" style="stop-color:#0f3460"/>
-    </linearGradient>
-    <filter id="chalk-texture">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
-      <feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 1 0 0 0.15 0"/>
-      <feComposite operator="in" in2="SourceGraphic"/>
-    </filter>
-    <filter id="chalk-glow">
-      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <!-- Arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666666"/>
+    </marker>
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
     </filter>
   </defs>
 
-  <!-- Wood frame -->
-  <rect x="0" y="0" width="1200" height="630" fill="#5d4037"/>
-  <rect x="15" y="15" width="1170" height="600" fill="url(#chalkboard-bg)"/>
-  <rect x="15" y="15" width="1170" height="600" fill="#ffffff" opacity="0.03" filter="url(#chalk-texture)"/>
+  <!-- Background -->
+  <rect width="800" height="400" fill="#ffffff"/>
 
   <!-- Title -->
-  <g transform="translate(600, 60)">
-    <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#e8eaf6" filter="url(#chalk-glow)">Astro 静态化</text>
-    <text x="0" y="45" text-anchor="middle" font-family="monospace" font-size="18" fill="#81d4fa">Modern Static Site Builder</text>
-  </g>
+  <text x="400" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333333">Astro 静态博客系统</text>
 
-  <!-- Components -->
   <!-- Pages -->
-  <g transform="translate(150, 150)">
-    <rect x="0" y="0" width="160" height="100" rx="8" fill="none" stroke="#4fc3f7" stroke-width="2"/>
-    <text x="80" y="35" text-anchor="middle" font-family="Arial" font-size="16" fill="#4fc3f7">pages/</text>
-    <text x="80" y="60" text-anchor="middle" font-family="monospace" font-size="12" fill="#81d4fa">路由页面</text>
-    <text x="80" y="80" text-anchor="middle" font-family="Arial" font-size="12" fill="#4fc3f7">.astro</text>
+  <g transform="translate(60, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="120" height="70" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
+    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">pages/</text>
+    <text x="60" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">路由页面</text>
   </g>
 
   <!-- Components -->
-  <g transform="translate(370, 150)">
-    <rect x="0" y="0" width="160" height="100" rx="8" fill="none" stroke="#4fc3f7" stroke-width="2"/>
-    <text x="80" y="35" text-anchor="middle" font-family="Arial" font-size="16" fill="#4fc3f7">components/</text>
-    <text x="80" y="60" text-anchor="middle" font-family="monospace" font-size="12" fill="#81d4fa">UI组件</text>
-    <text x="80" y="80" text-anchor="middle" font-family="Arial" font-size="12" fill="#4fc3f7">.astro</text>
+  <g transform="translate(210, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="120" height="70" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
+    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">components/</text>
+    <text x="60" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">UI 组件</text>
   </g>
 
   <!-- Content -->
-  <g transform="translate(590, 150)">
-    <rect x="0" y="0" width="160" height="100" rx="8" fill="none" stroke="#4fc3f7" stroke-width="2"/>
-    <text x="80" y="35" text-anchor="middle" font-family="Arial" font-size="16" fill="#4fc3f7">data/blog/</text>
-    <text x="80" y="60" text-anchor="middle" font-family="monospace" font-size="12" fill="#81d4fa">Markdown</text>
-    <text x="80" y="80" text-anchor="middle" font-family="Arial" font-size="12" fill="#4fc3f7">.md</text>
-  </g>
-
-  <!-- Config -->
-  <g transform="translate(810, 150)">
-    <rect x="0" y="0" width="160" height="100" rx="8" fill="none" stroke="#4fc3f7" stroke-width="2"/>
-    <text x="80" y="35" text-anchor="middle" font-family="Arial" font-size="16" fill="#4fc3f7">astro.config</text>
-    <text x="80" y="60" text-anchor="middle" font-family="monospace" font-size="12" fill="#81d4fa">TypeScript</text>
-    <text x="80" y="80" text-anchor="middle" font-family="Arial" font-size="12" fill="#4fc3f7">Islands</text>
+  <g transform="translate(360, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="120" height="70" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/>
+    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">data/blog/</text>
+    <text x="60" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">Markdown</text>
   </g>
 
   <!-- Build -->
-  <g transform="translate(1030, 150)">
-    <rect x="0" y="0" width="140" height="100" rx="8" fill="#e8eaf6" opacity="0.8"/>
-    <text x="70" y="35" text-anchor="middle" font-family="Arial" font-size="16" fill="#ffffff">npm run</text>
-    <text x="70" y="60" text-anchor="middle" font-family="monospace" font-size="12" fill="#ffffff">build</text>
-    <text x="70" y="80" text-anchor="middle" font-family="Arial" font-size="12" fill="#ffffff">10s!</text>
+  <g transform="translate(510, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="120" height="70" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="2"/>
+    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">Build</text>
+    <text x="60" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">npm run build</text>
   </g>
 
-  <!-- Arrow down -->
-  <g stroke="#4fc3f7" stroke-width="2" fill="none">
-    <path d="M 230 250 L 230 300"/>
-    <path d="M 450 250 L 450 300"/>
-    <path d="M 670 250 L 670 300"/>
-    <path d="M 890 250 L 890 300"/>
+  <!-- Deploy -->
+  <g transform="translate(660, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="100" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
+    <text x="50" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">Vercel</text>
+    <text x="50" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">自动部署</text>
+  </g>
+
+  <!-- Arrows -->
+  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <path d="M 180 135 Q 195 135 200 135"/>
+    <path d="M 330 135 Q 345 135 350 135"/>
+    <path d="M 480 135 Q 495 135 500 135"/>
+    <path d="M 630 135 Q 645 135 650 135"/>
   </g>
 
   <!-- Improvements -->
-  <g transform="translate(180, 300)">
-    <rect x="0" y="0" width="340" height="140" rx="5" fill="#1e2a4a" opacity="0.3"/>
-    <text x="170" y="30" text-anchor="middle" font-family="Arial" font-size="16" fill="#ffffff">核心改进</text>
-    <text x="170" y="60" text-anchor="middle" font-family="monospace" font-size="13" fill="#81d4fa">• 构建 60s → 10s</text>
-    <text x="170" y="85" text-anchor="middle" font-family="monospace" font-size="13" fill="#81d4fa">• TypeScript 支持</text>
-    <text x="170" y="110" text-anchor="middle" font-family="monospace" font-size="13" fill="#81d4fa">• Islands 架构</text>
+  <g transform="translate(60, 230)" filter="url(#shadow)">
+    <rect x="0" y="0" width="260" height="80" rx="6" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.5"/>
+    <text x="130" y="25" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">核心改进</text>
+    <text x="130" y="50" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• 构建 60s → 10s</text>
+    <text x="130" y="68" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• TypeScript + Islands</text>
   </g>
 
-  <g transform="translate(580, 300)">
-    <rect x="0" y="0" width="340" height="140" rx="5" fill="#1e2a4a" opacity="0.3"/>
-    <text x="170" y="30" text-anchor="middle" font-family="Arial" font-size="16" fill="#ffffff">部署简化</text>
-    <text x="170" y="60" text-anchor="middle" font-family="monospace" font-size="13" fill="#81d4fa">• Vercel 自动部署</text>
-    <text x="170" y="85" text-anchor="middle" font-family="monospace" font-size="13" fill="#81d4fa">• 热更新 HMR</text>
-    <text x="170" y="110" text-anchor="middle" font-family="monospace" font-size="13" fill="#81d4fa">• ESLint + Prettier</text>
+  <g transform="translate(350, 230)" filter="url(#shadow)">
+    <rect x="0" y="0" width="260" height="80" rx="6" fill="#ffe6cc" stroke="#d79b00" stroke-width="1.5"/>
+    <text x="130" y="25" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">部署简化</text>
+    <text x="130" y="50" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• Vercel 自动部署</text>
+    <text x="130" y="68" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• 热更新 HMR</text>
   </g>
 
-  <g transform="translate(980, 300)">
-    <rect x="0" y="0" width="180" height="140" rx="5" fill="#1e2a4a" opacity="0.3"/>
-    <text x="90" y="30" text-anchor="middle" font-family="Arial" font-size="16" fill="#ffffff">但封面...</text>
-    <text x="90" y="60" text-anchor="middle" font-family="monospace" font-size="13" fill="#81d4fa">仍然手动!</text>
-    <text x="90" y="90" text-anchor="middle" font-family="monospace" font-size="13" fill="#e8eaf6">待改进</text>
+  <!-- But cover still manual -->
+  <g transform="translate(640, 230)" filter="url(#shadow)">
+    <rect x="0" y="0" width="120" height="80" rx="6" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+    <text x="60" y="35" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">但封面...</text>
+    <text x="60" y="60" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">仍然手动!</text>
   </g>
 
   <!-- Watermark -->
-  <text x="1150" y="610" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.4" text-anchor="end">Jerret's Blog</text>
+  <text x="780" y="385" font-family="Arial, sans-serif" font-size="11" fill="#999999" text-anchor="end">Jerret's Blog</text>
 </svg>

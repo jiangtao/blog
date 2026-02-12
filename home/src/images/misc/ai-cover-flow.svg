@@ -1,99 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350">
   <defs>
-    <linearGradient id="chalkboard-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a1a2e"/>
-      <stop offset="50%" style="stop-color:#16213e"/>
-      <stop offset="100%" style="stop-color:#0f3460"/>
-    </linearGradient>
-    <filter id="chalk-texture">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
-      <feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 1 0 0.15 0"/>
-      <feComposite operator="in" in2="SourceGraphic"/>
-    </filter>
-    <filter id="chalk-glow">
-      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="chalk-glow-green">
-      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <!-- Arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666666"/>
+    </marker>
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
     </filter>
   </defs>
 
-  <!-- Wood frame -->
-  <rect x="0" y="0" width="1200" height="630" fill="#5d4037"/>
-  <rect x="15" y="15" width="1170" height="600" fill="url(#chalkboard-bg)"/>
-  <rect x="15" y="15" width="1170" height="600" fill="#ffffff" opacity="0.03" filter="url(#chalk-texture)"/>
+  <!-- Background -->
+  <rect width="800" height="350" fill="#ffffff"/>
 
   <!-- Title -->
-  <g transform="translate(600, 60)">
-    <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#e8eaf6" filter="url(#chalk-glow)">AI 封面生成</text>
-    <text x="0" y="45" text-anchor="middle" font-family="monospace" font-size="18" fill="#81d4fa">Automated Cover Generation</text>
+  <text x="400" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333333">AI 封面生成流程</text>
+
+  <!-- Manual Design -->
+  <g transform="translate(100, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="160" height="90" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
+    <text x="80" y="30" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">手动设计</text>
+    <text x="80" y="55" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">PS/Canva</text>
+    <text x="80" y="75" text-anchor="middle" font-family="monospace" font-size="11" fill="#b85450">30-60 分钟</text>
   </g>
 
-  <!-- Before -->
-  <g transform="translate(180, 160)">
-    <rect x="0" y="0" width="200" height="150" rx="8" fill="#1e2a4a" opacity="0.4"/>
-    <text x="100" y="30" text-anchor="middle" font-family="Arial" font-size="18" fill="#e8eaf6">手动设计</text>
-    <text x="100" y="60" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">PS/Canva</text>
-    <text x="100" y="90" text-anchor="middle" font-family="monospace" font-size="14" fill="#e8eaf6">30-60 分钟</text>
-    <text x="100" y="120" text-anchor="middle" font-family="Arial" font-size="14" fill="#e8eaf6">程序员不是设计师</text>
+  <!-- Arrow 1 -->
+  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <path d="M 260 145 Q 290 145 310 145"/>
   </g>
 
-  <!-- Arrow -->
-  <path d="M 380 235 L 420 235" stroke="#4fc3f7" stroke-width="3" marker-end="url(#arrowhead)" fill="none"/>
-
-  <!-- AI Process -->
-  <g transform="translate(500, 160)">
-    <rect x="0" y="0" width="200" height="150" rx="8" fill="none" stroke="#4fc3f7" stroke-width="3"/>
-    <text x="100" y="30" text-anchor="middle" font-family="Arial" font-size="18" fill="#4fc3f7">AI 生成</text>
-    <text x="100" y="60" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">Claude Code</text>
-    <text x="100" y="90" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">分析内容</text>
-    <text x="100" y="120" text-anchor="middle" font-family="Arial" font-size="14" fill="#81d4fa">生成 SVG</text>
+  <!-- AI Generation -->
+  <g transform="translate(320, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="160" height="90" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
+    <text x="80" y="30" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">AI 生成</text>
+    <text x="80" y="55" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">Claude Code</text>
+    <text x="80" y="75" text-anchor="middle" font-family="monospace" font-size="11" fill="#82b366">1 分钟!</text>
   </g>
 
-  <!-- Arrow -->
-  <path d="M 700 235 L 740 235" stroke="#4fc3f7" stroke-width="3" marker-end="url(#arrowhead)" fill="none"/>
-
-  <!-- After -->
-  <g transform="translate(820, 160)">
-    <rect x="0" y="0" width="200" height="150" rx="8" fill="#81d4fa" opacity="0.6"/>
-    <text x="100" y="30" text-anchor="middle" font-family="Arial" font-size="18" fill="#ffffff">自动生成</text>
-    <text x="100" y="60" text-anchor="middle" font-family="monospace" font-size="14" fill="#ffffff">1 分钟</text>
-    <text x="100" y="90" text-anchor="middle" font-family="monospace" font-size="14" fill="#ffffff">风格统一</text>
-    <text x="100" y="120" text-anchor="middle" font-family="Arial" font-size="14" fill="#ffffff">自动验证</text>
+  <!-- Arrow 2 -->
+  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <path d="M 480 145 Q 510 145 530 145"/>
   </g>
 
-  <!-- Comparison -->
-  <g transform="translate(250, 380)">
-    <rect x="0" y="0" width="700" height="120" rx="8" fill="#1e2a4a" opacity="0.3"/>
-    <text x="350" y="30" text-anchor="middle" font-family="Arial" font-size="16" fill="#ffffff">效果对比</text>
-    <text x="200" y="60" text-anchor="middle" font-family="monospace" font-size="13" fill="#81d4fa">时间成本: 30分钟 → 1分钟</text>
-    <text x="200" y="85" text-anchor="middle" font-family="monospace" font-size="13" fill="#81d4fa">风格一致性: 差 → 优秀</text>
+  <!-- Auto Output -->
+  <g transform="translate(540, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="160" height="90" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
+    <text x="80" y="30" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">自动生成</text>
+    <text x="80" y="55" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">SVG 封面</text>
+    <text x="80" y="75" text-anchor="middle" font-family="monospace" font-size="11" fill="#6c8ebf">风格统一</text>
   </g>
 
-  <!-- Quality checks -->
-  <g transform="translate(180, 540)">
-    <rect x="0" y="0" width="280" height="100" rx="8" fill="none" stroke="#4fc3f7" stroke-width="2"/>
-    <g transform="translate(140, 50) scale(0.8)">
-      <circle cx="0" cy="0" r="35" fill="none" stroke="#4fc3f7" stroke-width="2"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Arial" font-size="12" fill="#4fc3f7">水印</text>
-      <text x="0" y="20" text-anchor="middle" font-family="monospace" font-size="10" fill="#81d4fa">check</text>
-    </g>
-    <g transform="translate(140, 50) scale(0.8)">
-      <circle cx="0" cy="0" r="35" fill="none" stroke="#4fc3f7" stroke-width="2"/>
-      <text x="0" y="5" text-anchor="middle" font-family="Arial" font-size="12" fill="#4fc3f7">格式</text>
-      <text x="0" y="20" text-anchor="middle" font-family="monospace" font-size="10" fill="#81d4fa">xmllint</text>
-    </g>
-    <text x="140" y="80" text-anchor="middle" font-family="Arial" font-size="14" fill="#81d4fa">质量保证</text>
+  <!-- Quality Check -->
+  <g transform="translate(200, 230)" filter="url(#shadow)">
+    <rect x="0" y="0" width="200" height="80" rx="6" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.5"/>
+    <text x="100" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">质量保证</text>
+    <text x="100" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">• 水印检查</text>
+    <text x="100" y="68" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">• xmllint 验证</text>
+  </g>
+
+  <g transform="translate(440, 230)" filter="url(#shadow)">
+    <rect x="0" y="0" width="200" height="80" rx="6" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+    <text x="100" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">效果对比</text>
+    <text x="100" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">时间: 30min → 1min</text>
+    <text x="100" y="68" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">风格: 差 → 优秀</text>
   </g>
 
   <!-- Watermark -->
-  <text x="1350" y="610" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.4" text-anchor="end">Jerret's Blog</text>
+  <text x="780" y="335" font-family="Arial, sans-serif" font-size="11" fill="#999999" text-anchor="end">Jerret's Blog</text>
 </svg>

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280">
+  <defs>
+    <!-- Arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666666"/>
+    </marker>
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="280" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#333333">2. 工作流标准化</text>
+
+  <!-- Non-standardized -->
+  <g transform="translate(80, 80)" filter="url(#shadow)">
+    <rect x="0" y="0" width="160" height="60" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
+    <text x="80" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">非标准化</text>
+    <text x="80" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">每个人自己的习惯</text>
+  </g>
+
+  <!-- Arrow -->
+  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <path d="M 240 110 Q 270 110 290 110"/>
+  </g>
+
+  <!-- Standardized -->
+  <g transform="translate(320, 80)" filter="url(#shadow)">
+    <rect x="0" y="0" width="160" height="60" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
+    <text x="80" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">标准化</text>
+    <text x="80" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">团队约定+检查工具</text>
+  </g>
+
+  <!-- Arrow -->
+  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <path d="M 480 110 Q 510 110 530 110"/>
+  </g>
+
+  <!-- AI Standardized -->
+  <g transform="translate(560, 80)" filter="url(#shadow)">
+    <rect x="0" y="0" width="160" height="60" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
+    <text x="80" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">AI 标准化</text>
+    <text x="80" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">可观测+AI标准+监督</text>
+  </g>
+
+  <!-- Key Points -->
+  <g transform="translate(100, 170)">
+    <text x="0" y="0" font-family="monospace" font-size="11" fill="#555555">• 每个人习惯不同，难以协作</text>
+    <text x="0" y="20" font-family="monospace" font-size="11" fill="#555555">• 规则显性化，可自动化检查</text>
+    <text x="0" y="40" font-family="monospace" font-size="11" fill="#555555">• AI 执行标准，人工监督决策</text>
+  </g>
+
+  <!-- Watermark -->
+  <text x="780" y="265" font-family="Arial, sans-serif" font-size="10" fill="#999999" text-anchor="end">Jerret's Blog</text>
+</svg>

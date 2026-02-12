@@ -1,6 +1,6 @@
 # Draw.io Diagram Generator
 
-为技术文档生成 Draw.io 架构图、流程图，风格与博客封面保持一致（黑板粉笔风格）。
+为技术文档生成 Draw.io 架构图、流程图。
 
 ## 使用方法
 
@@ -11,14 +11,17 @@
 - 图表类型 (必需): architecture, workflow, sequence, data-flow, component
 - 标题 (必需)
 - 描述内容 (必需): 图表的各个组件/步骤
-- 风格 (可选，默认: chalkboard)
+- 风格 (可选，默认: default)
 
 可用风格:
-  chalkboard  - 黑板粉笔风格（默认）
+  default     - 默认自然风格（推荐，清爽简洁）
+  chalkboard  - 黑板粉笔风格（博客封面专用）
   blueprint   - 技术蓝图
   elegant     - 优雅精致
   minimal     - 极简风格
 ```
+
+> **注意：博客文章中的技术图表请使用 `default` 风格（白色背景、柔和配色），只有封面图片使用 `chalkboard` 风格。**
 
 ## 工作流程
 
@@ -26,7 +29,7 @@
 2. 选择 Draw.io 模板
 3. 使用 drawio MCP 打开 Draw.io
 4. 绘制图表元素
-5. 应用黑板风格效果
+5. 应用自然风格效果（默认）或黑板风格（封面专用）
 6. 导出 SVG/PNG
 7. 保存到文章目录
 
@@ -110,7 +113,25 @@ Components:
 
 ## 风格规范
 
-### Chalkboard 风格（默认）
+### Default 默认自然风格（推荐用于文章技术图表）
+
+清爽简洁的默认风格，适合技术文档：
+
+- **白色背景** (#ffffff) - 清爽简洁
+- **柔和配色** - 使用 Draw.io 默认色板：
+  - 蓝色: #dae8fc / #6c8ebf
+  - 绿色: #d5e8d4 / #82b366
+  - 黄色: #fff2cc / #d6b656
+  - 紫色: #e1d5e7 / #9673a6
+  - 红色: #f8cecc / #b85450
+  - 青色: #b0e3e6 / #0e8088
+- **圆角节点** (rx="8") - 柔和友好
+- **阴影效果** - 增加层次感
+- **贝塞尔曲线** (Q 指令) - 平滑过渡
+- **清晰箭头** - 方向明确
+- **统一水印** - "Jerret's Blog" (灰色 #999999)
+
+### Chalkboard 风格（博客封面专用）
 
 与博客封面保持一致的黑板粉笔风格：
 
@@ -170,21 +191,97 @@ home/public/images/diagrams/
 ![架构图](/images/diagrams/blog-architecture.svg)
 ```
 
-## Draw.io MCP 集成
+## Draw.io 自然风格原则
 
-使用 drawio MCP 服务直接操作 Draw.io：
+> **参考：[Draw.io Animated Connectors 示例](https://raw.githubusercontent.com/DayuanJiang/next-ai-draw-io/ac3570c1b01d4c3cbe75b5b91b04cdb61202708f/public/animated_connectors.svg)**
 
-```bash
-# MCP 服务已安装到 Claude
-# 在对话中直接调用：
+### 四大核心特征
+
+#### 1. 线条流畅自然
+
+Draw.io 原生图表使用**贝塞尔曲线**而非折线：
+
+```
+# Draw.io 自动生成的路径（自然流畅）
+<path d="M 50 244 L 30 244 Q 20 244 20 254 L 20 296.56 Q 20 306.56 30 306.54 L 42.7 306.51"/>
+      ^^^^^^^^^^^               ^^^^^^^^^^^^^^^             ^^^^^^^^^^^^^^^
+      直线段                     二次贝塞尔曲线                平滑过渡
 ```
 
-**命令模式：**
-- 打开 Draw.io
-- 创建新图表
-- 选择模板
-- 添加元素
-- 导出 SVG
+**对比手写 SVG：**
+- ❌ 手写：`<path d="M 100 200 L 200 300 L 300 400"/>` （生硬折线）
+- ✅ Draw.io：使用 `Q` 或 `C` 指令实现平滑曲线
+
+#### 2. 结构分明
+
+**节点样式特征：**
+- **圆角矩形**（`rounded=1`）：柔和友好
+- **柔和配色**：淡色填充 + 深色边框
+- **清晰层次**：组件分组、嵌套结构
+
+**Draw.io 配色示例：**
+```
+蓝色系:  fillColor=#dae8fc  strokeColor=#6c8ebf
+绿色系:  fillColor=#d5e8d4  strokeColor=#82b366
+红色系:  fillColor=#f8cecc  strokeColor=#b85450
+黄色系:  fillColor=#fff2cc  strokeColor=#d6b656
+紫色系:  fillColor=#e1d5e7  strokeColor=#9673a6
+```
+
+#### 3. 方向明确
+
+**箭头和流向指示：**
+- **菱形箭头**：`M 110 126.76 L 106 118.76 L 110 120.76 L 114 118.76 Z`
+- **方向标记**：`endArrow=classic` 或 `endArrow=block`
+- **路径连贯性**：从起点到终点，清晰的数据/控制流
+
+**Draw.io 自动处理的流向：**
+```
+输入 → 处理 → 输出  （自动路由连线）
+  ↓      ↓      ↓
+ 异常   验证   日志  （分支自然展开）
+```
+
+#### 4. 矩阵协调
+
+**布局对齐原则：**
+- **对称布局**：左右镜像或上下对称
+- **网格对齐**：基于 grid (gridSize=10) 对齐
+- **统一间距**：组件间距一致
+- **比例协调**：元素大小成比例
+
+**Draw.io 自动布局功能：**
+- `horizontal` / `vertical` - 自动水平/垂直排列
+- `tree` / `parallel` - 树状/并行布局
+- `organic` - 自然有机布局
+
+## Draw.io MCP 集成
+
+> **重点：使用 Draw.io MCP 工具绘制图表，保持 Draw.io 原生流程图的自然风格**
+
+### 使用方式
+
+通过 MCP 服务直接操作 Draw.io，**无需手工编写 SVG 代码**：
+
+```
+用户请求：
+  drawio-diagram workflow [type] [title] [description] --style chalkboard
+
+AI 处理：
+  1. 解析需求（图表类型、标题、内容）
+  2. 调用 Draw.io MCP 打开 Draw.io
+  3. 选择合适的 Draw.io 模板
+  4. 使用 Draw.io 原生图形库绘制元素
+  5. 应用 chalkboard 风格效果（黑板、粉笔、木框）
+  6. 添加 "Jerret's Blog" 水印
+  7. 导出 SVG/PNG
+```
+
+**优势**：
+- ✅ **自然流畅** - Draw.io 原生连线、自动布局
+- ✅ **专业美观** - 使用 Draw.io 图形库而非基础形状
+- ✅ **易于修改** - Draw.io 原生文件可二次编辑
+- ✅ **风格统一** - 与 chalkboard 封面保持视觉一致
 
 ## 与博客封面的视觉一致性
 
@@ -210,28 +307,87 @@ home/public/images/diagrams/
 
 ## 使用技巧
 
-### 架构图绘制
+### 架构图绘制技巧
 
-1. **分层展示**：从上到下或从左到右
-2. **使用箭头**：明确数据流/调用关系
-3. **颜色编码**：用颜色区分不同层次/模块
-4. **添加标签**：每个组件/服务有清晰标签
+使用 Draw.io 原生模板和图形库：
+- **分层展示** - 使用 Draw.io 分层功能自动组织
+- **使用箭头** - 选择 Draw.io 原生智能箭头（带自动路由）
+- **颜色编码** - 应用 Draw.io 预设配色方案
+- **添加标签** - 拖拽文本标签，自动对齐
 
-### 工作流程图
+**关键**：让 Draw.io 处理布局和连线，确保自然流畅
 
-1. **泳道布局**：横向展示不同角色/阶段
-2. **箭头连接**：明确流程方向
-3. **决策节点**：菱形表示判断/分支
-4. **起止点**：圆形表示开始/结束
+### 手写 SVG vs Draw.io 原生对比
 
-### 时序图
+| 特征 | 手写 SVG | Draw.io 原生 |
+|:-----|----------|--------------|
+| 连线方式 | 折线 `<path d="M 0 0 L 100 100"/>` | 贝塞尔曲线 `Q 20 0 20 10` |
+| 节点样式 | 基础矩形 | 圆角 + 阴影 + 渐变 |
+| 箭头 | 手绘多边形 | 智能箭头（自动路由） |
+| 布局 | 手动计算坐标 | 自动对齐、自动布局 |
+| 可编辑性 | 需重新编写代码 | 拖拽修改 |
+| 视觉效果 | 生硬机械 | 自然流畅 |
 
-1. **角色分离**：不同系统/服务在不同泳道
-2. **消息箭头**：虚线表示返回，实线表示请求
-3. **时间轴**：垂直虚线表示时间流逝
-4. **激活框**：高亮当前操作的组件
+**推荐做法：**
+```
+✅ 使用 Draw.io MCP → 导出 SVG → 保持原生风格
+❌ 手写 SVG 代码 → 难以达到自然流畅效果
+```
 
-## 质量检查
+### 工作流程图技巧
+
+使用 Draw.io 工作流图模板：
+- **泳道布局** - 自动横向泳道，拖拽调整
+- **智能连接** - Draw.io 自动路由连线（无需手动画箭头）
+- **决策节点** - 使用 Draw.io 原生菱形决策符号
+- **起止点** - 使用 Draw.io 终点圆形（自动流入/流出）
+
+**关键**：充分利用 Draw.io 的自动对齐和智能连线功能
+
+### 时序图技巧
+
+使用 Draw.io 序列图模板：
+- **角色分离** - Draw.io 自动角色泳道
+- **消息箭头** - 选择智能箭头（实线/虚线自动切换）
+- **时间轴** - Draw.io 自动时间标记（可配置格式）
+- **激活框** - 拖拽激活框到消息/对象上
+
+**关键**：让 Draw.io 自动处理时序逻辑
+
+## 博客文章中的图表应用
+
+### 推荐使用方式
+
+```
+drawio-diagram workflow [type] [title] [description] --style chalkboard
+```
+
+### 关键原则
+
+1. **优先使用 Draw.io MCP** - 让 AI 通过 drawio-diagram skill 调用 Draw.io
+2. **保持视觉一致性** - 所有技术图表使用 chalkboard 风格
+3. **自然流畅** - 利用 Draw.io 原生智能连线和布局
+4. **统一水印** - 所有图表包含 "Jerret's Blog" 标识
+
+### 图表类型参考
+
+| 类型 | Draw.io 模板 | 用途 |
+|------|--------------|------|
+| Flowchart | 流程图 | 自动化工作流、数据流 |
+| Sequence | 序列图 | 组件交互顺序 |
+| Network | 网络图 | 系统架构、服务调用 |
+| Mind Map | 思维导图 | 技术点梳理、知识结构 |
+| Entity Relationship | 实体关系 | 数据模型、ER 图 |
+
+### 文章示例
+
+在博客文章中需要添加流程图的位置：
+
+```
+阶段二 (Astro 迁移): 添加架构图
+阶段三 (AI 封面): 添加封面生成流程图
+阶段四 (全自动化): 添加完整工作流图
+```
 
 生成图表后需验证：
 
@@ -244,73 +400,119 @@ home/public/images/diagrams/
 
 ## 示例输出
 
-**博客架构图（chalkboard 风格）：**
+**博客架构图（默认自然风格）：**
 ```
 描述: Hexo 博客系统架构
-风格: chalkboard
+风格: default
 组件:
   - Source: source/_posts/ (Markdown)
   - Engine: Hexo (Node.js)
   - Theme: Next (EJS/模板)
   - Deploy: deploy.sh (手动 gh-pages)
-装饰: 木框、网格线
-水印: Source: Tech Diagram
+特征: 白色背景、柔和配色、圆角节点、贝塞尔曲线
+水印: Jerret's Blog
 ```
 
-**Astro 架构图（chalkboard 风格）：**
+**Astro 架构图（默认自然风格）：**
 ```
 描述: Astro 静态博客系统架构
-风格: chalkboard
+风格: default
 组件:
   - Pages: 路由页面
   - Components: UI 组件
   - Content: data/blog/ (Markdown)
   - Build: npm run build (10s!)
   - Deploy: Vercel 自动部署
-装饰: 木框、网格线
-水印: Source: Tech Diagram
+特征: 白色背景、柔和配色、圆角节点、贝塞尔曲线
+水印: Jerret's Blog
 ```
 
-**AI 封面生成流程图（chalkboard 风格）：**
+**AI 封面生成流程图（默认自然风格）：**
 ```
 描述: AI 自动生成封面流程
-风格: chalkboard
+风格: default
 流程:
   - 输入: 手动设计 (PS/Canva, 30-60分钟)
   - AI 处理: Claude Code 分析内容
   - 输出: SVG 封面 (1 分钟!)
   - 验证: lint:images 自动检查
-装饰: 粉笔质感、对比表格
-水印: Source: Tech Diagram
+特征: 白色背景、柔和配色、圆角节点、贝塞尔曲线
+水印: Jerret's Blog
 ```
 
-**全自动化工作流图（chalkboard 风格）：**
+**全自动化工作流图（默认自然风格）：**
 ```
 描述: 博客全自动化发布流程
-风格: chalkboard
+风格: default
 步骤:
   1. 写作: 语雀/本地 Markdown
   2. AI 封面: Claude Code (1分钟)
   3. 自动检查: lint:images
   4. 结构化提交: /dev:commit (5步工作流)
   5. CI/CD: GitHub Actions → Vercel
-装饰: 箭头连接、渐变背景
-水印: Source: Tech Diagram
+特征: 白色背景、柔和配色、圆角节点、贝塞尔曲线
+水印: Jerret's Blog
 ```
 
-**自动化工作流图（chalkboard 风格）：**
+## Draw.io 原生风格生成示例
+
+### 示例：工作流程图（默认自然风格）
+
+**请求：**
 ```
-描述: 博客自动化发布流程
-风格: chalkboard
-步骤:
-  1. 写作 (Yuque)
-  2. AI 封面 (Claude)
-  3. 自动检查 (lint:images)
-  4. 提交流程 (/dev:commit)
-  5. CI/CD (GitHub Actions)
-装饰: 箭头连接、流程标签
-水印: Jerret's Tech Diagrams
+drawio-diagram workflow "博客自动化流程" "写作 → AI封面 → 自动检查 → 提交 → CI/CD" --style default
 ```
+
+**Draw.io 生成要点：**
+- 使用 Flowchart 模板
+- 启用 **Smooth Connectors**（平滑连接器）
+- 设置 **Rounded**（圆角）= 5-10
+- 使用 **Curved**（曲线）连接风格
+- 应用默认柔和配色方案（蓝、绿、黄、紫、红等）
+
+**结果特征：**
+- 线条使用贝塞尔曲线，平滑过渡
+- 节点自动对齐，间距均匀
+- 箭头自动路由，避免交叉
+
+### 示例 2：架构图（自然风格）
+
+**请求：**
+```
+drawio-diagram architecture "Astro 博客系统" "Pages + Components + Content + Build + Deploy" --style chalkboard
+```
+
+**Draw.io 生成要点：**
+- 使用 Network 图模板
+- 分层展示：上→下 或 左→右
+- 使用 **Auto Layout**（自动布局）
+- 设置 **Spacing**（间距）= 40-60px
+- 对称布局保持视觉平衡
+
+### 示例 3：时序图（自然风格）
+
+**请求：**
+```
+drawio-diagram sequence "用户认证流程" "User → Frontend → Backend → Database" --style chalkboard
+```
+
+**Draw.io 生成要点：**
+- 使用 Sequence Diagram 模板
+- 角色自动泳道分隔
+- 消息线自动添加箭头
+- 时间轴从上到下自然流动
+
+## 自然风格检查清单
+
+生成图表后验证：
+
+- [ ] **线条流畅**：使用曲线而非折线
+- [ ] **节点圆角**：`rounded` 属性启用
+- [ ] **箭头清晰**：箭头标记明显
+- [ ] **布局对称**：左右或上下平衡
+- [ ] **间距统一**：组件间距一致
+- [ ] **配色和谐**：使用 Draw.io 预设配色
+- [ ] **水印完整**：包含 "Jerret's Blog"
 
 ## 注意事项
 

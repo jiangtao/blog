@@ -1,100 +1,81 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
   <defs>
-    <linearGradient id="chalkboard-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1a1a2e"/>
-      <stop offset="50%" style="stop-color:#16213e"/>
-      <stop offset="100%" style="stop-color:#0f3460"/>
-    </linearGradient>
-    <filter id="chalk-texture">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
-      <feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 1 0 0 0.15 0"/>
-      <feComposite operator="in" in2="SourceGraphic"/>
-    </filter>
-    <filter id="chalk-glow">
-      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <!-- Arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666666"/>
+    </marker>
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
     </filter>
   </defs>
 
-  <!-- Wood frame -->
-  <rect x="0" y="0" width="1200" height="630" fill="#5d4037"/>
-  <rect x="15" y="15" width="1170" height="600" fill="url(#chalkboard-bg)"/>
-  <rect x="15" y="15" width="1170" height="600" fill="#ffffff" opacity="0.03" filter="url(#chalk-texture)"/>
+  <!-- Background -->
+  <rect width="800" height="400" fill="#ffffff"/>
 
   <!-- Title -->
-  <g transform="translate(600, 60)">
-    <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#e8eaf6" filter="url(#chalk-glow)">Hexo 博客架构</text>
-    <text x="0" y="45" text-anchor="middle" font-family="monospace" font-size="18" fill="#81d4fa">Static Site Generator</text>
-  </g>
+  <text x="400" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333333">Hexo 博客系统架构</text>
 
-  <!-- Components -->
   <!-- Source Files -->
-  <g transform="translate(180, 150)">
-    <rect x="0" y="0" width="200" height="120" rx="8" fill="none" stroke="#4fc3f7" stroke-width="2" filter="url(#chalk-texture)"/>
-    <text x="100" y="35" text-anchor="middle" font-family="Arial" font-size="18" fill="#4fc3f7">source/_posts/</text>
-    <text x="100" y="65" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">Markdown 文章</text>
-    <text x="100" y="90" text-anchor="middle" font-family="Arial" font-size="14" fill="#4fc3f7">frontmatter</text>
+  <g transform="translate(60, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="140" height="80" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
+    <text x="70" y="35" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">source/_posts/</text>
+    <text x="70" y="55" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">Markdown 文章</text>
   </g>
 
   <!-- Hexo Engine -->
-  <g transform="translate(450, 150)">
-    <rect x="0" y="0" width="200" height="120" rx="8" fill="none" stroke="#e8eaf6" stroke-width="2" filter="url(#chalk-texture)"/>
-    <text x="100" y="35" text-anchor="middle" font-family="Arial" font-size="18" fill="#e8eaf6">Hexo Engine</text>
-    <text x="100" y="65" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">Node.js</text>
-    <text x="100" y="90" text-anchor="middle" font-family="Arial" font-size="14" fill="#e8eaf6">generate</text>
+  <g transform="translate(260, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="140" height="80" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
+    <text x="70" y="35" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">Hexo Engine</text>
+    <text x="70" y="55" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">Node.js</text>
   </g>
 
-  <!-- Theme -->
-  <g transform="translate(720, 150)">
-    <rect x="0" y="0" width="200" height="120" rx="8" fill="none" stroke="#4fc3f7" stroke-width="2" filter="url(#chalk-texture)"/>
-    <text x="100" y="35" text-anchor="middle" font-family="Arial" font-size="18" fill="#4fc3f7">Next Theme</text>
-    <text x="100" y="65" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">EJS/模板</text>
-    <text x="100" y="90" text-anchor="middle" font-family="Arial" font-size="14" fill="#e8eaf6">定制困难</text>
+  <!-- Next Theme -->
+  <g transform="translate(460, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="140" height="80" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/>
+    <text x="70" y="35" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">Next Theme</text>
+    <text x="70" y="55" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">EJS/模板</text>
   </g>
 
   <!-- Deploy Script -->
-  <g transform="translate(990, 150)">
-    <rect x="0" y="0" width="200" height="120" rx="8" fill="none" stroke="#4fc3f7" stroke-width="2" filter="url(#chalk-texture)"/>
-    <text x="100" y="35" text-anchor="middle" font-family="Arial" font-size="18" fill="#4fc3f7">deploy.sh</text>
-    <text x="100" y="65" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">手动上传</text>
-    <text x="100" y="90" text-anchor="middle" font-family="Arial" font-size="14" fill="#e8eaf6">gh-pages</text>
+  <g transform="translate(660, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="100" height="80" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
+    <text x="50" y="35" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">deploy.sh</text>
+    <text x="50" y="55" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">手动上传</text>
   </g>
 
-  <!-- Arrows -->
-  <g stroke="#4fc3f7" stroke-width="2" fill="none">
-    <path d="M 280 210 L 350 210"/>
-    <path d="M 550 210 L 620 210"/>
-    <path d="M 820 210 L 890 210"/>
-    <path d="M 380 270 L 380 320"/>
-    <path d="M 650 270 L 650 320"/>
-    <path d="M 920 270 L 920 320"/>
+  <!-- Arrows with smooth curves -->
+  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <!-- Source to Hexo -->
+    <path d="M 200 140 Q 230 140 250 140"/>
+    <!-- Hexo to Theme -->
+    <path d="M 400 140 Q 430 140 450 140"/>
+    <!-- Theme to Deploy -->
+    <path d="M 600 140 Q 620 140 650 140"/>
   </g>
 
-  <!-- Bottom problems -->
-  <g transform="translate(180, 320)">
-    <rect x="0" y="0" width="280" height="100" rx="5" fill="#1e2a4a" opacity="0.3"/>
-    <text x="140" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="#ffffff">痛点</text>
-    <text x="140" y="50" text-anchor="middle" font-family="monospace" font-size="12" fill="#81d4fa">• 手动封面 30min/篇</text>
-    <text x="140" y="75" text-anchor="middle" font-family="monospace" font-size="12" fill="#81d4fa">• 部署不稳定 404</text>
+  <!-- Problems section -->
+  <g transform="translate(60, 240)" filter="url(#shadow)">
+    <rect x="0" y="0" width="220" height="70" rx="6" fill="#ffe6cc" stroke="#d79b00" stroke-width="1.5"/>
+    <text x="110" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">痛点</text>
+    <text x="110" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• 手动封面 30min/篇</text>
+    <text x="110" y="60" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• 部署不稳定 404</text>
   </g>
 
-  <g transform="translate(520, 320)">
-    <rect x="0" y="0" width="280" height="100" rx="5" fill="#1e2a4a" opacity="0.3"/>
-    <text x="140" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="#ffffff">痛点</text>
-    <text x="140" y="50" text-anchor="middle" font-family="monospace" font-size="12" fill="#81d4fa">• 构建慢 60s+</text>
-    <text x="140" y="75" text-anchor="middle" font-family="monospace" font-size="12" fill="#81d4fa">• 主题定制困难</text>
+  <g transform="translate(310, 240)" filter="url(#shadow)">
+    <rect x="0" y="0" width="180" height="70" rx="6" fill="#e1d5e7" stroke="#9673a6" stroke-width="1.5"/>
+    <text x="90" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">问题</text>
+    <text x="90" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• 构建慢 60s+</text>
+    <text x="90" y="60" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• 主题定制困难</text>
   </g>
 
-  <g transform="translate(860, 320)">
-    <rect x="0" y="0" width="280" height="100" rx="5" fill="#1e2a4a" opacity="0.3"/>
-    <text x="140" y="25" text-anchor="middle" font-family="Arial" font-size="14" fill="#ffffff">时代局限</text>
-    <text x="140" y="50" text-anchor="middle" font-family="monospace" font-size="12" fill="#81d4fa">• AI 工具未成熟</text>
-    <text x="140" y="75" text-anchor="middle" font-family="monospace" font-size="12" fill="#81d4fa">• CI/CD 未普及</text>
+  <g transform="translate(520, 240)" filter="url(#shadow)">
+    <rect x="0" y="0" width="240" height="70" rx="6" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.5"/>
+    <text x="120" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">时代局限</text>
+    <text x="120" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• AI 工具未成熟</text>
+    <text x="120" y="60" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• CI/CD 未普及</text>
   </g>
 
   <!-- Watermark -->
-  <text x="1150" y="610" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.4" text-anchor="end">Jerret's Blog</text>
+  <text x="780" y="385" font-family="Arial, sans-serif" font-size="11" fill="#999999" text-anchor="end">Jerret's Blog</text>
 </svg>
