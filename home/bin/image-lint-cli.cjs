@@ -49,7 +49,26 @@ function validateSVGFiles() {
         });
       }
 
-      // 检查 3: xmllint 验证（如果可用）
+      // 检查 3: 属性是否正确闭合 (检查 "><" 或 "\"><" 模式)
+      // 例如: <text ... fill="#5E4B55"IMAGE> 应该是 <text ... fill="#5E4B55">IMAGE
+      const malformedAttrs = content.match(/\w+="[^"]*"\w+/g);
+      if (malformedAttrs) {
+        svgErrors.push({
+          file: file,
+          error: `属性未正确闭合: ${malformedAttrs[0].substring(0, 40)}...`
+        });
+      }
+
+      // 检查 4: 基本 XML 格式验证
+      const unclosedTags = content.match(/<[a-zA-Z][^>]*\w+="[^"]*"[a-zA-Z][^>]*>/g);
+      if (unclosedTags) {
+        svgErrors.push({
+          file: file,
+          error: `标签格式错误，属性后缺少 > 符号`
+        });
+      }
+
+      // 检查 5: xmllint 验证（如果可用）
       try {
         execSync(`xmllint --noout "${filePath}"`, { stdio: 'pipe' });
       } catch (e) {

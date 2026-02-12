@@ -69,8 +69,8 @@
   <!-- Bottom right info -->
   <g transform="translate(1800, 1020)">
     <rect x="0" y="-40" width="300" height="140" rx="8" fill="#FFFFFF" opacity="0.1"/>
-    <text x="0" y="0" text-anchor="middle" font-family="'Times New Roman', serif" font-size="14" fill="#5E4B55"IMAGE OPTIMIZATION</text>
-    <text x="0" y="25" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5E4B55"• 性能 · 体积</text>
+    <text x="0" y="0" text-anchor="middle" font-family="'Times New Roman', serif" font-size="14" fill="#5E4B55">IMAGE OPTIMIZATION</text>
+    <text x="0" y="25" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5E4B55">• 性能 · 体积</text>
     <text x="0" y="45" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5E4B55">• 格式 · 语法</text>
     <text x="0" y="65" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5E4B55">• 构建 · 缓存</text>
   </g>
