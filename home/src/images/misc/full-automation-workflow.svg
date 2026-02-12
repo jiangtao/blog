@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 700">
+  <defs>
+    <linearGradient id="chalkboard-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <filter id="chalk-texture">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 1 0 0.15 0"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="chalk-glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="chalk-glow-green">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Wood frame -->
+  <rect x="0" y="0" width="1400" height="700" fill="#5d4037"/>
+  <rect x="15" y="15" width="1370" height="670" fill="url(#chalkboard-bg)"/>
+  <rect x="15" y="15" width="1370" height="670" fill="#ffffff" opacity="0.03" filter="url(#chalk-texture)"/>
+
+  <!-- Title -->
+  <g transform="translate(700, 60)">
+    <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#e8eaf6" filter="url(#chalk-glow)">全自动化工作流</text>
+    <text x="0" y="45" text-anchor="middle" font-family="monospace" font-size="18" fill="#81d4fa">Full Automation Workflow</text>
+  </g>
+
+  <!-- Step 1: Write -->
+  <g transform="translate(100, 150)">
+    <rect x="0" y="0" width="200" height="180" rx="10" fill="none" stroke="#4fc3f7" stroke-width="2" filter="url(#chalk-texture)"/>
+    <text x="100" y="30" text-anchor="middle" font-family="Arial" font-size="20" fill="#4fc3f7">1. 写作</text>
+    <text x="100" y="60" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">Yuque / 本地</text>
+    <text x="100" y="90" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">Markdown 文章</text>
+    <text x="100" y="130" text-anchor="middle" font-family="Arial" font-size="14" fill="#4fc3f7">语雀 / 本地</text>
+    <text x="100" y="165" text-anchor="middle" font-family="monospace" font-size="13" fill="#e8eaf6">30-60 分钟</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <path d="M 300 240 L 350 240" stroke="#4fc3f7" stroke-width="3" marker-end="url(#arrowhead)" fill="none"/>
+
+  <!-- Step 2: AI Cover -->
+  <g transform="translate(380, 150)">
+    <rect x="0" y="0" width="200" height="180" rx="10" fill="none" stroke="#e8eaf6" stroke-width="2" filter="url(#chalk-glow-green)"/>
+    <text x="100" y="30" text-anchor="middle" font-family="Arial" font-size="20" fill="#e8eaf6">2. AI 封面</text>
+    <text x="100" y="60" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">Claude Code</text>
+    <text x="100" y="90" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">SVG 生成</text>
+    <text x="100" y="130" text-anchor="middle" font-family="Arial" font-size="14" fill="#81d4fa">1 分钟!</text>
+    <text x="100" y="165" text-anchor="middle" font-family="monospace" font-size="13" fill="#e8eaf6">自动验证</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <path d="M 580 240 L 630 240" stroke="#4fc3f7" stroke-width="3" marker-end="url(#arrowhead)" fill="none"/>
+
+  <!-- Step 3: Check -->
+  <g transform="translate(660, 150)">
+    <rect x="0" y="0" width="200" height="180" rx="10" fill="none" stroke="#4fc3f7" stroke-width="2" filter="url(#chalk-texture)"/>
+    <text x="100" y="30" text-anchor="middle" font-family="Arial" font-size="20" fill="#4fc3f7">3. 自动检查</text>
+    <text x="100" y="60" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">lint:images</text>
+    <text x="100" y="90" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">水印 + 格式</text>
+    <text x="100" y="130" text-anchor="middle" font-family="Arial" font-size="14" fill="#81d4fa">xmllint</text>
+    <text x="100" y="165" text-anchor="middle" font-family="monospace" font-size="13" fill="#e8eaf6">全部通过!</text>
+  </g>
+
+  <!-- Arrow 3 -->
+  <path d="M 860 240 L 910 240" stroke="#4fc3f7" stroke-width="3" marker-end="url(#arrowhead)" fill="none"/>
+
+  <!-- Step 4: Commit -->
+  <g transform="translate(940, 150)">
+    <rect x="0" y="0" width="200" height="180" rx="10" fill="none" stroke="#4fc3f7" stroke-width="2" filter="url(#chalk-texture)"/>
+    <text x="100" y="30" text-anchor="middle" font-family="Arial" font-size="20" fill="#4fc3f7">4. 提交流程</text>
+    <text x="100" y="60" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">/dev:commit</text>
+    <text x="100" y="90" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">5 步工作流</text>
+    <text x="100" y="130" text-anchor="middle" font-family="Arial" font-size="14" fill="#81d4fa">Git PR</text>
+    <text x="100" y="165" text-anchor="middle" font-family="monospace" font-size="13" fill="#e8eaf6">结构化提交</text>
+  </g>
+
+  <!-- Arrow 4 (down to CI/CD) -->
+  <path d="M 1040 330 L 700 380" stroke="#4fc3f7" stroke-width="3" marker-end="url(#arrowhead)" fill="none"/>
+
+  <!-- CI/CD Box -->
+  <g transform="translate(200, 380)">
+    <rect x="0" y="0" width="500" height="160" rx="10" fill="#1e2a4a" opacity="0.5" stroke="#e8eaf6" stroke-width="2"/>
+    <text x="250" y="35" text-anchor="middle" font-family="Arial" font-size="20" fill="#e8eaf6">CI/CD 自动部署</text>
+    <text x="250" y="70" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">GitHub Actions</text>
+    <text x="250" y="105" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">push → build → deploy</text>
+    <text x="250" y="140" text-anchor="middle" font-family="Arial" font-size="14" fill="#81d4fa">Vercel 自动上线</text>
+  </g>
+
+  <!-- Arrow from CI/CD to End -->
+  <path d="M 700 460 L 700 550" stroke="#4fc3f7" stroke-width="3" marker-end="url(#arrowhead)" fill="none"/>
+
+  <!-- Final Output -->
+  <g transform="translate(500, 580)">
+    <rect x="0" y="0" width="400" height="100" rx="10" fill="#81d4fa" opacity="0.6"/>
+    <text x="200" y="35" text-anchor="middle" font-family="Arial" font-size="22" fill="#ffffff">写作即发布!</text>
+    <text x="200" y="70" text-anchor="middle" font-family="monospace" font-size="16" fill="#ffffff">零图片问题</text>
+    <text x="200" y="105" text-anchor="middle" font-family="monospace" font-size="16" fill="#ffffff">质量保障</text>
+  </g>
+
+  <!-- Watermark -->
+  <text x="1350" y="680" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.4" text-anchor="end">Jerret's Blog</text>
+</svg>
