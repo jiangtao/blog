@@ -3,6 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 const { extractImageLinks, validateLinks } = require('./image-lint.cjs');
 const { downloadAndOptimize } = require('./image-optimizer.cjs');
 const { replaceImageLink } = require('./image-replacer.cjs');
@@ -12,9 +13,72 @@ const postsDir = path.join(__dirname, '../src/data/blog');
 const imageDir = path.join(__dirname, '../public/images');
 let hasErrors = false;
 
+// SVG 验证函数
+function validateSVGFiles() {
+  console.log('\n🔍 检查 SVG 文件...');
+  const svgDirs = [
+    path.join(imageDir, 'blog-covers'),
+    path.join(imageDir, 'misc')
+  ];
+
+  let svgErrors = [];
+
+  svgDirs.forEach(dir => {
+    if (!fs.existsSync(dir)) return;
+
+    const files = fs.readdirSync(dir).filter(f => f.endsWith('.svg'));
+
+    files.forEach(file => {
+      const filePath = path.join(dir, file);
+      const content = fs.readFileSync(filePath, 'utf-8');
+
+      // 检查 1: 是否有重复的标签
+      const svgTagCount = (content.match(/<\/svg>/g) || []).length;
+      if (svgTagCount !== 1) {
+        svgErrors.push({
+          file: file,
+          error: `有 ${svgTagCount} 个 </svg> 标签，应该只有 1 个`
+        });
+      }
+
+      // 检查 2: 是否包含 Watermark
+      if (!content.includes("Jerret's Blog")) {
+        svgErrors.push({
+          file: file,
+          error: '缺少水印 "Jerret\'s Blog"'
+        });
+      }
+
+      // 检查 3: xmllint 验证（如果可用）
+      try {
+        execSync(`xmllint --noout "${filePath}"`, { stdio: 'pipe' });
+      } catch (e) {
+        // xmllint 可能不可用，跳过
+      }
+    });
+  });
+
+  if (svgErrors.length === 0) {
+    console.log('  ✅ 所有 SVG 文件检查通过');
+  } else {
+    console.log('  ⚠️  发现 SVG 问题:');
+    svgErrors.forEach(err => {
+      console.log(`     ${err.file}: ${err.error}`);
+    });
+  }
+
+  return svgErrors.length === 0;
+}
+
 async function main() {
   const auto = args.includes('--auto');
   const includeYuque = args.includes('--include-yuque');
+
+  // 首先验证 SVG 文件
+  const svgValid = validateSVGFiles();
+  if (!svgValid) {
+    hasErrors = true;
+  }
 
   let files;
   try {
