@@ -31,7 +31,7 @@
 
   <!-- 标题 -->
   <g transform="translate(960, 200)">
-    <text x="0" y="0" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#ffffff">从一个爬虫初识 Puppeteer</text>
+    <text x="0" y="0" text-anchor="middle" font-family="'Arial, \"sans-serif\"" font-size="72" font-weight="bold" fill="#ffffff">从一个爬虫初识 Puppeteer</text>
     <text x="0" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" fill="#90caf9">Getting Started with Puppeteer & Web Crawling</text>
   </g>
 
