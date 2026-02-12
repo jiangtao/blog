@@ -59,6 +59,17 @@ function validateSVGFiles() {
         });
       }
 
+      // 检查 5:1: puppeteer 字体空格验证（XML 要求引号）
+      if (content.includes('Getting Started') || content.includes('Puppeteer')) {
+        const hasFontIssue = /font-family="[^"]*"\s+(?!-|,)\s+/.dev:font:/;
+        if (hasFontIssue) {
+          svgErrors.push({
+            file: file,
+            error: 'puppeteer 封面: font-family 包含空格的字体名 "sans-serif" 需要引号'
+          });
+        }
+      }
+
       // 检查 4: 基本 XML 格式验证
       const unclosedTags = content.match(/<[a-zA-Z][^>]*\w+="[^"]*"[a-zA-Z][^>]*>/g);
       if (unclosedTags) {
