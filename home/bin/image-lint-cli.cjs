@@ -59,13 +59,13 @@ function validateSVGFiles() {
         });
       }
 
-      // 检查 5:1: puppeteer 字体空格验证（XML 要求引号）
+      // 检查 5: puppeteer 字体验证（XML 中 & 符号必须转义）
       if (content.includes('Getting Started') || content.includes('Puppeteer')) {
-        const hasFontIssue = /font-family="[^"]*"\s+(?!-|,)\s+/.dev:font:/;
-        if (hasFontIssue) {
+        const unescapedAmp = /&(?!(?:amp|lt|gt|quot|apos);)/.test(content);
+        if (unescapedAmp) {
           svgErrors.push({
             file: file,
-            error: 'puppeteer 封面: font-family 包含空格的字体名 "sans-serif" 需要引号'
+            error: 'puppeteer 封面: & 符号未转义，需要使用 &amp;'
           });
         }
       }

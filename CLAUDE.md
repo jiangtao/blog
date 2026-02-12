@@ -132,7 +132,95 @@ When creating or modifying diagrams:
 - Content syncs to 语雀博客 and Jerret Life WeChat official account
 - Licensed under CC BY-NC-SA 3.0 CN (original content by jiangtao)
 
+## Development Workflow
+
+### Git Commit Workflow (MANDATORY)
+
+All code changes MUST follow the structured 5-step commit workflow:
+
+```bash
+# Step 1: Create branch with descriptive name
+git checkout -b feat/add-feature
+git checkout -b fix/error-handling
+git checkout -b refactor/cleanup-code
+git checkout -b docs/update-readme
+git checkout -b test/add-unit-tests
+
+# One-line summary template
+# <type>: <what changed> → <outcome/benefit>
+```
+
+**Step 2: Create PR with structured summary:**
+```markdown
+## Summary
+<!-- One sentence describing change -->
+
+## Changes
+- [ ] File path - Description of change
+- [ ] File path - Description of change
+
+## Type
+- [ ] feat - New feature
+- [ ] fix - Bug fix
+- [ ] refactor - Code restructuring (no behavior change)
+- [ ] docs - Documentation only
+- [ ] test - Tests only
+- [ ] chore - Build/config changes
+
+## Related Issue
+Closes #(issue number) or Relates to #(issue number)
+```
+
+**Step 3: Define test cases BEFORE running tests:**
+```markdown
+## Test Plan
+### Unit Tests
+- [ ] Test case 1: Description
+- [ ] Test case 2: Description
+
+### Integration Tests
+- [ ] Test case 1: Description
+
+### Manual Tests
+- [ ] Test case 1: Description
+
+### Edge Cases
+- [ ] Test case 1: Description
+```
+
+**Step 4: Run tests and generate report:**
+```bash
+npm test        # Run test suite
+npm run build   # Run build (if applicable)
+npm run lint    # Run linter
+```
+
+**Step 5: User review checklist:**
+- [ ] Code changes align with one-line summary
+- [ ] All tests pass (no failures)
+- [ ] Documentation is updated (if applicable)
+- [ ] No unintended side effects
+- [ ] Edge cases are covered
+- [ ] Code follows project style guidelines
+
+**Only after all 5 steps are completed and approved, merge to main.**
+
+### Image Linting
+
+Before committing changes to blog posts or images:
+
+```bash
+cd home && npm run lint:images
+```
+
+This validates:
+- Duplicate `</svg>` closing tags
+- Watermark presence ("Jerret's Blog")
+- Malformed attributes (missing `>` in attributes)
+- xmllint validation (if available)
+
 ## Rules
 
 1. 务必遵守： 禁止删除文件，若要删除的话 请询问
 2. 务必遵守：新增的变更，务必走测试，测试验证完成之后，拉分支创建提交
+3. 务必遵守：提交代码必须遵循 `/dev:commit` 工作流（5步骤）
