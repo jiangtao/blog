@@ -97,7 +97,6 @@
 
   <!-- 水印 -->
   <text x="1890" y="1065" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#4fc3f7" opacity="0.5" text-anchor="end">Jerret's Blog</text>
-</svg>
 
   <!-- 右下角日期 -->
   <text x="1850" y="1030" text-anchor="end" font-family="sans-serif" font-size="16" fill="#9b9a97">2017-12-01</text>
