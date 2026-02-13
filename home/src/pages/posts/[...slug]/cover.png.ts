@@ -28,50 +28,71 @@ export const GET: APIRoute = async ({ props }) => {
   }
 
   try {
-    // Resolve the cover path relative to the public directory
-    const coverPath = cover.startsWith("/")
-      ? path.join(process.cwd(), "dist", cover)
-      : cover;
+    // Normalize cover path to start with /
+    const normalizedCover = cover.startsWith("/") ? cover : `/${cover}`;
 
-    // During build, files are in dist/, during dev they're in public/
+    // During build, assets are in dist/, during dev they're in public/
     let fileContent: Buffer;
+    let readError: Error | null = null;
 
+    // Try public directory first (dev mode), then dist directory (build mode)
+    const publicPath = path.join(process.cwd(), "public", normalizedCover.replace(/^\//, "").replace(/^\/+/, ""));
     try {
-      fileContent = await fs.readFile(coverPath);
-    } catch {
-      // Fallback to public directory for dev mode
-      const publicPath = path.join(process.cwd(), "public", cover.replace(/^\//, ""));
       fileContent = await fs.readFile(publicPath);
+    } catch (error) {
+      readError = error as Error;
     }
 
-    // Check if it's an SVG (by content or extension)
-    const isSvg = cover.endsWith(".svg") ||
-      fileContent.toString().startsWith("<svg");
+    // If public failed, try dist directory
+    if (!fileContent && readError) {
+      const distPath = path.join(process.cwd(), "dist", normalizedCover.replace(/^\//, "").replace(/^\/+/, ""));
+      try {
+        fileContent = await fs.readFile(distPath);
+      } catch (error) {
+        readError = error as Error;
+      }
+    }
+
+    // If both paths failed, return 404 with details
+    if (!fileContent) {
+      const attemptedPaths = [publicPath];
+      if (readError) {
+        attemptedPaths.push(path.join(process.cwd(), "dist", normalizedCover.replace(/^\//, "").replace(/^\/+/, "")));
+      }
+      return new Response(null, {
+        status: 404,
+        statusText: `Cover image not found. Tried: ${attemptedPaths.join(", ")}`,
+      });
+    }
+
+    // Check if it's an SVG (by extension first, then content)
+    const isSvg = normalizedCover.endsWith(".svg") ||
+      fileContent.toString().trimStart().startsWith("<svg");
 
     if (isSvg) {
       // Convert SVG to PNG
       const pngBuffer = await convertSvgToPng(fileContent);
       return new Response(new Uint8Array(pngBuffer), {
-        headers: { "Content-Type": "image/png" },
+        headers: { "Content-Type": "image/png", "Cache-Control": "public, max-age=31536000, immutable" },
       });
     }
 
     // Return as-is if already PNG/JPEG/etc
-    const contentType = cover.endsWith(".png")
+    const contentType = normalizedCover.endsWith(".png")
       ? "image/png"
-      : cover.endsWith(".jpg") || cover.endsWith(".jpeg")
+      : normalizedCover.endsWith(".jpg") || normalizedCover.endsWith(".jpeg")
       ? "image/jpeg"
-      : cover.endsWith(".webp")
+      : normalizedCover.endsWith(".webp")
       ? "image/webp"
       : "image/png";
 
     return new Response(new Uint8Array(fileContent), {
-      headers: { "Content-Type": contentType },
+      headers: { "Content-Type": contentType, "Cache-Control": "public, max-age=31536000, immutable" },
     });
   } catch (error) {
     return new Response(null, {
       status: 500,
-      statusText: "Error processing cover image",
+      statusText: `Error reading cover image: ${error instanceof Error ? error.message : String(error)}`,
     });
   }
 };

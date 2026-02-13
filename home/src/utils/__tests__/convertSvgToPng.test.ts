@@ -25,4 +25,19 @@ describe("convertSvgToPng", () => {
     expect(pngBuffer).toBeInstanceOf(Buffer);
     expect(pngBuffer[0]).toBe(0x89); // PNG magic byte
   });
+
+  it("should handle empty buffer input", async () => {
+    const emptyBuffer = Buffer.alloc(0);
+    await expect(convertSvgToPng(emptyBuffer)).rejects.toThrow("Failed to convert SVG to PNG");
+  });
+
+  it("should handle invalid SVG syntax", async () => {
+    const invalidSvg = Buffer.from("<svg><rect></svg>"); // Missing closing tag
+    await expect(convertSvgToPng(invalidSvg)).rejects.toThrow("Failed to convert SVG to PNG");
+  });
+
+  it("should handle null input gracefully", async () => {
+    const nullBuffer = Buffer.from("null");
+    await expect(convertSvgToPng(nullBuffer as any)).rejects.toThrow("Failed to convert SVG to PNG");
+  });
 });
