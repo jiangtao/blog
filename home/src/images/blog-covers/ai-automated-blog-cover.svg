@@ -17,7 +17,7 @@
 
     <!-- Chalk stroke filter for hand-drawn effect -->
     <filter id="chalk-stroke">
-      <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" result="turbulence"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="turbulence"/>
       <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="3" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
 
@@ -58,7 +58,7 @@
   <rect x="15" y="15" width="1890" height="1050" fill="url(#erasure-marks)" opacity="0.5"/>
 
   <!-- Decorative chalk lines (hand-drawn style) -->
-  <g stroke="#4fc3f7" stroke-width="2" fill="none" opacity="0.15" filter="url(#chalk-stroke)">
+  <g stroke="#4fc3f7" stroke-width="2" fill="none" opacity="0.15">
     <!-- Horizontal lines -->
     <path d="M 50 180 Q 480 178 950 182 Q 1420 178 1870 180"/>
     <path d="M 50 900 Q 480 902 950 898 Q 1420 903 1870 900"/>
@@ -82,7 +82,7 @@
   <!-- Central icon area - Robot/AI symbol -->
   <g transform="translate(960, 540)">
     <!-- Gear icon background -->
-    <circle cx="0" cy="0" r="140" fill="none" stroke="#4fc3f7" stroke-width="2" opacity="0.2" filter="url(#chalk-stroke)"/>
+    <circle cx="0" cy="0" r="140" fill="none" stroke="#4fc3f7" stroke-width="2" opacity="0.2" />
     <circle cx="0" cy="0" r="110" fill="none" stroke="#4fc3f7" stroke-width="1.5" opacity="0.15"/>
 
     <!-- Robot/AI head icon -->
@@ -113,7 +113,7 @@
   <!-- Workflow diagram - left side -->
   <g transform="translate(250, 750)">
     <!-- Manual input box -->
-    <rect x="0" y="0" width="180" height="80" rx="8" fill="none" stroke="#e8eaf6" stroke-width="2" opacity="0.7" filter="url(#chalk-stroke)"/>
+    <rect x="0" y="0" width="180" height="80" rx="8" fill="none" stroke="#e8eaf6" stroke-width="2" opacity="0.7" />
     <text x="90" y="35" text-anchor="middle" font-family="Arial" font-size="18" fill="#e8eaf6" font-weight="bold">Manual</text>
     <text x="90" y="60" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">Writing</text>
 
@@ -126,7 +126,7 @@
 
   <!-- AI Processing box - center -->
   <g transform="translate(530, 730)">
-    <rect x="0" y="0" width="200" height="120" rx="10" fill="#1e2a4a" stroke="#4fc3f7" stroke-width="2" opacity="0.5" filter="url(#chalk-stroke)"/>
+    <rect x="0" y="0" width="200" height="120" rx="10" fill="#1e2a4a" stroke="#4fc3f7" stroke-width="2" opacity="0.5" />
     <text x="100" y="40" text-anchor="middle" font-family="Arial" font-size="20" fill="#e8eaf6" font-weight="bold">AI Engine</text>
     <text x="100" y="70" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">Claude / GPT</text>
     <text x="100" y="95" text-anchor="middle" font-family="monospace" font-size="12" fill="#81d4fa" opacity="0.8">Automation</text>
@@ -134,7 +134,7 @@
 
   <!-- Output box - right -->
   <g transform="translate(810, 750)">
-    <rect x="0" y="0" width="180" height="80" rx="8" fill="none" stroke="#e8eaf6" stroke-width="2" opacity="0.7" filter="url(#chalk-stroke)"/>
+    <rect x="0" y="0" width="180" height="80" rx="8" fill="none" stroke="#e8eaf6" stroke-width="2" opacity="0.7" />
     <text x="90" y="35" text-anchor="middle" font-family="Arial" font-size="18" fill="#e8eaf6" font-weight="bold">Auto</text>
     <text x="90" y="60" text-anchor="middle" font-family="monospace" font-size="14" fill="#81d4fa">Publish</text>
   </g>
