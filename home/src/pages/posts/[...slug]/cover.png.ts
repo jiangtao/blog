@@ -32,7 +32,7 @@ export const GET: APIRoute = async ({ props }) => {
     const normalizedCover = cover.startsWith("/") ? cover : `/${cover}`;
 
     // During build, assets are in dist/, during dev they're in public/
-    let fileContent: Buffer;
+    let fileContent: Buffer | undefined;
     let readError: Error | null = null;
 
     // Try public directory first (dev mode), then dist directory (build mode)
@@ -44,7 +44,7 @@ export const GET: APIRoute = async ({ props }) => {
     }
 
     // If public failed, try dist directory
-    if (!fileContent && readError) {
+    if (!fileContent) {
       const distPath = path.join(process.cwd(), "dist", normalizedCover.replace(/^\//, "").replace(/^\/+/, ""));
       try {
         fileContent = await fs.readFile(distPath);

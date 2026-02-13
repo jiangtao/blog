@@ -6,7 +6,7 @@ describe("convertSvgToPng", () => {
     const svgBuffer = Buffer.from(
       '<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="red"/></svg>'
     );
-    const pngBuffer = await convertSvgToPng(svgBuffer, 1200, 630);
+    const pngBuffer = await convertSvgToPng(svgBuffer, 1200);
 
     expect(pngBuffer).toBeInstanceOf(Buffer);
     expect(pngBuffer.length).toBeGreaterThan(0);
