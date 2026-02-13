@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <!-- Arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666666"/>
+    </marker>
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="400" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333333">Astro 静态博客系统</text>
+
+  <!-- Pages -->
+  <g transform="translate(60, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="120" height="70" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
+    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">pages/</text>
+    <text x="60" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">路由页面</text>
+  </g>
+
+  <!-- Components -->
+  <g transform="translate(210, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="120" height="70" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
+    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">components/</text>
+    <text x="60" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">UI 组件</text>
+  </g>
+
+  <!-- Content -->
+  <g transform="translate(360, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="120" height="70" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/>
+    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">data/blog/</text>
+    <text x="60" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">Markdown</text>
+  </g>
+
+  <!-- Build -->
+  <g transform="translate(510, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="120" height="70" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="2"/>
+    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">Build</text>
+    <text x="60" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">npm run build</text>
+  </g>
+
+  <!-- Deploy -->
+  <g transform="translate(660, 100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="100" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
+    <text x="50" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">Vercel</text>
+    <text x="50" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">自动部署</text>
+  </g>
+
+  <!-- Arrows -->
+  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <path d="M 180 135 Q 195 135 200 135"/>
+    <path d="M 330 135 Q 345 135 350 135"/>
+    <path d="M 480 135 Q 495 135 500 135"/>
+    <path d="M 630 135 Q 645 135 650 135"/>
+  </g>
+
+  <!-- Improvements -->
+  <g transform="translate(60, 230)" filter="url(#shadow)">
+    <rect x="0" y="0" width="260" height="80" rx="6" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.5"/>
+    <text x="130" y="25" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">核心改进</text>
+    <text x="130" y="50" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• 构建 60s → 10s</text>
+    <text x="130" y="68" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• TypeScript + Islands</text>
+  </g>
+
+  <g transform="translate(350, 230)" filter="url(#shadow)">
+    <rect x="0" y="0" width="260" height="80" rx="6" fill="#ffe6cc" stroke="#d79b00" stroke-width="1.5"/>
+    <text x="130" y="25" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">部署简化</text>
+    <text x="130" y="50" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• Vercel 自动部署</text>
+    <text x="130" y="68" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• 热更新 HMR</text>
+  </g>
+
+  <!-- But cover still manual -->
+  <g transform="translate(640, 230)" filter="url(#shadow)">
+    <rect x="0" y="0" width="120" height="80" rx="6" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+    <text x="60" y="35" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">但封面...</text>
+    <text x="60" y="60" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">仍然手动!</text>
+  </g>
+
+  <!-- Watermark -->
+  <text x="780" y="385" font-family="Arial, sans-serif" font-size="11" fill="#999999" text-anchor="end">Jerret's Blog</text>
+</svg>

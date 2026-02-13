@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280">
+  <defs>
+    <!-- Arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666666"/>
+    </marker>
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="280" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#333333">4. 知识编码化</text>
+
+  <!-- Tacit Knowledge -->
+  <g transform="translate(80, 80)" filter="url(#shadow)">
+    <rect x="0" y="0" width="140" height="60" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">隐性知识</text>
+    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">师傅带徒弟</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <path d="M 220 110 Q 250 110 270 110"/>
+  </g>
+
+  <!-- Documentation -->
+  <g transform="translate(290, 80)" filter="url(#shadow)">
+    <rect x="0" y="0" width="140" height="60" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">文档化</text>
+    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">Wiki、文档</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <path d="M 430 110 Q 460 110 480 110"/>
+  </g>
+
+  <!-- Tooling -->
+  <g transform="translate(500, 80)" filter="url(#shadow)">
+    <rect x="0" y="0" width="140" height="60" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">工具化</text>
+    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">脚本、插件</text>
+  </g>
+
+  <!-- Arrow 3 -->
+  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <path d="M 640 110 Q 670 110 690 110"/>
+  </g>
+
+  <!-- AI/Skills -->
+  <g transform="translate(710, 80)" filter="url(#shadow)">
+    <rect x="0" y="0" width="140" height="60" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">AI 化</text>
+    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">Skills、Agents</text>
+  </g>
+
+  <!-- Evolution Description -->
+  <g transform="translate(100, 180)">
+    <text x="0" y="0" font-family="Arial" font-size="12" font-weight="bold" fill="#333333">知识编码演进路径：</text>
+    <text x="0" y="20" font-family="monospace" font-size="10" fill="#555555">依赖口口相传 → 文档记录 → 工具固化 → AI 可复用</text>
+    <text x="0" y="40" font-family="monospace" font-size="10" fill="#555555"></text>
+    <text x="0" y="60" font-family="monospace" font-size="10" fill="#555555">可传递性：低 → 中 → 高 → 极高</text>
+  </g>
+
+  <!-- Watermark -->
+  <text x="880" y="265" font-family="Arial, sans-serif" font-size="10" fill="#999999" text-anchor="end">Jerret's Blog</text>
+</svg>

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250">
+  <defs>
+    <!-- Arrow marker -->
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666666"/>
+    </marker>
+    <!-- Drop shadow -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="250" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="400" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#333333">1. AI 从辅助到主导</text>
+
+  <!-- Traditional Development -->
+  <g transform="translate(100, 80)" filter="url(#shadow)">
+    <rect x="0" y="0" width="140" height="60" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#333333">传统开发</text>
+    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">人工设计+修正+审核</text>
+  </g>
+
+  <!-- Arrow -->
+  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <path d="M 240 110 Q 270 110 290 110"/>
+  </g>
+
+  <!-- Present -->
+  <g transform="translate(300, 80)" filter="url(#shadow)">
+    <rect x="0" y="0" width="140" height="60" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#333333">现在</text>
+    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">AI 方案+Review</text>
+  </g>
+
+  <!-- Arrow -->
+  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
+    <path d="M 440 110 Q 470 110 490 110"/>
+  </g>
+
+  <!-- Future -->
+  <g transform="translate(500, 80)" filter="url(#shadow)">
+    <rect x="0" y="0" width="140" height="60" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#333333">未来</text>
+    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">AI 决策+人工审核</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(200, 180)">
+    <text x="0" y="0" font-family="Arial" font-size="11" fill="#555555">• 过去：人工写代码 + 设计</text>
+    <text x="0" y="20" font-family="Arial" font-size="11" fill="#555555">• 现在：AI 帮你设计方案 + Review</text>
+    <text x="0" y="40" font-family="Arial" font-size="11" fill="#555555">• 未来：AI 帮你做决策</text>
+  </g>
+
+  <!-- Watermark -->
+  <text x="780" y="235" font-family="Arial, sans-serif" font-size="10" fill="#999999" text-anchor="end">Jerret's Blog</text>
+</svg>
