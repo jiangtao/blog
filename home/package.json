@@ -12,7 +12,9 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:images": "node bin/image-lint-cli.cjs",
-    "fix:images": "node bin/image-lint-cli.cjs --auto --include-yuque"
+    "fix:images": "node bin/image-lint-cli.cjs --auto --include-yuque",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.14",
@@ -37,6 +39,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@types/lodash.kebabcase": "^4.1.9",
     "@typescript-eslint/parser": "^8.51.0",
+    "@vitest/ui": "^4.0.18",
     "axios": "^1.13.4",
     "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.5.0",
@@ -46,6 +49,7 @@
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.51.0"
+    "typescript-eslint": "^8.51.0",
+    "vitest": "^4.0.18"
   }
 }
