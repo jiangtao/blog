@@ -1,6 +1,6 @@
 ---
 title: AI实践-搭建自动化博客
-pubDatetime: 2026-02-12T19:55:00.000Z
+pubDatetime: 2026-02-12T09:00:00.000Z
 tags:
   - ai
   - automation
@@ -35,13 +35,6 @@ Hexo + Next Theme
 ├── scaffold/               # 文章模板
 └── deploy.sh              # 手动部署脚本
 ```
-
-> **技术图表使用 drawio-diagram skill 生成（Draw.io 默认自然风格）**
->
-> **执行命令**：
-> ```bash
-> drawio-diagram architecture "Hexo博客系统架构" "source文章目录 -> Hexo引擎 -> Next主题 -> deploy.sh手动部署" --style default
-> ```
 
 ![Hexo 架构图](/images/misc/hexo-architecture.svg)
 
@@ -193,13 +186,6 @@ astro  v4.x  building in 9.2s  # ~10s
 - **图片优化**：自动 WebP 转换
 
 ### 代码示例：组件化布局
-
-> **技术图表使用 drawio-diagram skill 生成（Draw.io 默认自然风格）**
->
-> **执行命令**：
-> ```bash
-> drawio-diagram architecture "Astro静态博客系统" "Pages路由页 + Components组件 + Content数据 + Build构建 + Vercel部署" --style default
-> ```
 
 ![Astro 架构图](/images/misc/astro-architecture.svg)
 
