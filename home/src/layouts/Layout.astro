@@ -29,7 +29,11 @@ const {
   scrollSmooth = false,
 } = Astro.props;
 
-const socialImageURL = new URL(ogImage, Astro.url);
+// Add timestamp to OG image URL to bypass social platform caching
+// Only add to dynamically generated images (index.png, og.png, etc.)
+const needsCacheBust = ogImage.endsWith('.png') || ogImage.endsWith('/og.png');
+const cacheBustParam = needsCacheBust ? `?t=${Date.now()}` : '';
+const socialImageURL = new URL(`${ogImage}${cacheBustParam}`, Astro.url);
 
 const structuredData = {
   "@context": "https://schema.org",
