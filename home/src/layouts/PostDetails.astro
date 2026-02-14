@@ -49,13 +49,9 @@ if (typeof initOgImage === "string") {
   ogImageUrl = initOgImage.src; // Local asset
 }
 
-// Use cover-based OG image if cover exists (prioritize over dynamic generation)
-if (!ogImageUrl && cover) {
-  ogImageUrl = `${getPath(post.id, post.filePath, true, post)}/cover.png`;
-}
-
-// Use dynamic OG image if enabled and no other image set
-if (!ogImageUrl && SITE.dynamicOgImage) {
+// Use unified index.png endpoint (handles both cover and dynamic generation)
+// Prioritize explicit ogImage settings, then use index.png for unified handling
+if (!ogImageUrl && (cover || SITE.dynamicOgImage)) {
   ogImageUrl = `${getPath(post.id, post.filePath, true, post)}/index.png`;
 }
 
