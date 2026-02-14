@@ -20,7 +20,7 @@ export const GET: APIRoute = async ({ props }) => {
   const post = props as CollectionEntry<"blog">;
   const cover = post.data.cover;
 
-  if (!cover) {
+  if (!cover || typeof cover !== "string" || cover.trim().length === 0) {
     return new Response(null, {
       status: 404,
       statusText: "No cover image",
