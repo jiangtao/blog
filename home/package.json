@@ -4,7 +4,7 @@
   "version": "5.5.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build && pagefind --site dist",
+    "build": "astro check && astro build && pagefind --site dist && npm run validate:og-images",
     "preview": "astro preview",
     "sync": "astro sync",
     "astro": "astro",
