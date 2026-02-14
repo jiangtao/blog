@@ -1,8 +1,10 @@
 {
-  "buildCommand": "cd home && npm run build",
-  "outputDirectory": "home/dist",
-  "installCommand": "cd home && npm install",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
   "framework": null,
+  "project": "home",
   "redirects": [
     {
       "source": "/:path*",
