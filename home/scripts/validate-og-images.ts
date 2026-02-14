@@ -45,6 +45,20 @@ async function validateOgImages(): Promise<ValidationResult[]> {
     }
 
     // Additional checks
+    // Skip validation for posts/index.html (it's a collection page, not a blog post)
+    const isPostsIndexPage = htmlFile === "posts/index.html";
+    if (isPostsIndexPage) {
+      // Collection pages can use any OG image
+      results.push({
+        file: htmlFile,
+        ogImageUrl,
+        hasCover,
+        validation,
+        errors: [],
+      });
+      continue;
+    }
+
     if (hasCover && ogImageUrl && !ogImageUrl.includes("cover.png")) {
       errors.push(`cover.png exists but og:image points to ${ogImageUrl}`);
     }
