@@ -172,7 +172,7 @@ Components:
 
 - **SVG** - 矢量格式，可缩放（推荐）
 - **PNG** - 位图格式，兼容性好
-- **Draw.io 原生文件** - 可二次编辑
+- **Draw.io 原生文件** - 可二次编辑 (务必保留)
 
 ## 文件保存位置
 
@@ -181,9 +181,13 @@ Components:
 ```
 home/public/images/diagrams/
 ├── architecture-*.svg
+├── architecture-*.draw.io
 ├── workflow-*.svg
+├── workflow-*.draw.io
 ├── sequence-*.svg
+├── sequence-*.draw.io
 └── component-*.svg
+└── component-*.draw.io
 ```
 
 文章中引用：
