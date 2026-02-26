@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Repository Overview
 
 This is a personal knowledge management repository containing:
+- **home/** - Astro-powered blog (blog.jerret.me) with technical articles
 - Technical documentation and tutorials (docker, node, vue, etc.)
 - Code examples and demos (baiduMap, CSS demos, G6 visualizations, Web Workers, etc.)
 - Design patterns implementations (JavaScript patterns)
@@ -16,10 +17,14 @@ Most content has migrated to GitHub Issues - check issues for original articles 
 
 ## Directory Structure
 
-- `home/` - Hexo blog (deployed to Vercel at jiangtao.vercel.app)
-  - `source/_posts/` - Blog posts
-  - `themes/next/` - Next theme
-  - `_config.yml` - Hexo configuration
+- `home/` - Astro blog (deployed at blog.jerret.me)
+  - `src/data/blog/` - Blog posts (markdown with frontmatter)
+  - `src/components/` - React/Astro components
+  - `src/pages/` - Route pages
+  - `src/layouts/` - Layout templates
+  - `public/` - Static assets
+  - Tech stack: Astro 5, Tailwind CSS 4, Shiki, Pagefind search
+  - Features: Dynamic OG images, RSS feed, Sitemap
 - `docs/` - Main documentation directory
   - `MCP/` - Model Context Protocol examples and documentation
   - `books/` - Book summaries and notes (ES6, software architecture, etc.)
@@ -56,16 +61,16 @@ Most content has migrated to GitHub Issues - check issues for original articles 
 When working with React components or internationalization:
 
 **React Best Practices** (`.cursor/rules/react.mdc`):
-- Use React 18 with hooks for logic reuse
-- Keep components focused and performant
-- Use `memo` for pure components
-- Observe business components that use Store
+- Follow Vercel React Best Practices skill (`/skill vercel-react-best-practices`)
+- 57 rules across 8 categories: waterfalls, bundle size, server/client performance, re-renders, rendering, JS performance, advanced patterns
+- Key priorities: Eliminate waterfalls, optimize bundles, server-side caching
+- Use Astro Islands pattern for partial hydration when applicable
 
 **i18n Guidelines** (`.cursor/rules/i18n-check.mdc`):
 - Scan specified folders for tsx/jsx files requiring internationalization
 - Support both Chinese and English
 - Prioritize using existing copy from language packs
-- Language pack locations: `src/Locales/en_US/KDS.json` and `src/Locales/zh_CN/KDS.json`
+- Language pack locations: `src/Locales/en_US/` and `src/Locales/zh_CN/`
 
 **Draw.io Standards** (`.cursor/rules/drawio.mdc`):
 - File naming: `[module-name][chart-type]v[version][date].drawio`
@@ -75,14 +80,16 @@ When working with React components or internationalization:
 
 ## Common Commands
 
-### Hexo Blog (home/)
+### Astro Blog (home/)
 ```bash
 cd home
 npm install          # Install dependencies
-npm run dev          # Start local server at http://localhost:4000
-npm run build        # Generate static site to home/public
-npm run clean        # Clean generated files
-hexo new "title"     # Create new post
+npm run dev          # Start local server at http://localhost:4321
+npm run build        # Build static site to home/dist
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
+npm run lint:images  # Validate blog images
+npm test             # Run Vitest tests
 ```
 
 ### Deployment
@@ -136,7 +143,7 @@ When creating or modifying diagrams:
 
 ### Git Commit Workflow (MANDATORY)
 
-All code changes MUST follow the structured 5-step commit workflow:
+All code changes MUST follow `/dev:commit` workflow:
 
 ```bash
 # Step 1: Create branch with descriptive name
@@ -146,64 +153,16 @@ git checkout -b refactor/cleanup-code
 git checkout -b docs/update-readme
 git checkout -b test/add-unit-tests
 
-# One-line summary template
-# <type>: <what changed> → <outcome/benefit>
+# Branch types: feat, fix, refactor, docs, test, chore
+# Summary template: <type>: <what changed> → <outcome/benefit>
 ```
 
-**Step 2: Create PR with structured summary:**
-```markdown
-## Summary
-<!-- One sentence describing change -->
-
-## Changes
-- [ ] File path - Description of change
-- [ ] File path - Description of change
-
-## Type
-- [ ] feat - New feature
-- [ ] fix - Bug fix
-- [ ] refactor - Code restructuring (no behavior change)
-- [ ] docs - Documentation only
-- [ ] test - Tests only
-- [ ] chore - Build/config changes
-
-## Related Issue
-Closes #(issue number) or Relates to #(issue number)
-```
-
-**Step 3: Define test cases BEFORE running tests:**
-```markdown
-## Test Plan
-### Unit Tests
-- [ ] Test case 1: Description
-- [ ] Test case 2: Description
-
-### Integration Tests
-- [ ] Test case 1: Description
-
-### Manual Tests
-- [ ] Test case 1: Description
-
-### Edge Cases
-- [ ] Test case 1: Description
-```
-
-**Step 4: Run tests and generate report:**
-```bash
-npm test        # Run test suite
-npm run build   # Run build (if applicable)
-npm run lint    # Run linter
-```
-
-**Step 5: User review checklist:**
-- [ ] Code changes align with one-line summary
-- [ ] All tests pass (no failures)
-- [ ] Documentation is updated (if applicable)
-- [ ] No unintended side effects
-- [ ] Edge cases are covered
-- [ ] Code follows project style guidelines
-
-**Only after all 5 steps are completed and approved, merge to main.**
+**Use `/dev:commit` skill for the complete 5-step process:**
+1. Create PR with structured summary
+2. Define test cases BEFORE running tests
+3. Run tests and generate report
+4. User review checklist
+5. Merge after approval
 
 ### Image Linting
 
@@ -221,6 +180,6 @@ This validates:
 
 ## Rules
 
-1. 务必遵守： 禁止删除文件，若要删除的话 请询问
-2. 务必遵守：新增的变更，务必走测试，测试验证完成之后，拉分支创建提交
-3. 务必遵守：提交代码必须遵循 `/dev:commit` 工作流（5步骤）
+1. **File Deletion**: DO NOT delete files without asking first
+2. **Testing**: All new changes MUST be tested before committing
+3. **Commit Workflow**: All commits MUST follow `/dev:commit` workflow (5 steps)

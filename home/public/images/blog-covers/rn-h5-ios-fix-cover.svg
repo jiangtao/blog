@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <!-- 深色背景 -->
+  <rect width="1920" height="1080" fill="#1a1a2e"/>
+  <rect width="1920" height="1080" fill="#0f0f1a" opacity="0.9"/>
+
+  <!-- 边框 -->
+  <rect x="15" y="15" width="1890" height="1050" rx="4" fill="none" stroke="#5d4037" stroke-width="12"/>
+  <rect x="20" y="20" width="1880" height="1040" rx="2" fill="none" stroke="#3e2723" stroke-width="4"/>
+
+  <!-- 粉笔灰尘纹理 -->
+  <filter id="chalk">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/>
+  </filter>
+
+  <!-- 主标题区 -->
+  <g transform="translate(960, 85)">
+    <text x="0" y="0" text-anchor="middle" font-family="'Comic Sans MS', 'Chalkboard SE', cursive" font-size="56" font-weight="bold" fill="#fff9c4">React Native H5 离线加载 iOS 踩坑记</text>
+    <path d="M-380 15 Q0 25 380 15" stroke="#fff9c4" stroke-width="3" fill="none" opacity="0.6"/>
+    <text x="0" y="45" text-anchor="middle" font-family="cursive" font-size="20" fill="#b0bec5">React Native H5 Offline Loading - iOS Troubleshooting</text>
+  </g>
+
+  <!-- 左侧：问题现象 -->
+  <g transform="translate(320, 300)">
+    <!-- 红色框：错误信息 -->
+    <rect x="-140" y="-100" width="280" height="200" rx="12" fill="none" stroke="#ef5350" stroke-width="3" filter="url(#chalk)"/>
+    <text x="0" y="-70" text-anchor="middle" font-family="cursive" font-size="24" font-weight="bold" fill="#ef5350">错误现象</text>
+    <text x="0" y="-40" text-anchor="middle" font-family="monospace" font-size="14" fill="#ffcdd2">NSURLErrorDomain</text>
+    <text x="0" y="-20" text-anchor="middle" font-family="monospace" font-size="14" fill="#ffcdd2">Code -1100</text>
+    <text x="0" y="5" text-anchor="middle" font-family="cursive" font-size="14" fill="#ffebee">"URL not found"</text>
+    <text x="0" y="30" text-anchor="middle" font-family="cursive" font-size="14" fill="#ffebee">WebView 无法加载</text>
+    <text x="0" y="55" text-anchor="middle" font-family="cursive" font-size="14" fill="#ffebee">H5 离线资源失败</text>
+    <text x="0" y="80" text-anchor="middle" font-family="cursive" font-size="12" fill="#e57373" font-style="italic">iOS 特有问题</text>
+  </g>
+
+  <!-- 中间：核心原因 -->
+  <g transform="translate(960, 320)">
+    <!-- 黄色框：路径问题 -->
+    <rect x="-160" y="-80" width="320" height="160" rx="12" fill="none" stroke="#fff176" stroke-width="3"/>
+    <text x="0" y="-50" text-anchor="middle" font-family="cursive" font-size="24" font-weight="bold" fill="#fff176">核心原因</text>
+    <text x="0" y="-20" text-anchor="middle" font-family="monospace" font-size="12" fill="#fff9c4">❌ file:///bundled_assets/h5/</text>
+    <text x="0" y="0" text-anchor="middle" font-family="cursive" font-size="14" fill="#fffde7">相对路径在 iOS 不工作</text>
+    <text x="0" y="25" text-anchor="middle" font-family="cursive" font-size="14" fill="#fffde7">需要完整绝对路径</text>
+    <text x="0" y="50" text-anchor="middle" font-family="monospace" font-size="11" fill="#f0f4c3">file:///var/containers/.../app/</text>
+    <text x="0" y="65" text-anchor="middle" font-family="monospace" font-size="11" fill="#f0f4c3">bundled_assets/h5/index.html</text>
+  </g>
+
+  <!-- 右侧：解决方案 -->
+  <g transform="translate(1600, 300)">
+    <!-- 绿色框：解决方案 -->
+    <rect x="-140" y="-100" width="280" height="200" rx="12" fill="none" stroke="#81c784" stroke-width="3"/>
+    <text x="0" y="-70" text-anchor="middle" font-family="cursive" font-size="24" font-weight="bold" fill="#81c784">解决方案</text>
+    <text x="0" y="-40" text-anchor="middle" font-family="cursive" font-size="14" fill="#c8e6c9">使用 react-native-fs</text>
+    <text x="0" y="-15" text-anchor="middle" font-family="monospace" font-size="12" fill="#e8f5e9">RNFS.MainBundlePath</text>
+    <text x="0" y="10" text-anchor="middle" font-family="cursive" font-size="13" fill="#c8e6c9">动态获取 bundle 路径</text>
+    <text x="0" y="35" text-anchor="middle" font-family="cursive" font-size="13" fill="#c8e6c9">构造完整 file:// URL</text>
+    <text x="0" y="60" text-anchor="middle" font-family="cursive" font-size="13" fill="#c8e6c9">验证文件存在后加载</text>
+    <text x="0" y="85" text-anchor="middle" font-family="cursive" font-size="12" fill="#a5d6a7">✅ iOS + Android 双平台兼容</text>
+  </g>
+
+  <!-- 左下：RN 版本问题 -->
+  <g transform="translate(340, 650)">
+    <!-- 紫色框：版本选择 -->
+    <rect x="-150" y="-110" width="300" height="220" rx="12" fill="none" stroke="#ce93d8" stroke-width="3"/>
+    <text x="0" y="-80" text-anchor="middle" font-family="cursive" font-size="22" font-weight="bold" fill="#ce93d8">RN 版本选择</text>
+    <text x="0" y="-50" text-anchor="middle" font-family="cursive" font-size="13" fill="#f3e5f5">❌ RN 0.82.1 问题:</text>
+    <text x="0" y="-30" text-anchor="middle" font-family="cursive" font-size="12" fill="#f3e5f5">• 强制新架构 (Fabric)</text>
+    <text x="0" y="-12" text-anchor="middle" font-family="cursive" font-size="12" fill="#f3e5f5">• modulemap 错误</text>
+    <text x="0" y="6" text-anchor="middle" font-family="cursive" font-size="12" fill="#f3e5f5">• react-native-fs 不兼容</text>
+    <text x="0" y="35" text-anchor="middle" font-family="cursive" font-size="13" fill="#e1bee7">✅ RN 0.73.7:</text>
+    <text x="0" y="55" text-anchor="middle" font-family="cursive" font-size="12" fill="#e1bee7">• Old Architecture 稳定</text>
+    <text x="0" y="73" text-anchor="middle" font-family="cursive" font-size="12" fill="#e1bee7">• iOS 构建正常</text>
+    <text x="0" y="91" text-anchor="middle" font-family="cursive" font-size="12" fill="#e1bee7">• 第三方库兼容良好</text>
+  </g>
+
+  <!-- 中下：其他问题 -->
+  <g transform="translate(960, 670)">
+    <!-- 蓝色框：其他问题 -->
+    <rect x="-170" y="-90" width="340" height="180" rx="12" fill="none" stroke="#64b5f6" stroke-width="3"/>
+    <text x="0" y="-60" text-anchor="middle" font-family="cursive" font-size="22" font-weight="bold" fill="#64b5f6">其他遇到的问题</text>
+    <text x="0" y="-30" text-anchor="middle" font-family="cursive" font-size="13" fill="#e3f2fd">1. Babel 配置错误</text>
+    <text x="0" y="-12" text-anchor="middle" font-family="monospace" font-size="10" fill="#bbdefb">react-native-reanimated/plugin</text>
+    <text x="0" y="10" text-anchor="middle" font-family="cursive" font-size="13" fill="#e3f2fd">2. 组件注册名称不匹配</text>
+    <text x="0" y="28" text-anchor="middle" font-family="monospace" font-size="10" fill="#bbdefb">app.json vs AppDelegate</text>
+    <text x="0" y="50" text-anchor="middle" font-family="cursive" font-size="13" fill="#e3f2fd">3. 模块名称大小写</text>
+    <text x="0" y="68" text-anchor="middle" font-family="monospace" font-size="10" fill="#bbdefb">AwesomeProject vs awesomeproject</text>
+  </g>
+
+  <!-- 右下：最佳实践 -->
+  <g transform="translate(1580, 650)">
+    <!-- 橙色框：最佳实践 -->
+    <rect x="-130" y="-110" width="260" height="220" rx="12" fill="none" stroke="#ffb74d" stroke-width="3"/>
+    <text x="0" y="-80" text-anchor="middle" font-family="cursive" font-size="22" font-weight="bold" fill="#ffb74d">最佳实践</text>
+    <text x="0" y="-50" text-anchor="middle" font-family="cursive" font-size="13" fill="#ffe0b2">✓ 统一路径获取 API</text>
+    <text x="0" y="-28" text-anchor="middle" font-family="cursive" font-size="13" fill="#ffe0b2">✓ 文件存在验证</text>
+    <text x="0" y="-6" text-anchor="middle" font-family="cursive" font-size="13" fill="#ffe0b2">✓ 完善错误处理</text>
+    <text x="0" y="16" text-anchor="middle" font-family="cursive" font-size="13" fill="#ffe0b2">✓ 开发环境日志</text>
+    <text x="0" y="44" text-anchor="middle" font-family="cursive" font-size="13" fill="#ffe0b2">✓ 平台差异处理</text>
+    <text x="0" y="66" text-anchor="middle" font-family="cursive" font-size="13" fill="#ffe0b2">✓ 避免硬编码路径</text>
+    <text x="0" y="94" text-anchor="middle" font-family="cursive" font-size="11" fill="#ffcc80" font-style="italic">检查现有依赖，避免重复造轮</text>
+  </g>
+
+  <!-- 连接线 -->
+  <path d="M460 300 Q600 290 800 310" stroke="#ef5350" stroke-width="2" fill="none" stroke-dasharray="5,3" opacity="0.6"/>
+  <polygon points="795,308 805,310 795,312" fill="#ef5350" opacity="0.6"/>
+
+  <path d="M1120 310 Q1300 290 1460 300" stroke="#81c784" stroke-width="2" fill="none" stroke-dasharray="5,3" opacity="0.6"/>
+  <polygon points="1455,298 1465,300 1455,302" fill="#81c784" opacity="0.6"/>
+
+  <!-- 底部：章节导航 -->
+  <g transform="translate(960, 920)">
+    <text x="0" y="0" text-anchor="middle" font-family="cursive" font-size="16" fill="#b0bec5">问题背景 → 排查过程 → 解决方案 → 技术总结 → 最佳实践</text>
+    <line x1="-350" y1="15" x2="350" y2="15" stroke="#607d8b" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- 左下角标签 -->
+  <g transform="translate(120, 980)">
+    <rect x="0" y="-25" width="200" height="35" rx="17" fill="none" stroke="#64b5f6" stroke-width="2"/>
+    <text x="100" y="0" text-anchor="middle" font-family="cursive" font-size="14" fill="#64b5f6">#ReactNative #iOS #WebView</text>
+  </g>
+
+  <!-- 右下角信息 -->
+  <g transform="translate(1800, 980)">
+    <text x="0" y="0" text-anchor="end" font-family="cursive" font-size="14" fill="#78909c">2026-02-25 · 踩坑记录</text>
+  </g>
+
+  <!-- 装饰元素 -->
+  <text x="150" y="200" font-family="monospace" font-size="28" fill="#ef5350" opacity="0.2">&lt;WebView /&gt;</text>
+  <text x="1770" y="220" font-family="monospace" font-size="24" fill="#81c784" opacity="0.2">iOS</text>
+  <text x="100" y="500" font-family="monospace" font-size="26" fill="#ce93d8" opacity="0.2">RN</text>
+  <text x="1820" y="520" font-family="monospace" font-size="24" fill="#ffb74d" opacity="0.2">file://</text>
+
+  <!-- 装饰圆点 -->
+  <circle cx="200" cy="420" r="4" fill="#ef5350" opacity="0.4"/>
+  <circle cx="1720" cy="420" r="4" fill="#81c784" opacity="0.4"/>
+  <circle cx="500" cy="770" r="4" fill="#ce93d8" opacity="0.4"/>
+  <circle cx="1420" cy="770" r="4" fill="#ffb74d" opacity="0.4"/>
+
+  <!-- 水印 -->
+  <text x="1890" y="1065" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#ffffff" opacity="0.5" text-anchor="end">Jerret's Blog</text>
+</svg>
