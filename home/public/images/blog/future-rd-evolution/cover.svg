@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0f9ff"/>
+      <stop offset="100%" style="stop-color:#ffffff"/>
+    </linearGradient>
+    <linearGradient id="riseGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="cardGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dbeafe"/>
+      <stop offset="100%" style="stop-color:#eff6ff"/>
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fef3c7"/>
+      <stop offset="100%" style="stop-color:#fffbeb"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#skyGrad)"/>
+
+  <!-- Sun/light element - future -->
+  <circle cx="1000" cy="120" r="80" fill="#fbbf24" opacity="0.15"/>
+  <circle cx="1000" cy="120" r="60" fill="#fbbf24" opacity="0.25"/>
+  <circle cx="1000" cy="120" r="40" fill="#fbbf24" opacity="0.35"/>
+
+  <!-- Rising path line - symbolizing progress toward future -->
+  <path d="M 100 550 Q 300 500 450 400 T 800 250 T 1100 100" fill="none" stroke="url(#riseGrad)" stroke-width="3" opacity="0.3" stroke-dasharray="8,8"/>
+
+  <!-- Title area -->
+  <text x="600" y="80" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="36" font-weight="600" text-anchor="middle" fill="#1e293b">未来产研形态迭代</text>
+  <text x="600" y="110" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" text-anchor="middle" fill="#64748b">交付产物 × 支撑能力 → 共同进化</text>
+
+  <!-- ===== Left: 交付产物 (Ascending items) ===== -->
+  <g transform="translate(100, 150)">
+    <!-- Section header -->
+    <rect x="0" y="0" width="420" height="44" rx="12" fill="#3b82f6" opacity="0.1"/>
+    <text x="210" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="600" text-anchor="middle" fill="#3b82f6">📦 交付产物</text>
+
+    <!-- Item 1 - Base level -->
+    <g transform="translate(0, 60)">
+      <rect x="0" y="0" width="420" height="72" rx="12" fill="url(#cardGrad1)" filter="url(#softShadow)"/>
+      <rect x="0" y="0" width="6" height="72" rx="3" fill="#3b82f6"/>
+      <text x="30" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="#1e40af">01</text>
+      <text x="70" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="500" fill="#1e293b">可持续迭代的 Spec</text>
+      <text x="70" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">版本可控 · 增量更新 · 双向同步</text>
+    </g>
+
+    <!-- Item 2 - Mid level (slightly elevated) -->
+    <g transform="translate(0, 145)">
+      <rect x="0" y="0" width="420" height="72" rx="12" fill="url(#cardGrad1)" filter="url(#softShadow)"/>
+      <rect x="0" y="0" width="6" height="72" rx="3" fill="#10b981"/>
+      <text x="30" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="#059669">02</text>
+      <text x="70" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="500" fill="#1e293b">可稳定验收的产品</text>
+      <text x="70" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">清晰 Done · 自动验证 · 持续集成</text>
+    </g>
+
+    <!-- Item 3 - High level (more elevated) -->
+    <g transform="translate(0, 230)">
+      <rect x="0" y="0" width="420" height="72" rx="12" fill="url(#cardGrad1)" filter="url(#softShadow)"/>
+      <rect x="0" y="0" width="6" height="72" rx="3" fill="#f59e0b"/>
+      <text x="30" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="#d97706">03</text>
+      <text x="70" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="500" fill="#1e293b">持续观测标准</text>
+      <text x="70" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">指标追踪 · A/B 实验 · 反馈闭环</text>
+    </g>
+  </g>
+
+  <!-- ===== Right: 支撑能力 ===== -->
+  <g transform="translate(680, 150)">
+    <!-- Section header -->
+    <rect x="0" y="0" width="420" height="44" rx="12" fill="#8b5cf6" opacity="0.1"/>
+    <text x="210" y="30" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="600" text-anchor="middle" fill="#8b5cf6">🔧 支撑能力</text>
+
+    <!-- Item 1 -->
+    <g transform="translate(0, 60)">
+      <rect x="0" y="0" width="420" height="72" rx="12" fill="url(#cardGrad2)" filter="url(#softShadow)"/>
+      <rect x="0" y="0" width="6" height="72" rx="3" fill="#8b5cf6"/>
+      <text x="30" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="#7c3aed">01</text>
+      <text x="70" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="500" fill="#1e293b">自迭代运行环境</text>
+      <text x="70" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">无限 · 安全 · 环境一致 · 快速恢复</text>
+    </g>
+
+    <!-- Item 2 -->
+    <g transform="translate(0, 145)">
+      <rect x="0" y="0" width="420" height="72" rx="12" fill="url(#cardGrad2)" filter="url(#softShadow)"/>
+      <rect x="0" y="0" width="6" height="72" rx="3" fill="#ec4899"/>
+      <text x="30" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600" fill="#db2777">02</text>
+      <text x="70" y="28" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="500" fill="#1e293b">清晰的交付链接</text>
+      <text x="70" y="50" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">Shared Understanding · 透明沟通 · 责任边界</text>
+    </g>
+  </g>
+
+  <!-- ===== Center: Connection arrow ===== -->
+  <g transform="translate(560, 280)">
+    <path d="M 0 0 L 60 20 L 0 40 L 10 20 Z" fill="#94a3b8" opacity="0.6"/>
+  </g>
+
+  <!-- ===== Bottom: Bridge to future ===== -->
+  <g transform="translate(100, 480)">
+    <rect x="0" y="0" width="1000" height="56" rx="28" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
+    <text x="500" y="35" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="500" text-anchor="middle" fill="#166534">🌱 未来没来之前：对现有产研流程的重塑和增强</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="1100" y="600" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" text-anchor="end" fill="#94a3b8">Jerret's Blog</text>
+</svg>

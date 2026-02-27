@@ -1,0 +1,151 @@
+<mxfile host="app.diagrams.net" modified="2025-02-27T00:00:00.000Z" agent="Claude" version="24.0.0">
+  <diagram name="未来产研形态迭代封面" id="cover-diagram">
+    <mxGraphModel dx="1200" dy="630" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="630" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Background -->
+        <mxCell id="bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8f9fa;gradientColor=#e9ecef;gradientDirection=direction;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1200" height="630" as="geometry" />
+        </mxCell>
+
+        <!-- Shadow layer -->
+        <mxCell id="shadow" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dee2e6;opacity=80;" vertex="1" parent="1">
+          <mxGeometry x="54" y="54" width="1092" height="522" as="geometry" />
+        </mxCell>
+
+        <!-- Main card -->
+        <mxCell id="mainCard" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#343a40;strokeWidth=3;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="1080" height="510" as="geometry" />
+        </mxCell>
+
+        <!-- Title header -->
+        <mxCell id="titleHeader" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#343a40;roundedTop=1;roundedBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="1080" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Title text -->
+        <mxCell id="titleText" value="未来产研形态迭代" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;fontStyle=1;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="1080" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Subtitle -->
+        <mxCell id="subtitle" value="交付产物 vs 支撑能力" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontColor=#6c757d;" vertex="1" parent="1">
+          <mxGeometry x="60" y="140" width="1080" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Left: 交付产物 ===== -->
+        <!-- Container -->
+        <mxCell id="deliverablesContainer" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#343a40;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="90" y="185" width="460" height="290" as="geometry" />
+        </mxCell>
+
+        <!-- Header -->
+        <mxCell id="deliverablesHeader" value="📦 交付产物" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1976d2;strokeColor=#1976d2;fontStyle=1;fontSize=22;fontColor=#ffffff;roundedTop=1;roundedBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="90" y="185" width="460" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Item 1: Spec -->
+        <mxCell id="specItem" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3f2fd;gradientColor=#bbdefb;strokeColor=#1565c0;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="110" y="245" width="420" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="specNum" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1565c0;fontStyle=1;fontSize=18;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="120" y="253" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="specTitle" value="可持续迭代的 Spec" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#0d47a1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="250" width="350" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="specDesc" value="版本可控 · 增量更新 · 双向同步" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#455a64;" vertex="1" parent="1">
+          <mxGeometry x="170" y="275" width="350" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Item 2: Product -->
+        <mxCell id="productItem" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e9;gradientColor=#c8e6c9;strokeColor=#2e7d32;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="110" y="320" width="420" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="productNum" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#2e7d32;fontStyle=1;fontSize=18;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="120" y="328" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="productTitle" value="可稳定验收的产品" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#1b5e20;" vertex="1" parent="1">
+          <mxGeometry x="170" y="325" width="350" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="productDesc" value="清晰 Done · 自动验证 · 持续集成" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#455a64;" vertex="1" parent="1">
+          <mxGeometry x="170" y="350" width="350" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Item 3: Observation -->
+        <mxCell id="obsItem" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;gradientColor=#ffe0b2;strokeColor=#ef6c00;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="110" y="395" width="420" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="obsNum" value="3" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ef6c00;fontStyle=1;fontSize=18;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="120" y="403" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="obsTitle" value="持续观测标准" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#e65100;" vertex="1" parent="1">
+          <mxGeometry x="170" y="400" width="350" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="obsDesc" value="指标追踪 · A/B 实验 · 反馈闭环" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#455a64;" vertex="1" parent="1">
+          <mxGeometry x="170" y="425" width="350" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Center Arrow ===== -->
+        <mxCell id="arrow" value="" style="endArrow=classic;html=1;rounded=0;strokeColor=#6c757d;strokeWidth=2;fillColor=#6c757d;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="560" y="310" as="sourcePoint" />
+            <mxPoint x="600" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== Right: 支撑能力 ===== -->
+        <!-- Container -->
+        <mxCell id="capabilitiesContainer" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8f9fa;strokeColor=#343a40;strokeWidth=2;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="650" y="185" width="460" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- Header -->
+        <mxCell id="capabilitiesHeader" value="🔧 支撑能力" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7b1fa2;strokeColor=#7b1fa2;fontStyle=1;fontSize=22;fontColor=#ffffff;roundedTop=1;roundedBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="650" y="185" width="460" height="45" as="geometry" />
+        </mxCell>
+
+        <!-- Item 1: Environment -->
+        <mxCell id="envItem" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;gradientColor=#f8bbd0;strokeColor=#c2185b;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="670" y="245" width="420" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="envNum" value="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#c2185b;fontStyle=1;fontSize=18;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="680" y="252" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="envTitle" value="自迭代运行环境" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#880e4f;" vertex="1" parent="1">
+          <mxGeometry x="730" y="250" width="350" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="envDesc" value="无限 · 安全 · 环境一致 · 快速恢复" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#455a64;" vertex="1" parent="1">
+          <mxGeometry x="730" y="273" width="350" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Item 2: Communication -->
+        <mxCell id="commItem" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;gradientColor=#e1bee7;strokeColor=#6a1b9a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="670" y="315" width="420" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="commNum" value="2" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#6a1b9a;fontStyle=1;fontSize=18;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="680" y="322" width="36" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="commTitle" value="清晰的交付链接" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#4a148c;" vertex="1" parent="1">
+          <mxGeometry x="730" y="320" width="350" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="commDesc" value="Shared Understanding · 透明沟通 · 责任边界" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#455a64;" vertex="1" parent="1">
+          <mxGeometry x="730" y="343" width="350" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Bottom note ===== -->
+        <mxCell id="bottomNote" value="⚡ 未来没来之前：对现有产研流程的重塑和增强" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff9c4;strokeColor=#f9a825;strokeWidth=2;fontStyle=1;fontSize=18;fontColor=#f57f17;" vertex="1" parent="1">
+          <mxGeometry x="180" y="495" width="840" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Footer -->
+        <mxCell id="footer" value="Jerret's Blog" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;fontColor=#6c757d;" vertex="1" parent="1">
+          <mxGeometry x="60" y="540" width="1080" height="30" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
