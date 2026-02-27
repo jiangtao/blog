@@ -1,0 +1,162 @@
+<mxfile host="app.diagrams.net" modified="2025-02-27T00:00:00.000Z" agent="Claude" version="24.0.0">
+  <diagram name="未来产研形态迭代封面 v3" id="cover-diagram-v3">
+    <mxGraphModel dx="1200" dy="630" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="630" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Background - Light Sky -->
+        <mxCell id="bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f0f9ff;gradientColor=#ffffff;gradientDirection=south;" vertex="1" parent="1">
+          <mxGeometry x="0" y="0" width="1200" height="630" as="geometry" />
+        </mxCell>
+
+        <!-- Sun - Future symbol -->
+        <mxCell id="sun1" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fbbf24;strokeColor=none;opacity=15;" vertex="1" parent="1">
+          <mxGeometry x="920" y="40" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="sun2" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fbbf24;strokeColor=none;opacity=25;" vertex="1" parent="1">
+          <mxGeometry x="940" y="60" width="120" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="sun3" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fbbf24;strokeColor=none;opacity=35;" vertex="1" parent="1">
+          <mxGeometry x="960" y="80" width="80" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Rising path - progress line -->
+        <mxCell id="risePath" value="" style="curved=1;endArrow=none;html=1;rounded=0;strokeColor=#3b82f6;strokeWidth=3;fillColor=none;dashed=1;dashPattern=8 8;opacity=30;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="550" as="sourcePoint" />
+            <mxPoint x="1100" y="100" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="300" y="500" />
+              <mxPoint x="450" y="400" />
+              <mxPoint x="800" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Title -->
+        <mxCell id="title" value="未来产研形态迭代" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;fontStyle=2;fontColor=#1e293b;" vertex="1" parent="1">
+          <mxGeometry x="0" y="45" width="1200" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Subtitle -->
+        <mxCell id="subtitle" value="交付产物 × 支撑能力 → 共同进化" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontColor=#64748b;" vertex="1" parent="1">
+          <mxGeometry x="0" y="90" width="1200" height="25" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Left: 交付产物 ===== -->
+        <!-- Header -->
+        <mxCell id="delivHeader" value="📦 交付产物" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3b82f6;strokeColor=none;opacity=10;fontStyle=1;fontSize=20;fontColor=#3b82f6;" vertex="1" parent="1">
+          <mxGeometry x="100" y="150" width="420" height="44" as="geometry" />
+        </mxCell>
+
+        <!-- Item 1 -->
+        <mxCell id="deliv1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;gradientColor=#eff6ff;strokeColor=none;shadow=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="100" y="210" width="420" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="deliv1Bar" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3b82f6;strokeColor=verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="100" y="210" width="6" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="deliv1Num" value="01" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#1e40af;" vertex="1" parent="1">
+          <mxGeometry x="130" y="225" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="deliv1Title" value="可持续迭代的 Spec" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=15;fontStyle=1;fontColor=#1e293b;" vertex="1" parent="1">
+          <mxGeometry x="170" y="225" width="340" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="deliv1Desc" value="版本可控 · 增量更新 · 双向同步" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#64748b;" vertex="1" parent="1">
+          <mxGeometry x="170" y="250" width="340" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Item 2 -->
+        <mxCell id="deliv2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;gradientColor=#eff6ff;strokeColor=none;shadow=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="100" y="295" width="420" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="deliv2Bar" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#10b981;strokeColor=verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="100" y="295" width="6" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="deliv2Num" value="02" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#059669;" vertex="1" parent="1">
+          <mxGeometry x="130" y="310" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="deliv2Title" value="可稳定验收的产品" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=15;fontStyle=1;fontColor=#1e293b;" vertex="1" parent="1">
+          <mxGeometry x="170" y="310" width="340" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="deliv2Desc" value="清晰 Done · 自动验证 · 持续集成" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#64748b;" vertex="1" parent="1">
+          <mxGeometry x="170" y="335" width="340" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Item 3 -->
+        <mxCell id="deliv3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;gradientColor=#eff6ff;strokeColor=none;shadow=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="100" y="380" width="420" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="deliv3Bar" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f59e0b;strokeColor=verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="100" y="380" width="6" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="deliv3Num" value="03" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#d97706;" vertex="1" parent="1">
+          <mxGeometry x="130" y="395" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="deliv3Title" value="持续观测标准" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=15;fontStyle=1;fontColor=#1e293b;" vertex="1" parent="1">
+          <mxGeometry x="170" y="395" width="340" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="deliv3Desc" value="指标追踪 · A/B 实验 · 反馈闭环" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#64748b;" vertex="1" parent="1">
+          <mxGeometry x="170" y="420" width="340" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Right: 支撑能力 ===== -->
+        <!-- Header -->
+        <mxCell id="capHeader" value="🔧 支撑能力" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8b5cf6;strokeColor=none;opacity=10;fontStyle=1;fontSize=20;fontColor=#8b5cf6;" vertex="1" parent="1">
+          <mxGeometry x="680" y="150" width="420" height="44" as="geometry" />
+        </mxCell>
+
+        <!-- Item 1 -->
+        <mxCell id="cap1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;gradientColor=#fffbeb;strokeColor=none;shadow=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="680" y="210" width="420" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="cap1Bar" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#8b5cf6;strokeColor=verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="680" y="210" width="6" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="cap1Num" value="01" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#7c3aed;" vertex="1" parent="1">
+          <mxGeometry x="710" y="225" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="cap1Title" value="自迭代运行环境" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=15;fontStyle=1;fontColor=#1e293b;" vertex="1" parent="1">
+          <mxGeometry x="750" y="225" width="340" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="cap1Desc" value="无限 · 安全 · 环境一致 · 快速恢复" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#64748b;" vertex="1" parent="1">
+          <mxGeometry x="750" y="250" width="340" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Item 2 -->
+        <mxCell id="cap2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef3c7;gradientColor=#fffbeb;strokeColor=none;shadow=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="680" y="295" width="420" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="cap2Bar" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ec4899;strokeColor=verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="680" y="295" width="6" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="cap2Num" value="02" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#db2777;" vertex="1" parent="1">
+          <mxGeometry x="710" y="310" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="cap2Title" value="清晰的交付链接" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=15;fontStyle=1;fontColor=#1e293b;" vertex="1" parent="1">
+          <mxGeometry x="750" y="310" width="340" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="cap2Desc" value="Shared Understanding · 透明沟通 · 责任边界" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#64748b;" vertex="1" parent="1">
+          <mxGeometry x="750" y="335" width="340" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Center Arrow ===== -->
+        <mxCell id="arrow" value="" style="triangle;whiteSpace=wrap;html=1;fillColor=#94a3b8;strokeColor=none;opacity=60;direction=east;" vertex="1" parent="1">
+          <mxGeometry x="560" y="280" width="60" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- ===== Bottom Note ===== -->
+        <mxCell id="bottomNote" value="🌱 未来没来之前：对现有产研流程的重塑和增强" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#86efac;strokeWidth=1;fontStyle=1;fontSize=16;fontColor=#166534;" vertex="1" parent="1">
+          <mxGeometry x="100" y="480" width="1000" height="56" as="geometry" />
+        </mxCell>
+
+        <!-- Footer -->
+        <mxCell id="footer" value="Jerret's Blog" style="text;html=1;strokeColor=none;fillColor=none;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=13;fontColor=#94a3b8;" vertex="1" parent="1">
+          <mxGeometry x="0" y="585" width="1180" height="20" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
