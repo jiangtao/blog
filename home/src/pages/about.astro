@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import Breadcrumb from '../components/Breadcrumb.astro'
+import AIUsageDashboard from '../components/ai/AIUsageDashboard.astro'
+import { SITE } from '../config'
+---
+
+<Layout title={`About | ${SITE.title}`}>
+  <Header />
+  <Breadcrumb />
+  <main id="main-content" class="app-layout">
+    <section id="about" class="app-prose mb-28 max-w-app prose-img:border-0">
+      <h1 class="text-2xl tracking-wider sm:text-3xl">About</h1>
+
+      <ul>
+        <li>✨ FrontEnd, FullStack Devloper, Focus on Web/Hybrid/Electron/Node/RN</li>
+        <li>🌱 Find a job or chance in the feature 🚀</li>
+        <li>👯 Worked in <a href="https://github.com/meituan">meituan</a> 2020-2025，worked in <a href="https://www.wudaima.com">YiChuang wudaima</a>/2018-2020。Loved at Lowcode/NoCode. Currently exploring AI efficiency practices.</li>
+        <li>📝 <a href="https://github.com/jiangtao/blog">Blog</a> <a href="https://www.yuque.com/imjt">YuQue Notes</a></li>
+        <li>💬 Skill: <strong>Javascript/Node.js/Mongo/MySQL/Electron</strong></li>
+        <li>📫 Email: <strong>w3cfuns@qq.com</strong></li>
+        <li>💬 <a href="https://x.com/Jerret321">X</a>, A comfort zone for information exchange</li>
+        <li>💬 WeChat: jtss77，添加请备注来意</li>
+      </ul>
+
+      <h2>History Jobs</h2>
+
+      <p>最近 3 份经历：</p>
+
+      <ul>
+        <li>2025/05/08-2026/01/16  <strong>结行科技（resto）随行付旗下餐饮 SaaS 板块， Electron客户端，支持国内外</strong></li>
+        <li>2020/07/01-2026/04/30 <strong>美团，平台搭建系统负责人/全栈， 搜索站内营销负责人/前端</strong></li>
+        <li>2018/06-2020/06/30 <strong>宜创科技, 无代码搭建系统/架构师，宜创无代码平台</strong></li>
+      </ul>
+
+      <h2>Want To Do</h2>
+
+      <ul>
+        <li>定期会分享一些实践、心得等，转载的话备注出处</li>
+        <li>找工作中，方向前端/全栈（Leader），期望有机会实践 AI，不限制 AI Coding，如果您需要详细简历，请添加 vx，备注来意、招聘大概的职级等</li>
+        <li>可短期承接 App项目、后端服务</li>
+        <li>可承接面试辅导、技术咨询服务等</li>
+      </ul>
+
+      <blockquote>
+        <p>年纪已超过 35 岁斩杀线了，心态还很积极乐观健康，介意勿扰</p>
+      </blockquote>
+
+      <h2>坦诚以待</h2>
+
+      <ul>
+        <li>尽量 Base 北京或远程，人脉都在北京</li>
+        <li>真的缺人请真诚联系，刷KPI或套方案大可不必，加vx交流方向感兴趣随时沟通</li>
+      </ul>
+
+      <blockquote>
+        <p>授人以渔 乐意至极，项目方案之类的可以沟通，算咨询费或发红包都可以，</p>
+      </blockquote>
+
+      <ul>
+        <li>短期事宜：关于项目承接，尽量带价来，项目感兴趣有难度就搞起来；在上班前保质保量交付，正式上班后精力有限。</li>
+      </ul>
+
+      <!-- AI Usage Dashboard -->
+      <div class="my-16">
+        <AIUsageDashboard />
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
