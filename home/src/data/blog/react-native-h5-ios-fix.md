@@ -217,6 +217,8 @@ class BundleAssetsManager: NSObject {
 
 发现项目中已经安装了 `react-native-fs`，这个库提供了获取 bundle 路径的 API！
 
+#### 初版方案：直接使用 file:// URI
+
 ```typescript
 // src/native/BundleAssetsManager.ts
 import RNFS from 'react-native-fs';
@@ -240,23 +242,77 @@ export const getBundledH5Url = async (): Promise<string> => {
 };
 ```
 
+#### 遇到新问题：外部资源加载失败
+
+使用 file:// URI 后，虽然 HTML 能加载，但外部资源（CSS、JS、图片）出现错误：
+
+```
+[Error] Failed to load resource: The operation couldn't be completed. (WebKitError error 101)
+Ignoring request to load this main resource because it is outside the sandbox
+```
+
+这是因为 iOS WKWebView 的沙盒限制，即使使用绝对路径，外部资源仍被视为 "outside the sandbox"。
+
+#### 最终方案：HTML 字符串 + baseUrl（推荐）
+
+解决方法是读取 HTML 内容作为字符串，并设置 baseUrl：
+
+```typescript
+// src/native/BundleAssetsManager.ts
+import RNFS from 'react-native-fs';
+
+export const getBundledH5Content = async (): Promise<{ html: string; baseUrl: string } | null> => {
+  if (Platform.OS !== 'ios') return null;
+
+  const mainBundlePath = RNFS.MainBundlePath;
+  const h5IndexPath = `${mainBundlePath}/bundled_assets/h5/app.html`;
+
+  // 关键：baseUrl 必须是完整的 app.html 路径（包括文件名）
+  const baseUrl = `file://${mainBundlePath}/bundled_assets/h5/app.html`;
+
+  // 读取 HTML 内容
+  const html = await RNFS.readFile(h5IndexPath, 'utf8');
+
+  return { html, baseUrl };
+};
+```
+
 #### 更新 OfflineWebView 组件
 
 ```typescript
-const [loadState, setLoadState] = useState<ResourceLoadState>({
+// OfflineWebView.tsx
+import { getBundledH5Content } from '../native/BundleAssetsManager';
+
+const [loadState, setLoadState] = useState<{
+  source: 'bundled' | 'online';
+  // Android 使用 uri，iOS 使用 html + baseUrl
+  uri?: string;
+  html?: string;
+  baseUrl?: string;
+  isLoading: boolean;
+  error: string | null;
+}>({
   source: 'bundled',
-  uri: getInitialUri(), // 初始值
-  isLoading: true,      // iOS 开始加载
+  uri: getInitialUri(), // Android 初始值
+  isLoading: true,
   error: null,
 });
 
-// iOS: 异步获取正确的 bundle 路径
+// iOS: 异步获取 HTML 内容和 baseUrl
 useEffect(() => {
   if (Platform.OS === 'ios') {
-    getBundledH5Url()
-      .then((uri) => {
-        console.log('[OfflineWebView] Got iOS bundle path:', uri);
-        setLoadState(prev => ({ ...prev, uri, isLoading: false }));
+    getBundledH5Content()
+      .then((result) => {
+        if (result) {
+          console.log('[OfflineWebView] Got iOS H5 content');
+          setLoadState({
+            source: 'bundled',
+            html: result.html,
+            baseUrl: result.baseUrl,
+            isLoading: false,
+            error: null,
+          });
+        }
       })
       .catch((error) => {
         console.error('[OfflineWebView] Error:', error);
@@ -264,68 +320,288 @@ useEffect(() => {
       });
   }
 }, []);
+
+// 渲染时区分平台
+<WebView
+  source={
+    loadState.html && loadState.baseUrl
+      ? { html: loadState.html, baseUrl: loadState.baseUrl } // iOS
+      : { uri: loadState.uri } // Android
+  }
+  // ... 其他配置
+/>
+```
+
+### 第六步：适配 H5 路径
+
+实现 `html + baseUrl` 方案后，H5 页面能够成功加载 HTML 内容，但外部资源（CSS、JS、图片）可能出现加载失败。这是因为 H5 项目的资源路径配置不正确。
+
+#### 问题：资源路径使用绝对路径
+
+许多前端构建工具（rsbuild、vite、webpack）默认生成绝对路径：
+
+```html
+<!-- ❌ 错误：使用绝对路径 -->
+<link rel="stylesheet" href="/static/css/main.css">
+<script src="/static/js/bundle.js"></script>
+<img src="/static/image/logo.png">
+```
+
+**问题**：
+- **Android**：WebView 能正确解析绝对路径（基于 `file://` 协议根目录）
+- **iOS**：WKWebView 的沙盒机制无法解析绝对路径，资源加载失败
+
+#### 解决方案：使用相对路径
+
+##### 1. HTML 模板添加 `<base>` 标签
+
+在 H5 项目的 HTML 模板中添加 `<base href="./">`：
+
+```html
+<!-- public/app.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- 关键：设置相对路径基准 -->
+  <base href="./">
+
+  <!-- 资源使用相对路径 -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+  <link rel="stylesheet" href="./static/css/main.css">
+</head>
+<body>
+  <div id="root"></div>
+  <script src="./static/js/bundle.js"></script>
+</body>
+</html>
+```
+
+##### 2. 构建工具配置（rsbuild 示例）
+
+确保构建工具使用相对路径作为 base：
+
+```javascript
+// rsbuild.config.ts
+export default defineConfig({
+  output: {
+    assetPrefix: './', // 使用相对路径
+  },
+  // 或者使用环境变量
+  base: './',
+});
+```
+
+##### 3. 构建后路径修复（备选方案）
+
+如果构建工具仍生成绝对路径，可以在构建后自动修复：
+
+```javascript
+// scripts/fix-asset-paths.js
+const fs = require('fs');
+const path = require('path');
+
+const htmlPath = path.join(__dirname, '../dist/app.html');
+let html = fs.readFileSync(htmlPath, 'utf8');
+
+// 将绝对路径改为相对路径
+const replacements = [
+  [/href="\/static\//g, 'href="./static/'],
+  [/src="\/static\//g, 'src="./static/'],
+  [/href="\/favicon\//g, 'href="./favicon/'],
+];
+
+replacements.forEach(([pattern, replacement]) => {
+  html = html.replace(pattern, replacement);
+});
+
+fs.writeFileSync(htmlPath, html);
+console.log('✅ Asset paths fixed to relative paths');
+```
+
+在 `package.json` 中添加：
+
+```json
+{
+  "scripts": {
+    "build": "rsbuild build && node scripts/fix-asset-paths.js"
+  }
+}
+```
+
+#### 资源路径对照表
+
+| 资源类型 | ❌ 绝对路径（iOS 失败） | ✅ 相对路径 |
+|:---------|:-----------------------|:-----------|
+| CSS | `/static/css/main.css` | `./static/css/main.css` |
+| JS | `/static/js/bundle.js` | `./static/js/bundle.js` |
+| 图片 | `/static/image/logo.png` | `./static/image/logo.png` |
+| Favicon | `/favicon/favicon.ico` | `./favicon/favicon.ico` |
+| 字体 | `/static/fonts/icon.woff2` | `./static/fonts/icon.woff2` |
+
+#### 验证方法
+
+构建后检查生成的 HTML 文件：
+
+```bash
+# 检查 dist/app.html
+grep -E 'href=|src=' dist/app.html
+
+# 期望输出（全部使用相对路径）：
+# href="./favicon/favicon-32x32.png"
+# href="./static/css/main.css"
+# src="./static/js/bundle.js"
+```
+
+#### RN 组件中的完整实现
+
+```typescript
+// src/containers/webview/OfflineWebView.tsx
+/**
+ * ## H5 资源路径配置要求（重要！）
+ *
+ * H5 页面中的所有资源（CSS、JS、图片、字体等）**必须使用相对路径**：
+ *
+ * ✅ 正确：使用相对路径 `./` 或 `../`
+ * - `<link href="./static/css/index.css">`
+ * - `<script src="./static/js/index.js"></script>`
+ *
+ * ❌ 错误：使用绝对路径 `/`
+ * - `<link href="/static/css/index.css">`  ← iOS 无法加载
+ *
+ * ### HTML 模板配置
+ * 在 H5 项目的 `public/app.html` 中添加 `<base href="./">` 标签。
+ */
 ```
 
 ## 最终方案
 
-### 完整的路径获取逻辑
+### 平台差异化加载策略
+
+由于 iOS 和 Android 的 WebView 实现差异，采用不同的加载方式：
 
 ```typescript
 // src/native/BundleAssetsManager.ts
 import { Platform } from 'react-native';
 import RNFS from 'react-native-fs';
 
-export const getBundledH5Url = async (): Promise<string> => {
+/**
+ * Android: 直接返回 file:// URI
+ */
+export const getBundledH5Url = (): string => {
   if (Platform.OS === 'android') {
-    // Android: 使用固定路径
-    return 'file:///android_asset/bundled_assets/h5/index.html';
+    return 'file:///android_asset/bundled_assets/h5/app.html';
   }
-
-  // iOS: 获取动态 bundle 路径
-  try {
-    const mainBundlePath = RNFS.MainBundlePath;
-    const h5IndexPath = `${mainBundlePath}/bundled_assets/h5/index.html`;
-
-    const exists = await RNFS.exists(h5IndexPath);
-    if (exists) {
-      const url = `file://${h5IndexPath}`;
-      console.log('[BundleAssetsManager] iOS H5 URL:', url);
-      return url;
-    }
-  } catch (error) {
-    console.error('[BundleAssetsManager] Error:', error);
-  }
-
-  throw new Error('bundled_assets/h5/index.html not found');
+  throw new Error('getBundledH5Url should only be called on Android');
 };
+
+/**
+ * iOS: 返回 HTML 内容 + baseUrl
+ * baseUrl 必须是完整的 app.html 路径（包括文件名）
+ */
+export const getBundledH5Content = async (): Promise<{ html: string; baseUrl: string }> => {
+  const mainBundlePath = RNFS.MainBundlePath;
+  const h5IndexPath = `${mainBundlePath}/bundled_assets/h5/app.html`;
+
+  // 验证文件存在
+  const exists = await RNFS.exists(h5IndexPath);
+  if (!exists) {
+    throw new Error('bundled_assets/h5/app.html not found');
+  }
+
+  // 关键：baseUrl 必须是完整的 app.html 路径
+  const baseUrl = `file://${mainBundlePath}/bundled_assets/h5/app.html`;
+  const html = await RNFS.readFile(h5IndexPath, 'utf8');
+
+  return { html, baseUrl };
+};
+```
+
+### OfflineWebView 渲染逻辑
+
+```typescript
+// OfflineWebView.tsx
+const [loadState, setLoadState] = useState<{
+  source: 'bundled' | 'online';
+  uri?: string;           // Android 使用
+  html?: string;          // iOS 使用
+  baseUrl?: string;       // iOS 使用
+  isLoading: boolean;
+  error: string | null;
+}>({
+  source: 'bundled',
+  uri: getBundledH5Url(), // Android 固定路径
+  isLoading: Platform.OS === 'ios', // iOS 需要异步加载
+  error: null,
+});
+
+// iOS: 异步获取 HTML 内容
+useEffect(() => {
+  if (Platform.OS === 'ios') {
+    getBundledH5Content()
+      .then(({ html, baseUrl }) => {
+        setLoadState(prev => ({ ...prev, html, baseUrl, isLoading: false }));
+      })
+      .catch((error) => {
+        setLoadState(prev => ({ ...prev, error: error.message, isLoading: false }));
+      });
+  }
+}, []);
+
+// 渲染时区分平台
+<WebView
+  source={
+    loadState.html && loadState.baseUrl
+      ? { html: loadState.html, baseUrl: loadState.baseUrl } // iOS
+      : { uri: loadState.uri } // Android
+  }
+  originWhitelist={['*']}
+  allowFileAccess={true}
+  allowUniversalAccessFromFileURLs={true}
+  allowFileAccessFromFileURLs={true}
+  mixedContentMode="always"
+/>
 ```
 
 ### 生成的路径示例
 
 ```bash
 # Android
-file:///android_asset/bundled_assets/h5/index.html
+file:///android_asset/bundled_assets/h5/app.html
 
 # iOS (动态生成)
-file:///var/containers/Bundle/Application/EB3A4C8D-9A2F-4C3E-8B1D-7F9E6A5C8D4B/AwesomeProject.app/bundled_assets/h5/index.html
+file:///var/containers/Bundle/Application/EB3A4C8D-9A2F-4C3E-8B1D-7F9E6A5C8D4B/AwesomeProject.app/bundled_assets/h5/app.html
 ```
 
 ## 技术总结
 
 ### iOS 与 Android 文件路径差异
 
-| 平台 | 资源位置 | URL 格式 |
-|:-----|---------|---------|
-| **Android** | `assets/` 目录 | `file:///android_asset/...` (固定) |
-| **iOS** | App Bundle 内 | `file:///完整绝对路径` (动态) |
+| 平台 | 资源位置 | URL 格式 | 加载方式 |
+|:-----|---------|---------|:---------|
+| **Android** | `assets/` 目录 | `file:///android_asset/...` (固定) | 直接使用 `uri` |
+| **iOS** | App Bundle 内 | 动态路径 | 使用 `html` + `baseUrl` |
 
-### WKWebView 文件访问限制
+### WKWebView 沙盒限制与解决方案
 
 iOS WKWebView 对文件 URL 有严格限制：
 
 1. **必须使用绝对路径**：相对路径 `file:///bundled_assets/...` 不工作
 2. **路径必须真实存在**：iOS 不会自动解析 bundle 相对路径
-3. **需要文件存在验证**：建议加载前检查文件是否存在
+3. **沙盒限制**：使用 `file://` URI 时，外部资源被视为 "outside the sandbox"
+4. **解决方案**：使用 `source={{ html, baseUrl }}` 加载，避免沙盒问题
+
+### baseUrl 设置的关键要点
+
+```typescript
+// ✅ 正确：baseUrl 包含完整的 app.html 路径
+const baseUrl = `file://${mainBundlePath}/bundled_assets/h5/app.html`;
+
+// ❌ 错误：baseUrl 只指向目录
+const baseUrl = `file://${mainBundlePath}/bundled_assets/h5/`;
+
+// ❌ 错误：baseUrl 使用 file:// URI 方式
+<WebView source={{ uri: `file://${path}/app.html` }} />;
+```
 
 ### react-native-fs 关键 API
 
@@ -346,29 +622,95 @@ await RNFS.readFile(path, 'utf8');
 
 ## 其他尝试过的方案
 
-### 方案 1: 加载 HTML 内容
+### 方案 1: 使用 file:// URI（初版方案）
 
 ```typescript
-// 读取 HTML 字符串，设置 baseUrl
-const html = await RNFS.readFile(bundlePath + '/bundled_assets/h5/index.html', 'utf8');
-<WebView
-  source={{ html, baseUrl: `file://${bundlePath}/bundled_assets/h5/` }}
-/>
+const url = `file://${mainBundlePath}/bundled_assets/h5/app.html`;
+<WebView source={{ uri: url }} />
 ```
 
-**缺点**：相对资源路径（CSS、JS）可能仍有问题。
+**问题**：HTML 能加载，但外部资源（CSS、JS、图片）出现沙盒错误：
+```
+Ignoring request to load this main resource because it is outside the sandbox
+```
 
-### 方案 2: 使用 Native Module
+**结论**：不推荐用于加载包含外部资源的 H5 应用。
+
+### 方案 2: Native Module
 
 创建自定义 Swift/Native Module，但需要手动配置 Xcode 项目，较为复杂。
 
-### 方案 3: 使用 react-native-assets
+### 方案 3: react-native-assets
 
 专门的资源管理库，但增加了依赖。
 
+## H5 资源路径配置
+
+### HTML 模板配置
+
+为了确保资源路径正确解析，HTML 模板需要添加 `<base>` 标签：
+
+```html
+<!-- public/app.html -->
+<head>
+  <!-- 关键：设置相对路径基准 -->
+  <base href="./">
+
+  <!-- favicon 使用相对路径 -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+
+  <!-- 其他资源使用相对路径 -->
+  <link rel="stylesheet" href="./static/css/main.css">
+  <script src="./static/js/bundle.js"></script>
+</head>
+```
+
+### 资源路径规则
+
+| 资源类型 | Android | iOS |
+|:---------|:--------|:-----|
+| HTML | `file:///android_asset/...` | `{ html, baseUrl }` |
+| CSS/JS | 相对路径 `./static/...` | 相对路径 `./static/...` |
+| 图片 | 相对路径 `./static/image/...` | 相对路径 `./static/image/...` |
+| Favicon | 相对路径 `./favicon/...` | 相对路径 `./favicon/...` |
+
+### 构建后处理（可选）
+
+如果打包工具（如 rsbuild、vite）生成的是绝对路径，可以在构建后修复：
+
+```javascript
+// scripts/fix-asset-paths.js
+const fs = require('fs');
+const path = require('path');
+
+const htmlPath = path.join(__dirname, '../dist/app.html');
+let html = fs.readFileSync(htmlPath, 'utf8');
+
+// 将绝对路径 /static/ 改为相对路径 ./static/
+html = html.replace(/href="\/static\//g, 'href="./static/');
+html = html.replace(/src="\/static\//g, 'src="./static/');
+html = html.replace(/href="\/favicon\//g, 'href="./favicon/');
+
+fs.writeFileSync(htmlPath, html);
+```
+
 ## 最佳实践建议
 
-### 1. 统一路径获取
+### 1. 平台差异化加载
+
+```typescript
+// ✅ 推荐：区分平台加载方式
+if (Platform.OS === 'android') {
+  return <WebView source={{ uri }} />;
+} else {
+  return <WebView source={{ html, baseUrl }} />;
+}
+
+// ❌ 避免：跨平台使用相同方式
+return <WebView source={{ uri }} />; // iOS 可能出现沙盒错误
+```
+
+### 2. 统一路径获取
 
 ```typescript
 // ✅ 推荐：使用统一 API
@@ -377,8 +719,8 @@ const uri = await getBundledH5Url();
 
 // ❌ 避免：硬编码平台路径
 const uri = Platform.OS === 'ios'
-  ? 'file:///bundled_assets/h5/index.html'
-  : 'file:///android_asset/bundled_assets/h5/index.html';
+  ? 'file:///bundled_assets/h5/app.html'
+  : 'file:///android_asset/bundled_assets/h5/app.html';
 ```
 
 ### 2. 文件存在验证
@@ -409,18 +751,131 @@ if (__DEV__) {
 }
 ```
 
+### 5. 刘海屏适配
+
+现代全面屏手机（iPhone X、小米、华为等）需要特殊处理刘海区域。
+
+#### Android 适配（系统级配置）
+
+使用 `AndroidManifest.xml` 的 meta-data 配置：
+
+```xml
+<!-- android/app/src/main/AndroidManifest.xml -->
+<application>
+  <!-- 官方刘海屏支持 -->
+  <meta-data
+    android:name="android.notch_support"
+    android:value="true" />
+
+  <!-- 小米 MIUI 适配 -->
+  <meta-data
+    android:name="notch.config"
+    android:value="portrait|landscape" />
+
+  <!-- 华为 EMUI 适配 -->
+  <meta-data
+    android:name="android.max_aspect"
+    android:value="2.4" />
+
+  <!-- 允许内容延伸到刘海区域 -->
+  <activity
+    android:name=".MainActivity"
+    android:layoutInDisplayCutoutMode="shortEdges" />
+</application>
+```
+
+| 配置项 | 作用 | 适用机型 |
+|:-------|:-----|:---------|
+| `android.notch_support` | 官方刘海屏支持 | 通用 Android |
+| `notch.config` | 小米刘海屏适配 | 小米 MIUI |
+| `android.max_aspect` | 华为长屏幕适配 | 华为 EMUI |
+| `layoutInDisplayCutoutMode` | 允许内容延伸到刘海区 | Android P+ |
+
+#### iOS 适配（组件级处理）
+
+使用 `react-native-safe-area-context`：
+
+```typescript
+// App.tsx
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
+
+function App() {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}>
+      {/* 你的内容 */}
+    </View>
+  );
+}
+```
+
+#### WebView 安全区注入
+
+将安全区信息注入到 H5 页面：
+
+```typescript
+// JSBridge.ts
+const injectedJavaScript = `
+  (function() {
+    // 获取安全区信息
+    const safeAreaInsets = ${JSON.stringify(safeAreaInsets)};
+
+    // 注入到 window 对象
+    window.ContainerAPI = {
+      safeArea: safeAreaInsets,
+      // ... 其他 API
+    };
+
+    // 设置 CSS 变量供 H5 使用
+    document.documentElement.style.setProperty('--safe-area-inset-top', safeAreaInsets.top + 'px');
+    document.documentElement.style.setProperty('--safe-area-inset-bottom', safeAreaInsets.bottom + 'px');
+  })();
+`;
+
+<WebView
+  injectedJavaScript={injectedJavaScript}
+  // ...
+/>
+```
+
+#### H5 使用安全区
+
+```css
+/* H5 CSS */
+.container {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 或使用 CSS 变量 */
+.container {
+  padding-top: var(--safe-area-inset-top, 0);
+  padding-bottom: var(--safe-area-inset-bottom, 0);
+}
+```
+
+#### JSBridge 安全区 API
+
+```javascript
+// H5 页面中调用
+const { safeArea } = window.ContainerAPI;
+console.log('Safe area:', safeArea);
+// { top: 47, bottom: 34, left: 0, right: 0 } (iPhone X)
+```
+
 ## 版本信息
 
 ### 最终使用的版本
 
 | Package | Version | 说明 |
 |---------|---------|------|
-| React Native | 0.73.7 | 从 0.82.1 降级 |
+| React Native | 0.73.11 | 从 0.75.5 降级以支持 Xcode 26.2 |
 | React | 18.2.0 | |
 | react-native-webview | ^13.x | |
 | react-native-fs | ^2.20.0 | 用于获取 bundle 路径 |
+| react-native-safe-area-context | 4.14.0 | iOS 刘海屏适配 |
 | react-native-gesture-handler | 2.14.0 | |
-| react-native-safe-area-context | 4.5.0 | |
 | react-native-screens | 3.29.0 | |
 | iOS | 17.5 (模拟器) | |
 
