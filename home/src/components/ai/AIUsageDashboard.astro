@@ -1,0 +1,106 @@
+---
+// src/components/ai/AIUsageDashboard.astro
+import { loadAIUsageData } from '../../utils/ai-usage-loader'
+import DeviceSelector from './DeviceSelector.astro'
+import MonthlyStats from './MonthlyStats.astro'
+import TokenChart from './TokenChart.astro'
+import ModelDistribution from './ModelDistribution.astro'
+import UsageHeatmap from './UsageHeatmap.astro'
+
+// Get query parameter
+const url = new URL(Astro.request.url)
+const selectedDevice = url.searchParams.get('device') || 'all'
+
+// Load data
+const data = await loadAIUsageData()
+
+// Filter data by device
+const devices = data.summary.deviceList
+const isValidDevice = selectedDevice === 'all' || devices.includes(selectedDevice)
+const currentDevice = isValidDevice ? selectedDevice : 'all'
+
+// Get data for current view
+const currentData = currentDevice === 'all'
+  ? Object.values(data.total.byMonth).flat()
+  : Object.values(data.byDevice[currentDevice]?.byMonth || {}).flat()
+
+// Calculate monthly tokens for current month
+const currentMonth = new Date().toISOString().substring(0, 7)
+const monthlyData = currentDevice === 'all'
+  ? data.total.byMonth[currentMonth] || []
+  : data.byDevice[currentDevice]?.byMonth[currentMonth] || []
+const monthlyTokens = monthlyData.reduce((sum, d) => sum + d.totalTokens, 0)
+
+// Calculate summary for current view
+const totalTokens = currentData.reduce((sum, d) => sum + d.totalTokens, 0)
+const totalCost = currentData.reduce((sum, d) => sum + d.totalCost, 0)
+
+// Calculate model distribution for current view
+const byModel: Record<string, number> = {}
+for (const day of currentData) {
+  for (const breakdown of day.modelBreakdowns) {
+    const tokens = breakdown.inputTokens + breakdown.outputTokens + breakdown.cacheReadTokens
+    byModel[breakdown.modelName] = (byModel[breakdown.modelName] || 0) + tokens
+  }
+}
+---
+
+<div class="max-w-4xl mx-auto">
+  <div class="flex items-center gap-2 mb-6">
+    <span class="text-2xl">🤖</span>
+    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">AI Usage Statistics</h2>
+  </div>
+
+  <DeviceSelector devices={devices} selected={currentDevice} />
+
+  {currentData.length === 0 ? (
+    <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-12 text-center border border-gray-200 dark:border-gray-700">
+      <div class="text-4xl mb-4">📊</div>
+      <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">暂无数据</h3>
+      <p class="text-gray-600 dark:text-gray-400 mb-4">
+        请将 ccusage 生成的 JSON 文件放入 <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">ai/usages/</code> 目录
+      </p>
+      <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-sm text-left overflow-x-auto">
+ccusage -j > ai/usages/mydevice-$(date +%Y-%m).json</pre>
+    </div>
+  ) : (
+    <>
+      <MonthlyStats
+        totalTokens={totalTokens}
+        monthlyTokens={monthlyTokens}
+        totalCost={totalCost}
+      />
+
+      <TokenChart data={currentData} />
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <ModelDistribution byModel={byModel} />
+
+        <!-- Cost breakdown card -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">费用明细</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-600 dark:text-gray-400">总费用</span>
+              <span class="text-xl font-bold text-purple-600 dark:text-purple-400 font-mono">${totalCost.toFixed(2)}</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-600 dark:text-gray-400">日均费用</span>
+              <span class="font-mono text-gray-800 dark:text-gray-200">
+                ${currentData.length > 0 ? (totalCost / currentData.length).toFixed(3) : '0.000'}
+              </span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-600 dark:text-gray-400">每千 token 成本</span>
+              <span class="font-mono text-gray-800 dark:text-gray-200">
+                ${totalTokens > 0 ? ((totalCost / totalTokens) * 1000).toFixed(4) : '0.0000'}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <UsageHeatmap data={currentData} />
+    </>
+  )}
+</div>
