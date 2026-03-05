@@ -1,5 +1,5 @@
 // src/utils/ai-usage.ts
-import type { DailyUsage, ProcessedDeviceData } from '../types/ai-usage'
+import type { DailyUsage } from '../types/ai-usage'
 
 export function parseDeviceFilename(filename: string): { deviceName: string; yearMonth: string } | null {
   // 支持格式: {设备名}-{YYYY-MM-DD}.json 或 {设备名}-{YYYY-MM}.json
