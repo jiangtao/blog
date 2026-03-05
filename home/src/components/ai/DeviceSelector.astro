@@ -1,0 +1,56 @@
+---
+// src/components/ai/DeviceSelector.astro
+interface Props {
+  devices: string[]
+  selected: string
+}
+
+const { devices, selected } = Astro.props
+
+const deviceLabels: Record<string, string> = {
+  'all': '全部设备',
+  ...Object.fromEntries(devices.map(d => [d, d.charAt(0).toUpperCase() + d.slice(1)]))
+}
+---
+
+<!-- Desktop: Tabs -->
+<div class="hidden sm:flex gap-2 mb-6 overflow-x-auto">
+  <a
+    href="?device=all"
+    class={`px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
+      selected === 'all'
+        ? 'bg-blue-500 text-white'
+        : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
+    }`}
+  >
+    全部设备
+  </a>
+  {devices.map((device) => (
+    <a
+      href={`?device=${device}`}
+      class={`px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
+        selected === device
+          ? 'bg-blue-500 text-white'
+          : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
+      }`}
+    >
+      {deviceLabels[device] || device}
+    </a>
+  ))}
+</div>
+
+<!-- Mobile: Dropdown -->
+<div class="sm:hidden mb-6">
+  <label class="block text-sm text-gray-600 dark:text-gray-400 mb-2">选择设备</label>
+  <select
+    class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200"
+    onchange="window.location.href = '?device=' + this.value"
+  >
+    <option value="all" selected={selected === 'all'}>全部设备</option>
+    {devices.map((device) => (
+      <option value={device} selected={selected === device}>
+        {deviceLabels[device] || device}
+      </option>
+    ))}
+  </select>
+</div>
