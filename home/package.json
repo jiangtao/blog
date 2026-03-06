@@ -19,6 +19,7 @@
     "ai:validate": "node scripts/validate-ai-usage.js"
   },
   "dependencies": {
+    "@astrojs/react": "^4.4.2",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
     "@resvg/resvg-js": "^2.6.2",
@@ -27,6 +28,7 @@
     "dayjs": "^1.11.19",
     "gray-matter": "^4.0.3",
     "lodash.kebabcase": "^4.1.1",
+    "react-activity-calendar": "^3.1.1",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
     "satori": "^0.18.3",
@@ -45,6 +47,7 @@
     "axios": "^1.13.4",
     "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.5.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
     "glob": "^13.0.3",
     "globals": "^16.5.0",
     "pagefind": "^1.4.0",
