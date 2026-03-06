@@ -14,28 +14,28 @@ const deviceLabels: Record<string, string> = {
 ---
 
 <!-- Desktop: Tabs -->
-<div class="hidden sm:flex gap-2 mb-6 overflow-x-auto">
-  <a
-    href="?device=all"
-    class={`px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
+<div class="hidden sm:flex gap-2 mb-6 overflow-x-auto" id="device-tabs">
+  <button
+    data-device="all"
+    class={`device-tab px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
       selected === 'all'
         ? 'bg-blue-500 text-white'
         : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
     }`}
   >
     全部设备
-  </a>
+  </button>
   {devices.map((device) => (
-    <a
-      href={`?device=${device}`}
-      class={`px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
+    <button
+      data-device={device}
+      class={`device-tab px-4 py-2 rounded-lg text-sm font-medium transition-colors whitespace-nowrap ${
         selected === device
           ? 'bg-blue-500 text-white'
           : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
       }`}
     >
       {deviceLabels[device] || device}
-    </a>
+    </button>
   ))}
 </div>
 
@@ -43,8 +43,8 @@ const deviceLabels: Record<string, string> = {
 <div class="sm:hidden mb-6">
   <label class="block text-sm text-gray-600 dark:text-gray-400 mb-2">选择设备</label>
   <select
+    id="device-select"
     class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200"
-    onchange="window.location.href = '?device=' + this.value"
   >
     <option value="all" selected={selected === 'all'}>全部设备</option>
     {devices.map((device) => (
@@ -54,3 +54,50 @@ const deviceLabels: Record<string, string> = {
     ))}
   </select>
 </div>
+
+<script>
+  // Handle tab clicks
+  const tabs = document.querySelectorAll('.device-tab')
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const device = tab.getAttribute('data-device')
+      if (device) {
+        // Update active state
+        tabs.forEach(t => {
+          t.classList.remove('bg-blue-500', 'text-white')
+          t.classList.add('bg-gray-100', 'text-gray-700', 'dark:bg-gray-800', 'dark:text-gray-300')
+        })
+        tab.classList.remove('bg-gray-100', 'text-gray-700', 'dark:bg-gray-800', 'dark:text-gray-300')
+        tab.classList.add('bg-blue-500', 'text-white')
+
+        // Dispatch custom event
+        window.dispatchEvent(new CustomEvent('device-change', {
+          detail: { device }
+        }))
+
+        // Update URL without page reload
+        const url = new URL(window.location.href)
+        url.searchParams.set('device', device)
+        window.history.replaceState({}, '', url)
+      }
+    })
+  })
+
+  // Handle dropdown change
+  const select = document.getElementById('device-select') as HTMLSelectElement
+  if (select) {
+    select.addEventListener('change', () => {
+      const device = select.value
+
+      // Dispatch custom event
+      window.dispatchEvent(new CustomEvent('device-change', {
+        detail: { device }
+      }))
+
+      // Update URL without page reload
+      const url = new URL(window.location.href)
+      url.searchParams.set('device', device)
+      window.history.replaceState({}, '', url)
+    })
+  }
+</script>

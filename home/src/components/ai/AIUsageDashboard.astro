@@ -2,80 +2,378 @@
 // src/components/ai/AIUsageDashboard.astro
 import { loadAIUsageData } from '../../utils/ai-usage-loader'
 import DeviceSelector from './DeviceSelector.astro'
-import MonthlyStats from './MonthlyStats.astro'
-import TokenChart from './TokenChart.astro'
-import ModelDistribution from './ModelDistribution.astro'
-import UsageHeatmap from './UsageHeatmap.astro'
 
-// Get query parameter
-const url = new URL(Astro.request.url)
-const selectedDevice = url.searchParams.get('device') || 'all'
-
-// Load data
+// Load data on server
 const data = await loadAIUsageData()
-
-// Filter data by device
 const devices = data.summary.deviceList
-const isValidDevice = selectedDevice === 'all' || devices.includes(selectedDevice)
-const currentDevice = isValidDevice ? selectedDevice : 'all'
 
-// Get data for current view
-const currentData = currentDevice === 'all'
-  ? Object.values(data.total.byMonth).flat()
-  : Object.values(data.byDevice[currentDevice]?.byMonth || {}).flat()
-
-// Calculate monthly tokens for current month
-const currentMonth = new Date().toISOString().substring(0, 7)
-const monthlyData = currentDevice === 'all'
-  ? data.total.byMonth[currentMonth] || []
-  : data.byDevice[currentDevice]?.byMonth[currentMonth] || []
-const monthlyTokens = monthlyData.reduce((sum, d) => sum + d.totalTokens, 0)
-
-// Calculate summary for current view
-const totalTokens = currentData.reduce((sum, d) => sum + d.totalTokens, 0)
-
-// Calculate model distribution for current view
-const byModel: Record<string, number> = {}
-for (const day of currentData) {
-  for (const breakdown of day.modelBreakdowns) {
-    const tokens = breakdown.inputTokens + breakdown.outputTokens + breakdown.cacheReadTokens
-    byModel[breakdown.modelName] = (byModel[breakdown.modelName] || 0) + tokens
-  }
-}
+// Serialize data for client-side use
+const serializedData = JSON.stringify(data)
 ---
 
-<div class="max-w-4xl mx-auto">
+<div class="max-w-4xl mx-auto" id="ai-usage-dashboard">
   <div class="flex items-center gap-2 mb-6">
     <span class="text-2xl">🤖</span>
     <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">AI Usage Statistics</h2>
   </div>
 
-  <DeviceSelector devices={devices} selected={currentDevice} />
+  <DeviceSelector devices={devices} selected="all" />
 
-  {currentData.length === 0 ? (
+  <div id="dashboard-content">
+    <!-- Content will be rendered by client-side JS -->
     <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-12 text-center border border-gray-200 dark:border-gray-700">
       <div class="text-4xl mb-4">📊</div>
-      <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">暂无数据</h3>
-      <p class="text-gray-600 dark:text-gray-400 mb-4">
-        请将 ccusage 生成的 JSON 文件放入 <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">ai/usages/</code> 目录
-      </p>
-      <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-sm text-left overflow-x-auto">
-ccusage -j > ai/usages/mydevice-$(date +%Y-%m).json</pre>
+      <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">加载中...</h3>
     </div>
-  ) : (
-    <>
-      <MonthlyStats
-        totalTokens={totalTokens}
-        monthlyTokens={monthlyTokens}
-      />
-
-      <TokenChart data={currentData} />
-
-      <div class="mb-6">
-        <ModelDistribution byModel={byModel} />
-      </div>
-
-      <UsageHeatmap data={currentData} />
-    </>
-  )}
+  </div>
 </div>
+
+<script define:vars={{ data: serializedData }}>
+  // Parse the serialized data
+  const usageData = JSON.parse(data)
+  const devices = usageData.summary.deviceList
+
+  // Colors for different models
+  const colors = [
+    '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6',
+    '#ec4899', '#06b6d4', '#84cc16', '#f97316', '#6366f1'
+  ]
+
+  // Intensity colors for heatmap
+  const intensityColors = [
+    'bg-gray-100 dark:bg-gray-800',
+    'bg-green-200 dark:bg-green-900/40',
+    'bg-green-300 dark:bg-green-800/60',
+    'bg-green-400 dark:bg-green-700',
+    'bg-green-500 dark:bg-green-600'
+  ]
+
+  // Get current device from URL or default to 'all'
+  function getCurrentDevice() {
+    const url = new URL(window.location.href)
+    const device = url.searchParams.get('device') || 'all'
+    return devices.includes(device) || device === 'all' ? device : 'all'
+  }
+
+  // Get data for current view
+  function getCurrentData(device) {
+    if (device === 'all') {
+      return Object.values(usageData.total.byMonth).flat()
+    }
+    const deviceData = usageData.byDevice[device]
+    return deviceData ? Object.values(deviceData.byMonth).flat() : []
+  }
+
+  // Format number
+  function formatNumber(num) {
+    if (num >= 1000000000) return (num / 1000000000).toFixed(2) + 'B'
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M'
+    if (num >= 1000) return (num / 1000).toFixed(1) + 'K'
+    return num.toString()
+  }
+
+  // Format month
+  function formatMonth(monthStr) {
+    const [year, month] = monthStr.split('-')
+    return `${year}/${month}`
+  }
+
+  // Format date
+  function formatDate(dateStr) {
+    const [year, month, day] = dateStr.split('-')
+    return `${year}年${month}月${day}日`
+  }
+
+  // Render monthly stats
+  function renderMonthlyStats(totalTokens, monthlyTokens) {
+    return `
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+          <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">总 Tokens</div>
+          <div class="text-3xl font-bold text-blue-600 dark:text-blue-400 font-mono">${formatNumber(totalTokens)}</div>
+        </div>
+        <div class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/20 rounded-xl p-6 border border-green-200 dark:border-green-800">
+          <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">本月用量</div>
+          <div class="text-3xl font-bold text-green-600 dark:text-green-400 font-mono">${formatNumber(monthlyTokens)}</div>
+        </div>
+      </div>
+    `
+  }
+
+  // Render usage chart (stacked bar chart)
+  function renderUsageChart(data) {
+    const monthlyModelData = new Map()
+    const allModels = new Set()
+
+    for (const day of data) {
+      const month = day.date.substring(0, 7)
+      if (!monthlyModelData.has(month)) {
+        monthlyModelData.set(month, new Map())
+      }
+      const monthData = monthlyModelData.get(month)
+
+      for (const breakdown of day.modelBreakdowns) {
+        const tokens = breakdown.inputTokens + breakdown.outputTokens + breakdown.cacheReadTokens
+        if (tokens > 0) {
+          monthData.set(breakdown.modelName, (monthData.get(breakdown.modelName) || 0) + tokens)
+          allModels.add(breakdown.modelName)
+        }
+      }
+    }
+
+    const sortedMonths = Array.from(monthlyModelData.entries())
+      .sort((a, b) => a[0].localeCompare(b[0]))
+      .map(([month, modelMap]) => ({
+        month,
+        models: Array.from(modelMap.entries()).sort((a, b) => b[1] - a[1]),
+        total: Array.from(modelMap.values()).reduce((sum, v) => sum + v, 0),
+      }))
+
+    const sortedModels = Array.from(allModels).sort()
+    const maxTotal = Math.max(...sortedMonths.map((m) => m.total), 1)
+
+    const width = 800
+    const height = 320
+    const padding = { top: 20, right: 30, bottom: 60, left: 70 }
+    const chartWidth = width - padding.left - padding.right
+    const chartHeight = height - padding.top - padding.bottom
+    const barWidth = sortedMonths.length > 0 ? (chartWidth / sortedMonths.length) * 0.7 : 0
+    const barSpacing = sortedMonths.length > 0 ? chartWidth / sortedMonths.length : 0
+
+    const modelColors = new Map()
+    sortedModels.forEach((model, index) => {
+      modelColors.set(model, colors[index % colors.length])
+    })
+
+    if (sortedMonths.length === 0) {
+      return `
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">月度 Token 使用趋势</h3>
+          <div class="text-gray-500 text-center py-8">暂无数据</div>
+        </div>
+      `
+    }
+
+    // Grid lines
+    let gridLines = ''
+    for (let i = 0; i <= 4; i++) {
+      const ratio = i / 4
+      const y = padding.top + chartHeight * (1 - ratio)
+      gridLines += `
+        <g>
+          <line x1="${padding.left}" y1="${y}" x2="${width - padding.right}" y2="${y}" stroke="#e5e7eb" stroke-dasharray="4,4" class="dark:stroke-gray-700"/>
+          <text x="${padding.left - 10}" y="${y + 4}" text-anchor="end" class="text-xs fill-gray-500 dark:fill-gray-400">${formatNumber(Math.round(maxTotal * ratio))}</text>
+        </g>
+      `
+    }
+
+    // Stacked bars
+    let bars = ''
+    sortedMonths.forEach(({ month, models, total }, index) => {
+      const x = padding.left + index * barSpacing + (barSpacing - barWidth) / 2
+      let currentY = padding.top + chartHeight
+
+      // Stack segments
+      let segments = ''
+      models.forEach(([modelName, tokens]) => {
+        const segmentHeight = (tokens / maxTotal) * chartHeight
+        const y = currentY - segmentHeight
+        currentY = y
+        segments += `
+          <rect x="${x}" y="${y}" width="${barWidth}" height="${segmentHeight}" fill="${modelColors.get(modelName)}" rx="2" class="hover:opacity-80 transition-opacity">
+            <title>${modelName}: ${formatNumber(tokens)} (${((tokens / total) * 100).toFixed(1)}%)</title>
+          </rect>
+        `
+      })
+
+      bars += `
+        <g>
+          ${segments}
+          <text x="${x + barWidth / 2}" y="${currentY - 5}" text-anchor="middle" class="text-xs fill-gray-600 dark:fill-gray-400 font-medium">${formatNumber(total)}</text>
+          <text x="${x + barWidth / 2}" y="${height - 35}" text-anchor="middle" class="text-xs fill-gray-600 dark:fill-gray-400">${formatMonth(month)}</text>
+        </g>
+      `
+    })
+
+    // Legend
+    const legend = sortedModels.map((model) => `
+      <div class="flex items-center gap-1.5">
+        <span class="w-3 h-3 rounded-sm" style="background-color: ${modelColors.get(model)}"></span>
+        <span class="text-xs text-gray-600 dark:text-gray-400">${model}</span>
+      </div>
+    `).join('')
+
+    return `
+      <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">月度 Token 使用趋势</h3>
+          <span class="text-xs text-gray-500 dark:text-gray-400">堆叠柱状图展示各模型使用量</span>
+        </div>
+        <div class="overflow-x-auto">
+          <svg viewBox="0 0 ${width} ${height}" class="w-full min-w-[600px]" preserveAspectRatio="xMidYMid meet">
+            ${gridLines}
+            ${bars}
+            <line x1="${padding.left}" y1="${padding.top}" x2="${padding.left}" y2="${height - padding.bottom}" stroke="#9ca3af" stroke-width="1"/>
+            <line x1="${padding.left}" y1="${height - padding.bottom}" x2="${width - padding.right}" y2="${height - padding.bottom}" stroke="#9ca3af" stroke-width="1"/>
+          </svg>
+          <div class="mt-4 flex flex-wrap gap-3 justify-center">${legend}</div>
+        </div>
+      </div>
+    `
+  }
+
+  // Render usage heatmap
+  function renderUsageHeatmap(data) {
+    const sortedData = [...data].sort((a, b) => a.date.localeCompare(b.date))
+    const tokensList = sortedData.map(d => d.totalTokens)
+    const maxTokens = Math.max(...tokensList, 1)
+
+    function getIntensityLevel(tokens) {
+      if (tokens === 0) return 0
+      const ratio = tokens / maxTokens
+      if (ratio <= 0.25) return 1
+      if (ratio <= 0.5) return 2
+      if (ratio <= 0.75) return 3
+      return 4
+    }
+
+    // Group by week
+    const weeks = new Map()
+    for (const day of sortedData) {
+      const date = new Date(day.date)
+      const weekStart = new Date(date)
+      weekStart.setDate(date.getDate() - date.getDay())
+      const weekKey = weekStart.toISOString().split('T')[0]
+
+      if (!weeks.has(weekKey)) {
+        weeks.set(weekKey, Array(7).fill(null))
+      }
+      const week = weeks.get(weekKey)
+      week[date.getDay()] = day
+    }
+
+    const sortedWeeks = Array.from(weeks.entries()).sort((a, b) => a[0].localeCompare(b[0])).slice(-26)
+    const weekDays = ['日', '一', '二', '三', '四', '五', '六']
+
+    if (sortedWeeks.length === 0) {
+      return `
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+          <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">每日活跃度</h3>
+          <div class="text-gray-500 text-center py-8">暂无数据</div>
+        </div>
+      `
+    }
+
+    const weekDayLabels = weekDays.map((day, i) =>
+      `<div class="w-3 text-xs text-gray-500 text-center">${i % 2 === 1 ? day : ''}</div>`
+    ).join('')
+
+    const heatmapGrid = sortedWeeks.map(([weekKey, days]) => {
+      const dayCells = days.map((day, dayIndex) => {
+        if (day) {
+          return `<div class="w-3 h-3 rounded-sm ${intensityColors[getIntensityLevel(day.totalTokens)]} hover:ring-2 hover:ring-gray-400 cursor-pointer transition-all" title="${formatDate(day.date)}: ${day.totalTokens.toLocaleString()} tokens"/>`
+        }
+        return `<div class="w-3 h-3 rounded-sm bg-transparent"/>`
+      }).join('')
+      return `<div class="flex flex-col gap-1">${dayCells}</div>`
+    }).join('')
+
+    const legend = intensityColors.map(color => `<div class="w-3 h-3 rounded-sm ${color}"/>`).join('')
+
+    return `
+      <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 mb-6">
+        <h3 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">每日活跃度</h3>
+        <div class="overflow-x-auto">
+          <div class="min-w-max">
+            <div class="flex gap-1">
+              <div class="w-6"></div>
+              ${weekDayLabels}
+            </div>
+            <div class="flex gap-1">${heatmapGrid}</div>
+            <div class="flex items-center gap-2 mt-4 text-xs text-gray-500">
+              <span>少</span>${legend}<span>多</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  }
+
+  // Render empty state
+  function renderEmptyState() {
+    return `
+      <div class="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-12 text-center border border-gray-200 dark:border-gray-700">
+        <div class="text-4xl mb-4">📊</div>
+        <h3 class="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2">暂无数据</h3>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
+          请将 ccusage 生成的 JSON 文件放入 <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">ai/usages/</code> 目录
+        </p>
+        <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-sm text-left overflow-x-auto">ccusage -j > ai/usages/mydevice-$(date +%Y-%m).json</pre>
+      </div>
+    `
+  }
+
+  // Main render function
+  function renderDashboard() {
+    const currentDevice = getCurrentDevice()
+    const currentData = getCurrentData(currentDevice)
+    const contentEl = document.getElementById('dashboard-content')
+
+    if (!contentEl) return
+
+    if (currentData.length === 0) {
+      contentEl.innerHTML = renderEmptyState()
+      return
+    }
+
+    // Calculate stats
+    const totalTokens = currentData.reduce((sum, d) => sum + d.totalTokens, 0)
+
+    const currentMonth = new Date().toISOString().substring(0, 7)
+    const monthlyData = currentDevice === 'all'
+      ? usageData.total.byMonth[currentMonth] || []
+      : (usageData.byDevice[currentDevice]?.byMonth[currentMonth] || [])
+    const monthlyTokens = monthlyData.reduce((sum, d) => sum + d.totalTokens, 0)
+
+    contentEl.innerHTML = `
+      ${renderMonthlyStats(totalTokens, monthlyTokens)}
+      ${renderUsageChart(currentData)}
+      ${renderUsageHeatmap(currentData)}
+    `
+  }
+
+  // Initial render
+  renderDashboard()
+
+  // Listen for device change events
+  window.addEventListener('device-change', () => {
+    renderDashboard()
+  })
+
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', () => {
+    // Update device selector UI
+    const currentDevice = getCurrentDevice()
+
+    // Update tabs
+    const tabs = document.querySelectorAll('.device-tab')
+    tabs.forEach(tab => {
+      const device = tab.getAttribute('data-device')
+      if (device === currentDevice) {
+        tab.classList.remove('bg-gray-100', 'text-gray-700', 'dark:bg-gray-800', 'dark:text-gray-300')
+        tab.classList.add('bg-blue-500', 'text-white')
+      } else {
+        tab.classList.remove('bg-blue-500', 'text-white')
+        tab.classList.add('bg-gray-100', 'text-gray-700', 'dark:bg-gray-800', 'dark:text-gray-300')
+      }
+    })
+
+    // Update dropdown
+    const select = document.getElementById('device-select')
+    if (select) {
+      select.value = currentDevice
+    }
+
+    renderDashboard()
+  })
+</script>
