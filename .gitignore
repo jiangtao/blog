@@ -20,4 +20,5 @@ home/.deploy_git/
 home/db.json
 .agents
 docs/plans/
-.worktrees/
+.worktrees
+.claude/worktrees
