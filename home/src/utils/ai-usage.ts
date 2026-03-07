@@ -1,12 +1,16 @@
 // src/utils/ai-usage.ts
-import type { DailyUsage, ProcessedDeviceData } from '../types/ai-usage'
+import type { DailyUsage } from '../types/ai-usage'
 
 export function parseDeviceFilename(filename: string): { deviceName: string; yearMonth: string } | null {
-  const match = filename.match(/^(.+)-(\d{4}-\d{2})\.json$/)
+  // 支持格式: {设备名}-{YYYY-MM-DD}.json 或 {设备名}-{YYYY-MM}.json
+  const match = filename.match(/^(.*)-(\d{4}-\d{2}(?:-\d{2})?)\.json$/)
   if (!match) return null
+  const datePart = match[2]
+  // 提取年月 (YYYY-MM)
+  const yearMonth = datePart.substring(0, 7)
   return {
     deviceName: match[1],
-    yearMonth: match[2]
+    yearMonth
   }
 }
 

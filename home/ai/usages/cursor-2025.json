@@ -1,0 +1,9 @@
+{
+  "joinedDays": 453,
+  "models": ["Claude 4 Sonnet", "Auto", "Claude 4.5 Sonnet"],
+  "agents": 2100,
+  "tabs": 4500,
+  "tokens": 1290000000,
+  "streak": 12,
+  "url": "https://cursor.com/2025"
+}
