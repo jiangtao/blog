@@ -1,0 +1,102 @@
+---
+// src/components/ai/DeviceSelector.astro
+// 统一 Tab 样式的设备选择器
+
+interface Props {
+  devices: string[]
+  selected: string
+}
+
+const { devices, selected } = Astro.props
+
+const deviceLabels: Record<string, string> = {
+  'all': 'All',
+  ...Object.fromEntries(devices.map(d => [d, d.charAt(0).toUpperCase() + d.slice(1)]))
+}
+---
+
+<!-- Device Tabs (All devices) -->
+<div class="flex gap-x-5 gap-y-2 mb-6 flex-wrap" id="device-tabs">
+  <button
+    data-device="all"
+    class={`device-tab px-2 py-1 font-medium transition-colors ${
+      selected === 'all'
+        ? 'active-nav text-accent'
+        : 'hover:text-accent text-gray-700 dark:text-gray-300'
+    }`}
+  >
+    All
+  </button>
+  {devices.map((device) => (
+    <button
+      data-device={device}
+      class={`device-tab px-2 py-1 font-medium transition-colors ${
+        selected === device
+          ? 'active-nav text-accent'
+          : 'hover:text-accent text-gray-700 dark:text-gray-300'
+      }`}
+    >
+      {deviceLabels[device] || device}
+    </button>
+  ))}
+</div>
+
+<script>
+  // Initialize from URL parameter
+  function initializeDeviceFromURL() {
+    const url = new URL(window.location.href)
+    const deviceParam = url.searchParams.get('device')
+    const tabs = document.querySelectorAll('.device-tab')
+
+    if (deviceParam) {
+      // Find the tab with matching device
+      tabs.forEach(tab => {
+        const tabDevice = tab.getAttribute('data-device')
+        if (tabDevice === deviceParam) {
+          // Set as active
+          tabs.forEach(t => {
+            t.classList.remove('active-nav', 'text-accent')
+            t.classList.add('hover:text-accent', 'text-gray-700', 'dark:text-gray-300')
+          })
+          tab.classList.remove('hover:text-accent', 'text-gray-700', 'dark:text-gray-300')
+          tab.classList.add('active-nav', 'text-accent')
+        }
+      })
+    }
+  }
+
+  // Run initialization when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeDeviceFromURL)
+  } else {
+    initializeDeviceFromURL()
+  }
+
+  // Handle tab clicks
+  const tabs = document.querySelectorAll('.device-tab')
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const device = tab.getAttribute('data-device')
+      if (!device) return
+
+      // Update active state
+      tabs.forEach(t => {
+        t.classList.remove('active-nav', 'text-accent')
+        t.classList.add('hover:text-accent', 'text-gray-700', 'dark:text-gray-300')
+      })
+      tab.classList.remove('hover:text-accent', 'text-gray-700', 'dark:text-gray-300')
+      tab.classList.add('active-nav', 'text-accent')
+
+      // Dispatch custom event
+      window.dispatchEvent(new CustomEvent('device-change', {
+        detail: { device }
+      }))
+
+      // Update URL without page reload
+      const url = new URL(window.location.href)
+      url.searchParams.set('device', device)
+      window.history.replaceState({}, '', url)
+    })
+  })
+</script>

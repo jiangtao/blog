@@ -1,0 +1,75 @@
+---
+// src/components/ai/AIUsageDashboard.astro
+import { loadAIUsageData } from '../../utils/ai-usage-loader'
+import DeviceSelector from './DeviceSelector.astro'
+import ClientDashboard from './ClientDashboard.tsx'
+
+// Load data on server
+const data = await loadAIUsageData()
+const devices = data.summary.deviceList
+
+// Prepare all data for client-side use
+// @ts-ignore - Astro frontmatter doesn't support full TypeScript types
+function getAllDailyData(data) {
+  const allDaily = []
+  const byMonth = data.total?.byMonth || {}
+  for (const key in byMonth) {
+    allDaily.push(...byMonth[key])
+  }
+  return allDaily
+}
+
+const allDailyData = getAllDailyData(data)
+const serializedData = JSON.stringify(data)
+const serializedDailyData = JSON.stringify(allDailyData)
+---
+
+<div class="max-w-6xl mx-auto" id="ai-usage-dashboard">
+  <!-- Header -->
+  <div class="flex items-center mb-4">
+    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">AI Usage</h2>
+  </div>
+
+  <!-- Device Tabs -->
+  <DeviceSelector devices={devices} selected="all" />
+
+  <!-- Main Content Area with Client React Component -->
+  <div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6" id="dashboard-content">
+    <ClientDashboard
+      data={serializedData}
+      dailyData={serializedDailyData}
+      devices={devices}
+      client:load
+    />
+  </div>
+</div>
+
+<script>
+  // This script is kept for backward compatibility with tab switching
+  const tabs = document.querySelectorAll('.device-tab')
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const device = tab.getAttribute('data-device')
+      if (!device) return
+
+      // Update active state
+      tabs.forEach(t => {
+        t.classList.remove('active-nav', 'text-accent')
+        t.classList.add('hover:text-accent', 'text-gray-700', 'dark:text-gray-300')
+      })
+      tab.classList.remove('hover:text-accent', 'text-gray-700', 'dark:text-gray-300')
+      tab.classList.add('active-nav', 'text-accent')
+
+      // Dispatch custom event for React component
+      window.dispatchEvent(new CustomEvent('device-change', {
+        detail: { device }
+      }))
+
+      // Update URL without page reload
+      const url = new URL(window.location.href)
+      url.searchParams.set('device', device)
+      window.history.replaceState({}, '', url)
+    })
+  })
+</script>
