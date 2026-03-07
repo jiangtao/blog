@@ -18,6 +18,11 @@ describe('parseDeviceFilename', () => {
     const result = parseDeviceFilename('invalid.json')
     expect(result).toBeNull()
   })
+
+  it('should parse filename with full date (YYYY-MM-DD)', () => {
+    const result = parseDeviceFilename('home-macbook-2026-03-07.json')
+    expect(result).toEqual({ deviceName: 'home-macbook', yearMonth: '2026-03' })
+  })
 })
 
 describe('calculateSummary', () => {
