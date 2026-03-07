@@ -3,6 +3,8 @@
 import { loadAIUsageData } from '../../utils/ai-usage-loader'
 import DeviceSelector from './DeviceSelector.astro'
 import ClientDashboard from './ClientDashboard.tsx'
+import { Image } from 'astro:assets'
+import cursor2025Image from '../../assets/images/jerret_cursor_2025.png'
 
 // Load data on server
 const data = await loadAIUsageData()
@@ -42,6 +44,44 @@ const serializedDailyData = JSON.stringify(allDailyData)
       client:load
     />
   </div>
+  <!-- Cursor in 2025 -->
+  <div class="mt-8" id="cursor-2025-section">
+    <button
+      id="cursor-2025-toggle"
+      class="flex items-center justify-between w-full p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+      aria-expanded="false"
+      aria-controls="cursor-2025-content"
+    >
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-gray-900 dark:bg-gray-100 flex items-center justify-center">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 text-white dark:text-gray-900" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">Cursor in 2025</h3>
+      </div>
+      <svg
+        id="cursor-2025-arrow"
+        class="w-5 h-5 text-gray-500 transition-transform duration-200"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      </svg>
+    </button>
+    <div
+      id="cursor-2025-content"
+      class="hidden mt-4 w-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700"
+    >
+      <Image
+        src={cursor2025Image}
+        alt="Cursor 2025 Usage Statistics"
+        class="w-full h-auto object-contain bg-white dark:bg-gray-800"
+        loading="lazy"
+      />
+    </div>
+  </div>
 </div>
 
 <script>
@@ -72,4 +112,19 @@ const serializedDailyData = JSON.stringify(allDailyData)
       window.history.replaceState({}, '', url)
     })
   })
+
+  // Cursor 2025 toggle functionality
+  const toggleBtn = document.getElementById('cursor-2025-toggle')
+  const content = document.getElementById('cursor-2025-content')
+  const arrow = document.getElementById('cursor-2025-arrow')
+
+  if (toggleBtn && content && arrow) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true'
+
+      toggleBtn.setAttribute('aria-expanded', !isExpanded)
+      content.classList.toggle('hidden')
+      arrow.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)'
+    })
+  }
 </script>
