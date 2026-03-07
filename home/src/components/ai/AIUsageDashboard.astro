@@ -122,7 +122,7 @@ const serializedDailyData = JSON.stringify(allDailyData)
     toggleBtn.addEventListener('click', () => {
       const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true'
 
-      toggleBtn.setAttribute('aria-expanded', !isExpanded)
+      toggleBtn.setAttribute('aria-expanded', String(!isExpanded))
       content.classList.toggle('hidden')
       arrow.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)'
     })
