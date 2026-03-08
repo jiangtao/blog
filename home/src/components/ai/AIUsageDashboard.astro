@@ -119,6 +119,9 @@ const serializedDailyData = JSON.stringify(allDailyData)
   const arrow = document.getElementById('cursor-2025-arrow')
 
   if (toggleBtn && content && arrow) {
+    // Initialize as expanded
+    arrow.style.transform = 'rotate(180deg)'
+
     toggleBtn.addEventListener('click', () => {
       const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true'
 
@@ -126,13 +129,5 @@ const serializedDailyData = JSON.stringify(allDailyData)
       content.classList.toggle('hidden')
       arrow.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)'
     })
-  }
-</script>
-
-<script>
-  // Initialize Cursor 2025 section as expanded
-  const arrow = document.getElementById('cursor-2025-arrow')
-  if (arrow) {
-    arrow.style.transform = 'rotate(180deg)'
   }
 </script>
