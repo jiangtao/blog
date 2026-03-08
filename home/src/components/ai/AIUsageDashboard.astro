@@ -49,7 +49,7 @@ const serializedDailyData = JSON.stringify(allDailyData)
     <button
       id="cursor-2025-toggle"
       class="flex items-center justify-between w-full p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
-      aria-expanded="false"
+      aria-expanded="true"
       aria-controls="cursor-2025-content"
     >
       <div class="flex items-center gap-3">
@@ -72,7 +72,7 @@ const serializedDailyData = JSON.stringify(allDailyData)
     </button>
     <div
       id="cursor-2025-content"
-      class="hidden mt-4 w-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700"
+      class="mt-4 w-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700"
     >
       <Image
         src={cursor2025Image}
@@ -126,5 +126,13 @@ const serializedDailyData = JSON.stringify(allDailyData)
       content.classList.toggle('hidden')
       arrow.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)'
     })
+  }
+</script>
+
+<script>
+  // Initialize Cursor 2025 section as expanded
+  const arrow = document.getElementById('cursor-2025-arrow')
+  if (arrow) {
+    arrow.style.transform = 'rotate(180deg)'
   }
 </script>
