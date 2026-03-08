@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import Breadcrumb from '../components/Breadcrumb.astro'
+import AIUsageDashboard from '../components/ai/AIUsageDashboard.astro'
+import { SITE } from '../config'
+---
+
+<Layout title={`AI | ${SITE.title}`}>
+  <Header />
+  <Breadcrumb />
+  <main id="main-content" class="app-layout">
+    <section id="ai" class="app-prose mb-28 max-w-app prose-img:border-0">
+      <h1 class="text-2xl tracking-wider sm:text-3xl">AI</h1>
+      <p class="text-gray-600 dark:text-gray-400 mb-6">
+        AI tools and usage statistics. This page tracks my AI tool usage and will showcase AI projects and works in the future.
+      </p>
+
+      <AIUsageDashboard />
+
+    </section>
+  </main>
+  <Footer />
+</Layout>
