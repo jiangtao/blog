@@ -5,7 +5,6 @@ User-agent: *
 Allow: /
 
 Disallow: /ai
-Disallow: /ai/
 
 Sitemap: ${sitemapURL.href}
 `;
