@@ -1,0 +1,205 @@
+---
+// src/components/ai/UsageHeatmap.astro
+import type { DailyUsage } from '../../types/ai-usage'
+
+interface Props {
+  data: DailyUsage[]
+}
+
+const { data } = Astro.props
+
+// Get all unique year-months from data
+const yearMonths = [...new Set(data.map(d => d.date.slice(0, 7)))].sort()
+const defaultYearMonth = yearMonths.length > 0 ? yearMonths[yearMonths.length - 1] : new Date().toISOString().slice(0, 7)
+
+const intensityColors = [
+  'bg-gray-100 dark:bg-gray-800',
+  'bg-blue-200 dark:bg-blue-900/40',
+  'bg-blue-300 dark:bg-blue-800/60',
+  'bg-blue-400 dark:bg-blue-700',
+  'bg-blue-500 dark:bg-blue-600'
+]
+
+// Prepare data as JSON for client-side JS
+const dataJson = JSON.stringify(data)
+---
+
+<div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 mb-6" data-usage-data={dataJson}>
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200">每日活跃度</h3>
+    <div class="flex items-center gap-2">
+      <button id="prevMonth" class="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 transition-colors" aria-label="上个月">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <span id="currentMonth" class="text-sm font-medium text-gray-700 dark:text-gray-300 min-w-[80px] text-center">{defaultYearMonth}</span>
+      <button id="nextMonth" class="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400 transition-colors" aria-label="下个月">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="heatmapContainer">
+    <!-- Heatmap will be rendered here by client JS -->
+  </div>
+
+  {/* Legend */}
+  <div class="flex items-center justify-center gap-2 mt-4 text-xs text-gray-500">
+    <span>少</span>
+    {intensityColors.map((color) => (
+      <div class={`w-3 h-3 rounded-sm ${color}`} />
+    ))}
+    <span>多</span>
+  </div>
+</div>
+
+<script>
+  interface DailyUsage {
+    date: string
+    totalTokens: number
+  }
+
+  const intensityColors = [
+    'bg-gray-100 dark:bg-gray-800',
+    'bg-blue-200 dark:bg-blue-900/40',
+    'bg-blue-300 dark:bg-blue-800/60',
+    'bg-blue-400 dark:bg-blue-700',
+    'bg-blue-500 dark:bg-blue-600'
+  ]
+
+  function getIntensityLevel(tokens: number, maxTokens: number): number {
+    if (tokens === 0) return 0
+    const ratio = tokens / maxTokens
+    if (ratio <= 0.25) return 1
+    if (ratio <= 0.5) return 2
+    if (ratio <= 0.75) return 3
+    return 4
+  }
+
+  function formatDate(dateStr: string): string {
+    const [year, month, day] = dateStr.split('-')
+    return `${year}年${month}月${day}日`
+  }
+
+  function getDaysInMonth(yearMonth: string): number {
+    const [year, month] = yearMonth.split('-').map(Number)
+    return new Date(year, month, 0).getDate()
+  }
+
+  function getFirstDayOfMonth(yearMonth: string): number {
+    const [year, month] = yearMonth.split('-').map(Number)
+    return new Date(year, month - 1, 1).getDay()
+  }
+
+  function renderHeatmap(yearMonth: string, data: DailyUsage[]) {
+    const container = document.getElementById('heatmapContainer')
+    if (!container) return
+
+    const daysInMonth = getDaysInMonth(yearMonth)
+    const firstDay = getFirstDayOfMonth(yearMonth)
+
+    // Filter data for current month
+    const monthData = data.filter(d => d.date.startsWith(yearMonth))
+    const dataMap = new Map(monthData.map(d => [d.date, d.totalTokens]))
+
+    // Calculate max tokens for intensity
+    const tokensList = monthData.map(d => d.totalTokens)
+    const maxTokens = Math.max(...tokensList, 1)
+
+    // Weekday labels
+    const weekDays = ['日', '一', '二', '三', '四', '五', '六']
+
+    // Build grid
+    let html = '<div class="overflow-x-auto"><div class="min-w-max">'
+
+    // Weekday header
+    html += '<div class="flex gap-1 mb-1">'
+    html += '<div class="w-8"></div>' // Spacer for alignment
+    for (let i = 0; i < 7; i++) {
+      html += `<div class="w-8 text-xs text-gray-500 text-center">${weekDays[i]}</div>`
+    }
+    html += '</div>'
+
+    // Calculate grid layout
+    const totalCells = firstDay + daysInMonth
+    const totalRows = Math.ceil(totalCells / 7)
+
+    html += '<div class="grid grid-cols-[auto_1fr] gap-1">'
+
+    // Week numbers on the left
+    for (let row = 0; row < totalRows; row++) {
+      html += `<div class="w-8 text-xs text-gray-400 flex items-center justify-center">第${row + 1}周</div>`
+      html += '<div class="flex gap-1">'
+
+      for (let col = 0; col < 7; col++) {
+        const cellIndex = row * 7 + col
+        const dayOfMonth = cellIndex - firstDay + 1
+
+        if (cellIndex < firstDay || dayOfMonth > daysInMonth) {
+          // Empty cell
+          html += '<div class="w-8 h-8 rounded-sm bg-transparent"></div>'
+        } else {
+          const dateStr = `${yearMonth}-${String(dayOfMonth).padStart(2, '0')}`
+          const tokens = dataMap.get(dateStr) || 0
+          const intensity = getIntensityLevel(tokens, maxTokens)
+          const colorClass = intensityColors[intensity]
+
+          html += `<div
+            class="w-8 h-8 rounded-sm ${colorClass} hover:ring-2 hover:ring-gray-400 dark:hover:ring-gray-500 cursor-pointer transition-all flex items-center justify-center text-xs font-medium ${intensity >= 3 ? 'text-white' : 'text-gray-600 dark:text-gray-400'}"
+            title="${formatDate(dateStr)}: ${tokens.toLocaleString()} tokens"
+          >${dayOfMonth}</div>`
+        }
+      }
+
+      html += '</div>'
+    }
+
+    html += '</div></div></div>'
+    container.innerHTML = html
+  }
+
+  // Initialize
+  const container = document.querySelector('[data-usage-data]')
+  if (container) {
+    const data: DailyUsage[] = JSON.parse(container.getAttribute('data-usage-data') || '[]')
+
+    // Get unique year-months
+    const yearMonths = [...new Set(data.map(d => d.date.slice(0, 7)))].sort()
+    let currentIndex = yearMonths.length > 0 ? yearMonths.length - 1 : 0
+
+    function updateDisplay() {
+      const yearMonth = yearMonths[currentIndex] || new Date().toISOString().slice(0, 7)
+      document.getElementById('currentMonth')!.textContent = yearMonth
+      renderHeatmap(yearMonth, data)
+
+      // Update button states
+      const prevBtn = document.getElementById('prevMonth') as HTMLButtonElement
+      const nextBtn = document.getElementById('nextMonth') as HTMLButtonElement
+      if (prevBtn) prevBtn.disabled = currentIndex <= 0
+      if (nextBtn) nextBtn.disabled = currentIndex >= yearMonths.length - 1
+      if (prevBtn) prevBtn.style.opacity = currentIndex <= 0 ? '0.3' : '1'
+      if (nextBtn) nextBtn.style.opacity = currentIndex >= yearMonths.length - 1 ? '0.3' : '1'
+    }
+
+    // Event listeners
+    document.getElementById('prevMonth')?.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--
+        updateDisplay()
+      }
+    })
+
+    document.getElementById('nextMonth')?.addEventListener('click', () => {
+      if (currentIndex < yearMonths.length - 1) {
+        currentIndex++
+        updateDisplay()
+      }
+    })
+
+    // Initial render
+    updateDisplay()
+  }
+</script>
