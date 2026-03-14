@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { normalizeCodexData } from '../codex-usage'
+import type { CodexUsageData } from '../../types/ai-usage'
 
 describe('normalizeCodexData', () => {
   it('should convert Codex format to unified DailyUsage format', () => {
@@ -116,7 +117,7 @@ describe('normalizeCodexData', () => {
   })
 
   it('should handle multiple days', () => {
-    const codexData = {
+    const codexData: CodexUsageData = {
       daily: [
         {
           date: 'Mar 11, 2026',
@@ -186,7 +187,7 @@ describe('normalizeCodexData', () => {
   })
 
   it('should throw error for missing daily array', () => {
-    const codexData = {} as any
+    const codexData = {} as unknown as { daily: never[] }
 
     expect(() => normalizeCodexData(codexData)).toThrow('Invalid Codex data: missing or invalid daily array')
   })
@@ -194,7 +195,7 @@ describe('normalizeCodexData', () => {
   it('should throw error for non-array daily property', () => {
     const codexData = {
       daily: 'not-an-array'
-    } as any
+    } as unknown as { daily: never[] }
 
     expect(() => normalizeCodexData(codexData)).toThrow('Invalid Codex data: missing or invalid daily array')
   })
