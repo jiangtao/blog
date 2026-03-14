@@ -1,10 +1,33 @@
 // src/utils/ai-usage-loader.ts
 import fs from 'fs/promises'
 import path from 'path'
-import type { AIUsageData, DeviceMonthlyData, ProcessedDeviceData, DailyUsage } from '../types/ai-usage'
+import type { AIUsageData, DeviceMonthlyData, ProcessedDeviceData, DailyUsage, CodexUsageData } from '../types/ai-usage'
 import { parseDeviceFilename, calculateSummary, aggregateByMonth } from './ai-usage'
+import { normalizeCodexData } from './codex-usage'
 
 const USAGE_DIR = path.join(process.cwd(), 'ai', 'usages')
+
+type FileFormat = 'claude-code' | 'codex'
+
+export function detectFileFormat(data: any): FileFormat {
+  if (!data.daily || !Array.isArray(data.daily) || data.daily.length === 0) {
+    return 'claude-code' // default
+  }
+
+  const firstDay = data.daily[0]
+
+  // Codex format has: costUSD, cachedInputTokens, models object
+  if ('costUSD' in firstDay && 'cachedInputTokens' in firstDay && 'models' in firstDay) {
+    return 'codex'
+  }
+
+  // Claude Code format has: totalCost, modelsUsed array, modelBreakdowns array
+  if ('totalCost' in firstDay && 'modelsUsed' in firstDay && 'modelBreakdowns' in firstDay) {
+    return 'claude-code'
+  }
+
+  return 'claude-code' // default
+}
 
 export async function loadAIUsageData(): Promise<AIUsageData> {
   const byDevice: Record<string, ProcessedDeviceData> = {}
@@ -21,7 +44,13 @@ export async function loadAIUsageData(): Promise<AIUsageData> {
       const { deviceName, yearMonth } = parsed
       const filePath = path.join(USAGE_DIR, file)
       const content = await fs.readFile(filePath, 'utf-8')
-      const data: DeviceMonthlyData = JSON.parse(content)
+      const rawData = JSON.parse(content)
+
+      // Detect format and normalize
+      const format = detectFileFormat(rawData)
+      const dailyData = format === 'codex'
+        ? normalizeCodexData(rawData as CodexUsageData)
+        : (rawData as DeviceMonthlyData).daily
 
       if (!byDevice[deviceName]) {
         byDevice[deviceName] = { byMonth: {} }
@@ -29,8 +58,8 @@ export async function loadAIUsageData(): Promise<AIUsageData> {
 
       // Merge if same device-month exists
       const existing = byDevice[deviceName].byMonth[yearMonth] || []
-      byDevice[deviceName].byMonth[yearMonth] = mergeDailyData(existing, data.daily)
-      allDaily = allDaily.concat(data.daily)
+      byDevice[deviceName].byMonth[yearMonth] = mergeDailyData(existing, dailyData)
+      allDaily = allDaily.concat(dailyData)
     }
   } catch (error) {
     // Directory doesn't exist or is empty
