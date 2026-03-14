@@ -9,12 +9,20 @@ const USAGE_DIR = path.join(process.cwd(), 'ai', 'usages')
 
 type FileFormat = 'claude-code' | 'codex'
 
-export function detectFileFormat(data: any): FileFormat {
-  if (!data.daily || !Array.isArray(data.daily) || data.daily.length === 0) {
+export function detectFileFormat(data: unknown): FileFormat {
+  if (!data || typeof data !== 'object' || !('daily' in data)) {
     return 'claude-code' // default
   }
 
-  const firstDay = data.daily[0]
+  const typedData = data as { daily: unknown }
+  if (!Array.isArray(typedData.daily) || typedData.daily.length === 0) {
+    return 'claude-code' // default
+  }
+
+  const firstDay = typedData.daily[0]
+  if (!firstDay || typeof firstDay !== 'object') {
+    return 'claude-code' // default
+  }
 
   // Codex format has: costUSD, cachedInputTokens, models object
   if ('costUSD' in firstDay && 'cachedInputTokens' in firstDay && 'models' in firstDay) {
