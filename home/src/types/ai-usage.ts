@@ -43,3 +43,28 @@ export interface AIUsageData {
 }
 
 export type DeviceFilter = 'all' | string
+
+// Codex-specific types
+export interface CodexModelUsage {
+  inputTokens: number
+  cachedInputTokens: number
+  outputTokens: number
+  reasoningOutputTokens: number
+  totalTokens: number
+  isFallback: boolean
+}
+
+export interface CodexDailyUsage {
+  date: string // Format: "Mar 11, 2026"
+  inputTokens: number
+  cachedInputTokens: number
+  outputTokens: number
+  reasoningOutputTokens: number
+  totalTokens: number
+  costUSD: number
+  models: Record<string, CodexModelUsage>
+}
+
+export interface CodexUsageData {
+  daily: CodexDailyUsage[]
+}
