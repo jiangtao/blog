@@ -39,11 +39,60 @@ notify_error() {
   osascript -e "display notification \"原因: $reason\n查看日志: ~/Library/Logs/blog-sync/\" with title \"AI 使用数据同步失败\" subtitle \"时间: $(date +%H:%M)\""
 }
 
+# Environment check function
+check_environment() {
+  log "Checking environment..."
+
+  # Check if project directory exists
+  if [[ ! -d "$PROJECT_DIR" ]]; then
+    log_error "Project directory not found: $PROJECT_DIR"
+    notify_error "项目目录不存在: $PROJECT_DIR"
+    exit $EXIT_ENV_FAIL
+  fi
+
+  # Change to project directory
+  cd "$PROJECT_DIR" || {
+    log_error "Failed to change to project directory"
+    notify_error "无法进入项目目录"
+    exit $EXIT_ENV_FAIL
+  }
+
+  log "✓ Project directory: $PROJECT_DIR"
+
+  # Check required commands
+  local missing_commands=()
+
+  if ! command -v ccusage &> /dev/null; then
+    missing_commands+=("ccusage")
+  fi
+
+  if ! command -v pnpx &> /dev/null; then
+    missing_commands+=("pnpx")
+  fi
+
+  if ! command -v git &> /dev/null; then
+    missing_commands+=("git")
+  fi
+
+  if [[ ${#missing_commands[@]} -gt 0 ]]; then
+    local missing_list=$(IFS=, ; echo "${missing_commands[*]}")
+    log_error "Missing required commands: $missing_list"
+    notify_error "缺少必需命令: $missing_list"
+    exit $EXIT_ENV_FAIL
+  fi
+
+  log "✓ All required commands available"
+}
+
 # Main function placeholder
 main() {
   log "========== Sync Started =========="
   log "Device: $DEVICE_NAME"
   log "Year-Month: $YEAR_MONTH"
+
+  # Check environment
+  check_environment
+
   log "========== Sync Completed =========="
 }
 
