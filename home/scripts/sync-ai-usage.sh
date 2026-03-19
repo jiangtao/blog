@@ -13,8 +13,11 @@ EXIT_ENV_FAIL=3
 # Environment setup
 export PATH="/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin:$HOME/.local/bin:$PATH"
 
+# Get script directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Project directory
-PROJECT_DIR="$HOME/places/personal/blog"
+PROJECT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 # Log directory and file
 LOG_DIR="$HOME/Library/Logs/blog-sync"
@@ -92,6 +95,46 @@ check_environment() {
   log "✓ All required commands available"
 }
 
+# Data collection function
+collect_data() {
+  log "Collecting AI usage data..."
+
+  local collection_failed=0
+
+  # Collect Claude Code usage
+  log "Collecting Claude Code usage..."
+  if "$SCRIPT_DIR/collect-claude-usage.sh" "$DEVICE_NAME" >> "$LOG_FILE" 2>&1; then
+    log "✓ Claude Code data collected: ${DEVICE_NAME}-${YEAR_MONTH}.json"
+  else
+    log_error "Failed to collect Claude Code usage"
+    collection_failed=1
+  fi
+
+  # Collect Codex usage
+  log "Collecting Codex usage..."
+  if "$SCRIPT_DIR/collect-codex-usage.sh" "$DEVICE_NAME" >> "$LOG_FILE" 2>&1; then
+    log "✓ Codex data collected: ${DEVICE_NAME}-codex-${YEAR_MONTH}.json"
+  else
+    log_error "Failed to collect Codex usage"
+    collection_failed=1
+  fi
+
+  # Check if both collections failed
+  if [[ $collection_failed -eq 1 ]]; then
+    # Check if any files were created
+    local claude_file="home/ai/usages/${DEVICE_NAME}-${YEAR_MONTH}.json"
+    local codex_file="home/ai/usages/${DEVICE_NAME}-codex-${YEAR_MONTH}.json"
+
+    if [[ ! -f "$claude_file" ]] && [[ ! -f "$codex_file" ]]; then
+      log_error "Both data collections failed"
+      notify_error "数据收集失败：ccusage 和 codex 都无法执行"
+      exit $EXIT_COLLECTION_FAIL
+    else
+      log "⚠ Partial collection success, continuing..."
+    fi
+  fi
+}
+
 # Main function placeholder
 main() {
   log "========== Sync Started =========="
@@ -100,6 +143,9 @@ main() {
 
   # Check environment
   check_environment
+
+  # Collect data
+  collect_data
 
   log "========== Sync Completed =========="
 }
