@@ -24,6 +24,12 @@ LOG_FILE="$LOG_DIR/sync-usage-$(date +%Y-%m).log"
 DEVICE_NAME=$(hostname | cut -d'.' -f1)
 YEAR_MONTH=$(date +%Y-%m)
 
+# Create log directory if not exists
+if ! mkdir -p "$LOG_DIR"; then
+  echo "ERROR: Failed to create log directory: $LOG_DIR" >&2
+  exit "$EXIT_ENV_FAIL"
+fi
+
 # Logging functions
 log() {
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG_FILE"
@@ -75,7 +81,9 @@ check_environment() {
   fi
 
   if [[ ${#missing_commands[@]} -gt 0 ]]; then
-    local missing_list=$(IFS=, ; echo "${missing_commands[*]}")
+    local missing_list
+    missing_list=$(printf "%s," "${missing_commands[@]}")
+    missing_list=${missing_list%,}  # Remove trailing comma
     log_error "Missing required commands: $missing_list"
     notify_error "缺少必需命令: $missing_list"
     exit $EXIT_ENV_FAIL
@@ -95,12 +103,6 @@ main() {
 
   log "========== Sync Completed =========="
 }
-
-# Create log directory if not exists
-if ! mkdir -p "$LOG_DIR"; then
-  echo "ERROR: Failed to create log directory: $LOG_DIR" >&2
-  exit "$EXIT_ENV_FAIL"
-fi
 
 # Run main function
 main
