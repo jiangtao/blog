@@ -2,7 +2,7 @@
 # home/scripts/sync-ai-usage.sh
 # Automatically sync AI usage data (ccusage + codex) to Git repo
 
-set -e
+set -euo pipefail
 
 # Exit codes
 EXIT_SUCCESS=0
@@ -12,7 +12,6 @@ EXIT_ENV_FAIL=3
 
 # Environment setup
 export PATH="/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin:$HOME/.local/bin:$PATH"
-export HOME="${HOME:-/Users/jt}"
 
 # Project directory
 PROJECT_DIR="$HOME/places/personal/blog"
@@ -31,7 +30,7 @@ log() {
 }
 
 log_error() {
-  echo "[$(date '+%Y-%m-%d %H:%M:%S')] ERROR: $*" | tee -a "$LOG_FILE" >&2
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] ERROR: $*" >&2 | tee -a "$LOG_FILE"
 }
 
 # Notification function
@@ -49,7 +48,10 @@ main() {
 }
 
 # Create log directory if not exists
-mkdir -p "$LOG_DIR"
+if ! mkdir -p "$LOG_DIR"; then
+  echo "ERROR: Failed to create log directory: $LOG_DIR" >&2
+  exit "$EXIT_ENV_FAIL"
+fi
 
 # Run main function
 main
