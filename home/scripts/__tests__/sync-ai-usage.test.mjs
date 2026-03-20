@@ -40,6 +40,8 @@ function writeExecutable(filePath, content) {
 
 function installCommonFakes(binDir, stateDir) {
   const gitLogPath = path.join(stateDir, 'git.log')
+  const stashMarkerPath = path.join(stateDir, 'stash-created')
+  const stashMessagePath = path.join(stateDir, 'stash-message')
 
   writeExecutable(
     path.join(binDir, 'ccusage'),
@@ -69,10 +71,41 @@ printf '%s\\n' "$*" >> "${gitLogPath}"
 
 case "\${1:-}" in
   pull)
+    if [[ "\${FAKE_GIT_REQUIRE_STASH_BEFORE_PULL:-0}" == "1" ]] && [[ ! -f "${stashMarkerPath}" ]]; then
+      echo "pull requires stash first" >&2
+      exit 7
+    fi
     exit "\${FAKE_GIT_PULL_EXIT:-0}"
     ;;
   status)
     printf '%s' "\${FAKE_GIT_STATUS_OUTPUT:-}"
+    ;;
+  stash)
+    case "\${2:-}" in
+      push)
+        touch "${stashMarkerPath}"
+        message=""
+        while [[ $# -gt 0 ]]; do
+          if [[ "\${1:-}" == "--message" ]]; then
+            message="\${2:-}"
+            break
+          fi
+          shift
+        done
+        printf '%s' "$message" > "${stashMessagePath}"
+        exit 0
+        ;;
+      list)
+        if [[ -f "${stashMarkerPath}" ]]; then
+          printf 'stash@{0} %s\n' "$(cat "${stashMessagePath}")"
+        fi
+        exit 0
+        ;;
+      drop)
+        rm -f "${stashMarkerPath}" "${stashMessagePath}"
+        exit 0
+        ;;
+    esac
     ;;
   add)
     exit 0
@@ -350,6 +383,38 @@ test('sync-ai-usage stages only the current device files', () => {
     /add home\/ai\/usages\/test-device-2026-03\.json home\/ai\/usages\/test-device-codex-2026-03\.json/,
   )
   assert.doesNotMatch(gitLog, /someone-else-2026-03\.json/)
+})
+
+test('sync-ai-usage stashes current-device usage files before pull when they are already dirty', () => {
+  const { baseDir, repoDir, homeDir, binDir } = createTempRepo([
+    'collect-claude-usage.sh',
+    'collect-codex-usage.sh',
+    'sync-ai-usage.sh',
+  ])
+  const { gitLogPath } = installCommonFakes(binDir, baseDir)
+
+  const result = runScript(
+    path.join(repoDir, 'home', 'scripts', 'sync-ai-usage.sh'),
+    {
+      HOME: homeDir,
+      PATH: '',
+      BLOG_SYNC_PROJECT_DIR: repoDir,
+      BLOG_SYNC_PATH_PREFIX: binDir,
+      BLOG_SYNC_DEVICE_NAME: 'test-device',
+      BLOG_SYNC_YEAR_MONTH: '2026-03',
+      FAKE_GIT_REQUIRE_STASH_BEFORE_PULL: '1',
+      FAKE_GIT_STATUS_OUTPUT:
+        ' M home/ai/usages/test-device-2026-03.json\n D home/ai/usages/test-device-codex-2026-03.json\n',
+    },
+    repoDir,
+  )
+
+  assert.equal(result.status, 0, result.stderr || result.stdout)
+
+  const gitLog = readFileSync(gitLogPath, 'utf8')
+  assert.match(gitLog, /stash push --include-untracked --message blog-sync-prepull-test-device-2026-03-/)
+  assert.match(gitLog, /pull --rebase origin master/)
+  assert.match(gitLog, /stash drop stash@\{0\}/)
 })
 
 test('install-cron and uninstall-cron manage the matching crontab entry', () => {

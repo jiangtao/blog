@@ -10,6 +10,9 @@ EXIT_COLLECTION_FAIL=1
 EXIT_GIT_FAIL=2
 EXIT_ENV_FAIL=3
 
+TEMP_STASH_CREATED=0
+TEMP_STASH_MESSAGE=""
+
 # Environment setup
 export HOME="${HOME:-$(
   cd ~ >/dev/null 2>&1 && pwd
@@ -142,8 +145,35 @@ collect_data() {
   fi
 }
 
+# Temporarily stash the current device's usage files if they are already dirty.
+stash_current_device_changes() {
+  local claude_file="home/ai/usages/${DEVICE_NAME}-${YEAR_MONTH}.json"
+  local codex_file="home/ai/usages/${DEVICE_NAME}-codex-${YEAR_MONTH}.json"
+  local dirty_output
+
+  dirty_output="$(git status --porcelain -- "$claude_file" "$codex_file")"
+
+  if [[ -z "$dirty_output" ]]; then
+    return 0
+  fi
+
+  TEMP_STASH_MESSAGE="blog-sync-prepull-${DEVICE_NAME}-${YEAR_MONTH}-$(date +%s)"
+
+  log "Stashing existing local usage file changes for current device..."
+  if ! git stash push --include-untracked --message "$TEMP_STASH_MESSAGE" -- "$claude_file" "$codex_file" >> "$LOG_FILE" 2>&1; then
+    log_error "Failed to stash local usage file changes"
+    notify_error "无法暂存当前设备的本地 usage 变更"
+    exit $EXIT_GIT_FAIL
+  fi
+
+  TEMP_STASH_CREATED=1
+  log "✓ Stashed local usage file changes"
+}
+
 # Git preparation function
 prepare_git_repo() {
+  stash_current_device_changes
+
   # Pull latest changes before committing local updates.
   log "Pulling latest changes..."
   if ! git pull --rebase "$GIT_REMOTE" "$GIT_BRANCH" >> "$LOG_FILE" 2>&1; then
@@ -152,6 +182,29 @@ prepare_git_repo() {
     exit $EXIT_GIT_FAIL
   fi
   log "✓ Pulled latest changes"
+}
+
+drop_temporary_stash() {
+  if [[ $TEMP_STASH_CREATED -eq 0 ]]; then
+    return 0
+  fi
+
+  local stash_ref
+  stash_ref="$(git stash list --format='%gd %s' | awk -v message="$TEMP_STASH_MESSAGE" '$0 ~ message { print $1; exit }')"
+
+  if [[ -z "$stash_ref" ]]; then
+    log "Temporary stash already absent"
+    return 0
+  fi
+
+  log "Dropping temporary stash..."
+  if ! git stash drop "$stash_ref" >> "$LOG_FILE" 2>&1; then
+    log_error "Failed to drop temporary stash"
+    notify_error "无法删除临时 stash，请手动检查 git stash list"
+    exit $EXIT_GIT_FAIL
+  fi
+
+  log "✓ Dropped temporary stash"
 }
 
 # Git operations function
@@ -233,6 +286,9 @@ main() {
 
   # Sync new data to GitHub
   git_operations
+
+  # Drop temporary stash once sync succeeds end-to-end
+  drop_temporary_stash
 
   log "========== Sync Completed =========="
 }
