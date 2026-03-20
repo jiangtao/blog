@@ -124,6 +124,25 @@ pnpx @ccusage/codex -j > macbook-codex-$(date +%Y-%m).json
 3. 收集使用数据并保存到 `home/ai/usages/` 目录
 4. 提示如何提交数据
 
+## 自动同步（推荐）
+
+### 使用 Cron 自动同步
+
+项目提供了自动同步脚本，每天 23:00 自动收集并提交数据：
+
+```bash
+# 安装自动同步
+./home/scripts/install-cron.sh
+
+# 查看日志
+cat ~/Library/Logs/blog-sync/sync-usage-$(date +%Y-%m).log
+
+# 卸载自动同步
+./home/scripts/uninstall-cron.sh
+```
+
+详细说明请参考：`home/scripts/README-sync.md`
+
 ## 提交数据
 
 收集完数据后，提交到 Git 仓库：

@@ -11,21 +11,28 @@ EXIT_GIT_FAIL=2
 EXIT_ENV_FAIL=3
 
 # Environment setup
-export PATH="/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin:$HOME/.local/bin:$PATH"
+export HOME="${HOME:-$(
+  cd ~ >/dev/null 2>&1 && pwd
+)}"
+export PATH="${BLOG_SYNC_PATH_PREFIX:+${BLOG_SYNC_PATH_PREFIX}:}/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin:$HOME/.local/bin:${PATH:-}"
 
 # Get script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Project directory
-PROJECT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+DEFAULT_PROJECT_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
+PROJECT_DIR="${BLOG_SYNC_PROJECT_DIR:-$DEFAULT_PROJECT_DIR}"
+PROJECT_SCRIPT_DIR="$PROJECT_DIR/home/scripts"
+GIT_REMOTE="${BLOG_SYNC_GIT_REMOTE:-origin}"
+GIT_BRANCH="${BLOG_SYNC_GIT_BRANCH:-master}"
 
 # Log directory and file
-LOG_DIR="$HOME/Library/Logs/blog-sync"
+LOG_DIR="${BLOG_SYNC_LOG_DIR:-$HOME/Library/Logs/blog-sync}"
 LOG_FILE="$LOG_DIR/sync-usage-$(date +%Y-%m).log"
 
 # Device and date info
-DEVICE_NAME=$(hostname | cut -d'.' -f1)
-YEAR_MONTH=$(date +%Y-%m)
+DEVICE_NAME="${BLOG_SYNC_DEVICE_NAME:-$(hostname | cut -d'.' -f1)}"
+YEAR_MONTH="${BLOG_SYNC_YEAR_MONTH:-$(date +%Y-%m)}"
 
 # Create log directory if not exists
 if ! mkdir -p "$LOG_DIR"; then
@@ -45,7 +52,9 @@ log_error() {
 # Notification function
 notify_error() {
   local reason="$1"
-  osascript -e "display notification \"原因: $reason\n查看日志: ~/Library/Logs/blog-sync/\" with title \"AI 使用数据同步失败\" subtitle \"时间: $(date +%H:%M)\""
+  if command -v osascript > /dev/null 2>&1; then
+    osascript -e "display notification \"原因: $reason\n查看日志: ${LOG_DIR}\" with title \"AI 使用数据同步失败\" subtitle \"时间: $(date +%H:%M)\"" > /dev/null 2>&1 || true
+  fi
 }
 
 # Environment check function
@@ -104,7 +113,7 @@ collect_data() {
 
   # Collect Claude Code usage
   log "Collecting Claude Code usage..."
-  if "$SCRIPT_DIR/collect-claude-usage.sh" "$DEVICE_NAME" >> "$LOG_FILE" 2>&1; then
+  if "$PROJECT_SCRIPT_DIR/collect-claude-usage.sh" "$DEVICE_NAME" >> "$LOG_FILE" 2>&1; then
     log "✓ Claude Code data collected: ${DEVICE_NAME}-${YEAR_MONTH}.json"
     claude_success=1
   else
@@ -113,7 +122,7 @@ collect_data() {
 
   # Collect Codex usage
   log "Collecting Codex usage..."
-  if "$SCRIPT_DIR/collect-codex-usage.sh" "$DEVICE_NAME" >> "$LOG_FILE" 2>&1; then
+  if "$PROJECT_SCRIPT_DIR/collect-codex-usage.sh" "$DEVICE_NAME" >> "$LOG_FILE" 2>&1; then
     log "✓ Codex data collected: ${DEVICE_NAME}-codex-${YEAR_MONTH}.json"
     codex_success=1
   else
@@ -133,7 +142,81 @@ collect_data() {
   fi
 }
 
-# Main function placeholder
+# Git preparation function
+prepare_git_repo() {
+  # Pull latest changes before committing local updates.
+  log "Pulling latest changes..."
+  if ! git pull --rebase "$GIT_REMOTE" "$GIT_BRANCH" >> "$LOG_FILE" 2>&1; then
+    log_error "Failed to pull latest changes"
+    notify_error "git pull 失败，可能有冲突需要手动解决"
+    exit $EXIT_GIT_FAIL
+  fi
+  log "✓ Pulled latest changes"
+}
+
+# Git operations function
+git_operations() {
+  log "Performing Git operations..."
+
+  log "Checking for changes..."
+  local changes
+  changes="$(git status --porcelain home/ai/usages/)"
+
+  if [[ -z "$changes" ]]; then
+    log "No changes detected, skipping commit"
+    return 0
+  fi
+
+  local file_count
+  file_count="$(printf '%s\n' "$changes" | wc -l | tr -d ' ')"
+  log "Changes detected in $file_count file(s)"
+
+  local files_to_stage=()
+  local claude_file="home/ai/usages/${DEVICE_NAME}-${YEAR_MONTH}.json"
+  local codex_file="home/ai/usages/${DEVICE_NAME}-codex-${YEAR_MONTH}.json"
+
+  if [[ -f "$claude_file" ]]; then
+    files_to_stage+=("$claude_file")
+  fi
+
+  if [[ -f "$codex_file" ]]; then
+    files_to_stage+=("$codex_file")
+  fi
+
+  if [[ ${#files_to_stage[@]} -eq 0 ]]; then
+    log_error "No current device usage files found to stage"
+    notify_error "未找到当前设备的使用数据文件"
+    exit $EXIT_GIT_FAIL
+  fi
+
+  log "Adding changes..."
+  git add "${files_to_stage[@]}" >> "$LOG_FILE" 2>&1
+  log "✓ Changes staged"
+
+  local commit_message
+  commit_message="chore(ai): sync usage data for ${DEVICE_NAME} ${YEAR_MONTH}
+
+- Claude Code: ${DEVICE_NAME}-${YEAR_MONTH}.json
+- Codex: ${DEVICE_NAME}-codex-${YEAR_MONTH}.json"
+
+  log "Committing changes..."
+  if ! git commit -m "$commit_message" >> "$LOG_FILE" 2>&1; then
+    log_error "Failed to commit changes"
+    notify_error "git commit 失败"
+    exit $EXIT_GIT_FAIL
+  fi
+  log "✓ Changes committed"
+
+  log "Pushing to GitHub..."
+  if ! git push "$GIT_REMOTE" "$GIT_BRANCH" >> "$LOG_FILE" 2>&1; then
+    log_error "Failed to push to GitHub"
+    notify_error "git push 失败 - 可能是网络问题，本地提交已保留"
+    exit $EXIT_GIT_FAIL
+  fi
+  log "✓ Successfully pushed to ${GIT_REMOTE}/${GIT_BRANCH}"
+}
+
+# Main function
 main() {
   log "========== Sync Started =========="
   log "Device: $DEVICE_NAME"
@@ -142,8 +225,14 @@ main() {
   # Check environment
   check_environment
 
+  # Sync with remote before local collectors update tracked files
+  prepare_git_repo
+
   # Collect data
   collect_data
+
+  # Sync new data to GitHub
+  git_operations
 
   log "========== Sync Completed =========="
 }

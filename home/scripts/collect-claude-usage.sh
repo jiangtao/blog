@@ -1,7 +1,7 @@
 #!/bin/bash
 # home/scripts/collect-claude-usage.sh
 
-set -e
+set -euo pipefail
 
 # Check if ccusage command exists
 if ! command -v ccusage &> /dev/null; then
@@ -15,10 +15,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 # Get device name (default to hostname)
-DEVICE_NAME="${1:-$(hostname | cut -d'.' -f1)}"
+DEVICE_NAME="${1:-${BLOG_SYNC_DEVICE_NAME:-$(hostname | cut -d'.' -f1)}}"
 
 # Get current year-month
-YEAR_MONTH=$(date +%Y-%m)
+YEAR_MONTH="${BLOG_SYNC_YEAR_MONTH:-$(date +%Y-%m)}"
 
 # Output directory and filename (using absolute path)
 OUTPUT_DIR="$REPO_ROOT/home/ai/usages"
