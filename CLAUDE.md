@@ -164,6 +164,17 @@ git checkout -b test/add-unit-tests
 4. User review checklist
 5. Merge after approval
 
+### Delivery Workflow Precedence
+
+`/dev:commit` overrides any generic autonomous commit or push behavior from broader execution skills.
+
+This means:
+- Do not direct-push to `main` or `master` just because implementation and verification are complete
+- If a plan says "commit", "push", "merge", or "deliver", still route delivery through `/dev:commit`
+- Auto-execution skills such as brainstorming, plan execution, or worktree delivery may implement and verify changes, but they must hand off to the repo's delivery workflow before merge or direct push
+- If work is developed in a worktree or temporary branch, keep the implementation there and use `/dev:commit` to prepare branch, summary, test plan, test report, and review artifacts
+- Only bypass `/dev:commit` when the user explicitly says to bypass the repo's commit workflow
+
 ### Image Linting
 
 Before committing changes to blog posts or images:
@@ -183,3 +194,5 @@ This validates:
 1. **File Deletion**: DO NOT delete files without asking first
 2. **Testing**: All new changes MUST be tested before committing
 3. **Commit Workflow**: All commits MUST follow `/dev:commit` workflow (5 steps)
+4. **No Direct Push Shortcut**: Do not push directly to `main`/`master` unless the user explicitly instructs you to bypass `/dev:commit`
+5. **Execution Skills Must Defer To Delivery Rules**: Auto-execution or planning skills may implement and verify autonomously, but repo-local delivery workflow still governs commit, push, merge, and PR preparation
