@@ -243,7 +243,7 @@ test('sync-ai-usage collects data and performs git sync when usage files changed
   assert.match(gitLog, /pull --rebase origin master/)
   assert.match(gitLog, /status --porcelain home\/ai\/usages\//)
   assert.match(gitLog, /commit -m chore\(ai\): sync usage data for test-device 2026-03/)
-  assert.match(gitLog, /push origin master/)
+  assert.match(gitLog, /push origin HEAD:master/)
 })
 
 test('sync-ai-usage skips commit and push when git status reports no changes', () => {
@@ -273,7 +273,7 @@ test('sync-ai-usage skips commit and push when git status reports no changes', (
   const gitLog = readFileSync(gitLogPath, 'utf8')
   assert.match(gitLog, /pull --rebase origin master/)
   assert.doesNotMatch(gitLog, /commit -m/)
-  assert.doesNotMatch(gitLog, /push origin master/)
+  assert.doesNotMatch(gitLog, /push origin HEAD:master/)
 })
 
 test('sync-ai-usage pulls latest changes before collectors mutate tracked files', () => {

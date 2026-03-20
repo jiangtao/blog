@@ -261,12 +261,12 @@ git_operations() {
   log "✓ Changes committed"
 
   log "Pushing to GitHub..."
-  if ! git push "$GIT_REMOTE" "$GIT_BRANCH" >> "$LOG_FILE" 2>&1; then
+  if ! git push "$GIT_REMOTE" "HEAD:${GIT_BRANCH}" >> "$LOG_FILE" 2>&1; then
     log_error "Failed to push to GitHub"
     notify_error "git push 失败 - 可能是网络问题，本地提交已保留"
     exit $EXIT_GIT_FAIL
   fi
-  log "✓ Successfully pushed to ${GIT_REMOTE}/${GIT_BRANCH}"
+  log "✓ Successfully pushed to ${GIT_REMOTE} HEAD:${GIT_BRANCH}"
 }
 
 # Main function
