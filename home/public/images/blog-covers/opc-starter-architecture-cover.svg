@@ -1,25 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f2740"/>
-      <stop offset="100%" stop-color="#123f5d"/>
+      <stop offset="0%" stop-color="#10263a"/>
+      <stop offset="100%" stop-color="#153b57"/>
     </linearGradient>
     <linearGradient id="panel" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#143552"/>
-      <stop offset="100%" stop-color="#102a3f"/>
-    </linearGradient>
-    <linearGradient id="board" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f8fbff"/>
-      <stop offset="100%" stop-color="#eef5fb"/>
+      <stop offset="0%" stop-color="#13324c"/>
+      <stop offset="100%" stop-color="#0f273b"/>
     </linearGradient>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#07131d" flood-opacity="0.28"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#07111a" flood-opacity="0.26"/>
     </filter>
-    <pattern id="grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#7ed7ff" stroke-opacity="0.08" stroke-width="1"/>
+    <pattern id="grid" x="0" y="0" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M 44 0 L 0 0 0 44" fill="none" stroke="#89dcff" stroke-opacity="0.07" stroke-width="1"/>
     </pattern>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-      <polygon points="0 0, 10 5, 0 10" fill="#4fc3f7"/>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#53c8f6"/>
     </marker>
   </defs>
 
@@ -27,85 +23,95 @@
   <rect width="1200" height="630" fill="url(#grid)"/>
 
   <g filter="url(#shadow)">
-    <rect x="44" y="46" width="1112" height="538" rx="24" fill="url(#panel)" stroke="#7ed7ff" stroke-opacity="0.22" stroke-width="2"/>
+    <rect x="48" y="46" width="1104" height="538" rx="24" fill="url(#panel)" stroke="#89dcff" stroke-opacity="0.18" stroke-width="2"/>
   </g>
 
-  <g transform="translate(90, 98)">
-    <text x="0" y="0" font-family="Arial, sans-serif" font-size="20" font-weight="bold" letter-spacing="3" fill="#87ddff">ARCHITECTURE BREAKDOWN</text>
-    <text x="0" y="78" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="#f3fbff">OPC-Starter</text>
-    <text x="0" y="132" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#d8f5ff">A2UI · Functions · Agent Studio</text>
-    <text x="0" y="174" font-family="Arial, sans-serif" font-size="18" fill="#9fdff4">从渲染链路到 Edge Functions，拆解一个 AI-first SaaS 底座</text>
+  <g transform="translate(92, 92)">
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="18" font-weight="bold" letter-spacing="3" fill="#8de1ff">ARCHITECTURE REVIEW</text>
+    <text x="0" y="74" font-family="Arial, sans-serif" font-size="66" font-weight="bold" fill="#f1fbff">OPC-Starter</text>
+    <text x="0" y="126" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="#d4f2ff">A2UI · Functions · Agent Studio</text>
+    <text x="0" y="166" font-family="Arial, sans-serif" font-size="17" fill="#a6ddf2">拆解一个 AI-first SaaS 底座的渲染链路与后端网关设计</text>
   </g>
 
-  <g transform="translate(88, 246)" filter="url(#shadow)">
-    <rect x="0" y="0" width="350" height="88" rx="16" fill="#113854" stroke="#6fcfff" stroke-opacity="0.34" stroke-width="2"/>
-    <text x="24" y="32" font-family="Arial" font-size="20" font-weight="bold" fill="#f2fbff">A2UI</text>
-    <text x="24" y="58" font-family="monospace" font-size="14" fill="#9fe8ff">message stream -> surface -> renderer</text>
+  <g transform="translate(92, 238)" filter="url(#shadow)">
+    <rect x="0" y="0" width="320" height="82" rx="16" fill="#113551" stroke="#70d4ff" stroke-opacity="0.30" stroke-width="2"/>
+    <text x="24" y="30" font-family="Arial" font-size="19" font-weight="bold" fill="#f0fbff">A2UI Runtime</text>
+    <text x="24" y="54" font-family="monospace" font-size="13" fill="#9fe8ff">message -> surface -> renderer</text>
   </g>
 
-  <g transform="translate(88, 358)" filter="url(#shadow)">
-    <rect x="0" y="0" width="350" height="88" rx="16" fill="#14324c" stroke="#6fcfff" stroke-opacity="0.34" stroke-width="2"/>
-    <text x="24" y="32" font-family="Arial" font-size="20" font-weight="bold" fill="#f2fbff">Supabase Functions</text>
-    <text x="24" y="58" font-family="monospace" font-size="14" fill="#9fe8ff">auth -> sse -> agent loop -> tools</text>
+  <g transform="translate(92, 342)" filter="url(#shadow)">
+    <rect x="0" y="0" width="320" height="82" rx="16" fill="#14324c" stroke="#70d4ff" stroke-opacity="0.30" stroke-width="2"/>
+    <text x="24" y="30" font-family="Arial" font-size="19" font-weight="bold" fill="#f0fbff">Supabase Gateway</text>
+    <text x="24" y="54" font-family="monospace" font-size="13" fill="#9fe8ff">auth -> sse -> agent loop -> tools</text>
   </g>
 
-  <g transform="translate(88, 470)" filter="url(#shadow)">
-    <rect x="0" y="0" width="350" height="72" rx="16" fill="#102a3f" stroke="#6fcfff" stroke-opacity="0.34" stroke-width="2"/>
-    <text x="24" y="30" font-family="Arial" font-size="20" font-weight="bold" fill="#f2fbff">Key Question</text>
-    <text x="24" y="54" font-family="Arial" font-size="15" fill="#ccefff">Agent 是聊天框，还是交互编排层？</text>
+  <g transform="translate(92, 446)" filter="url(#shadow)">
+    <rect x="0" y="0" width="320" height="74" rx="16" fill="#0f283c" stroke="#70d4ff" stroke-opacity="0.30" stroke-width="2"/>
+    <text x="24" y="28" font-family="Arial" font-size="19" font-weight="bold" fill="#f0fbff">Design Tension</text>
+    <text x="24" y="52" font-family="Arial" font-size="15" fill="#caeeff">Agent 是聊天框，还是交互编排层？</text>
   </g>
 
-  <g transform="translate(488, 108)" filter="url(#shadow)">
-    <rect x="0" y="0" width="618" height="390" rx="22" fill="url(#board)" stroke="#b7cfdf" stroke-width="1.5"/>
-    <text x="28" y="34" font-family="Arial" font-size="18" font-weight="bold" fill="#263645">A2UI Runtime Flow</text>
-    <text x="28" y="56" font-family="Arial" font-size="12" fill="#607387">structured UI instead of raw HTML</text>
+  <g transform="translate(458, 104)" filter="url(#shadow)">
+    <rect x="0" y="0" width="650" height="412" rx="22" fill="#f7fbff" stroke="#bed3e1" stroke-width="1.5"/>
 
-    <g transform="translate(28, 90)">
-      <rect x="0" y="0" width="138" height="64" rx="12" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
-      <text x="69" y="28" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#243040">User</text>
-      <text x="69" y="46" text-anchor="middle" font-family="monospace" font-size="11" fill="#4f6478">prompt</text>
+    <text x="28" y="34" font-family="Arial" font-size="18" font-weight="bold" fill="#273848">A2UI Runtime Flow</text>
+    <text x="28" y="56" font-family="Arial" font-size="12" fill="#667989">server-driven UI with local rendering control</text>
+
+    <g transform="translate(28, 96)">
+      <rect x="0" y="0" width="132" height="58" rx="12" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
+      <text x="66" y="26" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="#243040">User</text>
+      <text x="66" y="43" text-anchor="middle" font-family="monospace" font-size="10" fill="#4f6478">prompt</text>
     </g>
 
-    <g transform="translate(200, 90)">
-      <rect x="0" y="0" width="160" height="64" rx="12" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
-      <text x="80" y="28" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#243040">useAgentChat</text>
-      <text x="80" y="46" text-anchor="middle" font-family="monospace" font-size="11" fill="#4f6478">text / a2ui / tool</text>
+    <g transform="translate(198, 96)">
+      <rect x="0" y="0" width="154" height="58" rx="12" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
+      <text x="77" y="26" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="#243040">useAgentChat</text>
+      <text x="77" y="43" text-anchor="middle" font-family="monospace" font-size="10" fill="#4f6478">text / a2ui / tool</text>
     </g>
 
-    <g transform="translate(394, 90)">
-      <rect x="0" y="0" width="180" height="64" rx="12" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/>
-      <text x="90" y="28" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#243040">Edge Function</text>
-      <text x="90" y="46" text-anchor="middle" font-family="monospace" font-size="11" fill="#4f6478">auth + sse + stream</text>
+    <g transform="translate(390, 96)">
+      <rect x="0" y="0" width="168" height="58" rx="12" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/>
+      <text x="84" y="26" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="#243040">Edge Function</text>
+      <text x="84" y="43" text-anchor="middle" font-family="monospace" font-size="10" fill="#4f6478">auth + sse + stream</text>
     </g>
 
-    <g transform="translate(92, 222)">
-      <rect x="0" y="0" width="190" height="72" rx="12" fill="#b0e3e6" stroke="#0e8088" stroke-width="2"/>
-      <text x="95" y="30" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#243040">useAgentStore</text>
-      <text x="95" y="50" text-anchor="middle" font-family="monospace" font-size="11" fill="#4f6478">surface + dataModel</text>
+    <g transform="translate(110, 236)">
+      <rect x="0" y="0" width="184" height="70" rx="12" fill="#b0e3e6" stroke="#0e8088" stroke-width="2"/>
+      <text x="92" y="30" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="#243040">useAgentStore</text>
+      <text x="92" y="49" text-anchor="middle" font-family="monospace" font-size="10" fill="#4f6478">surface + dataModel</text>
     </g>
 
-    <g transform="translate(330, 222)">
-      <rect x="0" y="0" width="190" height="72" rx="12" fill="#ffe6cc" stroke="#d79b00" stroke-width="2"/>
-      <text x="95" y="30" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#243040">A2UIRenderer</text>
-      <text x="95" y="50" text-anchor="middle" font-family="monospace" font-size="11" fill="#4f6478">registry + bindings</text>
+    <g transform="translate(346, 236)">
+      <rect x="0" y="0" width="184" height="70" rx="12" fill="#ffe6cc" stroke="#d79b00" stroke-width="2"/>
+      <text x="92" y="30" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="#243040">A2UIRenderer</text>
+      <text x="92" y="49" text-anchor="middle" font-family="monospace" font-size="10" fill="#4f6478">registry + bindings</text>
     </g>
 
-    <g transform="translate(152, 326)">
-      <rect x="0" y="0" width="290" height="40" rx="20" fill="#123551" opacity="0.94"/>
-      <text x="145" y="26" text-anchor="middle" font-family="Arial" font-size="16" fill="#ecf9ff">Rendered Surface / Portal / Fullscreen</text>
+    <g transform="translate(154, 344)">
+      <rect x="0" y="0" width="330" height="42" rx="21" fill="#123551"/>
+      <text x="165" y="27" text-anchor="middle" font-family="Arial" font-size="15" fill="#ecf9ff">Rendered Surface / Portal / Fullscreen</text>
     </g>
 
-    <g stroke="#4fc3f7" stroke-width="3" fill="none" marker-end="url(#arrow)">
-      <path d="M 166 122 C 178 122 186 122 200 122"/>
-      <path d="M 360 122 C 374 122 382 122 394 122"/>
-      <path d="M 282 258 C 302 258 314 258 330 258"/>
-      <path d="M 175 154 C 175 186 187 206 210 222"/>
-      <path d="M 484 154 C 484 188 458 208 428 222"/>
-      <path d="M 425 294 C 425 306 420 314 410 326"/>
+    <g stroke="#53c8f6" stroke-width="2.4" fill="none" marker-end="url(#arrow)">
+      <path d="M 160 125 C 172 125 182 125 198 125"/>
+      <path d="M 352 125 C 366 125 376 125 390 125"/>
+      <path d="M 275 154 C 275 192 256 214 232 236"/>
+      <path d="M 474 154 C 474 192 448 214 438 236"/>
+      <path d="M 294 271 C 314 271 326 271 346 271"/>
+      <path d="M 438 306 C 438 324 420 334 396 344"/>
     </g>
 
-    <text x="420" y="206" font-family="Arial" font-size="12" fill="#8a2d2d">tool call / a2ui / done</text>
+    <g transform="translate(570, 108)">
+      <rect x="0" y="0" width="52" height="188" rx="12" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
+      <text x="26" y="52" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold" fill="#243040">agent</text>
+      <text x="26" y="76" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold" fill="#243040">Loop</text>
+      <text x="26" y="118" text-anchor="middle" font-family="monospace" font-size="9" fill="#5c3e3e">tools</text>
+      <text x="26" y="134" text-anchor="middle" font-family="monospace" font-size="9" fill="#5c3e3e">stream</text>
+      <text x="26" y="150" text-anchor="middle" font-family="monospace" font-size="9" fill="#5c3e3e">result</text>
+    </g>
+
+    <text x="520" y="220" font-family="Arial" font-size="12" fill="#8a2d2d">server assumes tool success first</text>
   </g>
 
-  <text x="1128" y="608" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#8ddfff" opacity="0.52" text-anchor="end">Jerret's Blog</text>
+  <text x="1128" y="608" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#8de0ff" opacity="0.52" text-anchor="end">Jerret's Blog</text>
 </svg>
