@@ -22,3 +22,7 @@ home/db.json
 docs/plans/
 .worktrees
 .claude/worktrees
+
+# Local editable diagram sources
+*.drawio
+source-local/

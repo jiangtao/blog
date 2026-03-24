@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <polygon points="0 0, 9 4.5, 0 9" fill="#586574"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="760" fill="#ffffff"/>
+  <text x="600" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#202939">OPC-Starter A2UI 渲染链路</text>
+  <text x="600" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#5b6472">从用户消息、SSE、Edge Function 到前端 Surface 渲染</text>
+
+  <g filter="url(#shadow)">
+    <rect x="110" y="132" width="150" height="76" rx="12" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
+    <text x="185" y="165" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#243040">User</text>
+    <text x="185" y="188" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">prompt</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="330" y="120" width="188" height="100" rx="12" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
+    <text x="424" y="158" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#243040">useAgentChat</text>
+    <text x="424" y="182" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">message orchestration</text>
+    <text x="424" y="202" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">text / a2ui / tool</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="590" y="120" width="170" height="100" rx="12" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/>
+    <text x="675" y="158" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#243040">sseClient</text>
+    <text x="675" y="182" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">event parser</text>
+    <text x="675" y="202" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">stream bridge</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="830" y="106" width="260" height="128" rx="12" fill="#e1d5e7" stroke="#9673a6" stroke-width="2"/>
+    <text x="960" y="144" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#243040">Supabase Edge Function</text>
+    <text x="960" y="170" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">index.ts / sse.ts</text>
+    <text x="960" y="192" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">auth + TransformStream + SSE</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="830" y="300" width="260" height="152" rx="12" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
+    <text x="960" y="338" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#243040">agentLoop.ts</text>
+    <text x="960" y="364" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">qwen-plus + tools + stream</text>
+    <text x="960" y="388" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">tool_call -> processToolCall()</text>
+    <text x="960" y="412" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">result appended back to LLM</text>
+    <text x="960" y="436" text-anchor="middle" font-family="Arial" font-size="13" fill="#8a2d2d">Risk: server assumes tool success first</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="280" y="320" width="226" height="116" rx="12" fill="#b0e3e6" stroke="#0e8088" stroke-width="2"/>
+    <text x="393" y="360" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#243040">useAgentStore</text>
+    <text x="393" y="384" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">surface + dataModel</text>
+    <text x="393" y="406" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">A2UI state handler</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="548" y="320" width="208" height="116" rx="12" fill="#ffe6cc" stroke="#d79b00" stroke-width="2"/>
+    <text x="652" y="360" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#243040">A2UIRenderer</text>
+    <text x="652" y="384" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">registry + bindings</text>
+    <text x="652" y="406" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">sanitize + actions</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="350" y="540" width="356" height="92" rx="14" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
+    <text x="528" y="576" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#243040">Rendered Surface</text>
+    <text x="528" y="600" text-anchor="middle" font-family="monospace" font-size="11" fill="#425466">chat surface / portal / fullscreen</text>
+  </g>
+
+  <g stroke="#586574" stroke-width="2.3" fill="none" marker-end="url(#arrow)">
+    <path d="M 260 170 C 282 170 300 170 330 170"/>
+    <path d="M 518 170 C 540 170 558 170 590 170"/>
+    <path d="M 760 170 C 784 170 804 170 830 170"/>
+    <path d="M 393 220 C 393 260 393 284 393 320"/>
+    <path d="M 960 234 C 960 260 960 278 960 300"/>
+    <path d="M 830 376 C 808 376 790 376 756 376"/>
+    <path d="M 548 376 C 534 376 524 376 506 376"/>
+    <path d="M 652 436 C 652 480 620 510 566 540"/>
+  </g>
+
+  <g stroke="#8f7aa6" stroke-width="2" fill="none" stroke-dasharray="8 6" marker-end="url(#arrow)">
+    <path d="M 892 452 C 820 512 748 548 706 566"/>
+  </g>
+  <text x="842" y="514" font-family="Arial" font-size="12" fill="#7b6090">a2ui / tool_call / done</text>
+
+  <text x="1130" y="736" font-family="Arial, sans-serif" font-size="12" fill="#999999" text-anchor="end">Jerret's Blog</text>
+</svg>
