@@ -25,3 +25,4 @@ docs/plans/
 
 # Local editable diagram sources
 *.drawio
+source-local/
