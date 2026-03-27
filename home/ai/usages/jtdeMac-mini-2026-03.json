@@ -581,23 +581,23 @@
     },
     {
       "date": "2026-02-24",
-      "inputTokens": 3592653,
-      "outputTokens": 296873,
+      "inputTokens": 3153316,
+      "outputTokens": 243586,
       "cacheCreationTokens": 0,
-      "cacheReadTokens": 65623680,
-      "totalTokens": 69513206,
-      "totalCost": 8.899870000000004,
+      "cacheReadTokens": 55344000,
+      "totalTokens": 58740902,
+      "totalCost": 7.764822500000005,
       "modelsUsed": [
         "glm-4.7"
       ],
       "modelBreakdowns": [
         {
           "modelName": "glm-4.7",
-          "inputTokens": 3592653,
-          "outputTokens": 296873,
+          "inputTokens": 3153316,
+          "outputTokens": 243586,
           "cacheCreationTokens": 0,
-          "cacheReadTokens": 65623680,
-          "cost": 8.899870000000004
+          "cacheReadTokens": 55344000,
+          "cost": 7.764822500000005
         }
       ]
     },
@@ -1183,14 +1183,36 @@
           "cost": 0.392187
         }
       ]
+    },
+    {
+      "date": "2026-03-27",
+      "inputTokens": 6465215,
+      "outputTokens": 144215,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 6609430,
+      "totalCost": 21.558870000000006,
+      "modelsUsed": [
+        "claude-sonnet-4-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "claude-sonnet-4-5",
+          "inputTokens": 6465215,
+          "outputTokens": 144215,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 21.558870000000006
+        }
+      ]
     }
   ],
   "totals": {
-    "inputTokens": 298266484,
-    "outputTokens": 5075694,
+    "inputTokens": 304292362,
+    "outputTokens": 5166622,
     "cacheCreationTokens": 0,
-    "cacheReadTokens": 1521138083,
-    "totalCost": 612.5578817500003,
-    "totalTokens": 1824480261
+    "cacheReadTokens": 1510858403,
+    "totalCost": 632.9817042500002,
+    "totalTokens": 1820317387
   }
 }
