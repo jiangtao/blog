@@ -167,7 +167,7 @@
       "outputTokens": 1751032,
       "reasoningOutputTokens": 675594,
       "totalTokens": 386367784,
-      "costUSD": 177.89478749999998,
+      "costUSD": 177.19505999999998,
       "models": {
         "gpt-5.4": {
           "inputTokens": 379687026,
@@ -194,7 +194,7 @@
       "outputTokens": 1691527,
       "reasoningOutputTokens": 628197,
       "totalTokens": 354293132,
-      "costUSD": 165.42672499999998,
+      "costUSD": 165.03101399999997,
       "models": {
         "gpt-5.4": {
           "inputTokens": 350798619,
@@ -240,6 +240,6 @@
     "outputTokens": 5372452,
     "reasoningOutputTokens": 2129992,
     "totalTokens": 1183788867,
-    "costUSD": 538.3583666999999
+    "costUSD": 537.2629281999999
   }
 }
