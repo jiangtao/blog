@@ -7,7 +7,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 768,
       "totalTokens": 14996,
-      "totalCost": 0,
+      "totalCost": 0.032106499999999996,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -18,7 +18,7 @@
           "outputTokens": 187,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 768,
-          "cost": 0
+          "cost": 0.032106499999999996
         }
       ]
     },
@@ -29,7 +29,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 13824,
       "totalTokens": 19421,
-      "totalCost": 0,
+      "totalCost": 0.01272375,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -40,7 +40,7 @@
           "outputTokens": 261,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 13824,
-          "cost": 0
+          "cost": 0.01272375
         }
       ]
     },
@@ -51,7 +51,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 8064,
       "totalTokens": 15039,
-      "totalCost": 0,
+      "totalCost": 0.01582525,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -62,7 +62,7 @@
           "outputTokens": 263,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 8064,
-          "cost": 0
+          "cost": 0.01582525
         }
       ]
     },
@@ -73,7 +73,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 10368,
       "totalTokens": 42965,
-      "totalCost": 0,
+      "totalCost": 0.07375274999999999,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -84,7 +84,7 @@
           "outputTokens": 819,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 10368,
-          "cost": 0
+          "cost": 0.07375274999999999
         }
       ]
     },
@@ -95,7 +95,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 16768,
       "totalTokens": 45638,
-      "totalCost": 0,
+      "totalCost": 0.065295,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -106,7 +106,7 @@
           "outputTokens": 675,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 16768,
-          "cost": 0
+          "cost": 0.065295
         }
       ]
     },
@@ -117,7 +117,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 35534464,
       "totalTokens": 37076270,
-      "totalCost": 0,
+      "totalCost": 3.583593500000005,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -128,7 +128,7 @@
           "outputTokens": 229060,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 35534464,
-          "cost": 0
+          "cost": 3.583593500000005
         }
       ]
     },
@@ -139,7 +139,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 81986560,
       "totalTokens": 84315247,
-      "totalCost": 0,
+      "totalCost": 5.372627249999998,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -150,7 +150,7 @@
           "outputTokens": 266163,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 81986560,
-          "cost": 0
+          "cost": 5.372627249999998
         }
       ]
     },
@@ -161,7 +161,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 6016,
       "totalTokens": 57746,
-      "totalCost": 0,
+      "totalCost": 0.11684399999999999,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -172,7 +172,7 @@
           "outputTokens": 903,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 6016,
-          "cost": 0
+          "cost": 0.11684399999999999
         }
       ]
     },
@@ -183,7 +183,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 25154048,
       "totalTokens": 26461481,
-      "totalCost": 0,
+      "totalCost": 3.0662097499999974,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -194,7 +194,7 @@
           "outputTokens": 248971,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 25154048,
-          "cost": 0
+          "cost": 3.0662097499999974
         }
       ]
     },
@@ -205,7 +205,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 2118400,
       "totalTokens": 2296806,
-      "totalCost": 0,
+      "totalCost": 0.41633249999999994,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -216,7 +216,7 @@
           "outputTokens": 29838,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 2118400,
-          "cost": 0
+          "cost": 0.41633249999999994
         }
       ]
     },
@@ -227,7 +227,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 41567616,
       "totalTokens": 42832783,
-      "totalCost": 0,
+      "totalCost": 2.927508249999998,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -238,7 +238,7 @@
           "outputTokens": 161765,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 41567616,
-          "cost": 0
+          "cost": 2.927508249999998
         }
       ]
     },
@@ -249,7 +249,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 401408,
       "totalTokens": 629257,
-      "totalCost": 0,
+      "totalCost": 0.5140947499999999,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -260,7 +260,7 @@
           "outputTokens": 2869,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 401408,
-          "cost": 0
+          "cost": 0.5140947499999999
         }
       ]
     },
@@ -271,7 +271,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 6400,
       "totalTokens": 31606,
-      "totalCost": 0,
+      "totalCost": 0.0568825,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -282,7 +282,7 @@
           "outputTokens": 338,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 6400,
-          "cost": 0
+          "cost": 0.0568825
         }
       ]
     },
@@ -293,7 +293,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 2109952,
       "totalTokens": 2250281,
-      "totalCost": 0,
+      "totalCost": 0.3268742500000001,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -304,7 +304,7 @@
           "outputTokens": 22268,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 2109952,
-          "cost": 0
+          "cost": 0.3268742500000001
         }
       ]
     },
@@ -315,7 +315,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 16523904,
       "totalTokens": 17092965,
-      "totalCost": 0,
+      "totalCost": 1.33317625,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -326,7 +326,7 @@
           "outputTokens": 105578,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 16523904,
-          "cost": 0
+          "cost": 1.33317625
         }
       ]
     },
@@ -337,7 +337,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 2816,
       "totalTokens": 11568,
-      "totalCost": 0,
+      "totalCost": 0.01974,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -348,7 +348,7 @@
           "outputTokens": 96,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 2816,
-          "cost": 0
+          "cost": 0.01974
         }
       ]
     },
@@ -392,7 +392,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 1137152,
       "totalTokens": 2537368,
-      "totalCost": 0,
+      "totalCost": 0.16128525000000002,
       "modelsUsed": [
         "glm-4.7",
         "kimi-for-coding"
@@ -404,7 +404,7 @@
           "outputTokens": 8484,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 1137152,
-          "cost": 0
+          "cost": 0.16128525000000002
         },
         {
           "modelName": "kimi-for-coding",
@@ -498,7 +498,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 47141248,
       "totalTokens": 49638305,
-      "totalCost": 0,
+      "totalCost": 5.675235749999998,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -509,7 +509,7 @@
           "outputTokens": 113715,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 47141248,
-          "cost": 0
+          "cost": 5.675235749999998
         }
       ]
     },
@@ -520,7 +520,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 51974272,
       "totalTokens": 53408645,
-      "totalCost": 0,
+      "totalCost": 3.2777182499999995,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -531,7 +531,7 @@
           "outputTokens": 100758,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 51974272,
-          "cost": 0
+          "cost": 3.2777182499999995
         }
       ]
     },
@@ -542,7 +542,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 2050432,
       "totalTokens": 2211108,
-      "totalCost": 0,
+      "totalCost": 0.3628575,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -553,7 +553,7 @@
           "outputTokens": 2673,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 2050432,
-          "cost": 0
+          "cost": 0.3628575
         }
       ]
     },
@@ -564,7 +564,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 8192000,
       "totalTokens": 8906583,
-      "totalCost": 0,
+      "totalCost": 1.6115032499999997,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -575,7 +575,7 @@
           "outputTokens": 7383,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 8192000,
-          "cost": 0
+          "cost": 1.6115032499999997
         }
       ]
     },
@@ -586,7 +586,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 55344000,
       "totalTokens": 58740902,
-      "totalCost": 0,
+      "totalCost": 7.764822500000005,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -597,7 +597,7 @@
           "outputTokens": 243586,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 55344000,
-          "cost": 0
+          "cost": 7.764822500000005
         }
       ]
     },
@@ -608,7 +608,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 81074048,
       "totalTokens": 84849657,
-      "totalCost": 0,
+      "totalCost": 8.62200325,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -619,7 +619,7 @@
           "outputTokens": 253766,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 81074048,
-          "cost": 0
+          "cost": 8.62200325
         }
       ]
     },
@@ -630,7 +630,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 76123481,
       "totalTokens": 80869399,
-      "totalCost": 0,
+      "totalCost": 8.89788325,
       "modelsUsed": [
         "glm-4.7",
         "kimi-for-coding"
@@ -642,7 +642,7 @@
           "outputTokens": 229715,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 75780992,
-          "cost": 0
+          "cost": 8.89788325
         },
         {
           "modelName": "kimi-for-coding",
@@ -661,7 +661,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 63796864,
       "totalTokens": 68054180,
-      "totalCost": 0,
+      "totalCost": 9.722197000000008,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -672,7 +672,7 @@
           "outputTokens": 286472,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 63796864,
-          "cost": 0
+          "cost": 9.722197000000008
         }
       ]
     },
@@ -683,7 +683,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 474392064,
       "totalTokens": 486220360,
-      "totalCost": 0,
+      "totalCost": 27.010337000000042,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -694,7 +694,7 @@
           "outputTokens": 793342,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 474392064,
-          "cost": 0
+          "cost": 27.010337000000042
         }
       ]
     },
@@ -705,7 +705,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 71372800,
       "totalTokens": 73595356,
-      "totalCost": 0,
+      "totalCost": 5.092875999999991,
       "modelsUsed": [
         "glm-4.7"
       ],
@@ -716,7 +716,7 @@
           "outputTokens": 184250,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 71372800,
-          "cost": 0
+          "cost": 5.092875999999991
         }
       ]
     },
@@ -727,7 +727,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 35248128,
       "totalTokens": 41716790,
-      "totalCost": 0,
+      "totalCost": 6.63990100000001,
       "modelsUsed": [
         "glm-4.7",
         "kimi-for-coding"
@@ -739,7 +739,7 @@
           "outputTokens": 250970,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 33194752,
-          "cost": 0
+          "cost": 6.63990100000001
         },
         {
           "modelName": "kimi-for-coding",
@@ -758,7 +758,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 213820544,
       "totalTokens": 228358780,
-      "totalCost": 0,
+      "totalCost": 18.52039400000004,
       "modelsUsed": [
         "glm-4.7",
         "kimi-for-coding"
@@ -770,7 +770,7 @@
           "outputTokens": 370027,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 210488960,
-          "cost": 0
+          "cost": 18.52039400000004
         },
         {
           "modelName": "kimi-for-coding",
@@ -789,7 +789,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 5674112,
       "totalTokens": 6532595,
-      "totalCost": 0,
+      "totalCost": 0.582715,
       "modelsUsed": [
         "glm-4.7",
         "kimi-for-coding"
@@ -801,7 +801,7 @@
           "outputTokens": 22043,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 5363840,
-          "cost": 0
+          "cost": 0.582715
         },
         {
           "modelName": "kimi-for-coding",
@@ -820,7 +820,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 24855296,
       "totalTokens": 41939432,
-      "totalCost": 0,
+      "totalCost": 1.6585005000000006,
       "modelsUsed": [
         "glm-4.7",
         "kimi-for-coding"
@@ -832,7 +832,7 @@
           "outputTokens": 28410,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 13427456,
-          "cost": 0
+          "cost": 1.6585005000000006
         },
         {
           "modelName": "kimi-for-coding",
@@ -851,26 +851,26 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 17509120,
       "totalTokens": 26410547,
-      "totalCost": 0,
+      "totalCost": 0.8693699999999996,
       "modelsUsed": [
         "kimi-for-coding",
         "glm-4.7"
       ],
       "modelBreakdowns": [
         {
-          "modelName": "kimi-for-coding",
-          "inputTokens": 8441648,
-          "outputTokens": 81429,
-          "cacheCreationTokens": 0,
-          "cacheReadTokens": 13233152,
-          "cost": 0
-        },
-        {
           "modelName": "glm-4.7",
           "inputTokens": 342185,
           "outputTokens": 36165,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 4275968,
+          "cost": 0.8693699999999996
+        },
+        {
+          "modelName": "kimi-for-coding",
+          "inputTokens": 8441648,
+          "outputTokens": 81429,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 13233152,
           "cost": 0
         }
       ]
@@ -882,7 +882,7 @@
       "cacheCreationTokens": 0,
       "cacheReadTokens": 50712661,
       "totalTokens": 62063772,
-      "totalCost": 1.9961849999999999,
+      "totalCost": 3.5978515000000004,
       "modelsUsed": [
         "glm-4.7",
         "kimi-for-coding",
@@ -903,7 +903,7 @@
           "outputTokens": 110681,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 45259776,
-          "cost": 0
+          "cost": 1.6016664999999999
         },
         {
           "modelName": "kimi-for-coding",
@@ -1212,7 +1212,7 @@
     "outputTokens": 5166622,
     "cacheCreationTokens": 0,
     "cacheReadTokens": 1510858403,
-    "totalCost": 506.9768520000001,
+    "totalCost": 632.9817042500002,
     "totalTokens": 1820317387
   }
 }
