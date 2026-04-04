@@ -167,7 +167,7 @@
       "outputTokens": 1751032,
       "reasoningOutputTokens": 675594,
       "totalTokens": 386367784,
-      "costUSD": 177.89478749999998,
+      "costUSD": 177.19505999999998,
       "models": {
         "gpt-5.4": {
           "inputTokens": 379687026,
@@ -194,7 +194,7 @@
       "outputTokens": 1691527,
       "reasoningOutputTokens": 628197,
       "totalTokens": 354293132,
-      "costUSD": 165.42672499999998,
+      "costUSD": 165.03101399999997,
       "models": {
         "gpt-5.4": {
           "inputTokens": 350798619,
@@ -240,7 +240,7 @@
       "outputTokens": 261848,
       "reasoningOutputTokens": 127818,
       "totalTokens": 34910296,
-      "costUSD": 20.404995,
+      "costUSD": 19.672965299999998,
       "models": {
         "gpt-5.4": {
           "inputTokens": 29391000,
@@ -267,7 +267,7 @@
       "outputTokens": 395026,
       "reasoningOutputTokens": 187481,
       "totalTokens": 47873257,
-      "costUSD": 37.780051750000005,
+      "costUSD": 37.69737845,
       "models": {
         "gpt-5.4": {
           "inputTokens": 47050364,
@@ -294,7 +294,7 @@
       "outputTokens": 929590,
       "reasoningOutputTokens": 463124,
       "totalTokens": 139928775,
-      "costUSD": 98.0796655,
+      "costUSD": 97.5206532,
       "models": {
         "gpt-5.4": {
           "inputTokens": 136154889,
@@ -321,7 +321,7 @@
       "outputTokens": 1586372,
       "reasoningOutputTokens": 776605,
       "totalTokens": 225862068,
-      "costUSD": 119.23600300000001,
+      "costUSD": 114.89535780000001,
       "models": {
         "gpt-5.4": {
           "inputTokens": 193292796,
@@ -359,14 +359,33 @@
           "isFallback": false
         }
       }
+    },
+    {
+      "date": "Apr 04, 2026",
+      "inputTokens": 1324000,
+      "cachedInputTokens": 594176,
+      "outputTokens": 9510,
+      "reasoningOutputTokens": 2780,
+      "totalTokens": 1333510,
+      "costUSD": 2.115754,
+      "models": {
+        "gpt-5.4": {
+          "inputTokens": 1324000,
+          "cachedInputTokens": 594176,
+          "outputTokens": 9510,
+          "reasoningOutputTokens": 2780,
+          "totalTokens": 1333510,
+          "isFallback": false
+        }
+      }
     }
   ],
   "totals": {
-    "inputTokens": 1633362913,
-    "cachedInputTokens": 1501906432,
-    "outputTokens": 8649843,
-    "reasoningOutputTokens": 3741103,
-    "totalTokens": 1642012756,
-    "costUSD": 819.0390319499999
+    "inputTokens": 1634686913,
+    "cachedInputTokens": 1502500608,
+    "outputTokens": 8659353,
+    "reasoningOutputTokens": 3743883,
+    "totalTokens": 1643346266,
+    "costUSD": 814.3449869499999
   }
 }
