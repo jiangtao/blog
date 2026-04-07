@@ -1172,12 +1172,12 @@
     },
     {
       "date": "2026-04-06",
-      "inputTokens": 21965573,
-      "outputTokens": 224951,
-      "cacheCreationTokens": 153456,
-      "cacheReadTokens": 14802418,
-      "totalTokens": 37146398,
-      "totalCost": 18.079611359999998,
+      "inputTokens": 25312975,
+      "outputTokens": 252060,
+      "cacheCreationTokens": 642045,
+      "cacheReadTokens": 16704937,
+      "totalTokens": 42912017,
+      "totalCost": 20.169379560000003,
       "modelsUsed": [
         "glm-5",
         "kimi-k2.5"
@@ -1193,21 +1193,43 @@
         },
         {
           "modelName": "kimi-k2.5",
-          "inputTokens": 355840,
-          "outputTokens": 5560,
-          "cacheCreationTokens": 153456,
-          "cacheReadTokens": 0,
-          "cost": 0.230184
+          "inputTokens": 3703242,
+          "outputTokens": 32669,
+          "cacheCreationTokens": 642045,
+          "cacheReadTokens": 1902519,
+          "cost": 2.319952199999998
+        }
+      ]
+    },
+    {
+      "date": "2026-04-07",
+      "inputTokens": 344442,
+      "outputTokens": 345,
+      "cacheCreationTokens": 160451,
+      "cacheReadTokens": 320085,
+      "totalTokens": 825323,
+      "totalCost": 0.2077002,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 344442,
+          "outputTokens": 345,
+          "cacheCreationTokens": 160451,
+          "cacheReadTokens": 320085,
+          "cost": 0.2077002
         }
       ]
     }
   ],
   "totals": {
-    "inputTokens": 331289760,
-    "outputTokens": 3622702,
-    "cacheCreationTokens": 239333,
-    "cacheReadTokens": 895262746,
-    "totalCost": 650.2314703200002,
-    "totalTokens": 1230414541
+    "inputTokens": 334981604,
+    "outputTokens": 3650156,
+    "cacheCreationTokens": 888373,
+    "cacheReadTokens": 897485350,
+    "totalCost": 652.5289387200003,
+    "totalTokens": 1237005483
   }
 }
