@@ -735,12 +735,12 @@
     },
     {
       "date": "2026-03-07",
-      "inputTokens": 4482136,
-      "outputTokens": 18573,
+      "inputTokens": 534311,
+      "outputTokens": 5766,
       "cacheCreationTokens": 0,
-      "cacheReadTokens": 1693269,
-      "totalTokens": 6193978,
-      "totalCost": 1.9961849999999999,
+      "cacheReadTokens": 205568,
+      "totalTokens": 745645,
+      "totalCost": 0.355314,
       "modelsUsed": [
         "kimi-for-coding",
         "claude-sonnet-4-5"
@@ -748,72 +748,63 @@
       "modelBreakdowns": [
         {
           "modelName": "claude-sonnet-4-5",
-          "inputTokens": 642335,
-          "outputTokens": 4612,
+          "inputTokens": 104698,
+          "outputTokens": 2748,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 0,
-          "cost": 1.9961849999999999
+          "cost": 0.355314
         },
         {
           "modelName": "kimi-for-coding",
-          "inputTokens": 3839801,
-          "outputTokens": 13961,
+          "inputTokens": 429613,
+          "outputTokens": 3018,
           "cacheCreationTokens": 0,
-          "cacheReadTokens": 1693269,
+          "cacheReadTokens": 205568,
           "cost": 0
         }
       ]
     },
     {
       "date": "2026-03-08",
-      "inputTokens": 22576317,
-      "outputTokens": 54332,
+      "inputTokens": 11986568,
+      "outputTokens": 32535,
       "cacheCreationTokens": 0,
-      "cacheReadTokens": 807936,
-      "totalTokens": 23438585,
-      "totalCost": 64.05205199999999,
+      "cacheReadTokens": 0,
+      "totalTokens": 12019103,
+      "totalCost": 36.447728999999995,
       "modelsUsed": [
-        "kimi-for-coding",
         "claude-sonnet-4-5"
       ],
       "modelBreakdowns": [
         {
           "modelName": "claude-sonnet-4-5",
-          "inputTokens": 21087824,
-          "outputTokens": 52572,
+          "inputTokens": 11986568,
+          "outputTokens": 32535,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 0,
-          "cost": 64.05205199999999
-        },
-        {
-          "modelName": "kimi-for-coding",
-          "inputTokens": 1488493,
-          "outputTokens": 1760,
-          "cacheCreationTokens": 0,
-          "cacheReadTokens": 807936,
-          "cost": 0
+          "cost": 36.447728999999995
         }
       ]
     },
     {
       "date": "2026-03-09",
-      "inputTokens": 19294935,
-      "outputTokens": 66921,
+      "inputTokens": 18747612,
+      "outputTokens": 64499,
       "cacheCreationTokens": 0,
       "cacheReadTokens": 0,
-      "totalTokens": 19361856,
-      "totalCost": 58.88862000000005,
+      "totalTokens": 18812111,
+      "totalCost": 57.21032100000003,
       "modelsUsed": [
         "claude-sonnet-4-5"
       ],
       "modelBreakdowns": [
         {
           "modelName": "claude-sonnet-4-5",
-          "inputTokens": 19294935,
-          "outputTokens": 66921,
+          "inputTokens": 18747612,
+          "outputTokens": 64499,
           "cacheCreationTokens": 0,
           "cacheReadTokens": 0,
-          "cost": 58.88862000000005
+          "cost": 57.21032100000003
         }
       ]
     },
@@ -1222,14 +1213,36 @@
           "cost": 0.2077002
         }
       ]
+    },
+    {
+      "date": "2026-04-08",
+      "inputTokens": 77297415,
+      "outputTokens": 280731,
+      "cacheCreationTokens": 3939493,
+      "cacheReadTokens": 99574165,
+      "totalTokens": 181091804,
+      "totalCost": 47.220641999999806,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 77297415,
+          "outputTokens": 280731,
+          "cacheCreationTokens": 3939493,
+          "cacheReadTokens": 99574165,
+          "cost": 47.220641999999806
+        }
+      ]
     }
   ],
   "totals": {
-    "inputTokens": 334981604,
-    "outputTokens": 3650156,
-    "cacheCreationTokens": 888373,
-    "cacheReadTokens": 897485350,
-    "totalCost": 652.5289387200003,
-    "totalTokens": 1237005483
+    "inputTokens": 397194122,
+    "outputTokens": 3893861,
+    "cacheCreationTokens": 4827866,
+    "cacheReadTokens": 994763878,
+    "totalCost": 668.8260877199999,
+    "totalTokens": 1400679727
   }
 }
