@@ -37,6 +37,7 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
+    "@4hse/astro-llms-txt": "^1.0.4",
     "@astrojs/check": "^0.9.6",
     "@pagefind/default-ui": "^1.4.0",
     "@shikijs/transformers": "^3.20.0",
