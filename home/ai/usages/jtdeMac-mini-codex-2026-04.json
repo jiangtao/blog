@@ -316,19 +316,19 @@
     },
     {
       "date": "Apr 02, 2026",
-      "inputTokens": 224275696,
-      "cachedInputTokens": 202472064,
-      "outputTokens": 1586372,
-      "reasoningOutputTokens": 776605,
-      "totalTokens": 225862068,
-      "costUSD": 114.89535780000001,
+      "inputTokens": 195468832,
+      "cachedInputTokens": 176293760,
+      "outputTokens": 1389068,
+      "reasoningOutputTokens": 685532,
+      "totalTokens": 196857900,
+      "costUSD": 98.81982179999999,
       "models": {
         "gpt-5.4": {
-          "inputTokens": 193292796,
-          "cachedInputTokens": 176065280,
-          "outputTokens": 1453236,
-          "reasoningOutputTokens": 691140,
-          "totalTokens": 194746032,
+          "inputTokens": 164485932,
+          "cachedInputTokens": 149886976,
+          "outputTokens": 1255932,
+          "reasoningOutputTokens": 600067,
+          "totalTokens": 165741864,
           "isFallback": false
         },
         "gpt-5.4-mini": {
@@ -635,19 +635,19 @@
     },
     {
       "date": "Apr 20, 2026",
-      "inputTokens": 160302076,
-      "cachedInputTokens": 153725440,
-      "outputTokens": 1057785,
-      "reasoningOutputTokens": 507974,
-      "totalTokens": 161359861,
-      "costUSD": 67.46902435,
+      "inputTokens": 64243624,
+      "cachedInputTokens": 60860416,
+      "outputTokens": 558179,
+      "reasoningOutputTokens": 276330,
+      "totalTokens": 64801803,
+      "costUSD": 28.77510835,
       "models": {
         "gpt-5.4": {
-          "inputTokens": 152582095,
-          "cachedInputTokens": 146566912,
-          "outputTokens": 959174,
-          "reasoningOutputTokens": 447522,
-          "totalTokens": 153541269,
+          "inputTokens": 56523643,
+          "cachedInputTokens": 53701888,
+          "outputTokens": 459568,
+          "reasoningOutputTokens": 215878,
+          "totalTokens": 56983211,
           "isFallback": false
         },
         "gpt-5.4-mini": {
@@ -659,14 +659,68 @@
           "isFallback": false
         }
       }
+    },
+    {
+      "date": "Apr 21, 2026",
+      "inputTokens": 26459913,
+      "cachedInputTokens": 24994560,
+      "outputTokens": 209751,
+      "reasoningOutputTokens": 134102,
+      "totalTokens": 26669664,
+      "costUSD": 6.810296450000001,
+      "models": {
+        "gpt-5.4-mini": {
+          "inputTokens": 19208257,
+          "cachedInputTokens": 18272256,
+          "outputTokens": 134509,
+          "reasoningOutputTokens": 88630,
+          "totalTokens": 19342766,
+          "isFallback": false
+        },
+        "gpt-5.4": {
+          "inputTokens": 7251656,
+          "cachedInputTokens": 6722304,
+          "outputTokens": 75242,
+          "reasoningOutputTokens": 45472,
+          "totalTokens": 7326898,
+          "isFallback": false
+        }
+      }
+    },
+    {
+      "date": "Apr 22, 2026",
+      "inputTokens": 61990899,
+      "cachedInputTokens": 57932416,
+      "outputTokens": 449127,
+      "reasoningOutputTokens": 252205,
+      "totalTokens": 62440026,
+      "costUSD": 25.5156963,
+      "models": {
+        "gpt-5.4": {
+          "inputTokens": 47845071,
+          "cachedInputTokens": 44797312,
+          "outputTokens": 279307,
+          "reasoningOutputTokens": 136194,
+          "totalTokens": 48124378,
+          "isFallback": false
+        },
+        "gpt-5.4-mini": {
+          "inputTokens": 14145828,
+          "cachedInputTokens": 13135104,
+          "outputTokens": 169820,
+          "reasoningOutputTokens": 116011,
+          "totalTokens": 14315648,
+          "isFallback": false
+        }
+      }
     }
   ],
   "totals": {
-    "inputTokens": 16711122182,
-    "cachedInputTokens": 16012420352,
-    "outputTokens": 81658558,
-    "reasoningOutputTokens": 35376628,
-    "totalTokens": 16792780740,
-    "costUSD": 6773.28363905
+    "inputTokens": 16674707678,
+    "cachedInputTokens": 15976304000,
+    "outputTokens": 81620526,
+    "reasoningOutputTokens": 35440218,
+    "totalTokens": 16756328204,
+    "costUSD": 6750.8401797999995
   }
 }
