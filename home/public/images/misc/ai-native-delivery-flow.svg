@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" role="img" aria-labelledby="flow-title flow-desc">
+  <title id="flow-title">AI 时代端到端交付的失衡与治理</title>
+  <desc id="flow-desc">AI 加速需求试错和生产输出，但收益验证、质量保障和生产消化没有同步跟上时，需要通过组织治理闭环补齐。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8fbff"/>
+      <stop offset="52%" stop-color="#f3f7f1"/>
+      <stop offset="100%" stop-color="#fff6ed"/>
+    </linearGradient>
+    <linearGradient id="signal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1f7a68"/>
+      <stop offset="100%" stop-color="#f08a46"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#223042" flood-opacity="0.14"/>
+    </filter>
+    <filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#223042" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrowWarm" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M 0 0 L 9 4.5 L 0 9 Z" fill="#d66b35"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M 0 0 L 9 4.5 L 0 9 Z" fill="#1f7a68"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M 0 0 L 9 4.5 L 0 9 Z" fill="#3e78a4"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="760" fill="url(#bg)"/>
+  <rect x="44" y="40" width="1112" height="760" rx="22" fill="#fffdf8" stroke="#d9e1da" stroke-width="1.5" filter="url(#softShadow)"/>
+
+  <g opacity="0.50">
+    <path d="M 82 124 H 1118" stroke="#e2e8e2" stroke-width="1"/>
+    <path d="M 82 252 H 1118" stroke="#e2e8e2" stroke-width="1"/>
+    <path d="M 82 380 H 1118" stroke="#e2e8e2" stroke-width="1"/>
+    <path d="M 82 508 H 1118" stroke="#e2e8e2" stroke-width="1"/>
+    <path d="M 82 636 H 1118" stroke="#e2e8e2" stroke-width="1"/>
+    <path d="M 82 764 H 1118" stroke="#e2e8e2" stroke-width="1"/>
+    <path d="M 300 76 V 784" stroke="#e9eee8" stroke-width="1"/>
+    <path d="M 540 76 V 784" stroke="#e9eee8" stroke-width="1"/>
+    <path d="M 780 76 V 784" stroke="#e9eee8" stroke-width="1"/>
+    <path d="M 1020 76 V 784" stroke="#e9eee8" stroke-width="1"/>
+  </g>
+
+  <rect x="82" y="72" width="174" height="32" rx="16" fill="#e9f4ee" stroke="#b9d7c8"/>
+  <text x="106" y="94" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" font-weight="700" fill="#1f7a68">AI NATIVE DELIVERY</text>
+  <text x="82" y="154" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="38" font-weight="800" fill="#1f2933">端到端交付的失衡与治理</text>
+  <rect x="82" y="176" width="420" height="7" rx="4" fill="url(#signal)"/>
+  <text x="82" y="214" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" fill="#52606d">AI 能把输出变快，但不会自动把需求变准，也不会自动补齐交付系统。</text>
+
+  <g transform="translate(82 254)">
+    <text x="0" y="0" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" font-weight="800" fill="#31414f">1. 旧流程：慢，但在消化风险</text>
+    <rect x="0" y="20" width="1036" height="104" rx="18" fill="#f7faf8" stroke="#cddbd1" stroke-width="1.5"/>
+
+    <g font-family="Arial, 'PingFang SC', sans-serif">
+      <rect x="26" y="48" width="138" height="48" rx="12" fill="#eef5ff" stroke="#b9cce4" filter="url(#cardShadow)"/>
+      <text x="95" y="78" text-anchor="middle" font-size="14" font-weight="800" fill="#2f5d83">需求提出</text>
+
+      <rect x="198" y="48" width="138" height="48" rx="12" fill="#f4faf6" stroke="#bdd8c8" filter="url(#cardShadow)"/>
+      <text x="267" y="78" text-anchor="middle" font-size="14" font-weight="800" fill="#1f7a68">需求评审</text>
+
+      <rect x="370" y="48" width="138" height="48" rx="12" fill="#fff7ec" stroke="#e3c39f" filter="url(#cardShadow)"/>
+      <text x="439" y="78" text-anchor="middle" font-size="14" font-weight="800" fill="#98572a">技术评审</text>
+
+      <rect x="542" y="48" width="138" height="48" rx="12" fill="#eef6ff" stroke="#9dbddd" filter="url(#cardShadow)"/>
+      <text x="611" y="78" text-anchor="middle" font-size="14" font-weight="800" fill="#244a68">节奏推进</text>
+
+      <rect x="714" y="48" width="138" height="48" rx="12" fill="#f3f0ff" stroke="#c8b8e6" filter="url(#cardShadow)"/>
+      <text x="783" y="78" text-anchor="middle" font-size="14" font-weight="800" fill="#5a4a7c">预交付</text>
+
+      <rect x="886" y="48" width="84" height="48" rx="12" fill="#fff4ea" stroke="#e7a66e" filter="url(#cardShadow)"/>
+      <text x="928" y="78" text-anchor="middle" font-size="14" font-weight="800" fill="#713f1f">上线</text>
+    </g>
+
+    <g stroke="#7b8791" stroke-width="2.2" fill="none" marker-end="url(#arrowBlue)">
+      <path d="M 164 72 C 176 72 186 72 195 72"/>
+      <path d="M 336 72 C 348 72 358 72 367 72"/>
+      <path d="M 508 72 C 520 72 530 72 539 72"/>
+      <path d="M 680 72 C 692 72 702 72 711 72"/>
+      <path d="M 852 72 C 864 72 876 72 883 72"/>
+    </g>
+  </g>
+
+  <g transform="translate(82 418)">
+    <text x="0" y="0" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" font-weight="800" fill="#713f1f">2. AI 放大的失衡：快的是输出，不一定是收益</text>
+    <rect x="0" y="20" width="1036" height="180" rx="18" fill="#fff8f2" stroke="#f0c0a9" stroke-width="1.5"/>
+
+    <g font-family="Arial, 'PingFang SC', sans-serif">
+      <rect x="28" y="58" width="190" height="92" rx="14" fill="#fff4ea" stroke="#e7a66e" stroke-width="1.5" filter="url(#cardShadow)"/>
+      <circle cx="58" cy="88" r="16" fill="#f08a46"/>
+      <text x="53" y="94" font-size="16" font-weight="800" fill="#ffffff">A</text>
+      <text x="84" y="83" font-size="18" font-weight="800" fill="#713f1f">需求端提速</text>
+      <text x="84" y="110" font-size="13" font-weight="600" fill="#6d4e3a">更多想法、更多试错</text>
+      <text x="84" y="132" font-size="13" font-weight="600" fill="#6d4e3a">更多变化</text>
+
+      <rect x="270" y="58" width="190" height="92" rx="14" fill="#eef6ff" stroke="#9dbddd" stroke-width="1.5" filter="url(#cardShadow)"/>
+      <circle cx="300" cy="88" r="16" fill="#3e78a4"/>
+      <text x="295" y="94" font-size="16" font-weight="800" fill="#ffffff">B</text>
+      <text x="326" y="83" font-size="18" font-weight="800" fill="#244a68">生产端提速</text>
+      <text x="326" y="110" font-size="13" font-weight="600" fill="#415d74">Coding、Demo</text>
+      <text x="326" y="132" font-size="13" font-weight="600" fill="#415d74">局部执行更快</text>
+
+      <rect x="512" y="44" width="214" height="120" rx="16" fill="#fffdf8" stroke="#d66b35" stroke-width="2.2" filter="url(#cardShadow)"/>
+      <text x="619" y="78" text-anchor="middle" font-size="18" font-weight="800" fill="#9a3d22">没有同步跟上</text>
+      <text x="619" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#6d4e3a">收益验证</text>
+      <text x="619" y="130" text-anchor="middle" font-size="13" font-weight="700" fill="#6d4e3a">质量保障 / 生产消化</text>
+      <text x="619" y="152" text-anchor="middle" font-size="13" font-weight="700" fill="#6d4e3a">监控、灰度、回滚</text>
+
+      <rect x="778" y="58" width="206" height="92" rx="14" fill="#edf8f2" stroke="#9ccdb4" stroke-width="1.5" filter="url(#cardShadow)"/>
+      <circle cx="808" cy="88" r="16" fill="#1f7a68"/>
+      <text x="803" y="94" font-size="16" font-weight="800" fill="#ffffff">C</text>
+      <text x="834" y="83" font-size="18" font-weight="800" fill="#1f5d4f">研发侧承压</text>
+      <text x="834" y="110" font-size="13" font-weight="600" fill="#42685b">评审、联调、上线</text>
+      <text x="834" y="132" font-size="13" font-weight="600" fill="#42685b">回滚仍要兜住</text>
+    </g>
+
+    <g fill="none" stroke-width="3">
+      <path d="M 218 104 C 236 104 250 104 267 104" stroke="#d66b35" marker-end="url(#arrowWarm)"/>
+      <path d="M 460 104 C 478 104 494 104 509 104" stroke="#3e78a4" marker-end="url(#arrowBlue)"/>
+      <path d="M 726 104 C 746 104 760 104 775 104" stroke="#1f7a68" marker-end="url(#arrowGreen)"/>
+    </g>
+
+    <text x="518" y="188" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" font-weight="800" fill="#9a3d22">核心矛盾：需求提出、试错和变更速度上去了，收益验证和生产端消化速度没同步跟上</text>
+  </g>
+
+  <text x="600" y="638" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" font-weight="700" fill="#52606d">目标：交付需求带来正向转化和收益，而不是更快地产生更多变化。</text>
+
+  <g transform="translate(82 666)">
+    <text x="0" y="0" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" font-weight="800" fill="#1f5d4f">3. 治理闭环：让整个组织一起增速</text>
+    <rect x="0" y="20" width="1036" height="72" rx="18" fill="#f3fbf7" stroke="#b8dcc9" stroke-width="1.5"/>
+
+    <g font-family="Arial, 'PingFang SC', sans-serif">
+      <rect x="24" y="40" width="148" height="34" rx="10" fill="#f4faf6" stroke="#bdd8c8"/>
+      <text x="98" y="62" text-anchor="middle" font-size="13" font-weight="800" fill="#1f7a68">需求验证前置</text>
+
+      <rect x="210" y="40" width="148" height="34" rx="10" fill="#fff7ec" stroke="#e3c39f"/>
+      <text x="284" y="62" text-anchor="middle" font-size="13" font-weight="800" fill="#98572a">产品收敛变化</text>
+
+      <rect x="396" y="40" width="160" height="34" rx="10" fill="#eef5ff" stroke="#b9cce4"/>
+      <text x="476" y="62" text-anchor="middle" font-size="13" font-weight="800" fill="#2f5d83">Agent 进入系统</text>
+
+      <rect x="594" y="40" width="156" height="34" rx="10" fill="#edf8f2" stroke="#9ccdb4"/>
+      <text x="672" y="62" text-anchor="middle" font-size="13" font-weight="800" fill="#1f5d4f">质量体系兜底</text>
+
+      <rect x="788" y="40" width="164" height="34" rx="10" fill="#f3f0ff" stroke="#c8b8e6"/>
+      <text x="870" y="62" text-anchor="middle" font-size="13" font-weight="800" fill="#5a4a7c">组织共同增速</text>
+    </g>
+
+    <g stroke="#1f7a68" stroke-width="2.4" fill="none" marker-end="url(#arrowGreen)">
+      <path d="M 172 57 C 184 57 198 57 207 57"/>
+      <path d="M 358 57 C 370 57 384 57 393 57"/>
+      <path d="M 556 57 C 568 57 582 57 591 57"/>
+      <path d="M 750 57 C 762 57 776 57 785 57"/>
+    </g>
+  </g>
+
+  <text x="1116" y="784" text-anchor="end" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#7b8791">Jerret's Blog</text>
+</svg>
