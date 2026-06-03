@@ -1,0 +1,94 @@
+---
+import { SITE } from "@/config";
+
+const account = SITE.wechatOfficialAccount;
+---
+
+{
+  account.enabled && (
+    <div class="toc-wechat" data-pagefind-ignore>
+      <details>
+        <summary>公众号</summary>
+        <div class="toc-wechat-body">
+          <img
+            src={account.qrImage}
+            alt={account.alt}
+            width="132"
+            height="132"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <strong>{account.name}</strong>
+            <span>{account.description}</span>
+          </div>
+        </div>
+      </details>
+    </div>
+  )
+}
+
+<style>
+  .toc-wechat {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed oklch(var(--color-muted) / 0.45);
+    color: oklch(var(--color-foreground) / 0.82);
+    font-size: 12px;
+  }
+
+  .toc-wechat summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    color: oklch(var(--color-accent));
+    font-weight: 600;
+    list-style: none;
+    padding: 6px 8px;
+    border-radius: 6px;
+  }
+
+  .toc-wechat summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .toc-wechat summary::after {
+    content: "扫码";
+    color: oklch(var(--color-foreground) / 0.55);
+    font-size: 11px;
+    font-weight: 400;
+  }
+
+  .toc-wechat details[open] summary {
+    background: oklch(var(--color-muted) / 0.16);
+  }
+
+  .toc-wechat-body {
+    display: grid;
+    gap: 8px;
+    padding: 10px 8px 4px;
+  }
+
+  .toc-wechat img {
+    width: 132px;
+    height: 132px;
+    max-width: 100%;
+    border: 1px solid oklch(var(--color-border));
+    border-radius: 6px;
+    background: white;
+    padding: 4px;
+  }
+
+  .toc-wechat strong {
+    display: block;
+    color: oklch(var(--color-accent));
+    line-height: 1.5;
+  }
+
+  .toc-wechat span {
+    display: block;
+    color: oklch(var(--color-foreground) / 0.68);
+    line-height: 1.6;
+  }
+</style>
