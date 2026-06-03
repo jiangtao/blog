@@ -87,8 +87,8 @@ check_environment() {
     missing_commands+=("ccusage")
   fi
 
-  if ! command -v pnpx &> /dev/null; then
-    missing_commands+=("pnpx")
+  if ! command -v npx &> /dev/null; then
+    missing_commands+=("npx")
   fi
 
   if ! command -v git &> /dev/null; then
