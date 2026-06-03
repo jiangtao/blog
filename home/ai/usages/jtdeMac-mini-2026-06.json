@@ -1,0 +1,1657 @@
+{
+  "daily": [
+    {
+      "date": "2026-01-14",
+      "inputTokens": 14041,
+      "outputTokens": 187,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 768,
+      "totalTokens": 14996,
+      "totalCost": 0.032106499999999996,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 14041,
+          "outputTokens": 187,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 768,
+          "cost": 0.032106499999999996
+        }
+      ]
+    },
+    {
+      "date": "2026-01-16",
+      "inputTokens": 5336,
+      "outputTokens": 261,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 13824,
+      "totalTokens": 19421,
+      "totalCost": 0.01272375,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 5336,
+          "outputTokens": 261,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 13824,
+          "cost": 0.01272375
+        }
+      ]
+    },
+    {
+      "date": "2026-01-17",
+      "inputTokens": 6712,
+      "outputTokens": 263,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 8064,
+      "totalTokens": 15039,
+      "totalCost": 0.01582525,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 6712,
+          "outputTokens": 263,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 8064,
+          "cost": 0.01582525
+        }
+      ]
+    },
+    {
+      "date": "2026-01-18",
+      "inputTokens": 31778,
+      "outputTokens": 819,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 10368,
+      "totalTokens": 42965,
+      "totalCost": 0.07375274999999999,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 31778,
+          "outputTokens": 819,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 10368,
+          "cost": 0.07375274999999999
+        }
+      ]
+    },
+    {
+      "date": "2026-01-19",
+      "inputTokens": 28195,
+      "outputTokens": 675,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 16768,
+      "totalTokens": 45638,
+      "totalCost": 0.065295,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 28195,
+          "outputTokens": 675,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 16768,
+          "cost": 0.065295
+        }
+      ]
+    },
+    {
+      "date": "2026-01-20",
+      "inputTokens": 733302,
+      "outputTokens": 135682,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 14500864,
+      "totalTokens": 15369848,
+      "totalCost": 2.023054999999998,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 733302,
+          "outputTokens": 135682,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 14500864,
+          "cost": 2.023054999999998
+        }
+      ]
+    },
+    {
+      "date": "2026-01-26",
+      "inputTokens": 50827,
+      "outputTokens": 903,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 6016,
+      "totalTokens": 57746,
+      "totalCost": 0.11684399999999999,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 50827,
+          "outputTokens": 903,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 6016,
+          "cost": 0.11684399999999999
+        }
+      ]
+    },
+    {
+      "date": "2026-01-27",
+      "inputTokens": 1058462,
+      "outputTokens": 248971,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 25154048,
+      "totalTokens": 26461481,
+      "totalCost": 3.0662097499999974,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 1058462,
+          "outputTokens": 248971,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 25154048,
+          "cost": 3.0662097499999974
+        }
+      ]
+    },
+    {
+      "date": "2026-01-28",
+      "inputTokens": 148568,
+      "outputTokens": 29838,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 2118400,
+      "totalTokens": 2296806,
+      "totalCost": 0.41633249999999994,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 148568,
+          "outputTokens": 29838,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 2118400,
+          "cost": 0.41633249999999994
+        }
+      ]
+    },
+    {
+      "date": "2026-01-29",
+      "inputTokens": 532446,
+      "outputTokens": 88325,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 4800512,
+      "totalTokens": 5421283,
+      "totalCost": 1.4408972499999995,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 532446,
+          "outputTokens": 88325,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 4800512,
+          "cost": 1.4408972499999995
+        }
+      ]
+    },
+    {
+      "date": "2026-01-30",
+      "inputTokens": 107479,
+      "outputTokens": 2113,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 31744,
+      "totalTokens": 141336,
+      "totalCost": 0.24763849999999998,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 107479,
+          "outputTokens": 2113,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 31744,
+          "cost": 0.24763849999999998
+        }
+      ]
+    },
+    {
+      "date": "2026-01-31",
+      "inputTokens": 24868,
+      "outputTokens": 338,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 6400,
+      "totalTokens": 31606,
+      "totalCost": 0.0568825,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 24868,
+          "outputTokens": 338,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 6400,
+          "cost": 0.0568825
+        }
+      ]
+    },
+    {
+      "date": "2026-02-04",
+      "inputTokens": 118061,
+      "outputTokens": 22268,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 2109952,
+      "totalTokens": 2250281,
+      "totalCost": 0.3268742500000001,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 118061,
+          "outputTokens": 22268,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 2109952,
+          "cost": 0.3268742500000001
+        }
+      ]
+    },
+    {
+      "date": "2026-02-05",
+      "inputTokens": 463483,
+      "outputTokens": 105578,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 16523904,
+      "totalTokens": 17092965,
+      "totalCost": 1.33317625,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 463483,
+          "outputTokens": 105578,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 16523904,
+          "cost": 1.33317625
+        }
+      ]
+    },
+    {
+      "date": "2026-02-06",
+      "inputTokens": 8656,
+      "outputTokens": 96,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 2816,
+      "totalTokens": 11568,
+      "totalCost": 0.01974,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 8656,
+          "outputTokens": 96,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 2816,
+          "cost": 0.01974
+        }
+      ]
+    },
+    {
+      "date": "2026-02-07",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 0,
+      "totalCost": 0,
+      "modelsUsed": [],
+      "modelBreakdowns": []
+    },
+    {
+      "date": "2026-02-09",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 0,
+      "totalCost": 0,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 0,
+          "outputTokens": 0,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-02-11",
+      "inputTokens": 1330419,
+      "outputTokens": 0,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 1330419,
+      "totalCost": 0,
+      "modelsUsed": [
+        "kimi-for-coding"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-for-coding",
+          "inputTokens": 1330419,
+          "outputTokens": 0,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-02-12",
+      "inputTokens": 106244,
+      "outputTokens": 0,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 106244,
+      "totalCost": 0,
+      "modelsUsed": [
+        "kimi-for-coding",
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-for-coding",
+          "inputTokens": 106244,
+          "outputTokens": 0,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0
+        },
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 0,
+          "outputTokens": 0,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-02-13",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 0,
+      "totalCost": 0,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 0,
+          "outputTokens": 0,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-02-14",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 0,
+      "totalCost": 0,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 0,
+          "outputTokens": 0,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-02-15",
+      "inputTokens": 122,
+      "outputTokens": 41,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 62848,
+      "totalTokens": 63011,
+      "totalCost": 0.00038725,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 122,
+          "outputTokens": 41,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 62848,
+          "cost": 0.00038725
+        }
+      ]
+    },
+    {
+      "date": "2026-02-16",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 0,
+      "totalCost": 0,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 0,
+          "outputTokens": 0,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-02-23",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 0,
+      "totalCost": 0,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 0,
+          "outputTokens": 0,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-02-24",
+      "inputTokens": 20032,
+      "outputTokens": 48723,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 624256,
+      "totalTokens": 693011,
+      "totalCost": 0.17906025,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 20032,
+          "outputTokens": 48723,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 624256,
+          "cost": 0.17906025
+        }
+      ]
+    },
+    {
+      "date": "2026-02-25",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 0,
+      "totalCost": 0,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 0,
+          "outputTokens": 0,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-02-26",
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 0,
+      "totalCost": 0,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 0,
+          "outputTokens": 0,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-02-27",
+      "inputTokens": 102909,
+      "outputTokens": 15651,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 2096640,
+      "totalTokens": 2215200,
+      "totalCost": 0.27458550000000004,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 102909,
+          "outputTokens": 15651,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 2096640,
+          "cost": 0.27458550000000004
+        }
+      ]
+    },
+    {
+      "date": "2026-02-28",
+      "inputTokens": 2093950,
+      "outputTokens": 407943,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 298060416,
+      "totalTokens": 300562309,
+      "totalCost": 5.833230750000024,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 2093950,
+          "outputTokens": 407943,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 298060416,
+          "cost": 5.833230750000024
+        }
+      ]
+    },
+    {
+      "date": "2026-03-01",
+      "inputTokens": 212204,
+      "outputTokens": 38713,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 4666624,
+      "totalTokens": 4917541,
+      "totalCost": 0.5839197499999998,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 212204,
+          "outputTokens": 38713,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 4666624,
+          "cost": 0.5839197499999998
+        }
+      ]
+    },
+    {
+      "date": "2026-03-02",
+      "inputTokens": 669365,
+      "outputTokens": 113734,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 10479232,
+      "totalTokens": 11262331,
+      "totalCost": 1.8188397499999998,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 669365,
+          "outputTokens": 113734,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 10479232,
+          "cost": 1.8188397499999998
+        }
+      ]
+    },
+    {
+      "date": "2026-03-03",
+      "inputTokens": 4232297,
+      "outputTokens": 298186,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 196320256,
+      "totalTokens": 200850739,
+      "totalCost": 10.342679750000006,
+      "modelsUsed": [
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 4232297,
+          "outputTokens": 298186,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 196320256,
+          "cost": 10.342679750000006
+        }
+      ]
+    },
+    {
+      "date": "2026-03-06",
+      "inputTokens": 2064453,
+      "outputTokens": 57262,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 13089792,
+      "totalTokens": 15211507,
+      "totalCost": 0.29931299999999994,
+      "modelsUsed": [
+        "kimi-for-coding",
+        "glm-4.7"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-4.7",
+          "inputTokens": 117947,
+          "outputTokens": 12339,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 1376768,
+          "cost": 0.29931299999999994
+        },
+        {
+          "modelName": "kimi-for-coding",
+          "inputTokens": 1946506,
+          "outputTokens": 44923,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 11713024,
+          "cost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-03-07",
+      "inputTokens": 534311,
+      "outputTokens": 5766,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 205568,
+      "totalTokens": 745645,
+      "totalCost": 0.355314,
+      "modelsUsed": [
+        "kimi-for-coding",
+        "claude-sonnet-4-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "claude-sonnet-4-5",
+          "inputTokens": 104698,
+          "outputTokens": 2748,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0.355314
+        },
+        {
+          "modelName": "kimi-for-coding",
+          "inputTokens": 429613,
+          "outputTokens": 3018,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 205568,
+          "cost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-03-08",
+      "inputTokens": 11986568,
+      "outputTokens": 32535,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 12019103,
+      "totalCost": 36.447728999999995,
+      "modelsUsed": [
+        "claude-sonnet-4-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "claude-sonnet-4-5",
+          "inputTokens": 11986568,
+          "outputTokens": 32535,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 36.447728999999995
+        }
+      ]
+    },
+    {
+      "date": "2026-03-09",
+      "inputTokens": 11100020,
+      "outputTokens": 44395,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 11144415,
+      "totalCost": 33.96598500000007,
+      "modelsUsed": [
+        "claude-sonnet-4-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "claude-sonnet-4-5",
+          "inputTokens": 11100020,
+          "outputTokens": 44395,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 33.96598500000007
+        }
+      ]
+    },
+    {
+      "date": "2026-03-10",
+      "inputTokens": 8380689,
+      "outputTokens": 45052,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 745728,
+      "totalTokens": 9171469,
+      "totalCost": 22.905942000000017,
+      "modelsUsed": [
+        "kimi-for-coding",
+        "claude-sonnet-4-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "claude-sonnet-4-5",
+          "inputTokens": 7462494,
+          "outputTokens": 34564,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 22.905942000000017
+        },
+        {
+          "modelName": "kimi-for-coding",
+          "inputTokens": 918195,
+          "outputTokens": 10488,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 745728,
+          "cost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-03-11",
+      "inputTokens": 4030835,
+      "outputTokens": 58166,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 3653632,
+      "totalTokens": 7742633,
+      "totalCost": 0.092562,
+      "modelsUsed": [
+        "kimi-for-coding",
+        "claude-sonnet-4-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "claude-sonnet-4-5",
+          "inputTokens": 26899,
+          "outputTokens": 791,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0.092562
+        },
+        {
+          "modelName": "kimi-for-coding",
+          "inputTokens": 4003936,
+          "outputTokens": 57375,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 3653632,
+          "cost": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-03-14",
+      "inputTokens": 10116585,
+      "outputTokens": 39909,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 10156494,
+      "totalCost": 30.94839000000001,
+      "modelsUsed": [
+        "claude-sonnet-4-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "claude-sonnet-4-5",
+          "inputTokens": 10116585,
+          "outputTokens": 39909,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 30.94839000000001
+        }
+      ]
+    },
+    {
+      "date": "2026-03-19",
+      "inputTokens": 15632,
+      "outputTokens": 1,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 15633,
+      "totalCost": 0.046911,
+      "modelsUsed": [
+        "claude-sonnet-4-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "claude-sonnet-4-5",
+          "inputTokens": 15632,
+          "outputTokens": 1,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0.046911
+        }
+      ]
+    },
+    {
+      "date": "2026-03-20",
+      "inputTokens": 13006681,
+      "outputTokens": 47281,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 13053962,
+      "totalCost": 39.729258000000044,
+      "modelsUsed": [
+        "claude-sonnet-4-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "claude-sonnet-4-5",
+          "inputTokens": 13006681,
+          "outputTokens": 47281,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 39.729258000000044
+        }
+      ]
+    },
+    {
+      "date": "2026-03-24",
+      "inputTokens": 2667651,
+      "outputTokens": 21620,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 2689271,
+      "totalCost": 8.327253000000008,
+      "modelsUsed": [
+        "claude-sonnet-4-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "claude-sonnet-4-5",
+          "inputTokens": 2667651,
+          "outputTokens": 21620,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 8.327253000000008
+        }
+      ]
+    },
+    {
+      "date": "2026-03-27",
+      "inputTokens": 2723894,
+      "outputTokens": 99872,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 2823766,
+      "totalCost": 9.669762000000013,
+      "modelsUsed": [
+        "claude-sonnet-4-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "claude-sonnet-4-5",
+          "inputTokens": 2723894,
+          "outputTokens": 99872,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 9.669762000000013
+        }
+      ]
+    },
+    {
+      "date": "2026-04-01",
+      "inputTokens": 82462,
+      "outputTokens": 465,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 82927,
+      "totalCost": 0.084787,
+      "modelsUsed": [
+        "claude-haiku-4-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "claude-haiku-4-5",
+          "inputTokens": 82462,
+          "outputTokens": 465,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0.084787
+        }
+      ]
+    },
+    {
+      "date": "2026-04-04",
+      "inputTokens": 2318141,
+      "outputTokens": 22283,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 651180,
+      "totalTokens": 2991604,
+      "totalCost": 3.5127494000000024,
+      "modelsUsed": [
+        "glm-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-5",
+          "inputTokens": 2318141,
+          "outputTokens": 22283,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 651180,
+          "cost": 3.5127494000000024
+        }
+      ]
+    },
+    {
+      "date": "2026-04-05",
+      "inputTokens": 39488207,
+      "outputTokens": 340337,
+      "cacheCreationTokens": 9273,
+      "cacheReadTokens": 16157030,
+      "totalTokens": 55994847,
+      "totalCost": 60.9564692799999,
+      "modelsUsed": [
+        "glm-5",
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-5",
+          "inputTokens": 39468243,
+          "outputTokens": 338653,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 16130098,
+          "cost": 60.939438879999905
+        },
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 19964,
+          "outputTokens": 1684,
+          "cacheCreationTokens": 9273,
+          "cacheReadTokens": 26932,
+          "cost": 0.017030399999999998
+        }
+      ]
+    },
+    {
+      "date": "2026-04-06",
+      "inputTokens": 14312788,
+      "outputTokens": 211128,
+      "cacheCreationTokens": 75567,
+      "cacheReadTokens": 12213014,
+      "totalTokens": 26812497,
+      "totalCost": 23.92471564000001,
+      "modelsUsed": [
+        "glm-5",
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-5",
+          "inputTokens": 14124724,
+          "outputTokens": 206533,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 11979744,
+          "cost": 23.798092240000013
+        },
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 188064,
+          "outputTokens": 4595,
+          "cacheCreationTokens": 75567,
+          "cacheReadTokens": 233270,
+          "cost": 0.12662340000000002
+        }
+      ]
+    },
+    {
+      "date": "2026-04-08",
+      "inputTokens": 34014591,
+      "outputTokens": 152737,
+      "cacheCreationTokens": 1753640,
+      "cacheReadTokens": 66780173,
+      "totalTokens": 102701141,
+      "totalCost": 20.866965599999872,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 34014591,
+          "outputTokens": 152737,
+          "cacheCreationTokens": 1753640,
+          "cacheReadTokens": 66780173,
+          "cost": 20.866965599999872
+        }
+      ]
+    },
+    {
+      "date": "2026-04-09",
+      "inputTokens": 490348,
+      "outputTokens": 2907,
+      "cacheCreationTokens": 47631,
+      "cacheReadTokens": 307998,
+      "totalTokens": 848884,
+      "totalCost": 0.30292979999999997,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 490348,
+          "outputTokens": 2907,
+          "cacheCreationTokens": 47631,
+          "cacheReadTokens": 307998,
+          "cost": 0.30292979999999997
+        }
+      ]
+    },
+    {
+      "date": "2026-04-11",
+      "inputTokens": 8396523,
+      "outputTokens": 181273,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 9294068,
+      "totalTokens": 17871864,
+      "totalCost": 14.96919107999999,
+      "modelsUsed": [
+        "glm-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-5",
+          "inputTokens": 8396523,
+          "outputTokens": 181273,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 9294068,
+          "cost": 14.96919107999999
+        }
+      ]
+    },
+    {
+      "date": "2026-04-14",
+      "inputTokens": 32945,
+      "outputTokens": 5490,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 255232,
+      "totalTokens": 293667,
+      "totalCost": 0.12798525,
+      "modelsUsed": [
+        "gpt-5-2025-08-07"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "gpt-5-2025-08-07",
+          "inputTokens": 32945,
+          "outputTokens": 5490,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 255232,
+          "cost": 0.12798525
+        }
+      ]
+    },
+    {
+      "date": "2026-04-15",
+      "inputTokens": 4309283,
+      "outputTokens": 24107,
+      "cacheCreationTokens": 243376,
+      "cacheReadTokens": 961428,
+      "totalTokens": 5538194,
+      "totalCost": 2.6578908000000045,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 4309283,
+          "outputTokens": 24107,
+          "cacheCreationTokens": 243376,
+          "cacheReadTokens": 961428,
+          "cost": 2.6578908000000045
+        }
+      ]
+    },
+    {
+      "date": "2026-04-16",
+      "inputTokens": 13471074,
+      "outputTokens": 165301,
+      "cacheCreationTokens": 1634162,
+      "cacheReadTokens": 9734771,
+      "totalTokens": 25005308,
+      "totalCost": 8.578547400000014,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 13471074,
+          "outputTokens": 165301,
+          "cacheCreationTokens": 1634162,
+          "cacheReadTokens": 9734771,
+          "cost": 8.578547400000014
+        }
+      ]
+    },
+    {
+      "date": "2026-04-17",
+      "inputTokens": 145086170,
+      "outputTokens": 550624,
+      "cacheCreationTokens": 6199391,
+      "cacheReadTokens": 184289716,
+      "totalTokens": 336125901,
+      "totalCost": 88.70357400000042,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 145086170,
+          "outputTokens": 550624,
+          "cacheCreationTokens": 6199391,
+          "cacheReadTokens": 184289716,
+          "cost": 88.70357400000042
+        }
+      ]
+    },
+    {
+      "date": "2026-04-18",
+      "inputTokens": 1695588,
+      "outputTokens": 3398,
+      "cacheCreationTokens": 130248,
+      "cacheReadTokens": 399335,
+      "totalTokens": 2228569,
+      "totalCost": 1.0275467999999999,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 1695588,
+          "outputTokens": 3398,
+          "cacheCreationTokens": 130248,
+          "cacheReadTokens": 399335,
+          "cost": 1.0275467999999999
+        }
+      ]
+    },
+    {
+      "date": "2026-04-19",
+      "inputTokens": 797307,
+      "outputTokens": 1209,
+      "cacheCreationTokens": 34766,
+      "cacheReadTokens": 257492,
+      "totalTokens": 1090774,
+      "totalCost": 0.48201119999999986,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 797307,
+          "outputTokens": 1209,
+          "cacheCreationTokens": 34766,
+          "cacheReadTokens": 257492,
+          "cost": 0.48201119999999986
+        }
+      ]
+    },
+    {
+      "date": "2026-04-20",
+      "inputTokens": 24202232,
+      "outputTokens": 77555,
+      "cacheCreationTokens": 623308,
+      "cacheReadTokens": 12000369,
+      "totalTokens": 36903464,
+      "totalCost": 25.415046099999987,
+      "modelsUsed": [
+        "kimi-k2.5",
+        "glm-5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "glm-5",
+          "inputTokens": 12051869,
+          "outputTokens": 18872,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 3819715,
+          "cost": 17.948779299999998
+        },
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 12150363,
+          "outputTokens": 58683,
+          "cacheCreationTokens": 623308,
+          "cacheReadTokens": 8180654,
+          "cost": 7.4662668000000085
+        }
+      ]
+    },
+    {
+      "date": "2026-04-21",
+      "inputTokens": 27704320,
+      "outputTokens": 98198,
+      "cacheCreationTokens": 2662706,
+      "cacheReadTokens": 22795258,
+      "totalTokens": 53260482,
+      "totalCost": 16.917186000000004,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 27704320,
+          "outputTokens": 98198,
+          "cacheCreationTokens": 2662706,
+          "cacheReadTokens": 22795258,
+          "cost": 16.917186000000004
+        }
+      ]
+    },
+    {
+      "date": "2026-04-22",
+      "inputTokens": 25088145,
+      "outputTokens": 114418,
+      "cacheCreationTokens": 2412299,
+      "cacheReadTokens": 23747739,
+      "totalTokens": 51362601,
+      "totalCost": 15.396140999999991,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 25088145,
+          "outputTokens": 114418,
+          "cacheCreationTokens": 2412299,
+          "cacheReadTokens": 23747739,
+          "cost": 15.396140999999991
+        }
+      ]
+    },
+    {
+      "date": "2026-04-23",
+      "inputTokens": 728214,
+      "outputTokens": 3081,
+      "cacheCreationTokens": 239275,
+      "cacheReadTokens": 723236,
+      "totalTokens": 1693806,
+      "totalCost": 0.44617139999999994,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 728214,
+          "outputTokens": 3081,
+          "cacheCreationTokens": 239275,
+          "cacheReadTokens": 723236,
+          "cost": 0.44617139999999994
+        }
+      ]
+    },
+    {
+      "date": "2026-04-24",
+      "inputTokens": 72984,
+      "outputTokens": 0,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 0,
+      "totalTokens": 72984,
+      "totalCost": 0.0437904,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 72984,
+          "outputTokens": 0,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 0,
+          "cost": 0.0437904
+        }
+      ]
+    },
+    {
+      "date": "2026-04-26",
+      "inputTokens": 539219,
+      "outputTokens": 668,
+      "cacheCreationTokens": 56519,
+      "cacheReadTokens": 332338,
+      "totalTokens": 928744,
+      "totalCost": 0.3255353999999999,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 539219,
+          "outputTokens": 668,
+          "cacheCreationTokens": 56519,
+          "cacheReadTokens": 332338,
+          "cost": 0.3255353999999999
+        }
+      ]
+    },
+    {
+      "date": "2026-04-29",
+      "inputTokens": 46648,
+      "outputTokens": 756,
+      "cacheCreationTokens": 0,
+      "cacheReadTokens": 26752,
+      "totalTokens": 74156,
+      "totalCost": 0.05426639999999999,
+      "modelsUsed": [
+        "mimo-v2.5-pro"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "mimo-v2.5-pro",
+          "inputTokens": 46648,
+          "outputTokens": 756,
+          "cacheCreationTokens": 0,
+          "cacheReadTokens": 26752,
+          "cost": 0.05426639999999999
+        }
+      ]
+    },
+    {
+      "date": "2026-05-09",
+      "inputTokens": 3196676,
+      "outputTokens": 8982,
+      "cacheCreationTokens": 456457,
+      "cacheReadTokens": 1164579,
+      "totalTokens": 4826694,
+      "totalCost": 1.9449515999999996,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 3196676,
+          "outputTokens": 8982,
+          "cacheCreationTokens": 456457,
+          "cacheReadTokens": 1164579,
+          "cost": 1.9449515999999996
+        }
+      ]
+    },
+    {
+      "date": "2026-05-10",
+      "inputTokens": 28035823,
+      "outputTokens": 61081,
+      "cacheCreationTokens": 2088586,
+      "cacheReadTokens": 11908799,
+      "totalTokens": 42094289,
+      "totalCost": 17.004736800000025,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 28035823,
+          "outputTokens": 61081,
+          "cacheCreationTokens": 2088586,
+          "cacheReadTokens": 11908799,
+          "cost": 17.004736800000025
+        }
+      ]
+    },
+    {
+      "date": "2026-05-11",
+      "inputTokens": 59431701,
+      "outputTokens": 68601,
+      "cacheCreationTokens": 2975125,
+      "cacheReadTokens": 43336101,
+      "totalTokens": 105811528,
+      "totalCost": 35.86482360000008,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 59431701,
+          "outputTokens": 68601,
+          "cacheCreationTokens": 2975125,
+          "cacheReadTokens": 43336101,
+          "cost": 35.86482360000008
+        }
+      ]
+    },
+    {
+      "date": "2026-05-12",
+      "inputTokens": 19268354,
+      "outputTokens": 34184,
+      "cacheCreationTokens": 2617792,
+      "cacheReadTokens": 15468017,
+      "totalTokens": 37388347,
+      "totalCost": 11.66356439999999,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 19268354,
+          "outputTokens": 34184,
+          "cacheCreationTokens": 2617792,
+          "cacheReadTokens": 15468017,
+          "cost": 11.66356439999999
+        }
+      ]
+    },
+    {
+      "date": "2026-05-14",
+      "inputTokens": 4996087,
+      "outputTokens": 21724,
+      "cacheCreationTokens": 225812,
+      "cacheReadTokens": 2376357,
+      "totalTokens": 7619980,
+      "totalCost": 3.062824199999998,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 4996087,
+          "outputTokens": 21724,
+          "cacheCreationTokens": 225812,
+          "cacheReadTokens": 2376357,
+          "cost": 3.062824199999998
+        }
+      ]
+    },
+    {
+      "date": "2026-05-16",
+      "inputTokens": 1510136,
+      "outputTokens": 1630,
+      "cacheCreationTokens": 40623,
+      "cacheReadTokens": 332403,
+      "totalTokens": 1884792,
+      "totalCost": 0.9109716,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 1510136,
+          "outputTokens": 1630,
+          "cacheCreationTokens": 40623,
+          "cacheReadTokens": 332403,
+          "cost": 0.9109716
+        }
+      ]
+    },
+    {
+      "date": "2026-05-18",
+      "inputTokens": 302990,
+      "outputTokens": 8168,
+      "cacheCreationTokens": 35666,
+      "cacheReadTokens": 55440,
+      "totalTokens": 402264,
+      "totalCost": 0.20629799999999998,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 302990,
+          "outputTokens": 8168,
+          "cacheCreationTokens": 35666,
+          "cacheReadTokens": 55440,
+          "cost": 0.20629799999999998
+        }
+      ]
+    },
+    {
+      "date": "2026-05-19",
+      "inputTokens": 366145,
+      "outputTokens": 24249,
+      "cacheCreationTokens": 95620,
+      "cacheReadTokens": 50872,
+      "totalTokens": 536886,
+      "totalCost": 0.29243399999999997,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 366145,
+          "outputTokens": 24249,
+          "cacheCreationTokens": 95620,
+          "cacheReadTokens": 50872,
+          "cost": 0.29243399999999997
+        }
+      ]
+    },
+    {
+      "date": "2026-05-25",
+      "inputTokens": 54101,
+      "outputTokens": 229,
+      "cacheCreationTokens": 23474,
+      "cacheReadTokens": 0,
+      "totalTokens": 77804,
+      "totalCost": 0.0331476,
+      "modelsUsed": [
+        "kimi-k2.5"
+      ],
+      "modelBreakdowns": [
+        {
+          "modelName": "kimi-k2.5",
+          "inputTokens": 54101,
+          "outputTokens": 229,
+          "cacheCreationTokens": 23474,
+          "cacheReadTokens": 0,
+          "cost": 0.0331476
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "inputTokens": 538766277,
+    "outputTokens": 4195950,
+    "cacheCreationTokens": 24681316,
+    "cacheReadTokens": 1030929137,
+    "totalCost": 566.8457270000004,
+    "totalTokens": 1598572680
+  }
+}
