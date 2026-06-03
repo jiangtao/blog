@@ -28,6 +28,7 @@
     "dayjs": "^1.11.19",
     "gray-matter": "^4.0.3",
     "lodash.kebabcase": "^4.1.1",
+    "number-precision": "^1.6.0",
     "react-activity-calendar": "^3.1.1",
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",

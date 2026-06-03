@@ -1,5 +1,8 @@
 // src/utils/ai-usage.ts
+import NP from 'number-precision'
 import type { DailyUsage } from '../types/ai-usage'
+
+NP.enableBoundaryChecking(false)
 
 export function parseDeviceFilename(filename: string): { deviceName: string; yearMonth: string } | null {
   // 支持格式: {设备名}-{YYYY-MM-DD}.json 或 {设备名}-{YYYY-MM}.json
@@ -8,8 +11,12 @@ export function parseDeviceFilename(filename: string): { deviceName: string; yea
   const datePart = match[2]
   // 提取年月 (YYYY-MM)
   const yearMonth = datePart.substring(0, 7)
+  const deviceName = match[1].endsWith('-codex')
+    ? match[1].slice(0, -'-codex'.length)
+    : match[1]
+
   return {
-    deviceName: match[1],
+    deviceName,
     yearMonth
   }
 }
@@ -21,7 +28,7 @@ export function calculateSummary(daily: DailyUsage[]) {
 
   for (const day of daily) {
     totalTokens += day.totalTokens
-    totalCost += day.totalCost
+    totalCost = NP.plus(totalCost, day.totalCost)
 
     for (const breakdown of day.modelBreakdowns) {
       const modelTokens = breakdown.inputTokens + breakdown.outputTokens + breakdown.cacheReadTokens
