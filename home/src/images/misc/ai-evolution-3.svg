@@ -1,72 +1,92 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-labelledby="title desc">
+  <title id="title">可观测性上升</title>
+  <desc id="desc">四阶段展示黑盒执行、日志指标、质量门禁、可追溯复盘的演进。</desc>
   <defs>
-    <!-- Arrow marker -->
-    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-      <polygon points="0 0, 10 3, 0 6" fill="#666666"/>
+    <style>
+      .font { font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif; }
+      .title { font-size: 26px; font-weight: 700; fill: #0f172a; }
+      .subtitle { font-size: 15px; font-weight: 700; fill: #2563eb; }
+      .stage-title { font-size: 18px; font-weight: 700; fill: #0f172a; }
+      .stage-text { font-size: 13px; fill: #475569; }
+      .tiny { font-size: 12px; fill: #64748b; }
+      .badge { font-size: 12px; font-weight: 700; }
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#94a3b8"/>
     </marker>
-    <!-- Drop shadow -->
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
+    <filter id="cardShadow" x="-12%" y="-18%" width="124%" height="138%">
+      <feDropShadow dx="0" dy="9" stdDeviation="12" flood-color="#0f172a" flood-opacity="0.10"/>
     </filter>
   </defs>
 
-  <!-- Background -->
-  <rect width="800" height="320" fill="#ffffff"/>
+  <rect width="960" height="420" fill="#ffffff"/>
+  <path d="M48 98 H912 M48 318 H912" stroke="#e2e8f0" stroke-width="1"/>
+  <path d="M60 120 V292 M286 120 V292 M512 120 V292 M738 120 V292" stroke="#f1f5f9" stroke-width="1"/>
 
-  <!-- Title -->
-  <text x="400" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#333333">3. 可观测性上升</text>
+  <text x="480" y="46" text-anchor="middle" class="font title">3. 可观测性上升</text>
+  <rect x="286" y="66" width="388" height="30" rx="15" fill="#eff6ff" stroke="#bfdbfe"/>
+  <text x="480" y="86" text-anchor="middle" class="font subtitle">每次操作可验证、可回放、可改进</text>
 
-  <!-- Production Issues -->
-  <g transform="translate(80, 80)" filter="url(#shadow)">
-    <rect x="0" y="0" width="160" height="60" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
-    <text x="80" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">上线后</text>
-    <text x="80" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">才发现问题</text>
+  <line x1="232" y1="206" x2="274" y2="206" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="458" y1="206" x2="500" y2="206" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="684" y1="206" x2="726" y2="206" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <g transform="translate(60,120)" filter="url(#cardShadow)">
+    <rect width="168" height="172" rx="8" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+    <circle cx="84" cy="34" r="20" fill="#f97316"/>
+    <text x="84" y="40" text-anchor="middle" class="font badge" fill="#ffffff">01</text>
+    <text x="84" y="72" text-anchor="middle" class="font stage-title">黑盒执行</text>
+    <rect x="34" y="96" width="100" height="50" rx="6" fill="#1e293b"/>
+    <text x="84" y="126" text-anchor="middle" class="font" font-size="22" font-weight="700" fill="#f8fafc">?</text>
+    <text x="84" y="160" text-anchor="middle" class="font stage-text">只看最终结果</text>
   </g>
 
-  <!-- Arrow 1 -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 240 110 Q 270 110 290 110"/>
+  <g transform="translate(286,120)" filter="url(#cardShadow)">
+    <rect width="168" height="172" rx="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2"/>
+    <circle cx="84" cy="34" r="20" fill="#7c3aed"/>
+    <text x="84" y="40" text-anchor="middle" class="font badge" fill="#ffffff">02</text>
+    <text x="84" y="72" text-anchor="middle" class="font stage-title">日志 / 指标</text>
+    <rect x="38" y="98" width="28" height="42" rx="4" fill="#c4b5fd"/>
+    <rect x="76" y="112" width="28" height="28" rx="4" fill="#8b5cf6"/>
+    <rect x="114" y="88" width="28" height="52" rx="4" fill="#6d28d9"/>
+    <text x="84" y="160" text-anchor="middle" class="font stage-text">过程开始可见</text>
   </g>
 
-  <!-- Test Stage -->
-  <g transform="translate(320, 80)" filter="url(#shadow)">
-    <rect x="0" y="0" width="160" height="60" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/>
-    <text x="80" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">测试阶段</text>
-    <text x="80" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">测试发现</text>
+  <g transform="translate(512,120)" filter="url(#cardShadow)">
+    <rect width="168" height="172" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <circle cx="84" cy="34" r="20" fill="#2563eb"/>
+    <text x="84" y="40" text-anchor="middle" class="font badge" fill="#ffffff">03</text>
+    <text x="84" y="72" text-anchor="middle" class="font stage-title">质量门禁</text>
+    <path d="M48 110 L72 134 L124 92" fill="none" stroke="#10b981" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="84" y="160" text-anchor="middle" class="font stage-text">失败阻断交付</text>
   </g>
 
-  <!-- Arrow 2 -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 480 110 Q 510 110 530 110"/>
+  <g transform="translate(738,120)" filter="url(#cardShadow)">
+    <rect width="168" height="172" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+    <circle cx="84" cy="34" r="20" fill="#059669"/>
+    <text x="84" y="40" text-anchor="middle" class="font badge" fill="#ffffff">04</text>
+    <text x="84" y="68" text-anchor="middle" class="font stage-title">可追溯</text>
+    <text x="84" y="90" text-anchor="middle" class="font stage-title">复盘</text>
+    <path d="M56 122 C56 100 90 96 104 112" fill="none" stroke="#14b8a6" stroke-width="5" stroke-linecap="round"/>
+    <path d="M104 112 L104 98 L118 108 Z" fill="#14b8a6"/>
+    <text x="84" y="160" text-anchor="middle" class="font stage-text">经验回写规则</text>
   </g>
 
-  <!-- Pre-commit -->
-  <g transform="translate(560, 80)" filter="url(#shadow)">
-    <rect x="0" y="0" width="160" height="60" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="2"/>
-    <text x="80" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">提交前</text>
-    <text x="80" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">自动检查</text>
+  <g transform="translate(60,324)">
+    <rect width="846" height="56" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    <circle cx="40" cy="28" r="8" fill="#7c3aed"/>
+    <line x1="48" y1="28" x2="220" y2="28" stroke="#cbd5e1" stroke-width="2"/>
+    <circle cx="228" cy="28" r="8" fill="#2563eb"/>
+    <line x1="236" y1="28" x2="408" y2="28" stroke="#cbd5e1" stroke-width="2"/>
+    <circle cx="416" cy="28" r="8" fill="#10b981"/>
+    <line x1="424" y1="28" x2="596" y2="28" stroke="#cbd5e1" stroke-width="2"/>
+    <circle cx="604" cy="28" r="8" fill="#14b8a6"/>
+    <text x="70" y="33" class="font tiny">Trace</text>
+    <text x="258" y="33" class="font tiny">Logs</text>
+    <text x="446" y="33" class="font tiny">Gate</text>
+    <text x="634" y="33" class="font tiny">Replay</text>
+    <text x="732" y="33" text-anchor="middle" class="font badge" fill="#047857">证据链闭环</text>
   </g>
 
-  <!-- Arrow 3 -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 640 110 Q 650 150 660 170"/>
-  </g>
-
-  <!-- AI Generation -->
-  <g transform="translate(580, 170)" filter="url(#shadow)">
-    <rect x="0" y="0" width="160" height="60" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
-    <text x="80" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">AI 生成时</text>
-    <text x="80" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">自动验证并修复</text>
-  </g>
-
-  <!-- Benefits -->
-  <g transform="translate(100, 220)">
-    <text x="0" y="0" font-family="Arial" font-size="12" font-weight="bold" fill="#333333">演进趋势：</text>
-    <text x="0" y="20" font-family="monospace" font-size="11" fill="#555555">• 问题发现越早，成本越低</text>
-    <text x="0" y="40" font-family="monospace" font-size="11" fill="#555555">• 质量检查左移，AI 自动修复</text>
-    <text x="0" y="60" font-family="monospace" font-size="11" fill="#555555">• 可观测性成为基础设施</text>
-  </g>
-
-  <!-- Watermark -->
-  <text x="780" y="305" font-family="Arial, sans-serif" font-size="10" fill="#999999" text-anchor="end">Jerret's Blog</text>
+  <text x="920" y="396" text-anchor="end" class="font tiny" fill="#94a3b8">Jerret's Blog</text>
 </svg>

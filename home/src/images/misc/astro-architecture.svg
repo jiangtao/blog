@@ -1,86 +1,130 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-labelledby="astro-title astro-desc">
+  <title id="astro-title">Astro 静态化系统架构</title>
+  <desc id="astro-desc">Markdown、组件、布局和资源进入 Astro Build，输出 Static HTML、Pagefind/RSS 与 Vercel 部署，并标出 10s 构建、零 JS 默认、TypeScript 和 Islands 等收益。</desc>
   <defs>
-    <!-- Arrow marker -->
-    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-      <polygon points="0 0, 10 3, 0 6" fill="#666666"/>
+    <marker id="arrow-main" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 1 1 L 11 6 L 1 11 Z" fill="#2563eb"/>
     </marker>
-    <!-- Drop shadow -->
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
+    <marker id="arrow-good" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M 1 1 L 11 6 L 1 11 Z" fill="#059669"/>
+    </marker>
+    <filter id="card-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.10"/>
     </filter>
   </defs>
+  <style>
+    text { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+    .title { font-size: 28px; font-weight: 800; fill: #0f172a; }
+    .subtitle { font-size: 14px; fill: #475569; }
+    .stage-label { font-size: 13px; font-weight: 700; fill: #1d4ed8; }
+    .stage-num { font-size: 12px; font-weight: 800; fill: #ffffff; }
+    .node-title { font-size: 15px; font-weight: 800; fill: #0f172a; }
+    .node-copy { font-size: 12px; fill: #475569; }
+    .badge-text { font-size: 11px; font-weight: 800; }
+    .metric-title { font-size: 14px; font-weight: 800; fill: #065f46; }
+    .metric-copy { font-size: 12px; fill: #0f766e; }
+    .watermark { font-size: 12px; fill: #94a3b8; }
+  </style>
 
-  <!-- Background -->
-  <rect width="800" height="400" fill="#ffffff"/>
+  <rect width="960" height="560" fill="#f7fbff"/>
+  <path d="M 36 86 H 924 V 392 H 36 Z" fill="#ffffff" stroke="#dbeafe" stroke-width="1.5"/>
+  <path d="M 36 408 H 924 V 520 H 36 Z" fill="#ecfdf5" stroke="#bbf7d0" stroke-width="1.5"/>
 
-  <!-- Title -->
-  <text x="400" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333333">Astro 静态博客系统</text>
+  <text class="title" x="480" y="42" text-anchor="middle">Astro 静态化系统：更快的构建与更轻的页面</text>
+  <text class="subtitle" x="480" y="66" text-anchor="middle">内容、组件和资源进入统一构建管线，产物天然静态化，搜索、订阅与部署由工具链接管。</text>
 
-  <!-- Pages -->
-  <g transform="translate(60, 100)" filter="url(#shadow)">
-    <rect x="0" y="0" width="120" height="70" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
-    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">pages/</text>
-    <text x="60" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">路由页面</text>
+  <g transform="translate(54 96)">
+    <rect x="0" y="0" width="168" height="30" rx="15" fill="#dbeafe"/>
+    <circle cx="18" cy="15" r="12" fill="#2563eb"/>
+    <text class="stage-num" x="18" y="19" text-anchor="middle">1</text>
+    <text class="stage-label" x="94" y="20" text-anchor="middle">源码输入</text>
+  </g>
+  <g transform="translate(304 96)">
+    <rect x="0" y="0" width="168" height="30" rx="15" fill="#dbeafe"/>
+    <circle cx="18" cy="15" r="12" fill="#2563eb"/>
+    <text class="stage-num" x="18" y="19" text-anchor="middle">2</text>
+    <text class="stage-label" x="94" y="20" text-anchor="middle">Astro Build</text>
+  </g>
+  <g transform="translate(554 96)">
+    <rect x="0" y="0" width="168" height="30" rx="15" fill="#dbeafe"/>
+    <circle cx="18" cy="15" r="12" fill="#2563eb"/>
+    <text class="stage-num" x="18" y="19" text-anchor="middle">3</text>
+    <text class="stage-label" x="96" y="20" text-anchor="middle">静态产物</text>
+  </g>
+  <g transform="translate(738 96)">
+    <rect x="0" y="0" width="168" height="30" rx="15" fill="#dbeafe"/>
+    <circle cx="18" cy="15" r="12" fill="#2563eb"/>
+    <text class="stage-num" x="18" y="19" text-anchor="middle">4</text>
+    <text class="stage-label" x="96" y="20" text-anchor="middle">自动交付</text>
   </g>
 
-  <!-- Components -->
-  <g transform="translate(210, 100)" filter="url(#shadow)">
-    <rect x="0" y="0" width="120" height="70" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
-    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">components/</text>
-    <text x="60" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">UI 组件</text>
+  <g filter="url(#card-shadow)">
+    <rect x="54" y="132" width="168" height="56" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text class="node-title" x="138" y="154" text-anchor="middle">Markdown</text>
+    <text class="node-copy" x="138" y="174" text-anchor="middle">src/data/blog</text>
+
+    <rect x="54" y="198" width="168" height="56" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text class="node-title" x="138" y="220" text-anchor="middle">Components</text>
+    <text class="node-copy" x="138" y="240" text-anchor="middle">React / Astro Islands</text>
+
+    <rect x="54" y="264" width="168" height="56" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text class="node-title" x="138" y="286" text-anchor="middle">Layout</text>
+    <text class="node-copy" x="138" y="306" text-anchor="middle">统一模板与导航</text>
+
+    <rect x="54" y="330" width="168" height="56" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text class="node-title" x="138" y="352" text-anchor="middle">Assets</text>
+    <text class="node-copy" x="138" y="372" text-anchor="middle">图片 / 样式 / OG</text>
+
+    <rect x="304" y="264" width="168" height="56" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+    <text class="node-title" x="388" y="286" text-anchor="middle">Astro Build</text>
+    <text class="node-copy" x="388" y="306" text-anchor="middle">内容集合 + Vite</text>
+    <rect x="410" y="271" width="46" height="18" rx="9" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+    <text class="badge-text" x="433" y="284" text-anchor="middle" fill="#15803d">10s</text>
+
+    <rect x="554" y="150" width="168" height="56" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+    <text class="node-title" x="638" y="172" text-anchor="middle">Static HTML</text>
+    <text class="node-copy" x="638" y="192" text-anchor="middle">零 JS 默认输出</text>
+
+    <rect x="554" y="264" width="168" height="56" rx="8" fill="#f0fdfa" stroke="#14b8a6" stroke-width="2"/>
+    <text class="node-title" x="638" y="286" text-anchor="middle">Pagefind / RSS</text>
+    <text class="node-copy" x="638" y="306" text-anchor="middle">搜索与订阅索引</text>
+
+    <rect x="738" y="264" width="168" height="56" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+    <text class="node-title" x="822" y="286" text-anchor="middle">Vercel</text>
+    <text class="node-copy" x="822" y="306" text-anchor="middle">自动部署 / CDN</text>
   </g>
 
-  <!-- Content -->
-  <g transform="translate(360, 100)" filter="url(#shadow)">
-    <rect x="0" y="0" width="120" height="70" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/>
-    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">data/blog/</text>
-    <text x="60" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">Markdown</text>
+  <g stroke="#2563eb" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-main)">
+    <path d="M 222 160 H 264 V 292 H 304"/>
+    <path d="M 222 226 H 264 V 292 H 304"/>
+    <path d="M 222 292 H 304"/>
+    <path d="M 222 358 H 264 V 292 H 304"/>
+    <path d="M 472 292 H 514 V 178 H 554"/>
+    <path d="M 472 292 H 554"/>
+  </g>
+  <g stroke="#059669" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-good)">
+    <path d="M 722 178 H 730 V 292 H 738"/>
+    <path d="M 722 292 H 738"/>
   </g>
 
-  <!-- Build -->
-  <g transform="translate(510, 100)" filter="url(#shadow)">
-    <rect x="0" y="0" width="120" height="70" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="2"/>
-    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">Build</text>
-    <text x="60" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">npm run build</text>
+  <text x="54" y="424" font-size="14" font-weight="800" fill="#047857">收益指标</text>
+  <g filter="url(#card-shadow)">
+    <rect x="54" y="438" width="168" height="62" rx="8" fill="#ecfdf5" stroke="#22c55e" stroke-width="1.6"/>
+    <text class="metric-title" x="138" y="462" text-anchor="middle">10s 构建</text>
+    <text class="metric-copy" x="138" y="482" text-anchor="middle">反馈更快，发布更稳</text>
+
+    <rect x="304" y="438" width="168" height="62" rx="8" fill="#f0fdfa" stroke="#14b8a6" stroke-width="1.6"/>
+    <text class="metric-title" x="388" y="462" text-anchor="middle">零 JS 默认</text>
+    <text class="metric-copy" x="388" y="482" text-anchor="middle">页面更轻，首屏更快</text>
+
+    <rect x="554" y="438" width="168" height="62" rx="8" fill="#eef2ff" stroke="#6366f1" stroke-width="1.6"/>
+    <text class="metric-title" x="638" y="462" text-anchor="middle">TypeScript</text>
+    <text class="metric-copy" x="638" y="482" text-anchor="middle">内容模型可校验</text>
+
+    <rect x="738" y="438" width="168" height="62" rx="8" fill="#ecfeff" stroke="#06b6d4" stroke-width="1.6"/>
+    <text class="metric-title" x="822" y="462" text-anchor="middle">Islands</text>
+    <text class="metric-copy" x="822" y="482" text-anchor="middle">只为交互加载 JS</text>
   </g>
 
-  <!-- Deploy -->
-  <g transform="translate(660, 100)" filter="url(#shadow)">
-    <rect x="0" y="0" width="100" height="70" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
-    <text x="50" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">Vercel</text>
-    <text x="50" y="50" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">自动部署</text>
-  </g>
-
-  <!-- Arrows -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 180 135 Q 195 135 200 135"/>
-    <path d="M 330 135 Q 345 135 350 135"/>
-    <path d="M 480 135 Q 495 135 500 135"/>
-    <path d="M 630 135 Q 645 135 650 135"/>
-  </g>
-
-  <!-- Improvements -->
-  <g transform="translate(60, 230)" filter="url(#shadow)">
-    <rect x="0" y="0" width="260" height="80" rx="6" fill="#b0e3e6" stroke="#0e8088" stroke-width="1.5"/>
-    <text x="130" y="25" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">核心改进</text>
-    <text x="130" y="50" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• 构建 60s → 10s</text>
-    <text x="130" y="68" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• TypeScript + Islands</text>
-  </g>
-
-  <g transform="translate(350, 230)" filter="url(#shadow)">
-    <rect x="0" y="0" width="260" height="80" rx="6" fill="#ffe6cc" stroke="#d79b00" stroke-width="1.5"/>
-    <text x="130" y="25" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">部署简化</text>
-    <text x="130" y="50" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• Vercel 自动部署</text>
-    <text x="130" y="68" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">• 热更新 HMR</text>
-  </g>
-
-  <!-- But cover still manual -->
-  <g transform="translate(640, 230)" filter="url(#shadow)">
-    <rect x="0" y="0" width="120" height="80" rx="6" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
-    <text x="60" y="35" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#333333">但封面...</text>
-    <text x="60" y="60" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">仍然手动!</text>
-  </g>
-
-  <!-- Watermark -->
-  <text x="780" y="385" font-family="Arial, sans-serif" font-size="11" fill="#999999" text-anchor="end">Jerret's Blog</text>
+  <text class="watermark" x="912" y="540" text-anchor="end">Jerret's Blog</text>
 </svg>

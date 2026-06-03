@@ -1,72 +1,91 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280">
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420">
   <defs>
-    <!-- Arrow marker -->
-    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-      <polygon points="0 0, 10 3, 0 6" fill="#666666"/>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e5e7eb" stroke-width="1" opacity="0.55"/>
+    </pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" viewBox="0 0 10 10">
+      <path d="M 0 1 L 10 5 L 0 9 Z" fill="#2563eb"/>
     </marker>
-    <!-- Drop shadow -->
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
+    <filter id="softShadow" x="-18%" y="-24%" width="136%" height="148%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.12"/>
     </filter>
   </defs>
 
-  <!-- Background -->
-  <rect width="900" height="280" fill="#ffffff"/>
+  <rect width="960" height="420" fill="#ffffff"/>
+  <rect width="960" height="420" fill="url(#grid)"/>
+  <rect x="24" y="22" width="912" height="376" rx="14" fill="#ffffff" stroke="#e2e8f0"/>
 
-  <!-- Title -->
-  <text x="450" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#333333">4. 知识编码化</text>
+  <text x="480" y="58" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="700" letter-spacing="0" fill="#0f172a">4. 知识编码化</text>
+  <text x="480" y="86" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" letter-spacing="0" fill="#64748b">知识从人脑迁移到可运行规则，最后进入自动执行和校验闭环</text>
 
-  <!-- Tacit Knowledge -->
-  <g transform="translate(80, 80)" filter="url(#shadow)">
-    <rect x="0" y="0" width="140" height="60" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
-    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">隐性知识</text>
-    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">师傅带徒弟</text>
+  <path d="M 120 185 H 840" fill="none" stroke="#bfdbfe" stroke-width="10" stroke-linecap="round"/>
+  <path d="M 218 185 H 284" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M 450 185 H 516" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M 682 185 H 748" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g transform="translate(52,122)" filter="url(#softShadow)">
+    <rect width="166" height="126" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
+    <rect width="166" height="7" rx="8" fill="#64748b"/>
+    <circle cx="29" cy="37" r="15" fill="#e2e8f0" stroke="#94a3b8"/>
+    <text x="29" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#334155">1</text>
+    <text x="54" y="37" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" letter-spacing="0" fill="#0f172a">隐性经验</text>
+    <text x="20" y="70" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" letter-spacing="0" fill="#475569">口头判断</text>
+    <text x="20" y="89" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" letter-spacing="0" fill="#475569">个人习惯与直觉</text>
+    <rect x="20" y="101" width="58" height="18" rx="9" fill="#e2e8f0"/>
+    <text x="49" y="114" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" font-weight="700" letter-spacing="0" fill="#475569">人脑</text>
   </g>
 
-  <!-- Arrow 1 -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 220 110 Q 250 110 270 110"/>
+  <g transform="translate(284,122)" filter="url(#softShadow)">
+    <rect width="166" height="126" rx="8" fill="#faf5ff" stroke="#a78bfa" stroke-width="1.4"/>
+    <rect width="166" height="7" rx="8" fill="#7c3aed"/>
+    <circle cx="29" cy="37" r="15" fill="#ede9fe" stroke="#a78bfa"/>
+    <text x="29" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#5b21b6">2</text>
+    <text x="54" y="37" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" letter-spacing="0" fill="#0f172a">文档 / 规范</text>
+    <text x="20" y="70" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" letter-spacing="0" fill="#475569">流程沉淀</text>
+    <text x="20" y="89" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" letter-spacing="0" fill="#475569">清单、边界、示例</text>
+    <rect x="20" y="101" width="58" height="18" rx="9" fill="#ede9fe"/>
+    <text x="49" y="114" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" font-weight="700" letter-spacing="0" fill="#6d28d9">可读</text>
   </g>
 
-  <!-- Documentation -->
-  <g transform="translate(290, 80)" filter="url(#shadow)">
-    <rect x="0" y="0" width="140" height="60" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/>
-    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">文档化</text>
-    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">Wiki、文档</text>
+  <g transform="translate(516,122)" filter="url(#softShadow)">
+    <rect width="166" height="126" rx="8" fill="#eef2ff" stroke="#818cf8" stroke-width="1.4"/>
+    <rect width="166" height="7" rx="8" fill="#4f46e5"/>
+    <circle cx="29" cy="37" r="15" fill="#e0e7ff" stroke="#818cf8"/>
+    <text x="29" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#3730a3">3</text>
+    <text x="54" y="37" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" letter-spacing="0" fill="#0f172a">skill / rules</text>
+    <text x="20" y="70" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" letter-spacing="0" fill="#475569">触发条件</text>
+    <text x="20" y="89" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" letter-spacing="0" fill="#475569">可执行操作边界</text>
+    <rect x="20" y="101" width="68" height="18" rx="9" fill="#e0e7ff"/>
+    <text x="54" y="114" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" font-weight="700" letter-spacing="0" fill="#4338ca">可执行</text>
   </g>
 
-  <!-- Arrow 2 -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 430 110 Q 460 110 480 110"/>
+  <g transform="translate(748,122)" filter="url(#softShadow)">
+    <rect width="166" height="126" rx="8" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.4"/>
+    <rect width="166" height="7" rx="8" fill="#2563eb"/>
+    <circle cx="29" cy="37" r="15" fill="#dbeafe" stroke="#60a5fa"/>
+    <text x="29" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="700" fill="#1d4ed8">4</text>
+    <text x="54" y="37" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" letter-spacing="0" fill="#0f172a">自动执行与校验</text>
+    <text x="20" y="70" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" letter-spacing="0" fill="#475569">agent 执行</text>
+    <text x="20" y="89" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" letter-spacing="0" fill="#475569">构建、lint、验收</text>
+    <rect x="20" y="101" width="68" height="18" rx="9" fill="#dcfce7"/>
+    <text x="54" y="114" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" font-weight="700" letter-spacing="0" fill="#15803d">可验证</text>
   </g>
 
-  <!-- Tooling -->
-  <g transform="translate(500, 80)" filter="url(#shadow)">
-    <rect x="0" y="0" width="140" height="60" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
-    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">工具化</text>
-    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">脚本、插件</text>
+  <g transform="translate(72,292)">
+    <rect width="260" height="58" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="20" y="24" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" font-weight="700" letter-spacing="0" fill="#1d4ed8">迁移方向</text>
+    <text x="20" y="43" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" letter-spacing="0" fill="#0f172a">人脑经验 → 规则库</text>
+  </g>
+  <g transform="translate(350,292)">
+    <rect width="260" height="58" rx="8" fill="#f5f3ff" stroke="#ddd6fe"/>
+    <text x="20" y="24" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" font-weight="700" letter-spacing="0" fill="#6d28d9">复用方式</text>
+    <text x="20" y="43" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" letter-spacing="0" fill="#0f172a">被阅读 → 被调用执行</text>
+  </g>
+  <g transform="translate(628,292)">
+    <rect width="260" height="58" rx="8" fill="#f0fdf4" stroke="#bbf7d0"/>
+    <text x="20" y="24" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" font-weight="700" letter-spacing="0" fill="#15803d">质量兜底</text>
+    <text x="20" y="43" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" letter-spacing="0" fill="#0f172a">自动校验让规则闭环</text>
   </g>
 
-  <!-- Arrow 3 -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 640 110 Q 670 110 690 110"/>
-  </g>
-
-  <!-- AI/Skills -->
-  <g transform="translate(710, 80)" filter="url(#shadow)">
-    <rect x="0" y="0" width="140" height="60" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
-    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">AI 化</text>
-    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">Skills、Agents</text>
-  </g>
-
-  <!-- Evolution Description -->
-  <g transform="translate(100, 180)">
-    <text x="0" y="0" font-family="Arial" font-size="12" font-weight="bold" fill="#333333">知识编码演进路径：</text>
-    <text x="0" y="20" font-family="monospace" font-size="10" fill="#555555">依赖口口相传 → 文档记录 → 工具固化 → AI 可复用</text>
-    <text x="0" y="40" font-family="monospace" font-size="10" fill="#555555"></text>
-    <text x="0" y="60" font-family="monospace" font-size="10" fill="#555555">可传递性：低 → 中 → 高 → 极高</text>
-  </g>
-
-  <!-- Watermark -->
-  <text x="880" y="265" font-family="Arial, sans-serif" font-size="10" fill="#999999" text-anchor="end">Jerret's Blog</text>
+  <text x="936" y="398" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#94a3b8">Jerret's Blog</text>
 </svg>

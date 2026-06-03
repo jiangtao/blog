@@ -1,88 +1,146 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">博客完整自动化发布链路</title>
+  <desc id="desc">流程图展示从写作、AI 图片生成、图片 lint、Astro check 和 build、PR preview 到 Vercel 与公众号同步的完整发布链路，并标明质量门禁和失败回溯。</desc>
   <defs>
-    <!-- Arrow marker -->
-    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-      <polygon points="0 0, 10 3, 0 6" fill="#666666"/>
+    <marker id="arrow-main" viewBox="0 0 12 10" markerWidth="12" markerHeight="10" refX="11" refY="5" orient="auto">
+      <path d="M0 0 L12 5 L0 10 Z" fill="#163b63"/>
     </marker>
-    <!-- Drop shadow -->
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
-    </filter>
+    <marker id="arrow-soft" viewBox="0 0 12 10" markerWidth="10" markerHeight="9" refX="10" refY="4.5" orient="auto">
+      <path d="M0 0 L12 4.5 L0 9 Z" fill="#64748b"/>
+    </marker>
+    <marker id="arrow-rollback" viewBox="0 0 12 10" markerWidth="12" markerHeight="10" refX="11" refY="5" orient="auto">
+      <path d="M0 0 L12 5 L0 10 Z" fill="#c2410c"/>
+    </marker>
+    <style>
+      text { font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .title { font-size: 26px; font-weight: 700; fill: #172033; }
+      .subtitle { font-size: 13px; fill: #5c667a; }
+      .stage-num { font-size: 11px; font-weight: 700; letter-spacing: .5px; }
+      .node-title { font-size: 14px; font-weight: 700; fill: #172033; }
+      .node-copy { font-size: 11px; fill: #5c667a; }
+      .gate-title { font-size: 13px; font-weight: 700; fill: #334155; }
+      .gate-copy { font-size: 11px; fill: #64748b; }
+      .section { font-size: 15px; font-weight: 700; }
+      .badge { font-size: 12px; font-weight: 700; }
+    </style>
   </defs>
 
-  <!-- Background -->
-  <rect width="900" height="400" fill="#ffffff"/>
+  <rect width="960" height="560" fill="#f6f8fb"/>
+  <rect x="20" y="20" width="920" height="520" rx="18" fill="#ffffff" stroke="#d8e0ea"/>
 
-  <!-- Title -->
-  <text x="450" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#333333">博客全自动化发布流程</text>
+  <text x="480" y="54" class="title" text-anchor="middle">完整发布链路：写作到多端同步</text>
+  <text x="480" y="76" class="subtitle" text-anchor="middle">每一步都有自动检查点；失败时沿回溯路径修复，再重新进入 lint、build 和 preview。</text>
 
-  <!-- Step 1: Write -->
-  <g transform="translate(80, 100)" filter="url(#shadow)">
-    <rect x="0" y="0" width="140" height="80" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
-    <text x="70" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">1. 写作</text>
-    <text x="70" y="55" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">语雀/本地</text>
+  <rect x="42" y="102" width="876" height="112" rx="14" fill="#f8fafc" stroke="#dbe3ee"/>
+  <text x="64" y="130" class="section" fill="#163b63">主发布路径</text>
+
+  <g transform="translate(48 138)">
+    <rect width="128" height="58" rx="8" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.5"/>
+    <text x="14" y="19" class="stage-num" fill="#2563eb">01</text>
+    <text x="64" y="27" class="node-title" text-anchor="middle">写作</text>
+    <text x="64" y="46" class="node-copy" text-anchor="middle">Markdown / Issue</text>
+  </g>
+  <g transform="translate(200 138)">
+    <rect width="128" height="58" rx="8" fill="#ecfdf5" stroke="#22c55e" stroke-width="1.5"/>
+    <text x="14" y="19" class="stage-num" fill="#059669">02</text>
+    <text x="64" y="27" class="node-title" text-anchor="middle">AI 封面/图</text>
+    <text x="64" y="46" class="node-copy" text-anchor="middle">SVG + 配图</text>
+  </g>
+  <g transform="translate(352 138)">
+    <rect width="128" height="58" rx="8" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="14" y="19" class="stage-num" fill="#7c3aed">03</text>
+    <text x="64" y="27" class="node-title" text-anchor="middle">图片 lint</text>
+    <text x="64" y="46" class="node-copy" text-anchor="middle">watermark / XML</text>
+  </g>
+  <g transform="translate(504 138)">
+    <rect width="128" height="58" rx="8" fill="#eef2ff" stroke="#64748b" stroke-width="1.5"/>
+    <text x="14" y="19" class="stage-num" fill="#475569">04</text>
+    <text x="64" y="27" class="node-title" text-anchor="middle">Astro 检查</text>
+    <text x="64" y="46" class="node-copy" text-anchor="middle">check + build</text>
+  </g>
+  <g transform="translate(656 138)">
+    <rect width="128" height="58" rx="8" fill="#eff6ff" stroke="#60a5fa" stroke-width="1.5"/>
+    <text x="14" y="19" class="stage-num" fill="#2563eb">05</text>
+    <text x="64" y="27" class="node-title" text-anchor="middle">PR / Preview</text>
+    <text x="64" y="46" class="node-copy" text-anchor="middle">review URL</text>
+  </g>
+  <g transform="translate(808 138)">
+    <rect width="128" height="58" rx="8" fill="#ecfeff" stroke="#06b6d4" stroke-width="1.5"/>
+    <text x="14" y="19" class="stage-num" fill="#0891b2">06</text>
+    <text x="64" y="27" class="node-title" text-anchor="middle">发布同步</text>
+    <text x="64" y="46" class="node-copy" text-anchor="middle">Vercel + 公众号</text>
   </g>
 
-  <!-- Arrow 1 -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 220 140 Q 245 140 260 140"/>
+  <line x1="176" y1="167" x2="188" y2="167" stroke="#163b63" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="188 158 200 167 188 176" fill="#163b63"/>
+  <line x1="328" y1="167" x2="340" y2="167" stroke="#163b63" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="340 158 352 167 340 176" fill="#163b63"/>
+  <line x1="480" y1="167" x2="492" y2="167" stroke="#163b63" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="492 158 504 167 492 176" fill="#163b63"/>
+  <line x1="632" y1="167" x2="644" y2="167" stroke="#163b63" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="644 158 656 167 644 176" fill="#163b63"/>
+  <line x1="784" y1="167" x2="796" y2="167" stroke="#163b63" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="796 158 808 167 796 176" fill="#163b63"/>
+
+  <rect x="42" y="238" width="876" height="116" rx="14" fill="#fbfaff" stroke="#ddd6fe"/>
+  <text x="64" y="266" class="section" fill="#6d28d9">质量门禁</text>
+
+  <g transform="translate(62 286)">
+    <rect width="188" height="50" rx="8" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.3"/>
+    <text x="18" y="21" class="stage-num" fill="#7c3aed">G1</text>
+    <text x="94" y="22" class="gate-title" text-anchor="middle">图片资产</text>
+    <text x="94" y="40" class="gate-copy" text-anchor="middle">one &lt;/svg&gt; / 水印 / 无外链</text>
+  </g>
+  <g transform="translate(278 286)">
+    <rect width="188" height="50" rx="8" fill="#ffffff" stroke="#c4b5fd" stroke-width="1.3"/>
+    <text x="18" y="21" class="stage-num" fill="#7c3aed">G2</text>
+    <text x="94" y="22" class="gate-title" text-anchor="middle">图片 lint</text>
+    <text x="94" y="40" class="gate-copy" text-anchor="middle">重复闭合 / 属性 / XML</text>
+  </g>
+  <g transform="translate(494 286)">
+    <rect width="188" height="50" rx="8" fill="#ffffff" stroke="#94a3b8" stroke-width="1.3"/>
+    <text x="18" y="21" class="stage-num" fill="#475569">G3</text>
+    <text x="94" y="22" class="gate-title" text-anchor="middle">Astro 构建</text>
+    <text x="94" y="40" class="gate-copy" text-anchor="middle">check / build / 路由</text>
+  </g>
+  <g transform="translate(710 286)">
+    <rect width="188" height="50" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.3"/>
+    <text x="18" y="21" class="stage-num" fill="#2563eb">G4</text>
+    <text x="94" y="22" class="gate-title" text-anchor="middle">PR Preview</text>
+    <text x="94" y="40" class="gate-copy" text-anchor="middle">视觉预览 / 链接检查</text>
   </g>
 
-  <!-- Step 2: AI Cover -->
-  <g transform="translate(270, 100)" filter="url(#shadow)">
-    <rect x="0" y="0" width="140" height="80" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
-    <text x="70" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">2. AI 封面</text>
-    <text x="70" y="55" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">Claude Code</text>
+  <line x1="416" y1="196" x2="416" y2="274" stroke="#64748b" stroke-width="2.5"/>
+  <polygon points="408 274 416 286 424 274" fill="#64748b"/>
+  <line x1="568" y1="196" x2="568" y2="274" stroke="#64748b" stroke-width="2.5"/>
+  <polygon points="560 274 568 286 576 274" fill="#64748b"/>
+  <line x1="720" y1="196" x2="720" y2="274" stroke="#64748b" stroke-width="2.5"/>
+  <polygon points="712 274 720 286 728 274" fill="#64748b"/>
+  <line x1="872" y1="196" x2="872" y2="274" stroke="#64748b" stroke-width="2.5"/>
+  <polygon points="864 274 872 286 880 274" fill="#64748b"/>
+
+  <rect x="42" y="376" width="876" height="92" rx="14" fill="#fff7ed" stroke="#fed7aa"/>
+  <text x="64" y="404" class="section" fill="#c2410c">失败回溯能力</text>
+  <polyline points="858 420 116 420 116 362" stroke="#c2410c" stroke-width="4" fill="none" stroke-linejoin="round"/>
+  <polygon points="108 362 116 350 124 362" fill="#c2410c"/>
+  <line x1="416" y1="354" x2="416" y2="420" stroke="#c2410c" stroke-width="3"/>
+  <line x1="588" y1="354" x2="588" y2="420" stroke="#c2410c" stroke-width="3"/>
+  <line x1="804" y1="354" x2="804" y2="420" stroke="#c2410c" stroke-width="3"/>
+  <text x="486" y="445" class="badge" fill="#c2410c" text-anchor="middle">gate 失败 -&gt; 定位日志 / diff / preview -&gt; 回到写作或 AI 资产修复</text>
+  <text x="486" y="462" class="gate-copy" text-anchor="middle">修复后重新进入图片 lint、Astro check/build 与 PR preview，保证可重复交付。</text>
+
+  <g transform="translate(76 488)">
+    <rect width="218" height="28" rx="14" fill="#ecfdf5" stroke="#6ee7b7"/>
+    <text x="109" y="19" class="badge" fill="#047857" text-anchor="middle">Vercel 静态站发布</text>
+  </g>
+  <g transform="translate(332 488)">
+    <rect width="218" height="28" rx="14" fill="#ecfeff" stroke="#67e8f9"/>
+    <text x="109" y="19" class="badge" fill="#0891b2" text-anchor="middle">公众号素材同步</text>
+  </g>
+  <g transform="translate(588 488)">
+    <rect width="218" height="28" rx="14" fill="#eff6ff" stroke="#93c5fd"/>
+    <text x="109" y="19" class="badge" fill="#1d4ed8" text-anchor="middle">PR 留痕和预览</text>
   </g>
 
-  <!-- Arrow 2 -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 410 140 Q 435 140 450 140"/>
-  </g>
-
-  <!-- Step 3: Auto Check -->
-  <g transform="translate(460, 100)" filter="url(#shadow)">
-    <rect x="0" y="0" width="140" height="80" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/>
-    <text x="70" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">3. 自动检查</text>
-    <text x="70" y="55" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">lint:images</text>
-  </g>
-
-  <!-- Arrow 3 -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 600 140 Q 625 140 640 140"/>
-  </g>
-
-  <!-- Step 4: Commit -->
-  <g transform="translate(650, 100)" filter="url(#shadow)">
-    <rect x="0" y="0" width="140" height="80" rx="8" fill="#e1d5e7" stroke="#9673a6" stroke-width="2"/>
-    <text x="70" y="30" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">4. 提交流程</text>
-    <text x="70" y="55" text-anchor="middle" font-family="monospace" font-size="10" fill="#555555">/dev:commit</text>
-  </g>
-
-  <!-- Arrow 4 (curved down) -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 720 180 Q 720 210 450 230"/>
-  </g>
-
-  <!-- CI/CD Box -->
-  <g transform="translate(200, 220)" filter="url(#shadow)">
-    <rect x="0" y="0" width="500" height="90" rx="8" fill="#b0e3e6" stroke="#0e8088" stroke-width="2"/>
-    <text x="250" y="30" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold" fill="#333333">CI/CD 自动部署</text>
-    <text x="250" y="55" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">GitHub Actions → Vercel</text>
-    <text x="250" y="75" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">push → build → deploy</text>
-  </g>
-
-  <!-- Arrow from CI/CD to result -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 450 310 L 450 330"/>
-  </g>
-
-  <!-- Final Result -->
-  <g transform="translate(300, 330)" filter="url(#shadow)">
-    <rect x="0" y="0" width="300" height="50" rx="8" fill="#82b366" stroke="#5a9a6a" stroke-width="2"/>
-    <text x="150" y="30" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#ffffff">写作即发布! 零图片问题</text>
-  </g>
-
-  <!-- Watermark -->
-  <text x="880" y="385" font-family="Arial, sans-serif" font-size="11" fill="#999999" text-anchor="end">Jerret's Blog</text>
+  <text x="924" y="530" font-family="Arial, sans-serif" font-size="12" fill="#94a3b8" text-anchor="end">Jerret's Blog</text>
 </svg>
