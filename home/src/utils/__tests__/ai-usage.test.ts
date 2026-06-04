@@ -22,6 +22,11 @@ describe('parseDeviceFilename', () => {
     const result = parseDeviceFilename('home-macbook-2026-03-07.json')
     expect(result).toEqual({ deviceName: 'home-macbook', yearMonth: '2026-03' })
   })
+
+  it('should parse Codex usage filename as the original device', () => {
+    const result = parseDeviceFilename('jtdeMac-mini-codex-2026-06.json')
+    expect(result).toEqual({ deviceName: 'jtdeMac-mini', yearMonth: '2026-06' })
+  })
 })
 
 describe('calculateSummary', () => {
@@ -53,5 +58,35 @@ describe('calculateSummary', () => {
     expect(result.totalTokens).toBe(1700)
     expect(result.totalCost).toBe(0.01)
     expect(result.byModel['claude-sonnet-4-6']).toBe(1700)
+  })
+
+  it('should calculate cost totals with decimal precision', () => {
+    const daily: DailyUsage[] = [
+      {
+        date: '2026-03-01',
+        inputTokens: 1000,
+        outputTokens: 500,
+        cacheCreationTokens: 0,
+        cacheReadTokens: 200,
+        totalTokens: 1700,
+        totalCost: 0.1,
+        modelsUsed: ['claude-sonnet-4-6'],
+        modelBreakdowns: []
+      },
+      {
+        date: '2026-03-02',
+        inputTokens: 1000,
+        outputTokens: 500,
+        cacheCreationTokens: 0,
+        cacheReadTokens: 200,
+        totalTokens: 1700,
+        totalCost: 0.2,
+        modelsUsed: ['gpt-5.3-codex'],
+        modelBreakdowns: []
+      }
+    ]
+
+    const result = calculateSummary(daily)
+    expect(result.totalCost).toBe(0.3)
   })
 })
