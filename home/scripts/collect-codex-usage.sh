@@ -3,9 +3,9 @@
 
 set -euo pipefail
 
-# Check if pnpx command exists
-if ! command -v pnpx &> /dev/null; then
-  echo "Error: pnpx command not found"
+# Check if npx command exists
+if ! command -v npx &> /dev/null; then
+  echo "Error: npx command not found"
   exit 1
 fi
 
@@ -22,6 +22,7 @@ YEAR_MONTH="${BLOG_SYNC_YEAR_MONTH:-$(date +%Y-%m)}"
 # Output directory and filename
 OUTPUT_DIR="$REPO_ROOT/home/ai/usages"
 OUTPUT_FILE="$OUTPUT_DIR/${DEVICE_NAME}-codex-${YEAR_MONTH}.json"
+TEMP_FILE="$OUTPUT_FILE.tmp"
 
 # Create output directory if it doesn't exist
 mkdir -p "$OUTPUT_DIR"
@@ -29,15 +30,20 @@ mkdir -p "$OUTPUT_DIR"
 echo "Collecting Codex usage for device: $DEVICE_NAME"
 echo "Output file: $OUTPUT_FILE"
 
-# Run codex usage command
-pnpx @ccusage/codex -j > "$OUTPUT_FILE"
-
-# Verify output file is not empty
-if [ ! -s "$OUTPUT_FILE" ]; then
-  echo "Error: Output file is empty or was not created"
-  rm -f "$OUTPUT_FILE"
+# Run Codex usage command
+if ! npx --yes ccusage codex -j > "$TEMP_FILE"; then
+  rm -f "$TEMP_FILE"
   exit 1
 fi
+
+# Verify output file is not empty
+if [ ! -s "$TEMP_FILE" ]; then
+  echo "Error: Output file is empty or was not created"
+  rm -f "$TEMP_FILE"
+  exit 1
+fi
+
+mv "$TEMP_FILE" "$OUTPUT_FILE"
 
 echo "✓ Codex usage data collected successfully"
 echo ""
