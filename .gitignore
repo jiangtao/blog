@@ -26,3 +26,8 @@ docs/plans/
 # Local editable diagram sources
 *.drawio
 source-local/
+
+# Local-only blog drafts and draft assets
+home/src/data/blog/local-drafts/
+home/public/images/local-drafts/
+home/src/images/local-drafts/

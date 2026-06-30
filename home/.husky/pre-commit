@@ -1,5 +1,17 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
+if [ -z "$husky_skip_init" ] && [ -f "$(dirname "$0")/_/husky.sh" ]; then
+  . "$(dirname "$0")/_/husky.sh"
+fi
 
-echo "🔍 Checking image links in staged files..."
-cd home && npx lint-staged
+set -e
+cd "$(dirname "$0")/.."
+
+echo "Checking staged draft posts..."
+npm run check:drafts
+
+if [ -x node_modules/.bin/lint-staged ]; then
+  echo "Checking image links in staged files..."
+  npx lint-staged
+else
+  echo "lint-staged is not installed; skipping staged image link check."
+fi
