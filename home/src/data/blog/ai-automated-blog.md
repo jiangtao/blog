@@ -401,7 +401,7 @@ jobs:
 
 ### 3. 可观测性上升
 
-![可观测性上升](/images/misc/ai-evolution-2.svg)
+![可观测性上升](/images/misc/ai-evolution-3.svg)
 
 ### 4. 知识编码化
 

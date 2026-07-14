@@ -11,6 +11,7 @@ import BackButton from "@/components/BackButton.astro";
 import BackToTopButton from "@/components/BackToTopButton.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
 import ImageGallery from "@/components/ImageGallery.astro";
+import WeChatFollowCard from "@/components/WeChatFollowCard.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
@@ -130,6 +131,11 @@ const nextPost =
         </div>
       )}
       <Content />
+      <WeChatFollowCard
+        variant="inline"
+        data-wechat-inline-card
+        hidden
+      />
     </article>
 
     <EditPost class="sm:hidden" {hideEditPost} {post} />
@@ -244,6 +250,47 @@ const nextPost =
   // Initialize external links
   setupExternalLinks();
 
+  // Move the lightweight WeChat entry near the article lead.
+  function positionInlineWeChatFollow() {
+    const article = document.getElementById('article');
+    if (!article) return;
+
+    const card = article.querySelector('[data-wechat-inline-card]');
+    if (!(card instanceof HTMLElement)) return;
+
+    const walker = document.createTreeWalker(
+      article,
+      NodeFilter.SHOW_COMMENT,
+      null,
+      false
+    );
+
+    let moreComment = null;
+    while (walker.nextNode()) {
+      if (walker.currentNode.nodeValue?.trim() === 'more') {
+        moreComment = walker.currentNode;
+        break;
+      }
+    }
+
+    if (moreComment?.parentNode) {
+      moreComment.parentNode.insertBefore(card, moreComment.nextSibling);
+      card.hidden = false;
+      return;
+    }
+
+    const firstSectionHeading = article.querySelector('h2');
+    if (firstSectionHeading?.parentNode) {
+      firstSectionHeading.parentNode.insertBefore(card, firstSectionHeading);
+      card.hidden = false;
+      return;
+    }
+
+    card.hidden = true;
+  }
+
+  positionInlineWeChatFollow();
+
   // Move cover image to correct position (before <!--more--> or at beginning)
   function positionCoverImage() {
     const article = document.getElementById('article');
@@ -286,6 +333,7 @@ const nextPost =
   // Reinitialize after page navigation
   document.addEventListener('astro:after-swap', () => {
     setTimeout(setupExternalLinks, 50);
+    setTimeout(positionInlineWeChatFollow, 50);
     setTimeout(positionCoverImage, 50);
   });
 

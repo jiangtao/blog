@@ -1,0 +1,86 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { SITE } from "@/config";
+
+type Variant = "inline" | "post" | "about";
+
+type Props = {
+  variant?: Variant;
+} & HTMLAttributes<"section">;
+
+const { variant = "post", class: className, ...attrs } = Astro.props;
+const account = SITE.wechatOfficialAccount;
+const titleId = `wechat-follow-title-${variant}`;
+const isInline = variant === "inline";
+const isAbout = variant === "about";
+---
+
+{
+  account.enabled && (
+    <section
+      aria-labelledby={titleId}
+      data-pagefind-ignore
+      class:list={[
+        "not-prose border border-border bg-background/70",
+        isInline ? "my-6 rounded-lg px-4 py-3" : "my-8 rounded-lg p-4",
+        isAbout && "my-6",
+        className,
+      ]}
+      {...attrs}
+    >
+      {isInline ? (
+        <div class="flex items-center justify-between gap-4">
+          <div class="min-w-0 flex-1">
+            <span id={titleId} class="block text-sm font-semibold text-accent">
+              关注公众号：{account.name}
+            </span>
+            <span class="mt-1 block text-xs leading-5 text-foreground/75">
+              {account.description}
+            </span>
+            <span class="mt-1 block text-xs leading-5 text-foreground/55">
+              微信扫码关注
+            </span>
+          </div>
+          <img
+            src={account.qrImage}
+            alt={account.alt}
+            width="88"
+            height="88"
+            loading="lazy"
+            decoding="async"
+            class="size-20 shrink-0 rounded border border-border bg-white p-1 sm:size-22"
+          />
+        </div>
+      ) : (
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div class="min-w-0">
+            <div
+              id={titleId}
+              class:list={[
+                "m-0 text-base font-semibold text-accent",
+                isAbout ? "sm:text-lg" : "sm:text-base",
+              ]}
+            >
+              关注公众号：{account.name}
+            </div>
+            <p class="mt-2 mb-0 text-sm leading-6 text-foreground/80">
+              {account.description}
+            </p>
+            <p class="mt-1 mb-0 text-xs leading-5 text-foreground/60">
+              WeChat Official Account: {account.englishName}
+            </p>
+          </div>
+          <img
+            src={account.qrImage}
+            alt={account.alt}
+            width="176"
+            height="176"
+            loading="lazy"
+            decoding="async"
+            class="mx-auto size-40 shrink-0 rounded border border-border bg-white p-1 sm:mx-0 sm:size-44"
+          />
+        </div>
+      )}
+    </section>
+  )
+}

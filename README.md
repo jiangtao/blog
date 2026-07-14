@@ -7,7 +7,7 @@
 - **home/** - Hexo 博客，部署到 [Vercel](https://jiangtao.vercel.app)
 - **docs/** - 技术文档和代码示例
 
-内容会同步至 [语雀博客](https://www.yuque.com/imjt/blog) 和 前端进制 微信公众号
+内容会同步至 [语雀博客](https://www.yuque.com/imjt/blog) 和 Jerret Life 微信公众号
 
 ## 文章目录
  

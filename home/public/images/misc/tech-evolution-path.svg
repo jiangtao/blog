@@ -1,72 +1,91 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 350">
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="420" viewBox="0 0 960 420">
   <defs>
-    <!-- Arrow marker -->
-    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-      <polygon points="0 0, 10 3, 0 6" fill="#666666"/>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e5e7eb" stroke-width="1" opacity="0.55"/>
+    </pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" viewBox="0 0 10 10">
+      <path d="M 0 1 L 10 5 L 0 9 Z" fill="#2563eb"/>
     </marker>
-    <!-- Drop shadow -->
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="2" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
+    <filter id="softShadow" x="-18%" y="-24%" width="136%" height="148%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.12"/>
     </filter>
   </defs>
 
-  <!-- Background -->
-  <rect width="900" height="350" fill="#ffffff"/>
+  <rect width="960" height="420" fill="#ffffff"/>
+  <rect width="960" height="420" fill="url(#grid)"/>
+  <rect x="24" y="22" width="912" height="376" rx="14" fill="#ffffff" stroke="#e2e8f0"/>
 
-  <!-- Title -->
-  <text x="450" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#333333">技术演进路径</text>
+  <text x="480" y="58" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="700" letter-spacing="0" fill="#0f172a">技术演进路径</text>
+  <text x="480" y="86" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" letter-spacing="0" fill="#64748b">从手动博客到跨平台分发：自动化承担重复劳动，人审 gate 保留判断权</text>
 
-  <!-- Phase 1: Hexo Manual -->
-  <g transform="translate(80, 80)" filter="url(#shadow)">
-    <rect x="0" y="0" width="140" height="60" rx="8" fill="#f8cecc" stroke="#b85450" stroke-width="2"/>
-    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">Hexo 手动</text>
-    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">手动封面 60s+构建</text>
+  <path d="M 112 190 H 848" fill="none" stroke="#bfdbfe" stroke-width="10" stroke-linecap="round"/>
+  <path d="M 188 190 H 221" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M 371 190 H 404" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M 554 190 H 587" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M 737 190 H 770" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+
+  <g transform="translate(38,118)" filter="url(#softShadow)">
+    <rect width="150" height="150" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
+    <rect width="150" height="7" rx="8" fill="#64748b"/>
+    <text x="18" y="31" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#64748b">01</text>
+    <text x="18" y="56" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" letter-spacing="0" fill="#0f172a">Hexo 手动</text>
+    <text x="18" y="83" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="11" font-weight="700" letter-spacing="0" fill="#334155">收益</text>
+    <text x="18" y="101" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" letter-spacing="0" fill="#475569">结构可控</text>
+    <rect x="18" y="118" width="114" height="20" rx="10" fill="#e2e8f0"/>
+    <text x="75" y="132" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" font-weight="700" letter-spacing="0" fill="#475569">Gate：全流程人审</text>
   </g>
 
-  <!-- Arrow -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 220 110 Q 250 110 270 110"/>
+  <g transform="translate(221,118)" filter="url(#softShadow)">
+    <rect width="150" height="150" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.4"/>
+    <rect width="150" height="7" rx="8" fill="#2563eb"/>
+    <text x="18" y="31" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#2563eb">02</text>
+    <text x="18" y="56" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" letter-spacing="0" fill="#0f172a">Astro 静态化</text>
+    <text x="18" y="83" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="11" font-weight="700" letter-spacing="0" fill="#1d4ed8">收益</text>
+    <text x="18" y="101" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" letter-spacing="0" fill="#475569">构建更快，部署稳</text>
+    <rect x="18" y="118" width="114" height="20" rx="10" fill="#dbeafe"/>
+    <text x="75" y="132" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" font-weight="700" letter-spacing="0" fill="#1d4ed8">Gate：内容人审</text>
   </g>
 
-  <!-- Phase 2: Astro Static -->
-  <g transform="translate(300, 80)" filter="url(#shadow)">
-    <rect x="0" y="0" width="140" height="60" rx="8" fill="#fff2cc" stroke="#d6b656" stroke-width="2"/>
-    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">Astro 静态化</text>
-    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">10s构建 自动部署</text>
+  <g transform="translate(404,118)" filter="url(#softShadow)">
+    <rect width="150" height="150" rx="8" fill="#faf5ff" stroke="#c4b5fd" stroke-width="1.4"/>
+    <rect width="150" height="7" rx="8" fill="#7c3aed"/>
+    <text x="18" y="31" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#7c3aed">03</text>
+    <text x="18" y="56" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" letter-spacing="0" fill="#0f172a">AI 封面</text>
+    <text x="18" y="83" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="11" font-weight="700" letter-spacing="0" fill="#6d28d9">收益</text>
+    <text x="18" y="101" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" letter-spacing="0" fill="#475569">视觉统一，出图快</text>
+    <rect x="18" y="118" width="114" height="20" rx="10" fill="#ede9fe"/>
+    <text x="75" y="132" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" font-weight="700" letter-spacing="0" fill="#6d28d9">Gate：审美确认</text>
   </g>
 
-  <!-- Arrow -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 440 110 Q 470 110 490 110"/>
+  <g transform="translate(587,118)" filter="url(#softShadow)">
+    <rect width="150" height="150" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.4"/>
+    <rect width="150" height="7" rx="8" fill="#16a34a"/>
+    <text x="18" y="31" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#16a34a">04</text>
+    <text x="18" y="56" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" letter-spacing="0" fill="#0f172a">全自动化</text>
+    <text x="18" y="74" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" letter-spacing="0" fill="#0f172a">工作流</text>
+    <text x="18" y="101" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" letter-spacing="0" fill="#475569">写作到发布闭环</text>
+    <rect x="18" y="118" width="114" height="20" rx="10" fill="#dcfce7"/>
+    <text x="75" y="132" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" font-weight="700" letter-spacing="0" fill="#15803d">Gate：结果验收</text>
   </g>
 
-  <!-- Phase 3: AI Cover -->
-  <g transform="translate(520, 80)" filter="url(#shadow)">
-    <rect x="0" y="0" width="140" height="60" rx="8" fill="#d5e8d4" stroke="#82b366" stroke-width="2"/>
-    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">AI 封面生成</text>
-    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">1分钟 风格统一</text>
+  <g transform="translate(770,118)" filter="url(#softShadow)">
+    <rect width="150" height="150" rx="8" fill="#fff7ed" stroke="#fdba74" stroke-width="1.4"/>
+    <rect width="150" height="7" rx="8" fill="#f97316"/>
+    <text x="18" y="31" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#f97316">05</text>
+    <text x="18" y="56" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" letter-spacing="0" fill="#0f172a">跨平台分发</text>
+    <text x="18" y="83" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="11" font-weight="700" letter-spacing="0" fill="#c2410c">收益</text>
+    <text x="18" y="101" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" letter-spacing="0" fill="#475569">一次写，多处发</text>
+    <rect x="18" y="118" width="114" height="20" rx="10" fill="#ffedd5"/>
+    <text x="75" y="132" text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" font-weight="700" letter-spacing="0" fill="#c2410c">Gate：合规人审</text>
   </g>
 
-  <!-- Arrow -->
-  <g stroke="#666666" stroke-width="2" fill="none" marker-end="url(#arrowhead)">
-    <path d="M 660 110 Q 670 110 680 110"/>
+  <g transform="translate(72,306)">
+    <rect width="816" height="64" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="22" y="27" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" font-weight="700" letter-spacing="0" fill="#1d4ed8">路线</text>
+    <text x="74" y="27" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" letter-spacing="0" fill="#0f172a">手动博客 → 静态性能 → 图像生产 → 发布闭环 → 分发复用</text>
+    <text x="22" y="49" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" font-weight="700" letter-spacing="0" fill="#15803d">原则</text>
+    <text x="74" y="49" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" letter-spacing="0" fill="#0f172a">自动化负责重复劳动，人审 gate 负责判断、审美与合规</text>
   </g>
 
-  <!-- Phase 4: Full Automation -->
-  <g transform="translate(700, 80)" filter="url(#shadow)">
-    <rect x="0" y="0" width="140" height="60" rx="8" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2"/>
-    <text x="70" y="25" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333333">全自动化</text>
-    <text x="70" y="45" text-anchor="middle" font-family="monospace" font-size="11" fill="#555555">写作即发布</text>
-  </g>
-
-  <!-- Evolution Description -->
-  <g transform="translate(100, 170)">
-    <text x="0" y="0" font-family="Arial" font-size="12" font-weight="bold" fill="#333333">演进路径：</text>
-    <text x="0" y="20" font-family="monospace" font-size="11" fill="#555555">手动时代（Hexo）→ 解决部署问题（Astro）</text>
-    <text x="0" y="40" font-family="monospace" font-size="11" fill="#555555">→ 解决效率问题（AI 封面）</text>
-    <text x="0" y="60" font-family="monospace" font-size="11" fill="#555555">→ 解决质量问题（自动验证）→ 全自动化（Workflow）</text>
-  </g>
-
-  <!-- Watermark -->
-  <text x="880" y="335" font-family="Arial, sans-serif" font-size="10" fill="#999999" text-anchor="end">Jerret's Blog</text>
+  <text x="936" y="398" text-anchor="end" font-family="Arial, sans-serif" font-size="10" fill="#94a3b8">Jerret's Blog</text>
 </svg>

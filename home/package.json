@@ -13,6 +13,8 @@
     "lint": "eslint .",
     "lint:images": "node bin/image-lint-cli.cjs",
     "fix:images": "node bin/image-lint-cli.cjs --auto --include-yuque",
+    "check:drafts": "node bin/check-drafts-before-commit.cjs",
+    "setup:hooks": "git config core.hooksPath home/.husky",
     "test": "vitest run",
     "test:watch": "vitest",
     "validate:og-images": "tsx scripts/validate-og-images.ts",
