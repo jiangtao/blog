@@ -1,0 +1,20 @@
+name: Setup blog Node toolchain
+description: Install and verify the Node.js and npm versions declared by the blog.
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      with:
+        node-version-file: home/.node-version
+        cache: npm
+        cache-dependency-path: home/package-lock.json
+
+    - name: Verify pinned toolchain
+      shell: bash
+      working-directory: home
+      run: |
+        test "$(node --version)" = "v$(cat .node-version)"
+        expected_npm="$(node -p 'require("./package.json").packageManager')"
+        test "npm@$(npm --version)" = "$expected_npm"

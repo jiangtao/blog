@@ -9,18 +9,19 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout blog repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
+      - name: Setup blog Node toolchain
+        uses: ./.github/actions/setup-blog-node
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci --audit=false --fund=false
         working-directory: ./home
 
       - name: Sync to profile
