@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 1,
+  "profileId": "github.com/jiangtao/blog:home",
+  "observedAt": "2026-07-15",
+  "summary": {
+    "zhCN": "Article Content 的第一输出源；所有文章先进入本地草稿区，通过人工审阅和博客验证后才可成为正式候选。",
+    "en": "The primary output source for Article Content. Every article enters the local draft area first and becomes a release candidate only after human review and blog verification."
+  },
+  "repository": {
+    "remote": "git@github.com:jiangtao/blog.git",
+    "defaultBranch": "master",
+    "profiledBranch": "fix/blog-supply-chain-baseline",
+    "profiledBaseCommit": "2295cee619214d249e0aee08c1f90d0400f3737b",
+    "applicationRoot": "home"
+  },
+  "content": {
+    "collection": "blog",
+    "publishedRoot": "home/src/data/blog",
+    "localDraftRoots": [
+      "home/src/data/blog/local-drafts",
+      "home/public/images/local-drafts",
+      "home/src/images/local-drafts"
+    ],
+    "format": "Markdown with YAML frontmatter",
+    "requiredFrontmatter": ["pubDatetime", "title", "description"],
+    "defaultedFrontmatter": {
+      "author": "SITE.author",
+      "tags": ["others"]
+    },
+    "draftField": "draft",
+    "draftBehavior": {
+      "development": "visible when draft is true",
+      "production": "excluded when draft is true",
+      "commitGuard": "home/bin/check-drafts-before-commit.cjs",
+      "guardBehaviorTest": "home/bin/verify-draft-guard.cjs"
+    },
+    "canonicalPath": "/posts/{UTC year}/{UTC month}/{UTC day}/{slug}",
+    "canonicalPathImplementation": "home/src/utils/getPath.ts"
+  },
+  "toolchain": {
+    "node": "24.18.0",
+    "nodeReleaseLine": "Krypton LTS",
+    "packageManager": "npm@11.16.0",
+    "lockfile": "home/package-lock.json",
+    "installCommand": "npm ci --audit=false --fund=false",
+    "astro": "6.4.8",
+    "lifecyclePolicy": {
+      "strict": true,
+      "allowed": ["esbuild", "sharp"],
+      "denied": ["fsevents"]
+    }
+  },
+  "commands": {
+    "install": "cd home && npm ci --audit=false --fund=false",
+    "formatterBaseline": "cd home && npm run format:baseline",
+    "imageLintCI": "cd home && npm run lint:images:local",
+    "imageLintExternalManual": "cd home && npm run lint:images",
+    "draftCheck": "cd home && npm run check:drafts",
+    "trackedDraftCheck": "cd home && npm run check:drafts:tracked",
+    "draftGuardTest": "cd home && npm run verify:draft-guard",
+    "testBaseline": "cd home && npm run test:baseline",
+    "productionAudit": "cd home && npm audit --audit-level=high --omit=dev",
+    "build": "cd home && npm run build",
+    "artifactValidation": "cd home && npm run validate:build"
+  },
+  "derivedArtifacts": {
+    "outputRoot": "home/dist",
+    "required": [
+      "rss.xml",
+      "sitemap-index.xml",
+      "llms.txt",
+      "llms-full.txt",
+      "pagefind/pagefind.js",
+      "pagefind/pagefind-entry.json"
+    ],
+    "validator": "home/bin/validate-build-artifacts.cjs"
+  },
+  "qualityBaseline": {
+    "file": "home/quality-baseline.json",
+    "formatterDifferingFiles": 52,
+    "testSuites": {
+      "total": 13,
+      "passed": 9,
+      "failed": 4
+    },
+    "tests": {
+      "total": 28,
+      "passed": 26,
+      "failed": 2
+    },
+    "semantics": "Known failures are accepted only when the exact reviewed failure set is unchanged; any drift fails CI."
+  },
+  "security": {
+    "productionAuditThreshold": "high",
+    "highOrCriticalAdvisories": 0,
+    "acceptedResiduals": [
+      {
+        "package": "esbuild",
+        "severity": "low",
+        "scope": "Windows development server only",
+        "reason": "Astro 6.4.8 constrains esbuild to ^0.27.3; forcing a 0.x minor override would add compatibility risk to a macOS/Linux static production build."
+      }
+    ],
+    "peerDependencyWarnings": [
+      {
+        "package": "@astrojs/mdx@4.3.14",
+        "introducedBy": "@4hse/astro-llms-txt@1.0.5",
+        "declaredAstroRange": "^5.0.0",
+        "observedBehavior": "Astro 6.4.8 build completed successfully; warning remains visible for upstream follow-up."
+      }
+    ]
+  },
+  "release": {
+    "firstOutputSource": true,
+    "draftFirst": true,
+    "unattendedRelease": false,
+    "disposition": "manual-required",
+    "publishingPerformedByBaseline": false,
+    "requiredDeliveryFlow": "/dev:commit",
+    "notes": "The supply-chain baseline validates candidates but never publishes content or syncs profile data during verification."
+  },
+  "sources": [
+    "https://nodejs.org/en/blog/release/v24.18.0",
+    "https://nodejs.org/en/about/previous-releases",
+    "https://docs.npmjs.com/cli/commands/npm-ci/",
+    "https://docs.astro.build/zh-cn/guides/upgrade-to/v6/"
+  ],
+  "controlFileSha256": {
+    "AGENTS.md": "2c4d08f11cb4806940c6bd2f2a05ff3b6848fdbad312bd39a9b865a8de65cac5",
+    ".gitignore": "bab166db7d6cdb40529ce8acb9c1b4b5932df19670c440f633bb8474e39f37b7",
+    ".github/actions/setup-blog-node/action.yml": "8eba1e736d4c3416d3cf96940fa572a4ec325308561037d1f44e6893540791e0",
+    ".github/workflows/image-check.yml": "f08498675fd0401eccdae5ccc58083aa3d319200bf1e7457f449682e051c6a8c",
+    ".github/workflows/sync-to-profile.yml": "e4c1f37d8e4e4718758c150fa355f8af0ec6898dcb6abcc3dfdb03f7c190ff7f",
+    "home/.husky/pre-commit": "468ee075bf5ee0122b0f2c02ceca51aab1a6b58fe15fab6ec72a052f54be30f6",
+    "home/.npmrc": "39e77e19b009792da9c06d30abd2fc7b7559f6bc15196c9e82b7e8c1e51dd8d8",
+    "home/.node-version": "55075b5ec4e8b31936cbbc282b8829116d1fd48f2f2f1856dee592a6650700ce",
+    "home/package.json": "cb4722e728bb9263928b6b48eb656e329959f893a3795e55ca5ee20a472e5a37",
+    "home/package-lock.json": "ff8ef5f11b5866dbe55d92ec66992517e4c7f5e479896dcbae4c385fe9612cca",
+    "home/astro.config.ts": "b75b0a06cdcc90422c7067fb923a80e434b6b1ce3f1392eb3f61c67e6e1f6072",
+    "home/src/content.config.ts": "758b3ec8f46936f828d8b4fbe634724db96fb0bfa34da923b7b7a5457994acec",
+    "home/src/utils/postFilter.ts": "a32ad430b94c34bc796148ebbc7b3060493c34fceba5b522112365771779ede7",
+    "home/src/utils/getPath.ts": "d549cd6b9c6324ad4173b5e0142fc36aa89cc05a7180bfccff274c4bb7a0e61f",
+    "home/vercel.json": "b31f52e2f1cb03d23b27ec210d4de6581e0bfb06f803111c721d6b016d9272e4",
+    "home/quality-baseline.json": "f4d8db59062f5f6412df3df1b17849758fac6b97ba4657c331b06950dadee67a",
+    "home/bin/check-quality-baseline.cjs": "7e799a0a03803026ab713fa0ea29855c24f2200155da584c2489d7ed8e260d81",
+    "home/bin/check-drafts-before-commit.cjs": "4e60c1f27bde683d402fae17d5e68feb978457c562417f2ac6bfa4125f5fbe58",
+    "home/bin/image-lint.cjs": "b73886c5c0cd1bb9dd2fcfdfeb19bacf34147cd45afbadc878e737d9c152efb6",
+    "home/bin/image-lint-cli.cjs": "34d989ee6cef425b784350b32d366e5afcbef3d92a8e784ffc6c0099b5f7a1cf",
+    "home/bin/validate-build-artifacts.cjs": "5e502ca595c84dfd7fe866e525e1f45ebcc859e2406f8d26306fedf3ec68df84",
+    "home/bin/verify-draft-guard.cjs": "3dcad10c11b3615c1aa96268403c37f1eb18e7507061d1444532ea055f220684"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "formatter": {
+    "expectedDifferingFiles": [
+      "public/images/blog/future-rd-evolution/CHANGELOG.md",
+      "public/pagefind/pagefind-entry.json",
+      "public/pagefind/pagefind-highlight.js",
+      "public/pagefind/pagefind-modular-ui.css",
+      "public/pagefind/pagefind-modular-ui.js",
+      "public/pagefind/pagefind-ui.css",
+      "public/pagefind/pagefind-ui.js",
+      "public/pagefind/pagefind.js",
+      "src/components/ai/ActivityHeatmap.tsx",
+      "src/components/ai/AIUsageDashboard.astro",
+      "src/components/ai/ClientDashboard.tsx",
+      "src/components/ai/DeviceSelector.astro",
+      "src/components/ai/ModelDistribution.astro",
+      "src/components/ai/MonthlyStats.astro",
+      "src/components/ai/TokenChart.astro",
+      "src/components/ai/UsageHeatmap.astro",
+      "src/components/Header.astro",
+      "src/components/ImageGallery.astro",
+      "src/components/TableOfContents.astro",
+      "src/data/blog/ai-automated-blog.md",
+      "src/data/blog/ai-native-delivery.md",
+      "src/data/blog/compiler-in-fe.md",
+      "src/data/blog/future-rd-evolution.md",
+      "src/data/blog/opc-starter-architecture-a2ui.md",
+      "src/data/blog/project-next-cli.md",
+      "src/data/blog/puppeteer-start.md",
+      "src/data/blog/react-native-h5-ios-fix.md",
+      "src/data/blog/version-lock.md",
+      "src/data/blog/vue-mixin-apply.md",
+      "src/data/blog/vue-webp.md",
+      "src/data/blog/webview-file-upload-android.md",
+      "src/data/blog/xss-live.md",
+      "src/goal/0602.md",
+      "src/layouts/Layout.astro",
+      "src/layouts/PostDetails.astro",
+      "src/pages/about.astro",
+      "src/pages/ai.astro",
+      "src/pages/index.astro",
+      "src/pages/posts/[...slug]/cover.png.ts",
+      "src/pages/posts/[...slug]/index.png.ts",
+      "src/pages/rss.xml.ts",
+      "src/types/ai-usage.ts",
+      "src/utils/__tests__/ai-usage-loader.test.ts",
+      "src/utils/__tests__/ai-usage.test.ts",
+      "src/utils/__tests__/codex-usage.test.ts",
+      "src/utils/__tests__/convertSvgToPng.test.ts",
+      "src/utils/__tests__/validateImageUrl.test.ts",
+      "src/utils/ai-usage-loader.ts",
+      "src/utils/ai-usage.ts",
+      "src/utils/codex-usage.ts",
+      "src/utils/convertSvgToPng.ts",
+      "src/utils/getPath.ts"
+    ]
+  },
+  "tests": {
+    "counts": {
+      "totalSuites": 13,
+      "passedSuites": 9,
+      "failedSuites": 4,
+      "totalTests": 28,
+      "passedTests": 26,
+      "failedTests": 2
+    },
+    "failedAssertions": [
+      {
+        "fullName": "validateImageUrl should reject invalid URL",
+        "message": "AssertionError: expected 'File not found: tried <path>' to contain 'Invalid URL'"
+      },
+      {
+        "fullName": "validateImageUrl should validate valid absolute URL",
+        "message": "AssertionError: expected 'Skipped remote validation' to be undefined"
+      }
+    ],
+    "failedSuitesWithoutAssertions": [
+      {
+        "file": "src/pages/posts/[...slug]/__tests__/cover.png.test.ts",
+        "message": "Cannot find package 'astro:content' imported from <root>/src/pages/posts/[...slug]/cover.png.ts"
+      },
+      {
+        "file": "src/pages/posts/[...slug]/__tests__/index.png.test.ts",
+        "message": "Cannot find package 'astro:content' imported from <root>/src/pages/posts/[...slug]/index.png.ts"
+      }
+    ]
+  }
+}

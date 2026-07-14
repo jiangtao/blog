@@ -103,6 +103,7 @@ function validateSVGFiles() {
 async function main() {
   const auto = args.includes('--auto');
   const includeYuque = args.includes('--include-yuque');
+  const localOnly = args.includes('--local-only');
 
   // 首先验证 SVG 文件
   const svgValid = validateSVGFiles();
@@ -132,11 +133,20 @@ async function main() {
 
     console.log(`\n📄 ${file}`);
 
-    const results = await validateLinks(links, imageDir);
-    const issues = results.filter(r => r.status !== 'valid');
+    const results = await validateLinks(links, imageDir, 5000, {
+      checkExternal: !localOnly
+    });
+    const issues = results.filter(
+      r => r.status !== 'valid' && r.status !== 'skipped'
+    );
+    const skipped = results.filter(r => r.status === 'skipped').length;
 
     if (issues.length === 0) {
-      console.log('  ✅ All links valid');
+      console.log(
+        skipped > 0
+          ? `  ✅ 本地图片有效；跳过 ${skipped} 个实时外链探测`
+          : '  ✅ All links valid'
+      );
       continue;
     }
 

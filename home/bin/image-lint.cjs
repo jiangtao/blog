@@ -27,7 +27,12 @@ function extractImageLinks(markdown, filename = '<unknown>') {
   return { filename, links };
 }
 
-async function validateLinks(links, imageDir, timeout = 5000) {
+async function validateLinks(
+  links,
+  imageDir,
+  timeout = 5000,
+  { checkExternal = true } = {}
+) {
   const axios = require('axios');
   const fs = require('fs');
   const path = require('path');
@@ -42,6 +47,15 @@ async function validateLinks(links, imageDir, timeout = 5000) {
       status = 'yuque-auth';
       message = 'Yuque 防盗链（需要迁移）';
     } else if (link.type === 'external') {
+      if (!checkExternal) {
+        results.push({
+          ...link,
+          status: 'skipped',
+          message: '外链实时探测已跳过'
+        });
+        continue;
+      }
+
       try {
         const response = await axios.head(link.url, {
           timeout,

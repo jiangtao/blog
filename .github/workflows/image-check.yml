@@ -1,19 +1,59 @@
-name: Image Link Check
+name: Blog CI
 
 on:
+  push:
+    branches:
+      - master
+    paths:
+      - "home/**"
+      - ".github/actions/setup-blog-node/**"
+      - ".github/workflows/image-check.yml"
   pull_request:
     paths:
-      - 'home/source/_posts/**/*.md'
+      - "home/**"
+      - ".github/actions/setup-blog-node/**"
+      - ".github/workflows/image-check.yml"
+
+permissions:
+  contents: read
 
 jobs:
-  check-images:
+  verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: home
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Install dependencies
-        run: cd home && npm install
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Setup blog Node toolchain
+        uses: ./.github/actions/setup-blog-node
+
+      - name: Install locked dependencies
+        run: npm ci --audit=false --fund=false
+
+      - name: Check formatter failure set
+        run: npm run format:baseline
+
       - name: Check image links
-        run: cd home && npm run lint:images
+        run: npm run lint:images:local
+
+      - name: Reject tracked drafts
+        run: npm run check:drafts:tracked
+
+      - name: Verify draft guard behavior
+        run: npm run verify:draft-guard
+
+      - name: Check test failure set
+        run: npm run test:baseline
+
+      - name: Audit production dependencies
+        run: npm audit --audit-level=high --omit=dev
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Validate derived artifacts
+        run: npm run validate:build

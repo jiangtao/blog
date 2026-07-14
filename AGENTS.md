@@ -23,7 +23,7 @@ Most content has migrated to GitHub Issues - check issues for original articles 
   - `src/pages/` - Route pages
   - `src/layouts/` - Layout templates
   - `public/` - Static assets
-  - Tech stack: Astro 5, Tailwind CSS 4, Shiki, Pagefind search
+  - Tech stack: Astro 6, Tailwind CSS 4, Shiki, Pagefind search
   - Features: Dynamic OG images, RSS feed, Sitemap
 - `docs/` - Main documentation directory
   - `MCP/` - Model Context Protocol examples and documentation
@@ -48,7 +48,10 @@ Most content has migrated to GitHub Issues - check issues for original articles 
 - LF line endings
 - No trailing whitespace trimming (for Markdown files)
 
-### ESLint
+### Root ESLint (legacy areas)
+
+The following rules describe legacy code outside `home/`:
+
 - Uses `babel-eslint` parser
 - Extends `standard` style guide
 - ES6+ syntax with JSX support
@@ -56,6 +59,12 @@ Most content has migrated to GitHub Issues - check issues for original articles 
   - Single quotes preferred
   - No semicolons (warning level)
   - Space before function parenthases: never
+
+### Astro Blog Formatting (`home/`)
+
+- `home/.prettierrc.mjs` is authoritative for files included by `home/.prettierignore`
+- Run `cd home && npm run format:baseline`; do not manually override Prettier output
+- Prettier-managed blog files use double quotes and semicolons; ignored files follow their adjacent-file convention
 
 ### Cursor Rules (when applicable)
 When working with React components or internationalization:
@@ -83,7 +92,7 @@ When working with React components or internationalization:
 ### Astro Blog (home/)
 ```bash
 cd home
-npm install          # Install dependencies
+npm ci               # Install exact dependencies from package-lock.json
 npm run dev          # Start local server at http://localhost:4321
 npm run build        # Build static site to home/dist
 npm run preview      # Preview production build

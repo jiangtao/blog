@@ -14,7 +14,7 @@ function git(args) {
   }).trim();
 }
 
-function readStagedFile(repoRoot, file) {
+function readIndexFile(repoRoot, file) {
   return execFileSync("git", ["-C", repoRoot, "show", `:${file}`], {
     encoding: "utf8",
     stdio: ["ignore", "pipe", "pipe"],
@@ -22,29 +22,35 @@ function readStagedFile(repoRoot, file) {
 }
 
 const repoRoot = git(["rev-parse", "--show-toplevel"]);
-const stagedFiles = git([
-  "-C",
-  repoRoot,
-  "diff",
-  "--cached",
-  "--name-only",
-  "--diff-filter=ACMR",
-])
+const trackedMode = process.argv.includes("--tracked");
+const candidateFiles = git(
+  trackedMode
+    ? ["-C", repoRoot, "ls-files", "--cached"]
+    : [
+        "-C",
+        repoRoot,
+        "diff",
+        "--cached",
+        "--name-only",
+        "--diff-filter=ACMR",
+      ]
+)
   .split(/\r?\n/)
   .filter(Boolean);
 
-const draftPosts = stagedFiles.filter(file => {
+const draftPosts = candidateFiles.filter(file => {
   if (!/^home\/src\/data\/blog\/.+\.md$/.test(file)) {
     return false;
   }
 
-  const content = readStagedFile(repoRoot, file);
+  const content = readIndexFile(repoRoot, file);
   const { data } = matter(content);
   return data.draft === true;
 });
 
 if (draftPosts.length > 0) {
-  console.error("\nDraft posts are local-only and cannot be committed:");
+  const scope = trackedMode ? "Tracked" : "Staged";
+  console.error(`\n${scope} draft posts are local-only and cannot be committed:`);
   draftPosts.forEach(file => console.error(`  - ${file}`));
   console.error(
     "\nChange `draft: true` to `draft: false` when the article is ready to publish, then stage it again.\n"
@@ -52,4 +58,4 @@ if (draftPosts.length > 0) {
   process.exit(1);
 }
 
-console.log("No staged draft posts found.");
+console.log(`No ${trackedMode ? "tracked" : "staged"} draft posts found.`);
