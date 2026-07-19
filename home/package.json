@@ -18,6 +18,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "validate:og-images": "tsx scripts/validate-og-images.ts",
+    "publish:channels": "tsx scripts/publish-channels.ts",
     "ai:validate": "node scripts/validate-ai-usage.js"
   },
   "dependencies": {
