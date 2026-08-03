@@ -1,6 +1,7 @@
 import { BLOG_PATH } from "@/content.config";
 import { slugifyStr } from "./slugify";
 import type { CollectionEntry } from "astro:content";
+import { DEFAULT_LOCALE, getLocalizedPath } from "@/i18n";
 
 /**
  * Get full path of a blog post
@@ -19,14 +20,16 @@ export function getPath(
   if (post?.data.pubDatetime) {
     const date = new Date(post.data.pubDatetime);
     const year = date.getUTCFullYear();
-    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
-    const day = String(date.getUTCDate()).padStart(2, '0');
+    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(date.getUTCDate()).padStart(2, "0");
 
     // Making sure `id` does not contain the directory
     const blogId = id.split("/");
     const slug = blogId.length > 0 ? blogId.slice(-1) : blogId;
 
-    const basePath = includeBase ? "/posts" : "";
+    const basePath = includeBase
+      ? getLocalizedPath(post.data.locale, "/posts")
+      : "";
     return [basePath, year, month, day, slug].join("/");
   }
 
@@ -39,7 +42,9 @@ export function getPath(
     .slice(0, -1) // remove the last segment_ file name_ since it's unnecessary
     .map(segment => slugifyStr(segment)); // slugify each segment path
 
-  const basePath = includeBase ? "/posts" : "";
+  const basePath = includeBase
+    ? getLocalizedPath(post?.data.locale ?? DEFAULT_LOCALE, "/posts")
+    : "";
 
   // Making sure `id` does not contain the directory
   const blogId = id.split("/");

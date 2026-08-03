@@ -1,5 +1,5 @@
 ---
-import { render, type CollectionEntry } from "astro:content";
+import { getCollection, render, type CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
@@ -17,6 +17,14 @@ import { slugifyStr } from "@/utils/slugify";
 import IconChevronLeft from "@/assets/icons/IconChevronLeft.svg";
 import IconChevronRight from "@/assets/icons/IconChevronRight.svg";
 import { SITE } from "@/config";
+import {
+  getLocaleFromPath,
+  getLocalizedPath,
+  getOtherLocales,
+  type Locale,
+  t,
+} from "@/i18n";
+import { getPostTranslation } from "@/utils/getPostsByLocale";
 
 type Props = {
   post: CollectionEntry<"blog">;
@@ -24,6 +32,23 @@ type Props = {
 };
 
 const { post, posts } = Astro.props;
+const locale = getLocaleFromPath(Astro.url.pathname);
+const allPosts = await getCollection("blog");
+const alternatePaths: Partial<Record<Locale, string>> = {};
+const languagePaths: Partial<Record<Locale, string>> = {
+  [locale]: getPath(post.id, post.filePath, true, post),
+};
+
+for (const targetLocale of getOtherLocales(locale)) {
+  const translatedPost = getPostTranslation(post, allPosts, targetLocale);
+  const translatedPath = translatedPost
+    ? getPath(translatedPost.id, translatedPost.filePath, true, translatedPost)
+    : undefined;
+
+  if (translatedPath) alternatePaths[targetLocale] = translatedPath;
+  languagePaths[targetLocale] =
+    translatedPath ?? getLocalizedPath(targetLocale, "/");
+}
 
 const {
   title,
@@ -66,19 +91,22 @@ const layoutProps = {
   modDatetime,
   canonicalURL,
   ogImage: finalOgImage,
+  alternatePaths,
   scrollSmooth: true,
 };
 
 /* ========== Prev/Next Posts ========== */
 
-const allPosts = posts.map(({ data: { title }, id, filePath, data: { pubDatetime } }) => ({
-  id,
-  title,
-  filePath,
-  pubDatetime,
-}));
+const allPostMetadata = posts.map(
+  ({ data: { title }, id, filePath, data: { pubDatetime } }) => ({
+    id,
+    title,
+    filePath,
+    pubDatetime,
+  })
+);
 
-const currentPostIndex = allPosts.findIndex(a => a.id === post.id);
+const currentPostIndex = allPostMetadata.findIndex(a => a.id === post.id);
 
 const prevPost = currentPostIndex !== 0 ? posts[currentPostIndex - 1] : null;
 const nextPost =
@@ -86,7 +114,7 @@ const nextPost =
 ---
 
 <Layout {...layoutProps}>
-  <Header />
+  <Header {languagePaths} />
   <BackButton />
 
   <!-- Table of Contents -->
@@ -98,6 +126,8 @@ const nextPost =
     id="main-content"
     class:list={["app-layout pb-12", { "mt-8": !SITE.showBackButton }]}
     data-pagefind-body
+    data-copy-label={t(locale, "copy")}
+    data-copied-label={t(locale, "copied")}
   >
     <h1
       transition:name={slugifyStr(title.replaceAll(".", "-"))}
@@ -120,27 +150,37 @@ const nextPost =
       id="article"
       class="app-prose mt-8 w-full max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"
     >
-      {cover && (
-        <div class="cover-image mb-8 rounded-lg overflow-hidden shadow-lg">
-          <img
-            src={cover}
-            alt={`${title} 封面图`}
-            loading="lazy"
-            class:list={["w-full h-auto", { "max-w-4xl mx-auto": cover.endsWith('.svg') }]}
-          />
-        </div>
-      )}
+      {
+        cover && (
+          <div class="cover-image mb-8 overflow-hidden rounded-lg shadow-lg">
+            <img
+              src={cover}
+              alt={
+                locale === "en"
+                  ? `${title} cover image`
+                  : locale === "zh-TW"
+                    ? `${title} 封面圖片`
+                    : `${title} 封面图`
+              }
+              loading="lazy"
+              class:list={[
+                "h-auto w-full",
+                { "mx-auto max-w-4xl": cover.endsWith(".svg") },
+              ]}
+            />
+          </div>
+        )
+      }
       <Content />
-      <WeChatFollowCard
-        variant="inline"
-        data-wechat-inline-card
-        hidden
-      />
+      <WeChatFollowCard variant="inline" data-wechat-inline-card hidden />
     </article>
 
     <EditPost class="sm:hidden" {hideEditPost} {post} />
 
-    <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8">
+    <ul
+      data-print-supplemental
+      class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8"
+    >
       {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
     </ul>
 
@@ -148,10 +188,14 @@ const nextPost =
 
     <ShareLinks />
 
-    <hr class="my-6 border-dashed" />
+    <hr data-print-supplemental class="my-6 border-dashed" />
 
     <!-- Previous/Next Post Buttons -->
-    <div data-pagefind-ignore class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    <div
+      data-pagefind-ignore
+      data-print-supplemental
+      class="grid grid-cols-1 gap-6 sm:grid-cols-2"
+    >
       {
         prevPost && (
           <a
@@ -160,7 +204,7 @@ const nextPost =
           >
             <IconChevronLeft class="inline-block flex-none rtl:rotate-180" />
             <div>
-              <span>Previous Post</span>
+              <span>{t(locale, "previousPost")}</span>
               <div class="text-sm text-accent/85">{prevPost.data.title}</div>
             </div>
           </a>
@@ -173,7 +217,7 @@ const nextPost =
             class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"
           >
             <div>
-              <span>Next Post</span>
+              <span>{t(locale, "nextPost")}</span>
               <div class="text-sm text-accent/85">{nextPost.data.title}</div>
             </div>
             <IconChevronRight class="inline-block flex-none rtl:rotate-180" />
@@ -188,13 +232,13 @@ const nextPost =
 <script is:inline data-astro-rerun>
   // Add target="_blank" to external links in article content
   function setupExternalLinks() {
-    const article = document.getElementById('article');
+    const article = document.getElementById("article");
     if (!article) return;
 
     // Inject styles for external links if not already present
-    if (!document.getElementById('external-links-style')) {
-      const style = document.createElement('style');
-      style.id = 'external-links-style';
+    if (!document.getElementById("external-links-style")) {
+      const style = document.createElement("style");
+      style.id = "external-links-style";
       style.textContent = `
         .external-link {
           position: relative;
@@ -221,11 +265,11 @@ const nextPost =
       document.head.appendChild(style);
     }
 
-    const links = article.querySelectorAll('a[href]');
+    const links = article.querySelectorAll("a[href]");
     const currentOrigin = window.location.origin;
 
     links.forEach(link => {
-      const href = link.getAttribute('href');
+      const href = link.getAttribute("href");
       if (!href) return;
 
       // Check if it's an external link
@@ -233,18 +277,18 @@ const nextPost =
         const linkUrl = new URL(href, currentOrigin);
         if (linkUrl.origin !== currentOrigin) {
           // Open external links in new tab
-          link.setAttribute('target', '_blank');
-          link.setAttribute('rel', 'noopener noreferrer');
+          link.setAttribute("target", "_blank");
+          link.setAttribute("rel", "noopener noreferrer");
           // Add external link indicator class
-          link.classList.add('external-link');
+          link.classList.add("external-link");
         }
-      } catch (e) {
+      } catch {
         // Invalid URL, skip
-        console.warn('[ExternalLinks] Invalid URL:', href);
+        console.warn("[ExternalLinks] Invalid URL:", href);
       }
     });
 
-    console.log('[ExternalLinks] Processed', links.length, 'links');
+    console.log("[ExternalLinks] Processed", links.length, "links");
   }
 
   // Initialize external links
@@ -252,10 +296,10 @@ const nextPost =
 
   // Move the lightweight WeChat entry near the article lead.
   function positionInlineWeChatFollow() {
-    const article = document.getElementById('article');
+    const article = document.getElementById("article");
     if (!article) return;
 
-    const card = article.querySelector('[data-wechat-inline-card]');
+    const card = article.querySelector("[data-wechat-inline-card]");
     if (!(card instanceof HTMLElement)) return;
 
     const walker = document.createTreeWalker(
@@ -267,7 +311,7 @@ const nextPost =
 
     let moreComment = null;
     while (walker.nextNode()) {
-      if (walker.currentNode.nodeValue?.trim() === 'more') {
+      if (walker.currentNode.nodeValue?.trim() === "more") {
         moreComment = walker.currentNode;
         break;
       }
@@ -279,7 +323,7 @@ const nextPost =
       return;
     }
 
-    const firstSectionHeading = article.querySelector('h2');
+    const firstSectionHeading = article.querySelector("h2");
     if (firstSectionHeading?.parentNode) {
       firstSectionHeading.parentNode.insertBefore(card, firstSectionHeading);
       card.hidden = false;
@@ -293,11 +337,11 @@ const nextPost =
 
   // Move cover image to correct position (before <!--more--> or at beginning)
   function positionCoverImage() {
-    const article = document.getElementById('article');
+    const article = document.getElementById("article");
     if (!article) return;
 
     // Find cover image
-    const coverDiv = article.querySelector('.cover-image');
+    const coverDiv = article.querySelector(".cover-image");
     if (!coverDiv) return;
 
     // Find <!--more--> comment
@@ -310,7 +354,7 @@ const nextPost =
 
     let moreComment = null;
     while (walker.nextNode()) {
-      if (walker.currentNode.nodeValue?.trim() === 'more') {
+      if (walker.currentNode.nodeValue?.trim() === "more") {
         moreComment = walker.currentNode;
         break;
       }
@@ -319,11 +363,11 @@ const nextPost =
     if (moreComment) {
       // Insert cover before <!--more-->
       moreComment.parentNode?.insertBefore(coverDiv, moreComment);
-      console.log('[Cover] Positioned before <!--more-->');
+      console.log("[Cover] Positioned before <!--more-->");
     } else {
       // No <!--more-->, keep at beginning (insert as first child of article)
       article.insertBefore(coverDiv, article.firstChild);
-      console.log('[Cover] Positioned at beginning (no <!--more-->)');
+      console.log("[Cover] Positioned at beginning (no <!--more-->)");
     }
   }
 
@@ -331,7 +375,7 @@ const nextPost =
   positionCoverImage();
 
   // Reinitialize after page navigation
-  document.addEventListener('astro:after-swap', () => {
+  document.addEventListener("astro:after-swap", () => {
     setTimeout(setupExternalLinks, 50);
     setTimeout(positionInlineWeChatFollow, 50);
     setTimeout(positionCoverImage, 50);
@@ -403,7 +447,11 @@ const nextPost =
   /** Attaches copy buttons to code blocks in the document,
    * allowing users to copy code easily. */
   function attachCopyButtons() {
-    const copyButtonLabel = "Copy";
+    const mainContent = document.querySelector("#main-content");
+    const copyButtonLabel =
+      mainContent?.getAttribute("data-copy-label") ?? "Copy";
+    const copiedButtonLabel =
+      mainContent?.getAttribute("data-copied-label") ?? "Copied";
     const codeBlocks = Array.from(document.querySelectorAll("pre"));
 
     for (const codeBlock of codeBlocks) {
@@ -442,7 +490,7 @@ const nextPost =
       await navigator.clipboard.writeText(text ?? "");
 
       // visual feedback that task is completed
-      button.innerText = "Copied";
+      button.innerText = copiedButtonLabel;
 
       setTimeout(() => {
         button.innerText = copyButtonLabel;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">聊聊近來的 AI 所見所聞</title>
+  <desc id="desc">AI 加速輸出，但需求驗證、交付系統與組織治理需要同步跟上。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f8fbff"/><stop offset="52%" stop-color="#f3f7f1"/><stop offset="100%" stop-color="#fff6ed"/></linearGradient>
+    <linearGradient id="signal" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#1f7a68"/><stop offset="100%" stop-color="#f08a46"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#223042" flood-opacity=".16"/></filter>
+    <marker id="warm" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#d66b35"/></marker>
+    <marker id="green" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9Z" fill="#1f7a68"/></marker>
+    <style>text{font-family:Arial,'PingFang TC','Microsoft JhengHei',sans-serif}.title{font-size:50px;font-weight:800;fill:#1f2933}.copy{font-size:18px;fill:#52606d}.cardTitle{font-size:19px;font-weight:800}.cardCopy{font-size:14px;font-weight:600}.chipTitle{font-size:14px;font-weight:700}.chipCopy{font-size:11px;fill:#63736a}</style>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="44" y="42" width="1112" height="546" rx="22" fill="#fffdf8" stroke="#d9e1da" stroke-width="1.5" filter="url(#shadow)"/>
+  <g opacity=".55" stroke="#e2e8e2"><path d="M82 126H1118M82 226H1118M82 326H1118M82 426H1118"/><path d="M300 78V552M540 78V552M780 78V552M1020 78V552"/></g>
+  <rect x="82" y="76" width="174" height="32" rx="16" fill="#e9f4ee" stroke="#b9d7c8"/>
+  <text x="106" y="98" font-size="15" font-weight="700" fill="#1f7a68">AI NATIVE DELIVERY</text>
+  <text class="title" x="82" y="166">聊聊近來的</text><text class="title" x="82" y="226">AI 所見所聞</text><rect x="82" y="254" width="390" height="8" rx="4" fill="url(#signal)"/>
+  <text x="82" y="312" font-size="21" font-weight="700" fill="#2f3b45">輸出變快，不等於交付系統變強</text>
+  <text class="copy" x="82" y="350"><tspan x="82">需求試錯變快，收益驗證與生產消化沒有跟上，</tspan><tspan x="82" dy="28">不確定性就會進入研發與交付鏈路。</tspan></text>
+  <g transform="translate(82 438)"><g><rect width="136" height="56" rx="12" fill="#f4faf6" stroke="#bdd8c8"/><text class="chipTitle" x="18" y="24" fill="#1f7a68">需求驗證</text><text class="chipCopy" x="18" y="43">value first</text></g><g transform="translate(156)"><rect width="136" height="56" rx="12" fill="#fff7ec" stroke="#e3c39f"/><text class="chipTitle" x="18" y="24" fill="#98572a">品質保障</text><text class="chipCopy" x="18" y="43" fill="#7f6b59">observe</text></g><g transform="translate(312)"><rect width="136" height="56" rx="12" fill="#eef5ff" stroke="#b9cce4"/><text class="chipTitle" x="18" y="24" fill="#2f5d83">組織共速</text><text class="chipCopy" x="18" y="43" fill="#607084">shared speed</text></g></g>
+  <g transform="translate(604 92)"><rect width="472" height="424" rx="18" fill="#f7faf8" stroke="#cddbd1" stroke-width="1.5"/><text x="34" y="46" font-size="20" font-weight="800" fill="#31414f">最近看到的核心矛盾</text><g transform="translate(34 76)"><rect width="404" height="76" rx="14" fill="#fff4ea" stroke="#e7a66e"/><circle cx="40" cy="38" r="18" fill="#f08a46"/><text x="35" y="44" font-size="18" font-weight="800" fill="#fff">1</text><text class="cardTitle" x="74" y="31" fill="#713f1f">需求端提速</text><text class="cardCopy" x="74" y="56" fill="#6d4e3a">更多想法、更多試錯、更多變化</text></g><path d="M236 154V194" stroke="#d66b35" stroke-width="3" marker-end="url(#warm)"/><g transform="translate(34 196)"><rect width="404" height="76" rx="14" fill="#eef6ff" stroke="#9dbddd"/><circle cx="40" cy="38" r="18" fill="#3e78a4"/><text x="35" y="44" font-size="18" font-weight="800" fill="#fff">2</text><text class="cardTitle" x="74" y="31" fill="#244a68">研發側承壓</text><text class="cardCopy" x="74" y="56" fill="#415d74">評審、聯調、上線、回滾仍要兜住</text></g><path d="M236 274V314" stroke="#1f7a68" stroke-width="3" marker-end="url(#green)"/><g transform="translate(34 316)"><rect width="404" height="76" rx="14" fill="#edf8f2" stroke="#9ccdb4"/><circle cx="40" cy="38" r="18" fill="#1f7a68"/><text x="35" y="44" font-size="18" font-weight="800" fill="#fff">3</text><text class="cardTitle" x="74" y="31" fill="#1f5d4f">組織治理補齊</text><text class="cardCopy" x="74" y="56" fill="#42685b">驗證前置、平台打通、品質體系兜底</text></g></g>
+  <text x="82" y="552" font-size="14" fill="#6b747d">PDE / FDE / Agent / 端到端交付 / 組織升級</text><text x="1116" y="552" text-anchor="end" font-size="13" font-weight="700" fill="#7b8791">Jerret's Blog</text>
+</svg>

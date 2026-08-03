@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="A Thought Experiment: Deliverables for the Next Generation of Product and Engineering">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0f172a"/><stop offset="1" stop-color="#312e81"/></linearGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0V42" fill="none" stroke="#ffffff" stroke-opacity="0.08"/></pattern>
+    <filter id="glow"><feGaussianBlur stdDeviation="12"/></filter>
+    <style>.eyebrow{font:600 16px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:2px}.title{font:700 47px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#f8fafc}.description{font:400 20px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#cbd5e1}.card{font:600 18px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#f8fafc}.footer{font:500 14px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#cbd5e1}</style>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="1050" cy="86" r="118" fill="#67e8f9" fill-opacity="0.16" filter="url(#glow)"/><circle cx="1050" cy="86" r="76" fill="none" stroke="#67e8f9" stroke-opacity="0.34"/><circle cx="1050" cy="86" r="7" fill="#67e8f9"/>
+  <rect x="74" y="98" width="286" height="34" rx="17" fill="#67e8f9" fill-opacity="0.16" stroke="#67e8f9" stroke-opacity="0.55"/><text x="94" y="121" class="eyebrow" fill="#dbeafe">TECHNICAL NOTE · ENGLISH</text>
+  <text x="74" y="242" class="title">A Thought Experiment:</text><text x="74" y="308" class="title">Deliverables for the Next</text><text x="74" y="374" class="title">Generation of Product and</text><text x="76" y="482" class="description">Three core deliverables for future product-and-engineering</text><text x="76" y="512" class="description">workflows: an evolvable specification, an acceptably shippable</text>
+  <path d="M706 132V479" stroke="#67e8f9" stroke-opacity="0.42" stroke-width="2" stroke-dasharray="7 10"/>
+  <rect x="718" y="116" width="408" height="388" rx="28" fill="#0f172a" fill-opacity="0.34" stroke="#67e8f9" stroke-opacity="0.44"/>
+  <text x="750" y="140" class="eyebrow" fill="#bae6fd">DELIVERY SYSTEM</text>
+  <rect x="750" y="154" width="144" height="92" rx="16" fill="#ffffff" fill-opacity="0.12" stroke="#67e8f9" stroke-opacity="0.72"/><text x="822" y="208" class="card" text-anchor="middle">Intent</text><rect x="925" y="154" width="144" height="92" rx="16" fill="#ffffff" fill-opacity="0.12" stroke="#67e8f9" stroke-opacity="0.72"/><text x="997" y="208" class="card" text-anchor="middle">Design</text><rect x="750" y="286" width="144" height="92" rx="16" fill="#ffffff" fill-opacity="0.12" stroke="#67e8f9" stroke-opacity="0.72"/><text x="822" y="340" class="card" text-anchor="middle">Build</text><rect x="925" y="286" width="144" height="92" rx="16" fill="#ffffff" fill-opacity="0.12" stroke="#67e8f9" stroke-opacity="0.72"/><text x="997" y="340" class="card" text-anchor="middle">Verify</text>
+  <path d="M894 200h28m-14-14 14 14-14 14M822 246v40m0-20h175m-87 0v20M997 246v40" fill="none" stroke="#67e8f9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="74" y1="560" x2="1126" y2="560" stroke="#67e8f9" stroke-opacity="0.42"/>
+  <text x="74" y="592" class="footer">Jerret's Blog</text><text x="1126" y="592" class="footer" text-anchor="end">Static multilingual edition</text>
+</svg>

@@ -1,46 +1,73 @@
 ---
 // src/components/ai/AIUsageDashboard.astro
-import { loadAIUsageData } from '../../utils/ai-usage-loader'
-import DeviceSelector from './DeviceSelector.astro'
-import ClientDashboard from './ClientDashboard.tsx'
-import { Image } from 'astro:assets'
-import cursor2025Image from '../../assets/images/jerret_cursor_2025.png'
+import { loadAIUsageData } from "../../utils/ai-usage-loader";
+import DeviceSelector from "./DeviceSelector.astro";
+import ClientDashboard from "./ClientDashboard.tsx";
+import { Image } from "astro:assets";
+import cursor2025Image from "../../assets/images/jerret_cursor_2025.png";
+import { getLocaleFromPath, getLocaleHtmlLang, t } from "@/i18n";
 
 // Load data on server
-const data = await loadAIUsageData()
-const devices = data.summary.deviceList
+const data = await loadAIUsageData();
+const devices = data.summary.deviceList;
 
 // Prepare all data for client-side use
-// @ts-ignore - Astro frontmatter doesn't support full TypeScript types
+// @ts-expect-error - Astro frontmatter does not infer the loaded data shape.
 function getAllDailyData(data) {
-  const allDaily = []
-  const byMonth = data.total?.byMonth || {}
+  const allDaily = [];
+  const byMonth = data.total?.byMonth || {};
   for (const key in byMonth) {
-    allDaily.push(...byMonth[key])
+    allDaily.push(...byMonth[key]);
   }
-  return allDaily
+  return allDaily;
 }
 
-const allDailyData = getAllDailyData(data)
-const serializedData = JSON.stringify(data)
-const serializedDailyData = JSON.stringify(allDailyData)
+const allDailyData = getAllDailyData(data);
+const serializedData = JSON.stringify(data);
+const serializedDailyData = JSON.stringify(allDailyData);
+const locale = getLocaleFromPath(Astro.url.pathname);
+const clientMessages = {
+  loading: t(locale, "loading"),
+  noData: t(locale, "noData"),
+  noDataHelp: t(locale, "noDataHelp"),
+  models: t(locale, "models"),
+  tokens: t(locale, "tokens"),
+  streak: t(locale, "streak"),
+  days: t(locale, "days"),
+  tokensActivity: t(locale, "tokensActivity"),
+  previousYear: t(locale, "previousYear"),
+  nextYear: t(locale, "nextYear"),
+  less: t(locale, "less"),
+  more: t(locale, "more"),
+};
 ---
 
-<div class="max-w-6xl mx-auto" id="ai-usage-dashboard">
+<div class="mx-auto max-w-6xl" id="ai-usage-dashboard">
   <!-- Header -->
-  <div class="flex items-center mb-4">
-    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">AI Usage</h2>
+  <div class="mb-4 flex items-center">
+    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+      {t(locale, "aiUsage")}
+    </h2>
   </div>
 
   <!-- Device Tabs -->
-  <DeviceSelector devices={devices} selected="all" />
+  <DeviceSelector
+    devices={devices}
+    selected="all"
+    allLabel={t(locale, "allDevices")}
+  />
 
   <!-- Main Content Area with Client React Component -->
-  <div class="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6" id="dashboard-content">
+  <div
+    class="grid grid-cols-1 gap-6 lg:grid-cols-[320px_1fr]"
+    id="dashboard-content"
+  >
     <ClientDashboard
       data={serializedData}
       dailyData={serializedDailyData}
       devices={devices}
+      messages={clientMessages}
+      locale={getLocaleHtmlLang(locale)}
       client:load
     />
   </div>
@@ -48,26 +75,40 @@ const serializedDailyData = JSON.stringify(allDailyData)
   <div class="mt-8" id="cursor-2025-section">
     <button
       id="cursor-2025-toggle"
-      class="flex items-center justify-between w-full p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+      class="flex w-full items-center justify-between rounded-xl border border-gray-200 bg-white p-4 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700/50"
       aria-expanded="true"
       aria-controls="cursor-2025-content"
     >
       <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-lg bg-gray-900 dark:bg-gray-100 flex items-center justify-center">
-          <svg viewBox="0 0 24 24" class="w-5 h-5 text-white dark:text-gray-900" fill="currentColor">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+        <div
+          class="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-900 dark:bg-gray-100"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            class="h-5 w-5 text-white dark:text-gray-900"
+            fill="currentColor"
+          >
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+            ></path>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">Cursor in 2025</h3>
+        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">
+          {t(locale, "cursorIn2025")}
+        </h3>
       </div>
       <svg
         id="cursor-2025-arrow"
-        class="w-5 h-5 text-gray-500 transition-transform duration-200"
+        class="h-5 w-5 text-gray-500 transition-transform duration-200"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
       >
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 9l-7 7-7-7"></path>
       </svg>
     </button>
     <div
@@ -76,8 +117,8 @@ const serializedDailyData = JSON.stringify(allDailyData)
     >
       <Image
         src={cursor2025Image}
-        alt="Cursor 2025 Usage Statistics"
-        class="w-full h-auto object-contain bg-white dark:bg-gray-800"
+        alt={t(locale, "cursorUsageStatistics")}
+        class="h-auto w-full bg-white object-contain dark:bg-gray-800"
         loading="lazy"
       />
     </div>
@@ -86,48 +127,58 @@ const serializedDailyData = JSON.stringify(allDailyData)
 
 <script>
   // This script is kept for backward compatibility with tab switching
-  const tabs = document.querySelectorAll('.device-tab')
+  const tabs = document.querySelectorAll(".device-tab");
 
   tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const device = tab.getAttribute('data-device')
-      if (!device) return
+    tab.addEventListener("click", () => {
+      const device = tab.getAttribute("data-device");
+      if (!device) return;
 
       // Update active state
       tabs.forEach(t => {
-        t.classList.remove('active-nav', 'text-accent')
-        t.classList.add('hover:text-accent', 'text-gray-700', 'dark:text-gray-300')
-      })
-      tab.classList.remove('hover:text-accent', 'text-gray-700', 'dark:text-gray-300')
-      tab.classList.add('active-nav', 'text-accent')
+        t.classList.remove("active-nav", "text-accent");
+        t.classList.add(
+          "hover:text-accent",
+          "text-gray-700",
+          "dark:text-gray-300"
+        );
+      });
+      tab.classList.remove(
+        "hover:text-accent",
+        "text-gray-700",
+        "dark:text-gray-300"
+      );
+      tab.classList.add("active-nav", "text-accent");
 
       // Dispatch custom event for React component
-      window.dispatchEvent(new CustomEvent('device-change', {
-        detail: { device }
-      }))
+      window.dispatchEvent(
+        new CustomEvent("device-change", {
+          detail: { device },
+        })
+      );
 
       // Update URL without page reload
-      const url = new URL(window.location.href)
-      url.searchParams.set('device', device)
-      window.history.replaceState({}, '', url)
-    })
-  })
+      const url = new URL(window.location.href);
+      url.searchParams.set("device", device);
+      window.history.replaceState({}, "", url);
+    });
+  });
 
   // Cursor 2025 toggle functionality
-  const toggleBtn = document.getElementById('cursor-2025-toggle')
-  const content = document.getElementById('cursor-2025-content')
-  const arrow = document.getElementById('cursor-2025-arrow')
+  const toggleBtn = document.getElementById("cursor-2025-toggle");
+  const content = document.getElementById("cursor-2025-content");
+  const arrow = document.getElementById("cursor-2025-arrow");
 
   if (toggleBtn && content && arrow) {
     // Initialize as expanded
-    arrow.style.transform = 'rotate(180deg)'
+    arrow.style.transform = "rotate(180deg)";
 
-    toggleBtn.addEventListener('click', () => {
-      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true'
+    toggleBtn.addEventListener("click", () => {
+      const isExpanded = toggleBtn.getAttribute("aria-expanded") === "true";
 
-      toggleBtn.setAttribute('aria-expanded', String(!isExpanded))
-      content.classList.toggle('hidden')
-      arrow.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)'
-    })
+      toggleBtn.setAttribute("aria-expanded", String(!isExpanded));
+      content.classList.toggle("hidden");
+      arrow.style.transform = isExpanded ? "rotate(0deg)" : "rotate(180deg)";
+    });
   }
 </script>

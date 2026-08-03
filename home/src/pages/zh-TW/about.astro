@@ -1,0 +1,68 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import WeChatFollowCard from "@/components/WeChatFollowCard.astro";
+import { SITE } from "@/config";
+import { t } from "@/i18n";
+---
+
+<Layout title={`${t("zh-TW", "about")} | ${SITE.title}`}>
+  <Header />
+  <Breadcrumb />
+  <main id="main-content" class="app-layout">
+    <section id="about" class="app-prose mb-28 max-w-app prose-img:border-0">
+      <h1 class="text-2xl tracking-wider sm:text-3xl">關於</h1>
+      <ul>
+        <li>
+          ✨ 前端與全端開發者，專注 Web、Hybrid、Electron、Node 與 React
+          Native。
+        </li>
+        <li>🌱 正在尋找新的工作與合作機會。</li>
+        <li>
+          📝 <a href="https://github.com/jiangtao/blog">Blog</a> · <a
+            href="https://www.yuque.com/imjt">YuQue Notes</a
+          >
+        </li>
+        <li>
+          💬 技能：<strong>JavaScript、Node.js、MongoDB、MySQL、Electron</strong
+          >
+        </li>
+        <li>📫 Email：<strong>w3cfuns@qq.com</strong></li>
+        <li>💬 <a href="https://x.com/Jerret321">X</a>，歡迎交流想法。</li>
+        <li>💬 微信：jtss77（請註明來意）。</li>
+      </ul>
+
+      <WeChatFollowCard variant="about" id="wechat-official-account" />
+
+      <h2>近期工作經歷</h2>
+      <ul>
+        <li>
+          2025/05/08–2026/01/16：<strong
+            >結行科技（resto）隨行付旗下餐飲 SaaS 業務，Electron
+            用戶端，支援境內外使用。</strong
+          >
+        </li>
+        <li>
+          2020/07/01–2025/04/30：<strong
+            >美團，平台搭建系統負責人／全端；站內行銷搜尋負責人／前端。</strong
+          >
+        </li>
+        <li>
+          2018/06–2020/06/30：<strong
+            >宜創科技，無程式碼平台架構師與建設者。</strong
+          >
+        </li>
+      </ul>
+
+      <h2>想做的事</h2>
+      <ul>
+        <li>定期分享技術實踐與心得；轉載請註明出處。</li>
+        <li>尋找前端或全端（Leader）職位，期待有機會實踐 AI 產品與工程。</li>
+        <li>可承接短期 App 專案、後端服務、面試輔導與技術諮詢。</li>
+      </ul>
+    </section>
+  </main>
+  <Footer />
+</Layout>

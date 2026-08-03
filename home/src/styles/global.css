@@ -63,6 +63,17 @@ html[data-theme="dark"] {
   @apply underline decoration-wavy decoration-2 underline-offset-8;
 }
 
+@media print {
+  body > header.app-layout,
+  body > footer.app-layout,
+  .toc-toggle,
+  .toc-container,
+  .toc-overlay,
+  [data-print-supplemental] {
+    display: none !important;
+  }
+}
+
 /* Source: https://piccalil.li/blog/a-more-modern-css-reset/ */
 /* Anything that has been anchored to should have extra scroll margin */
 :target {

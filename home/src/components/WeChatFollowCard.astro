@@ -1,6 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { SITE } from "@/config";
+import { getLocaleFromPath, t } from "@/i18n";
 
 type Variant = "inline" | "post" | "about";
 
@@ -10,6 +11,7 @@ type Props = {
 
 const { variant = "post", class: className, ...attrs } = Astro.props;
 const account = SITE.wechatOfficialAccount;
+const locale = getLocaleFromPath(Astro.url.pathname);
 const titleId = `wechat-follow-title-${variant}`;
 const isInline = variant === "inline";
 const isAbout = variant === "about";
@@ -32,13 +34,14 @@ const isAbout = variant === "about";
         <div class="flex items-center justify-between gap-4">
           <div class="min-w-0 flex-1">
             <span id={titleId} class="block text-sm font-semibold text-accent">
-              关注公众号：{account.name}
+              {t(locale, "followAccount")}
+              {locale === "en" ? account.englishName : account.name}
             </span>
             <span class="mt-1 block text-xs leading-5 text-foreground/75">
-              {account.description}
+              {t(locale, "followAccountDescription")}
             </span>
             <span class="mt-1 block text-xs leading-5 text-foreground/55">
-              微信扫码关注
+              {t(locale, "scanWeChat")}
             </span>
           </div>
           <img
@@ -61,13 +64,14 @@ const isAbout = variant === "about";
                 isAbout ? "sm:text-lg" : "sm:text-base",
               ]}
             >
-              关注公众号：{account.name}
+              {t(locale, "followAccount")}
+              {locale === "en" ? account.englishName : account.name}
             </div>
             <p class="mt-2 mb-0 text-sm leading-6 text-foreground/80">
-              {account.description}
+              {t(locale, "followAccountDescription")}
             </p>
             <p class="mt-1 mb-0 text-xs leading-5 text-foreground/60">
-              WeChat Official Account: {account.englishName}
+              {t(locale, "wechatOfficialAccount")}: {account.englishName}
             </p>
           </div>
           <img

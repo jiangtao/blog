@@ -6,11 +6,14 @@ import { convertSvgToPng } from "@/utils/convertSvgToPng";
 import { SITE } from "@/config";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { DEFAULT_LOCALE } from "@/i18n";
+import { getPostsByLocale } from "@/utils/getPostsByLocale";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog").then(p =>
-    p.filter(({ data }) => !data.draft && !data.ogImage)
-  );
+  const posts = getPostsByLocale(
+    await getCollection("blog"),
+    DEFAULT_LOCALE
+  ).filter(({ data }) => !data.draft && !data.ogImage);
 
   return posts.map(post => ({
     params: { slug: getPath(post.id, post.filePath, false, post) },
@@ -22,7 +25,9 @@ export async function getStaticPaths() {
  * Get cover image buffer for a post
  * Reuses the same logic as cover.png.ts
  */
-async function getCoverImage(post: CollectionEntry<"blog">): Promise<Buffer | null> {
+async function getCoverImage(
+  post: CollectionEntry<"blog">
+): Promise<Buffer | null> {
   const cover = post.data.cover;
 
   if (!cover || typeof cover !== "string" || cover.trim().length === 0) {
@@ -34,14 +39,22 @@ async function getCoverImage(post: CollectionEntry<"blog">): Promise<Buffer | nu
     const normalizedCover = cover.startsWith("/") ? cover : `/${cover}`;
 
     // Try public directory first (dev mode), then dist directory (build mode)
-    const publicPath = path.join(process.cwd(), "public", normalizedCover.replace(/^\//, "").replace(/^\/+/, ""));
+    const publicPath = path.join(
+      process.cwd(),
+      "public",
+      normalizedCover.replace(/^\//, "").replace(/^\/+/, "")
+    );
     let fileContent: Buffer | undefined;
 
     try {
       fileContent = await fs.readFile(publicPath);
     } catch {
       // Try dist directory
-      const distPath = path.join(process.cwd(), "dist", normalizedCover.replace(/^\//, "").replace(/^\/+/, ""));
+      const distPath = path.join(
+        process.cwd(),
+        "dist",
+        normalizedCover.replace(/^\//, "").replace(/^\/+/, "")
+      );
       try {
         fileContent = await fs.readFile(distPath);
       } catch {
@@ -51,7 +64,8 @@ async function getCoverImage(post: CollectionEntry<"blog">): Promise<Buffer | nu
     }
 
     // Check if it's an SVG (by extension first, then content)
-    const isSvg = normalizedCover.endsWith(".svg") ||
+    const isSvg =
+      normalizedCover.endsWith(".svg") ||
       fileContent.toString().trimStart().startsWith("<svg");
 
     if (isSvg) {
@@ -78,10 +92,10 @@ export const GET: APIRoute = async ({ props }) => {
       const contentType = cover.endsWith(".png")
         ? "image/png"
         : cover.endsWith(".jpg") || cover.endsWith(".jpeg")
-        ? "image/jpeg"
-        : cover.endsWith(".webp")
-        ? "image/webp"
-        : "image/png";
+          ? "image/jpeg"
+          : cover.endsWith(".webp")
+            ? "image/webp"
+            : "image/png";
 
       return new Response(new Uint8Array(coverBuffer), {
         headers: {

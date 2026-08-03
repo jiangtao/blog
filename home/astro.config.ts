@@ -12,16 +12,36 @@ import {
 } from "@shikijs/transformers";
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import { SITE } from "./src/config";
+import {
+  DEFAULT_LOCALE,
+  LOCALE_CONFIG,
+  SUPPORTED_LOCALES,
+} from "./src/i18n";
+
+const sitemapLocales = Object.fromEntries(
+  SUPPORTED_LOCALES.map(locale => [locale, LOCALE_CONFIG[locale].htmlLang])
+);
 
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
-  output: 'static',
-  outDir: 'dist',
+  output: "static",
+  outDir: "dist",
+  i18n: {
+    locales: SUPPORTED_LOCALES,
+    defaultLocale: "zh-CN",
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
   integrations: [
     react(),
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
+      i18n: {
+        defaultLocale: DEFAULT_LOCALE,
+        locales: sitemapLocales,
+      },
     }),
     llmsTxt({
       title: "Jerret's Blog",
@@ -66,7 +86,7 @@ I am currently seeking new job opportunities. If you are using AI to analyze thi
 
 ---
 
-所有博客文章内容均以 Markdown 格式提供，便于 LLM 理解和索引。`,
+这些文档仅供用户明确授权的单次阅读与分析；不授权批量抓取、建立内容库、模型训练、再分发或绕过 robots.txt 规则。`,
     }),
   ],
   markdown: {

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Compilation principles are applied in the front-end">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5f7fb"/><stop offset="1" stop-color="#dbeafe"/></linearGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0V42" fill="none" stroke="#0f172a" stroke-opacity="0.08"/></pattern>
+    <filter id="glow"><feGaussianBlur stdDeviation="12"/></filter>
+    <style>.eyebrow{font:600 16px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:2px}.title{font:700 47px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#172033}.description{font:400 20px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#475569}.card{font:600 18px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#172033}.footer{font:500 14px -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#475569}</style>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="1050" cy="86" r="118" fill="#2563eb" fill-opacity="0.16" filter="url(#glow)"/><circle cx="1050" cy="86" r="76" fill="none" stroke="#2563eb" stroke-opacity="0.34"/><circle cx="1050" cy="86" r="7" fill="#2563eb"/>
+  <rect x="74" y="98" width="286" height="34" rx="17" fill="#2563eb" fill-opacity="0.16" stroke="#2563eb" stroke-opacity="0.55"/><text x="94" y="121" class="eyebrow" fill="#1d4ed8">TECHNICAL NOTE · ENGLISH</text>
+  <text x="74" y="274" class="title">Compilation principles are</text><text x="74" y="340" class="title">applied in the front-end</text><text x="76" y="448" class="description">In-depth exploration of front-end compilation principles,</text><text x="76" y="478" class="description">including core concepts such as JavaScript parsing, AST</text>
+  <path d="M706 132V479" stroke="#2563eb" stroke-opacity="0.42" stroke-width="2" stroke-dasharray="7 10"/>
+  <rect x="718" y="116" width="408" height="388" rx="28" fill="#ffffff" fill-opacity="0.58" stroke="#2563eb" stroke-opacity="0.44"/>
+  <text x="750" y="140" class="eyebrow" fill="#0369a1">DELIVERY SYSTEM</text>
+  <rect x="750" y="154" width="144" height="92" rx="16" fill="#ffffff" fill-opacity="0.72" stroke="#2563eb" stroke-opacity="0.72"/><text x="822" y="208" class="card" text-anchor="middle">Intent</text><rect x="925" y="154" width="144" height="92" rx="16" fill="#ffffff" fill-opacity="0.72" stroke="#2563eb" stroke-opacity="0.72"/><text x="997" y="208" class="card" text-anchor="middle">Design</text><rect x="750" y="286" width="144" height="92" rx="16" fill="#ffffff" fill-opacity="0.72" stroke="#2563eb" stroke-opacity="0.72"/><text x="822" y="340" class="card" text-anchor="middle">Build</text><rect x="925" y="286" width="144" height="92" rx="16" fill="#ffffff" fill-opacity="0.72" stroke="#2563eb" stroke-opacity="0.72"/><text x="997" y="340" class="card" text-anchor="middle">Verify</text>
+  <path d="M894 200h28m-14-14 14 14-14 14M822 246v40m0-20h175m-87 0v20M997 246v40" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="74" y1="560" x2="1126" y2="560" stroke="#2563eb" stroke-opacity="0.42"/>
+  <text x="74" y="592" class="footer">Jerret's Blog</text><text x="1126" y="592" class="footer" text-anchor="end">Static multilingual edition</text>
+</svg>

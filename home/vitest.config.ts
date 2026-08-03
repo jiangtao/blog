@@ -1,7 +1,13 @@
 import { defineConfig } from "vitest/config";
+import path from "node:path";
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": path.resolve(import.meta.dirname, "src"),
+    },
+  },
   test: {
-    include: ["src/**/__tests__/**/*.ts"],
+    include: ["src/**/__tests__/**/*.ts", "scripts/**/__tests__/**/*.ts"],
   },
 });

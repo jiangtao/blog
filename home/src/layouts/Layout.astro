@@ -3,6 +3,15 @@ import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import { PUBLIC_GOOGLE_SITE_VERIFICATION } from "astro:env/client";
 import { SITE } from "@/config";
+import {
+  getLocaleFromPath,
+  getLocaleHtmlLang,
+  getLocalizedPath,
+  getOtherLocales,
+  hasSharedStaticLocaleRoute,
+  type Locale,
+  t,
+} from "@/i18n";
 import "@/styles/global.css";
 
 type Props = {
@@ -12,6 +21,7 @@ type Props = {
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
+  alternatePaths?: Partial<Record<Locale, string>>;
   pubDatetime?: Date;
   modDatetime?: Date | null;
   scrollSmooth?: boolean;
@@ -21,18 +31,34 @@ const {
   title = SITE.title,
   author = SITE.author,
   profile = SITE.profile,
-  description = SITE.desc,
+  description,
   ogImage = SITE.ogImage ? `/${SITE.ogImage}` : "/og.png",
   canonicalURL = new URL(Astro.url.pathname, Astro.url),
+  alternatePaths,
   pubDatetime,
   modDatetime,
   scrollSmooth = false,
 } = Astro.props;
 
+const locale = getLocaleFromPath(Astro.url.pathname);
+const localizedDescription = description ?? t(locale, "siteDescription");
+const alternateURLs = getOtherLocales(locale).flatMap(targetLocale => {
+  const alternatePath =
+    alternatePaths?.[targetLocale] ??
+    (alternatePaths === undefined &&
+    hasSharedStaticLocaleRoute(Astro.url.pathname)
+      ? getLocalizedPath(targetLocale, Astro.url.pathname)
+      : undefined);
+
+  return alternatePath
+    ? [{ locale: targetLocale, url: new URL(alternatePath, Astro.url) }]
+    : [];
+});
+
 // Add timestamp to OG image URL to bypass social platform caching
 // Only add to dynamically generated images (index.png, og.png, etc.)
-const needsCacheBust = ogImage.endsWith('.png') || ogImage.endsWith('/og.png');
-const cacheBustParam = needsCacheBust ? `?t=${Date.now()}` : '';
+const needsCacheBust = ogImage.endsWith(".png") || ogImage.endsWith("/og.png");
+const cacheBustParam = needsCacheBust ? `?t=${Date.now()}` : "";
 const socialImageURL = new URL(`${ogImage}${cacheBustParam}`, Astro.url);
 
 const structuredData = {
@@ -55,7 +81,7 @@ const structuredData = {
 <!doctype html>
 <html
   dir={SITE.dir}
-  lang=`${SITE.lang ?? "en"}`
+  lang={getLocaleHtmlLang(locale)}
   class={`${scrollSmooth && "scroll-smooth"}`}
 >
   <head>
@@ -74,13 +100,13 @@ const structuredData = {
     <!-- General Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
-    <meta name="description" content={description} />
+    <meta name="description" content={localizedDescription} />
     <meta name="author" content={author} />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={localizedDescription} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={socialImageURL} />
 
@@ -106,7 +132,22 @@ const structuredData = {
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
+    <meta property="twitter:description" content={localizedDescription} />
+
+    <link
+      rel="alternate"
+      hreflang={getLocaleHtmlLang(locale)}
+      href={canonicalURL}
+    />
+    {
+      alternateURLs.map(({ locale: alternateLocale, url }) => (
+        <link
+          rel="alternate"
+          hreflang={getLocaleHtmlLang(alternateLocale)}
+          href={url}
+        />
+      ))
+    }
     <meta property="twitter:image" content={socialImageURL} />
 
     <!-- Google JSON-LD Structured data -->
@@ -121,8 +162,8 @@ const structuredData = {
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={SITE.title}
-      href={new URL("rss.xml", Astro.site)}
+      title={`${SITE.title} ${t(locale, "rssFeed")}`}
+      href={new URL(getLocalizedPath(locale, "/rss.xml"), Astro.site)}
     />
 
     <meta name="theme-color" content="" />

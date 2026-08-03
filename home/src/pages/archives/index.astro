@@ -8,35 +8,32 @@ import Card from "@/components/Card.astro";
 import getPostsByGroupCondition from "@/utils/getPostsByGroupCondition";
 import postFilter from "@/utils/postFilter";
 import { SITE } from "@/config";
+import { getLocaleFromPath, getLocaleHtmlLang, t } from "@/i18n";
+import { getPostsByLocale } from "@/utils/getPostsByLocale";
 
 // Redirect to 404 page if `showArchives` config is false
 if (!SITE.showArchives) {
   return Astro.redirect("/404");
 }
 
-const posts = await getCollection("blog").then(posts =>
-  posts.filter(postFilter)
+const locale = getLocaleFromPath(Astro.url.pathname);
+const posts = getPostsByLocale(await getCollection("blog"), locale).filter(
+  postFilter
 );
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+const months = Array.from({ length: 12 }, (_, month) =>
+  new Intl.DateTimeFormat(getLocaleHtmlLang(locale), { month: "long" }).format(
+    new Date(2024, month, 1)
+  )
+);
 ---
 
-<Layout title={`Archives | ${SITE.title}`}>
+<Layout title={`${t(locale, "archives")} | ${SITE.title}`}>
   <Header />
-  <Main pageTitle="Archives" pageDesc="All the articles I've archived.">
+  <Main
+    pageTitle={t(locale, "archives")}
+    pageDesc={t(locale, "archivesDescription")}
+  >
     {
       Object.entries(
         getPostsByGroupCondition(posts, post =>
