@@ -10,7 +10,7 @@
 内容会同步至 [语雀博客](https://www.yuque.com/imjt/blog) 和 Jerret Life 微信公众号
 
 ## 文章目录
- 
+
 - [docker文章](https://github.com/jiangtao/blog/issues?utf8=%E2%9C%93&q=docker)
 - [node文章](https://github.com/jiangtao/blog/issues?utf8=%E2%9C%93&q=node)
 - [vue文章](https://github.com/jiangtao/blog/issues?utf8=%E2%9C%93&q=vue)
@@ -23,6 +23,14 @@
 - [issue](https://github.com/jiangtao/blog/issues) 为原创文件
 - 项目中的目录代码片段和参考资源
 - closed issue一般为项目中遇到的问题解决方法
+
+## 博客多语言 / Blog i18n
+
+- 中文为默认静态站点，沿用现有 URL；英文与繁体中文静态站点分别使用 `/en/`、`/zh-TW/` 前缀，顶部可切换语言。
+- 翻译文章位于 `home/src/data/blog/<locale>/`，必须包含对应的 `locale` 与指向中文源文章的 `translationKey`；当前支持 `en`、`zh-TW`。
+- 发布前先执行 `cd home && npm run translations:status`。若有缺失或过期翻译，调用 Codex 的 `$translate-blog-en` 技能并明确目标 Locale（`en` 或 `zh-TW`）；`npm run publish` 会在任一发布必需语言未完整时中止。
+
+Chinese is the default static site. English and Traditional Chinese pages are generated under `/en/` and `/zh-TW/`, with a language selector in the header. Before publishing, run the translation status check and use `$translate-blog-en` with the target locale to create or refresh missing localized posts.
 
 ## License
 

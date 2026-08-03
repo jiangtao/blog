@@ -1,0 +1,88 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import WeChatFollowCard from "@/components/WeChatFollowCard.astro";
+import { SITE } from "@/config";
+import { t } from "@/i18n";
+---
+
+<Layout title={`${t("en", "about")} | ${SITE.title}`}>
+  <Header />
+  <Breadcrumb />
+  <main id="main-content" class="app-layout">
+    <section id="about" class="app-prose mb-28 max-w-app prose-img:border-0">
+      <h1 class="text-2xl tracking-wider sm:text-3xl">About</h1>
+      <ul>
+        <li>
+          ✨ Frontend and full-stack developer focused on Web, Hybrid, Electron,
+          Node.js, and React Native.
+        </li>
+        <li>🌱 Open to new roles and collaboration opportunities.</li>
+        <li>
+          📝 <a href="https://github.com/jiangtao/blog">Blog</a> · <a
+            href="https://www.yuque.com/imjt">YuQue Notes</a
+          >
+        </li>
+        <li>
+          💬 Skills: <strong
+            >JavaScript, Node.js, MongoDB, MySQL, and Electron</strong
+          >
+        </li>
+        <li>📫 Email: <strong>w3cfuns@qq.com</strong></li>
+        <li>
+          💬 <a href="https://x.com/Jerret321">X</a> — happy to exchange ideas.
+        </li>
+        <li>💬 WeChat: jtss77 (please include the reason for adding me).</li>
+      </ul>
+
+      <WeChatFollowCard variant="about" id="wechat-official-account" />
+
+      <h2>Work history</h2>
+      <ul>
+        <li>
+          2025/05/08–2026/01/16: <strong
+            >Resto, a restaurant SaaS business under Lakala — Electron client
+            for domestic and international use.</strong
+          >
+        </li>
+        <li>
+          2020/07/01–2025/04/30: <strong
+            >Meituan — platform-building system owner/full-stack developer;
+            onsite marketing search owner/frontend developer.</strong
+          >
+        </li>
+        <li>
+          2018/06–2020/06/30: <strong
+            >Yichuang Technology — no-code platform architect and builder.</strong
+          >
+        </li>
+      </ul>
+
+      <h2>What I am looking for</h2>
+      <ul>
+        <li>
+          I regularly share technical practice and lessons learned. Please
+          credit the source when reposting.
+        </li>
+        <li>
+          I am looking for frontend or full-stack leadership roles, ideally with
+          hands-on AI product work. Contact me on WeChat for a detailed résumé.
+        </li>
+        <li>
+          Available for short-term App projects, backend services, interview
+          coaching, and technical consulting.
+        </li>
+      </ul>
+
+      <blockquote>
+        <p>
+          I value direct, sincere collaboration. Beijing-based or remote
+          opportunities are preferred.
+        </p>
+      </blockquote>
+    </section>
+  </main>
+  <Footer />
+</Layout>

@@ -4,15 +4,18 @@ import PostDetails from "@/layouts/PostDetails.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 import postFilter from "@/utils/postFilter";
 import { getPath } from "@/utils/getPath";
+import { DEFAULT_LOCALE } from "@/i18n";
+import { getPostsByLocale } from "@/utils/getPostsByLocale";
 
 type Props = {
   post: CollectionEntry<"blog">;
 };
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog").then(posts =>
-    posts.filter(postFilter)
-  );
+  const posts = getPostsByLocale(
+    await getCollection("blog"),
+    DEFAULT_LOCALE
+  ).filter(postFilter);
   const postResult = posts.map(post => ({
     params: { slug: getPath(post.id, post.filePath, false, post) },
     props: { post },
@@ -23,7 +26,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 
-const posts = await getCollection("blog");
+const posts = getPostsByLocale(await getCollection("blog"), DEFAULT_LOCALE);
 const sortedPosts = getSortedPosts(posts);
 ---
 
