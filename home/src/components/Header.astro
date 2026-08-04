@@ -148,6 +148,43 @@ const isActive = (path: string) => {
             </li>
           )
         }
+        <li class="col-span-2 flex items-center justify-center sm:col-span-1">
+          <details class="group relative">
+            <summary
+              class="focus-outline flex cursor-pointer list-none items-center gap-1 rounded px-3 py-3 text-sm font-medium hover:text-accent sm:px-1 sm:py-1"
+              aria-label={t(locale, "language")}
+            >
+              {LANGUAGE_LABELS[locale]}
+              <span
+                aria-hidden="true"
+                class="text-xs transition-transform group-open:rotate-180"
+                >▾</span
+              >
+            </summary>
+            <ul
+              class="absolute end-0 z-50 mt-1 hidden min-w-36 rounded border border-border bg-background p-1 shadow-lg group-open:block"
+            >
+              {
+                SUPPORTED_LOCALES.map(targetLocale => (
+                  <li>
+                    <a
+                      href={getLanguagePath(targetLocale)}
+                      aria-current={
+                        targetLocale === locale ? "page" : undefined
+                      }
+                      class:list={[
+                        "block rounded px-3 py-2 text-sm hover:bg-muted hover:text-accent",
+                        { "bg-muted text-accent": targetLocale === locale },
+                      ]}
+                    >
+                      {LANGUAGE_LABELS[targetLocale]}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </details>
+        </li>
         <li class="col-span-1 flex items-center justify-center">
           <LinkButton
             href={localPath("/search")}
@@ -189,43 +226,6 @@ const isActive = (path: string) => {
             </li>
           )
         }
-        <li class="col-span-2 flex items-center justify-center sm:col-span-1">
-          <details class="group relative">
-            <summary
-              class="focus-outline flex cursor-pointer list-none items-center gap-1 rounded px-3 py-3 text-sm font-medium hover:text-accent sm:px-1 sm:py-1"
-              aria-label={t(locale, "language")}
-            >
-              {LANGUAGE_LABELS[locale]}
-              <span
-                aria-hidden="true"
-                class="text-xs transition-transform group-open:rotate-180"
-                >▾</span
-              >
-            </summary>
-            <ul
-              class="absolute end-0 z-50 mt-1 hidden min-w-36 rounded border border-border bg-background p-1 shadow-lg group-open:block"
-            >
-              {
-                SUPPORTED_LOCALES.map(targetLocale => (
-                  <li>
-                    <a
-                      href={getLanguagePath(targetLocale)}
-                      aria-current={
-                        targetLocale === locale ? "page" : undefined
-                      }
-                      class:list={[
-                        "block rounded px-3 py-2 text-sm hover:bg-muted hover:text-accent",
-                        { "bg-muted text-accent": targetLocale === locale },
-                      ]}
-                    >
-                      {LANGUAGE_LABELS[targetLocale]}
-                    </a>
-                  </li>
-                ))
-              }
-            </ul>
-          </details>
-        </li>
       </ul>
     </nav>
   </div>
