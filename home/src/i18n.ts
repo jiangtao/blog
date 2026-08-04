@@ -36,7 +36,6 @@ export const LANGUAGE_LABELS = Object.fromEntries(
 const SHARED_STATIC_LOCALE_PATHS = new Set([
   "/",
   "/about",
-  "/ai",
   "/archives",
   "/posts",
   "/search",
